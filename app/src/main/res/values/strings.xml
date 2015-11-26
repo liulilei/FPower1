@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">FPower</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="check_net">"请检查网络"</string>
+    <string name="network_error">连接网络出错</string>
+    <string name="loading">加载中</string>
+    <string name="json_erro">数据错误</string>
+</resources>
