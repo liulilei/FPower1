@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="title_back_textcolor">#fb624a</color>
+    <color name="line">#e7e7e7</color>
+    <color name="white">#ffffff</color>
+    <color name="title_back_bgcolor">#E61600</color>
+    <color name="color_ffffff">#ffffff</color>
 </resources>
