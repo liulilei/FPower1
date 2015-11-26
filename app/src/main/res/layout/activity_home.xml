@@ -1,9 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white">
 
+    <RadioGroup
+        android:id="@+id/home_rp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"
+        android:orientation="horizontal">
 
+        <RadioButton
+            android:id="@+id/activity_home_home_rbt"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:checked="true"
+            android:drawableTop="@drawable/selector_home"
+            android:gravity="center"
+            android:paddingBottom="5dp"
+            android:paddingTop="7dp"
+            android:text="首页"
+            android:textColor="@drawable/home_tab_text_color"
+            android:textSize="11dp"/>
 
-</LinearLayout>
+        <RadioButton
+            android:id="@+id/activity_home_progress_rbt"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_progress"
+            android:gravity="center"
+            android:paddingBottom="5dp"
+            android:paddingTop="7dp"
+            android:text="进度"
+            android:textColor="@drawable/home_tab_text_color"
+            android:textSize="11dp"/>
+
+        <RadioButton
+            android:id="@+id/activity_home_entering_rbt"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_entering"
+            android:gravity="center"
+            android:paddingBottom="5dp"
+            android:paddingTop="7dp"
+            android:text="录入"
+            android:textColor="@drawable/home_tab_text_color"
+            android:textSize="11dp"/>
+
+        <RadioButton
+            android:id="@+id/activity_home_me_rbt"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:button="@null"
+            android:drawableTop="@drawable/selector_me"
+            android:gravity="center"
+            android:paddingBottom="5dp"
+            android:paddingTop="7dp"
+            android:text="我的"
+            android:textColor="@drawable/home_tab_text_color"
+            android:textSize="11dp"/>
+
+    </RadioGroup>
+
+    <View
+        android:id="@+id/activity_home_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_above="@id/home_rp"
+        android:layout_marginBottom="1dp"
+        android:background="@color/line"></View>
+
+    <FrameLayout
+        android:id="@+id/activity_home_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/activity_home_line"
+        android:layout_marginBottom="1px"
+        android:background="@color/white"></FrameLayout>
+
+</RelativeLayout>
