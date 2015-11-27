@@ -38,11 +38,12 @@
             android:layout_height="46dp"
             android:layout_marginLeft="12dp"
             android:layout_weight="128"
-            android:background="@drawable/small_button"
+            android:background="@drawable/s_round_group_red"
             android:text="@string/send_code" />
     </LinearLayout>
 
     <Button
+        android:background="@drawable/s_round_group_red"
         android:textSize="17sp"
         android:textColor="@color/white"
         android:layout_marginLeft="20dp"

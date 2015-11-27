@@ -6,6 +6,6 @@
     <color name="title_back_bgcolor">#E61600</color>
     <color name="text_hit">#D2D2D2</color>
     <color name="text_des">#5A5A5A</color>
-
+    <color name="button_bg">#E60012</color>
 
 </resources>
