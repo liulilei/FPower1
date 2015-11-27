@@ -15,4 +15,5 @@
     <string name="code">请输入验证码</string>
     <string name="send_code">发送验证码</string>
     <string name="sutmit">提交</string>
+    <string name="confirm_add">确认添加</string>
 </resources>
