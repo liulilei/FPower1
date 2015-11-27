@@ -1,15 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="45dp"
-    android:background="@color/title_back_bgcolor" >
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@color/title_back_bgcolor">
+
+    <ImageView
+        android:id="@+id/title_bar_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:paddingBottom="6dp"
+        android:paddingLeft="26dp"
+        android:paddingRight="15dp"
+        android:paddingTop="6dp"
+        android:src="@mipmap/back"/>
 
     <TextView
+        android:id="@+id/title_bar_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:text="@string/login_in"
-        android:textColor="@color/white"
-        android:textSize="17sp" />
+        android:textColor="@android:color/white"
+        android:textSize="17sp"/>
+
+    <TextView
+        android:id="@+id/title_bar_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:paddingBottom="6dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="26dp"
+        android:paddingTop="6dp"
+        android:textColor="@android:color/white"
+        android:textSize="15sp"
+        />
+
+    <ImageView
+        android:id="@+id/title_bar_right_iv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:paddingBottom="6dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="26dp"
+        android:paddingTop="6dp"
+        android:textSize="15sp"
+        />
 
 </RelativeLayout>

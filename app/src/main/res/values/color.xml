@@ -8,4 +8,7 @@
     <color name="text_des">#5A5A5A</color>
     <color name="button_bg">#E60012</color>
 
+
+    <color name="split_line">#f8f8f8</color>
+
 </resources>
