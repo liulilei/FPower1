@@ -3,6 +3,7 @@ package cn.fpower.financeservice.view.home;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -21,6 +22,9 @@ public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
     @ViewInject(R.id.home_rp)
     private RadioGroup homeRg;
+
+    @ViewInject(R.id.activity_home_entering_rbt)
+    private RadioButton enteringRbt;
 
     private FragmentManager fragmentManager;
 
@@ -60,18 +64,22 @@ public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         switch (checkedId) {
             case R.id.activity_home_home_rbt:
-                nowFragment = homeFragment;
+                showFragment(homeFragment);
                 break;
             case R.id.activity_home_progress_rbt:
-                nowFragment = progressFragment;
+                showFragment(progressFragment);
                 break;
             case R.id.activity_home_entering_rbt:
-                nowFragment = enteringFragment;
+                showFragment(enteringFragment);
                 break;
             case R.id.activity_home_me_rbt:
-                nowFragment = meFragment;
+                showFragment(meFragment);
                 break;
         }
+    }
+
+    public void showFragment(Fragment fragment) {
+        nowFragment = fragment;
         transaction = fragmentManager.beginTransaction();
         transaction.hide(currentFragment);
         if (!nowFragment.isAdded()) {
@@ -80,5 +88,9 @@ public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         transaction.show(nowFragment);
         transaction.commit();
         currentFragment = nowFragment;
+    }
+
+    public void selectEnteringFragment() {
+        enteringRbt.setChecked(true);
     }
 }

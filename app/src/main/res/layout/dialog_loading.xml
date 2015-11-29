@@ -6,21 +6,21 @@
     android:layout_height="match_parent"
     android:background="@drawable/s_round_group_white"
     android:gravity="center"
-    android:minHeight="100dp"
-    android:minWidth="180dp"
+    android:minWidth="160dp"
     android:orientation="vertical"
-    android:padding="10dp">
+    android:padding="20dp">
 
     <ProgressBar
+        android:id="@+id/loading"
+        style="@style/customProgressBar"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:indeterminateDrawable="@drawable/custom_progress_bar"
-        android:indeterminateDuration="1800"/>
+        android:layout_height="wrap_content"/>
 
     <TextView
         android:id="@+id/tv_loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:textColor="@color/title_back_textcolor"
         android:textSize="14sp"/>
 </LinearLayout>

@@ -5,13 +5,16 @@
                 android:background="@color/white"
                 android:orientation="vertical">
 
-    <include layout="@layout/title_bar"></include>
+    <include
+        android:id="@+id/title"
+        layout="@layout/title_bar"></include>
 
 
     <ScrollView
         android:id="@+id/main_scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/title"
         android:fillViewport="true"
         android:scrollbars="none">
 
@@ -34,21 +37,20 @@
                 android:layout_marginBottom="5dp"
                 android:orientation="horizontal"/>
 
-            <RadioGroup
-                android:id="@+id/fragment_home_rp"
+            <LinearLayout
+                android:id="@+id/fragment_home_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/fragment_home_vp"
                 android:background="@color/white"
                 android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/fragment_home_interest_rbt"
+                <TextView
+                    android:id="@+id/fragment_home_interest_tv"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:button="@null"
-                    android:checked="true"
+                    android:background="@null"
                     android:drawablePadding="10dp"
                     android:drawableTop="@mipmap/interest_low"
                     android:gravity="center"
@@ -58,12 +60,12 @@
                     android:textColor="#494949"
                     android:textSize="13dp"/>
 
-                <RadioButton
-                    android:id="@+id/fragment_home_loan_rbt"
+                <TextView
+                    android:id="@+id/fragment_home_loan_tv"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:button="@null"
+                    android:background="@null"
                     android:drawablePadding="10dp"
                     android:drawableTop="@mipmap/quick_loan"
                     android:gravity="center"
@@ -73,12 +75,12 @@
                     android:textColor="#494949"
                     android:textSize="13dp"/>
 
-                <RadioButton
-                    android:id="@+id/fragment_home_limit_rbt"
+                <TextView
+                    android:id="@+id/fragment_home_limit_tv"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:button="@null"
+                    android:background="@null"
                     android:drawablePadding="10dp"
                     android:drawableTop="@mipmap/height_limit"
                     android:gravity="center"
@@ -88,12 +90,12 @@
                     android:textColor="#494949"
                     android:textSize="13dp"/>
 
-                <RadioButton
-                    android:id="@+id/fragment_home_add_entering_rbt"
+                <TextView
+                    android:id="@+id/fragment_home_add_entering_tv"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:button="@null"
+                    android:background="@null"
                     android:drawablePadding="10dp"
                     android:drawableTop="@mipmap/add_entering"
                     android:gravity="center"
@@ -102,20 +104,34 @@
                     android:text="添加录入"
                     android:textColor="@color/title_back_bgcolor"
                     android:textSize="13dp"/>
-            </RadioGroup>
+            </LinearLayout>
+
+            <View
+                android:id="@+id/line2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/fragment_home_ll"
+                android:background="#bababa"></View>
 
             <View
                 android:id="@+id/line"
                 android:layout_width="match_parent"
                 android:layout_height="8dp"
-                android:layout_below="@id/fragment_home_rp"
+                android:layout_below="@id/line2"
                 android:background="@color/split_line"></View>
+
+            <View
+                android:id="@+id/line3"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_below="@id/line"
+                android:background="#bababa"></View>
 
             <RelativeLayout
                 android:id="@+id/fragment_home_success_rl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/line">
+                android:layout_below="@id/line3">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -124,8 +140,8 @@
                     android:paddingBottom="12dp"
                     android:paddingLeft="17dp"
                     android:paddingTop="12dp"
-                    android:textSize="12dp"
-                    android:text="成功案例"/>
+                    android:text="成功案例"
+                    android:textSize="12dp"/>
 
                 <TextView
                     android:id="@+id/fragment_home_success_more"
@@ -137,8 +153,8 @@
                     android:paddingLeft="15dp"
                     android:paddingRight="12dp"
                     android:paddingTop="12dp"
-                    android:textSize="12dp"
-                    android:text="更多"/>
+                    android:text="更多"
+                    android:textSize="12dp"/>
 
             </RelativeLayout>
 

@@ -1,4 +1,4 @@
-package cn.fpower.financeservice.netmanager;
+package cn.fpower.financeservice.manager.netmanager;
 
 import android.content.Context;
 
