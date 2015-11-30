@@ -5,7 +5,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.lidroid.xutils.view.annotation.ViewInject;
 
@@ -17,6 +19,12 @@ import cn.fpower.financeservice.view.widget.MeSettingView;
  * Created by ll on 2015/11/26.
  */
 public class MeFragment extends BaseFragment implements View.OnClickListener {
+
+    @ViewInject(R.id.title_bar_back)
+    private ImageView back;
+
+    @ViewInject(R.id.title_bar_title)
+    private TextView title;
 
     @ViewInject(R.id.fragment_me_check)
     private MeSettingView checkView;
@@ -38,6 +46,8 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
 
     @Override
     protected void initView() {
+        back.setVisibility(View.GONE);
+        title.setText(getString(R.string.me));
         checkView.setOnClickListener(this);
         modView.setOnClickListener(this);
         usView.setOnClickListener(this);

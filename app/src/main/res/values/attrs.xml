@@ -2,8 +2,7 @@
 <resources>
     <declare-styleable name="me_setting">
         <attr name="txtName" format="string" />
-        <attr name="imgRes" format="reference"/>
-        <!--boolean值-->
-        <attr name="showLine" format="boolean"/>
+        <attr name="imgRes" format="reference" />
+        <attr name="showLine" format="boolean" />
     </declare-styleable>
 </resources>

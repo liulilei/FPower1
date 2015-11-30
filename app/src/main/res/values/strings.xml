@@ -16,4 +16,7 @@
     <string name="send_code">发送验证码</string>
     <string name="sutmit">提交</string>
     <string name="confirm_add">确认添加</string>
+
+    <string name="me">我的</string>
+    <string name="entering">信息录入</string>
 </resources>
