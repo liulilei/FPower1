@@ -11,8 +11,8 @@ import cn.fpower.financeservice.R;
 
 public class EnteringSettingView extends RelativeLayout {
 
-    private TextView title;
-    private TextView value;
+    private TextView titleName;
+    private TextView valueName;
 
     public EnteringSettingView(Context context) {
         this(context, null);
@@ -21,8 +21,8 @@ public class EnteringSettingView extends RelativeLayout {
     public EnteringSettingView(Context context, AttributeSet attrs) {
         super(context, attrs);
         View.inflate(context, R.layout.ui_add_info, this);
-        title = (TextView) findViewById(R.id.title);
-        value = (TextView) findViewById(R.id.value);
+        titleName = (TextView) findViewById(R.id.title);
+        valueName = (TextView) findViewById(R.id.value);
         initAttrs(context, attrs);
     }
 
@@ -31,12 +31,21 @@ public class EnteringSettingView extends RelativeLayout {
                 R.styleable.me_setting);
         String txtTitle = mTypedArray.getString(R.styleable.me_setting_txtName);
         if (txtTitle != null) {
-            title.setText(txtTitle);
+            titleName.setText(txtTitle);
         }
         mTypedArray.recycle();
     }
 
+    public String getTitle(){
+        return titleName.getText().toString();
+    }
+
+    public String getValue(){
+        return valueName.getText().toString();
+    }
+
+
     public void setValue(String value){
-        title.setText(value);
+        valueName.setText(value);
     }
 }

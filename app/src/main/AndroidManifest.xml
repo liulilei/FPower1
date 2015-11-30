@@ -49,6 +49,7 @@
         </activity>
 
         <activity android:name=".view.WebViewActivity"></activity>
+        <activity android:name=".view.InfoInputActivity"></activity>
     </application>
 
 </manifest>

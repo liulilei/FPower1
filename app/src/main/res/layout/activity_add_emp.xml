@@ -1,29 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/act_bg"
-    android:orientation="vertical">
+    android:background="@color/act_bg">
 
-    <include layout="@layout/title_bar" />
+    <include
+        android:id="@+id/layout_head"
+        layout="@layout/title_bar" />
 
-   <include layout="@layout/item_emp" />
-
-    <View
+    <cn.fpower.financeservice.view.widget.EnteringSettingView
+        android:id="@+id/info_name"
         android:layout_width="match_parent"
-        android:background="#DCDCDC"
-        android:layout_height="1dp"/>
-    <include layout="@layout/item_emp" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_head"
+        app:txtName="员工姓名" />
+
+    <cn.fpower.financeservice.view.widget.EnteringSettingView
+        android:id="@+id/info_mobile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/info_name"
+        app:txtName="员工电话"/>
+
 
     <Button
-
-        android:background="@drawable/s_round_group_red"
-        android:textSize="17sp"
-        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_below="@+id/info_mobile"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="30dp"
-        android:layout_width="match_parent"
-        android:layout_height="46dp"
-        android:text="@string/confirm_add" />
-</LinearLayout>
+        android:background="@drawable/s_round_group_red"
+        android:text="@string/confirm_add"
+        android:textColor="@color/white"
+        android:textSize="17sp" />
+</RelativeLayout>

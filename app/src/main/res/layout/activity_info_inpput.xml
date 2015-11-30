@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/act_bg">
+
+    <include
+        android:id="@+id/layout_head"
+        layout="@layout/title_bar" />
+
+   <cn.fpower.financeservice.view.widget.ClearEditText
+       android:layout_below="@+id/layout_head"
+       style="@style/edittext_linput"
+       android:layout_width="match_parent"
+       android:layout_height="46dp" />
+    
+</RelativeLayout>
