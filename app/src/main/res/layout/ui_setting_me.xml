@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:paddingRight="26dp"
+        android:paddingRight="23dp"
         android:src="@mipmap/fanhui" />
 
     <View

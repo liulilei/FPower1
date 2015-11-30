@@ -2,6 +2,7 @@ package cn.fpower.financeservice.view.me;
 
 import android.support.v4.app.FragmentActivity;
 
+import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.view.BaseActivity;
 
 /**
@@ -10,6 +11,6 @@ import cn.fpower.financeservice.view.BaseActivity;
 public class LoginActivity extends BaseActivity {
     @Override
     protected int initLayout() {
-        return 0;
+        return R.layout.activity_login;
     }
 }
