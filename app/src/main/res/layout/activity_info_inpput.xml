@@ -9,9 +9,10 @@
         layout="@layout/title_bar" />
 
    <cn.fpower.financeservice.view.widget.ClearEditText
+       android:id="@+id/inputinfo"
        android:layout_below="@+id/layout_head"
        style="@style/edittext_linput"
        android:layout_width="match_parent"
        android:layout_height="46dp" />
-    
+
 </RelativeLayout>

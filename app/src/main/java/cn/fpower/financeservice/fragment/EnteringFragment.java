@@ -6,6 +6,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -29,6 +30,26 @@ public class EnteringFragment extends BaseFragment  implements View.OnClickListe
     private TextView title;
     @ViewInject(R.id.info_name)
     private EnteringSettingView info_name;
+    @ViewInject(R.id.info_money)
+    private EnteringSettingView info_money;
+    @ViewInject(R.id.info_mobile)
+    private EnteringSettingView info_mobile;
+    @ViewInject(R.id.info_addr)
+    private EnteringSettingView info_addr;
+    @ViewInject(R.id.info_fanchan)
+    private EnteringSettingView info_fanchan;
+    @ViewInject(R.id.info_pay)
+    private EnteringSettingView info_pay;
+    @ViewInject(R.id.info_qudao)
+    private EnteringSettingView info_qudao;
+    private final int CODE_NAME=0;
+    private final int CODE_MONEY=1;
+    private final int CODE_MOBILE=2;
+    private final int CODE_ADDR=3;
+    private final int CODE_FANCHAN=4;
+    private final int CODE_PAY=5;
+    private final int CODE_QUDAO=6;
+
     @Override
     protected ViewGroup onCreateView(LayoutInflater inflater, Bundle savedInstanceState) {
         RelativeLayout rootView = (RelativeLayout) inflater.inflate(R.layout.fragment_entering, null);
@@ -40,17 +61,69 @@ public class EnteringFragment extends BaseFragment  implements View.OnClickListe
         back.setVisibility(View.GONE);
         title.setText(getString(R.string.entering));
         info_name.setOnClickListener(this);
+        info_money.setOnClickListener(this);
+        info_mobile.setOnClickListener(this);
+        info_addr.setOnClickListener(this);
+        info_fanchan.setOnClickListener(this);
+        info_pay.setOnClickListener(this);
+        info_qudao.setOnClickListener(this);
+    }
+
+    private void jump(EnteringSettingView esView,int code,int inputType){
+        Intent intent = new Intent();
+        intent.putExtra("title", esView.getTitle());
+        intent.putExtra("value", esView.getValue());
+        intent.putExtra("inputType",inputType);
+        intent.setClass(getContext(), InfoInputActivity.class);
+        startActivityForResult(intent,code);
     }
 
     @Override
     public void onClick(View v) {
+
         switch (v.getId()) {
             case R.id.info_name:
-                Intent intent = new Intent();
-                intent.putExtra("title",info_name.getTitle());
-                intent.setClass(getContext(), InfoInputActivity.class);
-                startActivity(intent);
+                jump(info_name,CODE_NAME,0);
                 break;
+            case R.id.info_money:
+                jump(info_money, CODE_MONEY, EditorInfo.TYPE_CLASS_NUMBER|EditorInfo.TYPE_NUMBER_FLAG_DECIMAL);
+                break;
+            case R.id.info_mobile:
+                jump(info_mobile, CODE_MOBILE,EditorInfo.TYPE_CLASS_NUMBER);
+                break;
+            case R.id.info_addr:
+                //TODO
+                break;
+            case R.id.info_fanchan:
+
+                break;
+            case R.id.info_pay:
+
+                break;
+            case R.id.info_qudao:
+                jump(info_qudao, CODE_QUDAO,0);
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(data!=null) {
+            String result=data.getExtras().getString("result");
+            switch (requestCode) {
+                case CODE_NAME:
+                    info_name.setValue(result);
+                    break;
+                case CODE_MONEY:
+                    info_money.setValue(result);
+                    break;
+                case CODE_MOBILE:
+                    info_mobile.setValue(result);
+                    break;
+                case CODE_QUDAO:
+                    info_qudao.setValue(result);
+                    break;
+            }
         }
     }
 }
