@@ -50,6 +50,7 @@
 
         <activity android:name=".view.WebViewActivity"></activity>
         <activity android:name=".view.InfoInputActivity"></activity>
+        <activity android:name=".view.home.SuccessExampleActivity"></activity>
     </application>
 
 </manifest>
