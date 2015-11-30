@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="me_setting">
+        <attr name="txtName" format="string" />
+        <attr name="imgRes" format="reference"/>
+        <!--boolean值-->
+        <attr name="showLine" format="boolean"/>
+    </declare-styleable>
+</resources>

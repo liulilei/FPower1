@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0EFF4"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/title"
+        layout="@layout/title_bar"></include>
+
+    <RelativeLayout
+        android:id="@+id/layout_login_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title"
+        android:background="@color/white"
+        android:paddingBottom="21dp"
+        android:paddingTop="22dp">
+
+        <ImageView
+            android:id="@+id/img_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/me_check" />
+
+        <TextView
+            android:id="@+id/txt_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/img_login"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:text="您还没有登录呢~"
+            android:textColor="#959595"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/loginin"
+            android:layout_width="110dp"
+            android:layout_height="36dp"
+            android:layout_below="@+id/txt_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/s_round_group_red"
+            android:text="@string/login_in"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+    </RelativeLayout>
+
+    <cn.fpower.financeservice.view.widget.MeSettingView
+        android:layout_marginTop="23dp"
+        android:id="@+id/fragment_me_check"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_login_info"
+        android:background="@color/white"
+        app:imgRes="@mipmap/me_check"
+        app:txtName="我的审核" />
+
+    <cn.fpower.financeservice.view.widget.MeSettingView
+        android:id="@+id/fragment_me_up"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fragment_me_check"
+        android:background="@color/white"
+        app:imgRes="@mipmap/me_mod"
+        app:txtName="修改信息" />
+
+    <cn.fpower.financeservice.view.widget.MeSettingView
+        android:id="@+id/fragment_me_about"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/fragment_me_up"
+        android:background="@color/white"
+        app:imgRes="@mipmap/me_aboutus"
+        app:showLine="false"
+        app:txtName="关于我们" />
+
+</RelativeLayout>

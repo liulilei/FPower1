@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="53dp">
+
+    <ImageView
+        android:id="@+id/img_left"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:paddingLeft="16dp"
+        android:src="@mipmap/me_check" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="9dp"
+        android:layout_marginTop="3dp"
+        android:layout_toRightOf="@+id/img_left"
+        android:text="我的审核"
+        android:textColor="#464646"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:id="@+id/img_right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:paddingRight="26dp"
+        android:src="@mipmap/fanhui" />
+
+    <View
+        android:id="@+id/line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="13dp"
+        android:background="#D2D2D2" />
+</RelativeLayout>
