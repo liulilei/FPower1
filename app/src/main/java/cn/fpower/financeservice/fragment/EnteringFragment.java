@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 import cn.fpower.financeservice.R;
+import cn.fpower.financeservice.utils.KeyBoardUtils;
 import cn.fpower.financeservice.view.InfoInputActivity;
 import cn.fpower.financeservice.view.widget.EnteringSettingView;
 

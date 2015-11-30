@@ -1,15 +1,16 @@
 package cn.fpower.financeservice.view;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.lidroid.xutils.view.annotation.ViewInject;
 
+
 import cn.fpower.financeservice.R;
+import cn.fpower.financeservice.utils.KeyBoardUtils;
 import cn.fpower.financeservice.view.widget.ClearEditText;
 
 public class InfoInputActivity extends BaseActivity implements OnClickListener {
@@ -49,6 +50,12 @@ public class InfoInputActivity extends BaseActivity implements OnClickListener {
         }
         save.setText("完成");
         save.setOnClickListener(this);
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                KeyBoardUtils.openKeybord(inputinfo, InfoInputActivity.this);
+            }
+        }, 500);
     }
 
     @Override
