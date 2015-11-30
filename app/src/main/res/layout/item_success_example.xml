@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/item_success_example_avatar"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginBottom="12dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="12dp"
+        android:src="@mipmap/ad1"/>
+
+    <TextView
+        android:id="@+id/item_success_example_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/item_success_example_avatar"
+        android:layout_marginTop="1dp"
+        android:layout_toRightOf="@id/item_success_example_avatar"
+        android:text="江先生"
+        android:textColor="#272727"
+        android:textSize="17dp"/>
+
+    <TextView
+        android:id="@+id/item_success_example_money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/item_success_example_name"
+        android:layout_below="@id/item_success_example_name"
+        android:layout_marginTop="1dp"
+        android:text="￥50000"
+        android:textColor="#e61600"
+        android:textSize="16sp"/>
+
+    <TextView
+        android:id="@+id/item_success_example_create_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/item_success_example_money"
+        android:layout_below="@id/item_success_example_money"
+        android:layout_marginTop="1dp"
+        android:text="申请时间:2015-12-1 15:30"
+        android:textColor="#737373"
+        android:textSize="11dp"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:paddingRight="21dp"
+        android:src="@mipmap/fanhui"/>
+
+</RelativeLayout>

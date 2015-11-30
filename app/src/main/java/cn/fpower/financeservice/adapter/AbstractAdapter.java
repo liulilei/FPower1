@@ -18,12 +18,6 @@ public abstract class AbstractAdapter<T> extends BaseAdapter {
     protected Context mContext;
     protected List<T> mList;
 
-    /**
-     * 初始化适配器
-     *
-     * @param Context
-     * @param datas
-     */
     public AbstractAdapter(Context Context, List<T> datas) {
         this.mContext = Context;
         if (datas == null) {

@@ -16,6 +16,7 @@ import java.util.List;
 
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.adapter.MainAdPageradapter;
+import cn.fpower.financeservice.constants.Constants;
 import cn.fpower.financeservice.mode.BannerInfo;
 import cn.fpower.financeservice.utils.ImageUtils;
 import cn.fpower.financeservice.utils.StringUtils;
@@ -137,7 +138,7 @@ public class HomeMenuFragmentGroup {
             public void onClick(View v) {
                 if (!StringUtils.isEmpty(address)) {
                     Intent intent = new Intent(context, WebViewActivity.class);
-                    intent.putExtra("address", address);
+                    intent.putExtra(Constants.ADDRESS, address);
                     context.startActivity(intent);
                 }
             }

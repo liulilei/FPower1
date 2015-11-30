@@ -64,7 +64,7 @@ public class ImageUtils {
                 .bitmapConfig(Bitmap.Config.RGB_565)// 设置图片的解码类型//
                         // .resetViewBeforeLoading(true)//设置图片在下载前是否重置，复位
                         // .displayer(new FadeInBitmapDisplayer(100))//是否图片加载好后渐入的动画时间
-                .displayer(new RoundedBitmapDisplayer(100))// 加载圆形图片
+                .displayer(new RoundedBitmapDisplayer(10))// 加载圆形图片
                 .build();// 构建完成
 
         return options;

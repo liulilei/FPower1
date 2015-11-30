@@ -3,6 +3,7 @@ package cn.fpower.financeservice.view.home;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -13,6 +14,7 @@ import cn.fpower.financeservice.fragment.EnteringFragment;
 import cn.fpower.financeservice.fragment.HomeFragment;
 import cn.fpower.financeservice.fragment.MeFragment;
 import cn.fpower.financeservice.fragment.ProgressFragment;
+import cn.fpower.financeservice.utils.ToastUtils;
 import cn.fpower.financeservice.view.BaseActivity;
 
 /**
@@ -41,6 +43,8 @@ public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     private Fragment currentFragment;
 
     private Fragment nowFragment;
+
+    private long mExitTime;
 
     @Override
     protected int initLayout() {
@@ -92,5 +96,18 @@ public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
     public void selectEnteringFragment() {
         enteringRbt.setChecked(true);
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if ((System.currentTimeMillis() - mExitTime) > 2000) {
+                ToastUtils.show(this, "再按一次退出程序");
+                mExitTime = System.currentTimeMillis();
+            } else {
+                finish();
+            }
+        }
+        return true;
     }
 }

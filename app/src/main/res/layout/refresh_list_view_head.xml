@@ -35,13 +35,10 @@
 
             <!-- 进度条 -->
 
+
             <ProgressBar
                 android:id="@+id/head_progressBar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:indeterminateDrawable="@drawable/custom_progress_bar"
-                android:indeterminateDuration="1800"
+                style="@style/customProgressBar"
                 android:visibility="gone"/>
         </FrameLayout>
 

@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 import cn.fpower.financeservice.R;
+import cn.fpower.financeservice.constants.Constants;
 import cn.fpower.financeservice.utils.DialogUtils;
 
 public class WebViewActivity extends BaseActivity implements OnClickListener {
@@ -42,13 +43,11 @@ public class WebViewActivity extends BaseActivity implements OnClickListener {
         settings.setJavaScriptEnabled(true);
         settings.setLayoutAlgorithm(LayoutAlgorithm.NORMAL);
         settings.setLoadWithOverviewMode(true);
-        String address = getIntent().getStringExtra("address");
-        if (address.equals("http://www.idongri.com")) {
-            settings.setBuiltInZoomControls(true);
-            settings.setSupportZoom(true);
-            settings.setUseWideViewPort(true);
-            webView.setInitialScale(1);
-        }
+        String address = getIntent().getStringExtra(Constants.ADDRESS);
+        settings.setBuiltInZoomControls(true);
+        settings.setSupportZoom(true);
+        settings.setUseWideViewPort(true);
+        webView.setInitialScale(1);
         webView.loadUrl(address);
         webView.setWebViewClient(new WebViewClient() {
             @Override
