@@ -1,5 +1,6 @@
 package cn.fpower.financeservice.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.utils.ToastUtils;
+import cn.fpower.financeservice.view.me.MeStoreActivity;
 import cn.fpower.financeservice.view.widget.MeSettingView;
 
 /**
@@ -25,6 +27,13 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
 
     @ViewInject(R.id.title_bar_title)
     private TextView title;
+
+    @ViewInject(R.id.layout_no_login_info)
+    private RelativeLayout layout_no_login_info;
+
+    @ViewInject(R.id.layout_login_info)
+    private RelativeLayout layout_login_info;
+
 
     @ViewInject(R.id.fragment_me_check)
     private MeSettingView checkView;
@@ -57,13 +66,18 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
     @Override
     protected void initData() {
         super.initData();
+        //TODO
+       //登陆不登陆状态
+        layout_no_login_info.setVisibility(View.GONE);
+        layout_login_info.setVisibility(View.VISIBLE);
+        checkView.setIconText(R.mipmap.me_store,"店铺管理");
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fragment_me_check:
-                ToastUtils.show(getActivity(),"fragment_me_check");
+               startActivity(new Intent(getActivity(),MeStoreActivity.class));
                 break;
             case R.id.fragment_me_up:
                 ToastUtils.show(getActivity(),"fragment_me_up");

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/act_bg">
+
+    <include
+        android:id="@+id/layout_head"
+        layout="@layout/title_bar" />
+
+    <RelativeLayout
+        android:id="@+id/layout_top"
+        android:layout_below="@+id/layout_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <include
+            android:id="@+id/layout_info"
+            layout="@layout/item_info_top" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_marginTop="12dp"
+        android:background="@color/white"
+        android:id="@+id/layout_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_top">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:paddingBottom="12dp"
+            android:paddingLeft="17dp"
+            android:paddingTop="12dp"
+            android:text="我的员工"
+            android:textSize="12dp"/>
+
+        <TextView
+            android:id="@+id/fragment_home_success_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingBottom="12dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="12dp"
+            android:paddingTop="12dp"
+            android:text=""
+            android:textSize="12dp"/>
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/list"
+        android:layout_below="@+id/layout_title"
+        android:layout_width="match_parent"
+        android:background="@color/white"
+        android:layout_height="wrap_content" />
+
+</RelativeLayout>

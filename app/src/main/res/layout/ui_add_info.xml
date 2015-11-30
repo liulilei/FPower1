@@ -13,7 +13,7 @@
         android:layout_centerVertical="true"
         android:text="员工姓名"
         android:textColor="#272727"
-        android:textSize="17sp" />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/value"
@@ -24,14 +24,14 @@
         android:layout_marginRight="12dp"
         android:layout_toLeftOf="@+id/img_go"
         android:textColor="#737373"
-        android:textSize="17sp" />
+        android:textSize="14sp" />
 
     <ImageView
         android:id="@+id/img_go"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:src="@mipmap/fanhui"
-        android:paddingRight="20dp"
+        android:paddingRight="23dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
