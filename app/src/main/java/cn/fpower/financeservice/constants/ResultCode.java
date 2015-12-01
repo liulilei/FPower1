@@ -7,5 +7,5 @@ package cn.fpower.financeservice.constants;
 public interface ResultCode {
 
     /* code */
-    int SUCCESS = 0;// 成功
+    int SUCCESS = 200;// 成功
 }

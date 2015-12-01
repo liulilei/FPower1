@@ -4,7 +4,7 @@ package cn.fpower.financeservice.mode;
 public class BaseMode implements BaseEntity {
     private int code;
 
-    private String msg;
+    private String message;
 
     private Page page;
 
@@ -16,12 +16,13 @@ public class BaseMode implements BaseEntity {
         this.code = code;
     }
 
-    public String getMsg() {
-        return msg;
+
+    public String getMessage() {
+        return message;
     }
 
-    public void setMsg(String msg) {
-        this.msg = msg;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
     public Page getPage() {

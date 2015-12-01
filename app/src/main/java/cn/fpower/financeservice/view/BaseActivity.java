@@ -17,7 +17,7 @@ public abstract class BaseActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().requestFeature(Window.FEATURE_NO_TITLE);
-        if (!(this instanceof HomeActivity)) {
+        if (!(this instanceof HomeActivity || this instanceof SplashActivity)) {
             overridePendingTransition(R.anim.in_push_right_to_left, R.anim.in_stable);
         }
         setContentView(initLayout());
@@ -53,7 +53,7 @@ public abstract class BaseActivity extends FragmentActivity {
     @Override
     public void finish() {
         super.finish();
-        if (!(this instanceof HomeActivity)) {
+        if (!(this instanceof HomeActivity || this instanceof SplashActivity)){
             overridePendingTransition(R.anim.in_stable, R.anim.out_push_left_to_right);
         }
     }

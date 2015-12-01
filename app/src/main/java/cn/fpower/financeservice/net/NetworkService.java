@@ -64,8 +64,7 @@ public class NetworkService {
         postWithLoading(cont, pUrl, null, pListener);
     }
 
-    public static void postWithLoading(final Context cont, String pUrl,
-                                       RequestParams params, final IRequestListener pListener) {
+    public static void postWithLoading(final Context cont, String pUrl, RequestParams params, final IRequestListener pListener) {
         if (mHttpUtils == null) {
             mHttpUtils = new HttpUtils(1000 * 10);
         }
@@ -100,8 +99,7 @@ public class NetworkService {
     }
 
 
-    private static void checkResponseCode(Context cont, String result,
-                                          IRequestListener pListener) {
+    private static void checkResponseCode(Context cont, String result, IRequestListener pListener) {
         try {
             JSONObject jsonObject = new JSONObject(result);
             int code = -1;
@@ -109,8 +107,8 @@ public class NetworkService {
                 code = jsonObject.getInt("code");
             }
             String msg = "";
-            if (jsonObject.has("msg")) {
-                msg = jsonObject.getString("msg");
+            if (jsonObject.has("message")) {
+                msg = jsonObject.getString("message");
             }
             switch (code) {
                 case ResultCode.SUCCESS:

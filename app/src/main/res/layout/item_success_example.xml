@@ -48,11 +48,11 @@
         android:textSize="11sp"/>
 
     <ImageView
+        android:id="@+id/item_success_example_right_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:paddingRight="21dp"
-        android:src="@mipmap/fanhui"/>
+        android:paddingRight="21dp"/>
 
 </RelativeLayout>

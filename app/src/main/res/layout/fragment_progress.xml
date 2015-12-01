@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include layout="@layout/title_bar"></include>
+
+    <LinearLayout
+        android:id="@+id/fragment_progress_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/fragment_progress_all_ll"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/fragment_progress_all"
+                style="@style/fragment_progress_tab"
+                android:checked="true"
+                android:text="全部"/>
+
+            <View
+                android:id="@+id/line1"
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:background="@drawable/progress_tab_line_select"></View>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/fragment_progress_checking_ll"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/fragment_progress_checking"
+                style="@style/fragment_progress_tab"
+                android:text="待审核"/>
+
+            <View
+                android:id="@+id/line2"
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:background="@drawable/progress_tab_line_select"
+                android:visibility="gone"></View>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/fragment_progress_checked_ll"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/fragment_progress_checked"
+                style="@style/fragment_progress_tab"
+                android:text="待放款"/>
+
+            <View
+                android:id="@+id/line3"
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:background="@drawable/progress_tab_line_select"
+                android:visibility="gone"></View>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/fragment_progress_check_ok_ll"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/fragment_progress_check_ok"
+                style="@style/fragment_progress_tab"
+                android:text="已放款"/>
+
+            <View
+                android:id="@+id/line4"
+                android:layout_width="match_parent"
+                android:layout_height="6dp"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:background="@drawable/progress_tab_line_select"
+                android:visibility="gone"></View>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="#f1f0f6"></View>
+
+    <cn.fpower.financeservice.view.widget.RefreshListView
+        android:id="@+id/fragment_progress_rlv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="#bababa"
+        android:dividerHeight="1dp"
+        android:listSelector="@android:color/transparent"
+        android:scrollbars="none"/>
+
+</LinearLayout>

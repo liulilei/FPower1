@@ -31,11 +31,13 @@ public class SuccessExampleAdapter extends AbstractAdapter<SuccessExample> {
             holder.exampleName = (TextView) convertView.findViewById(R.id.item_success_example_name);
             holder.exampleMoney = (TextView) convertView.findViewById(R.id.item_success_example_money);
             holder.exampleCreateTime = (TextView) convertView.findViewById(R.id.item_success_example_create_time);
+            holder.exampleRightIv = (ImageView) convertView.findViewById(R.id.item_success_example_right_iv);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
         ImageUtils.displayImageRoundImg(R.mipmap.ad1, "http://stimgcn1.s-msn.com/msnportal/fashion/2012/12/24/51478f07-382d-4da9-99b5-815dd2848aa8.jpg", holder.exampleAvatar);
+        holder.exampleRightIv.setImageResource(R.mipmap.fanhui);
         return convertView;
     }
 
@@ -44,5 +46,6 @@ public class SuccessExampleAdapter extends AbstractAdapter<SuccessExample> {
         private TextView exampleName;
         private TextView exampleMoney;
         private TextView exampleCreateTime;
+        private ImageView exampleRightIv;
     }
 }

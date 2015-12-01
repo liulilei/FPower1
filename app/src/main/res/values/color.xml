@@ -12,4 +12,6 @@
     <color name="split_line">#f8f8f8</color>
     <drawable name="pressed_bg">#dedede</drawable>
     <drawable name="nopressed_bg">#fff</drawable>
+    <color name="progress_text_normal">#555555</color>
+    <color name="progress_text_select">#F20C00</color>
 </resources>
