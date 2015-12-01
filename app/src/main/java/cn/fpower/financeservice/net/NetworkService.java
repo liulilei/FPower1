@@ -122,7 +122,7 @@ public class NetworkService {
             if (code != ResultCode.SUCCESS) {
                 ToastUtils.show(cont, msg);
                 if (null != pListener) {
-                    pListener.onError(cont.getResources().getString(R.string.network_error));
+                    pListener.onError(result);
                 }
             }
         } catch (JSONException e) {

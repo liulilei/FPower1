@@ -4,7 +4,7 @@ package cn.fpower.financeservice.manager.netmanager;
  * Created by ll on 2015/9/15.
  * 管理所有网络请求manager的基类
  */
-public class CustomerManagerControl {
+public class FinanceManagerControl {
 
     private static FinanceServiceManager financeServiceManager;
 

@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Message;
 
 import cn.fpower.financeservice.R;
+import cn.fpower.financeservice.manager.netmanager.FinanceManagerControl;
 import cn.fpower.financeservice.view.home.HomeActivity;
 
 /**
