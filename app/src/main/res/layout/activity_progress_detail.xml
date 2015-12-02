@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <include layout="@layout/title_bar"></include>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:paddingBottom="25dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="21dp">
+
+                <RelativeLayout
+                    android:id="@+id/layout_head"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toRightOf="@+id/img_my_head"
+                        android:text="申请金额"
+                        android:textColor="#272727"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:id="@+id/progress_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:text="2015-12-01 12:01"
+                        android:textColor="#737373"
+                        android:textSize="14sp"/>
+                </RelativeLayout>
+
+
+                <TextView
+                    android:id="@+id/progress_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/layout_head"
+                    android:layout_marginTop="21dp"
+                    android:text="￥50000.00"
+                    android:textColor="#F84431"
+                    android:textSize="30sp"
+                    android:textStyle="bold"/>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#bbbbbb"></View>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="14dp"
+                android:paddingTop="14dp">
+
+                <ImageView
+                    android:id="@+id/progress_header"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="21dp"
+                    android:src="@mipmap/ad1"/>
+
+                <TextView
+                    android:id="@+id/progress_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="16dp"
+                    android:layout_toRightOf="@id/progress_header"
+                    android:text="江小贤"
+                    android:textColor="#292929"
+                    android:textSize="16sp"/>
+
+                <ImageView
+                    android:id="@+id/progress_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="21dp"
+                    android:src="@mipmap/phone"/>
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:background="#f0eff5"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp">
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="3dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"></View>
+
+                        <ImageView
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_gravity="center"
+                            android:padding="1dp"
+                            android:src="@mipmap/progress_ok"/>
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="3dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:background="#13d424"></View>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="13dp"
+                        android:text="录入成功"
+                        android:textColor="#b7b6b6"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:id="@+id/progress_time1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="2015-12-01 12:01"
+                        android:textColor="#b7b6b6"
+                        android:textSize="12sp"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp">
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="3dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:background="#13d424"></View>
+
+                        <ImageView
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
+                            android:layout_gravity="center"
+                            android:padding="1dp"
+                            android:src="@mipmap/progress_ok"/>
+
+                        <View
+                            android:id="@+id/line1"
+                            android:layout_width="0dp"
+                            android:layout_height="3dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:background="#13d424"></View>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="13dp"
+                        android:text="正在审核"
+                        android:textColor="#b7b6b6"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:id="@+id/progress_time2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="2015-12-01 12:01"
+                        android:textColor="#b7b6b6"
+                        android:textSize="12sp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp">
+
+                        <View
+                            android:id="@+id/line2"
+                            android:layout_width="0dp"
+                            android:layout_height="3dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"
+                            android:background="#13d424"></View>
+
+                        <ImageView
+                            android:id="@+id/progress_state_iv"
+                            android:layout_width="15dp"
+                            android:layout_height="15dp"
+                            android:layout_gravity="center"
+                            android:padding="1dp"
+                            android:src="@mipmap/progress_success"/>
+
+                        <View
+                            android:layout_width="0dp"
+                            android:layout_height="3dp"
+                            android:layout_gravity="center"
+                            android:layout_weight="1"></View>
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/progress_state_tv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="13dp"
+                        android:text="申请成功"
+                        android:textColor="#13d424"
+                        android:textSize="14sp"/>
+
+                    <TextView
+                        android:id="@+id/progress_time3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:text="2015-12-01 12:01"
+                        android:textColor="#b7b6b6"
+                        android:textSize="12sp"/>
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#bbbbbb"></View>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="22dp"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:id="@+id/progress_address_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:text="地址"
+                    android:textColor="#717171"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/progress_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="21dp"
+                    android:layout_toRightOf="@id/progress_address_tv"
+                    android:gravity="right"
+                    android:singleLine="true"
+                    android:text="北京朝阳区酒仙桥1号楼2004"
+                    android:textColor="#717171"
+                    android:textSize="16sp"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#bbbbbb"></View>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="22dp"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:text="有无房产"
+                    android:textColor="#717171"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/progress_has_house"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="21dp"
+                    android:singleLine="true"
+                    android:text="有"
+                    android:textColor="#717171"
+                    android:textSize="16sp"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#bbbbbb"></View>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="22dp"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:text="有无贷款"
+                    android:textColor="#717171"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/progress_has_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="21dp"
+                    android:singleLine="true"
+                    android:text="有"
+                    android:textColor="#717171"
+                    android:textSize="16sp"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#bbbbbb"></View>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="22dp"
+                android:layout_marginTop="15dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="22dp"
+                    android:text="渠道"
+                    android:textColor="#717171"
+                    android:textSize="16sp"/>
+
+                <TextView
+                    android:id="@+id/progress_has_chanel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="21dp"
+                    android:singleLine="true"
+                    android:text="有"
+                    android:textColor="#717171"
+                    android:textSize="16sp"/>
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#bbbbbb"></View>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

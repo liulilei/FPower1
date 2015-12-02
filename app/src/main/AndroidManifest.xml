@@ -55,6 +55,7 @@
         <activity android:name=".view.me.LoginCheckActivity"></activity>
         <activity android:name=".view.me.RegisterActivity"></activity>
         <activity android:name=".view.home.SuccessExampleActivity"></activity>
+        <activity android:name=".view.progress.ProgressDetailActivity"/>
     </application>
 
 </manifest>
