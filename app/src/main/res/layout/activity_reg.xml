@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/act_bg"
+    android:orientation="vertical">
+
+    <include layout="@layout/title_bar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="22dp"
+        android:orientation="horizontal">
+
+        <cn.fpower.financeservice.view.widget.ClearEditText
+            android:id="@+id/code"
+            style="@style/edittext_linput"
+            android:layout_width="0dp"
+            android:layout_weight="195"
+            android:hint="@string/code" />
+
+        <Button
+            android:id="@+id/send"
+            android:layout_width="0dp"
+            android:layout_height="46dp"
+            android:layout_marginLeft="12dp"
+            android:layout_weight="128"
+            android:background="@drawable/s_round_group_red"
+            android:text="@string/send_code"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+    </LinearLayout>
+
+    <cn.fpower.financeservice.view.widget.ClearEditText
+        android:id="@+id/pass"
+        style="@style/edittext_linput"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="22dp"
+        android:hint="@string/input_pwd"
+        android:maxLength="11" />
+
+    <Button
+        android:id="@+id/confirm"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="22dp"
+        android:background="@drawable/s_round_group_red"
+        android:text="@string/confirm"
+        android:textColor="@color/white"
+        android:textSize="17sp" />
+
+</LinearLayout>

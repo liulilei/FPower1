@@ -11,116 +11,122 @@
         layout="@layout/title_bar"></include>
 
     <RelativeLayout
-        android:id="@+id/layout_login_info"
+        android:id="@+id/layout_head"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/title"
-        android:background="@color/white"
-        android:paddingBottom="16dp"
-        android:paddingTop="16dp">
-
-        <ImageView
-            android:id="@+id/img_login"
-            android:layout_width="62dp"
-            android:layout_height="62dp"
-            android:layout_marginLeft="20dp"
-            android:src="@mipmap/me_check" />
+        android:layout_below="@+id/title">
 
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:id="@+id/layout_login_info"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"
-            android:layout_toRightOf="@+id/img_login">
+            android:background="@color/white"
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp">
 
-            <TextView
-                android:id="@+id/username"
+            <ImageView
+                android:id="@+id/img_login"
+                android:layout_width="62dp"
+                android:layout_height="62dp"
+                android:layout_marginLeft="20dp"
+                android:src="@mipmap/me_check" />
+
+            <RelativeLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="江哮喘~"
-                android:textColor="#272727"
-                android:textSize="14sp" />
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/img_login">
 
-            <TextView
-                android:id="@+id/userage"
+                <TextView
+                    android:id="@+id/username"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="江哮喘~"
+                    android:textColor="#272727"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/userage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/username"
+                    android:layout_marginTop="12dp"
+                    android:text="45岁"
+                    android:textColor="#737373"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/useraddr"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/userage"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_toRightOf="@+id/userage"
+                    android:text="北京"
+                    android:textColor="#737373"
+                    android:textSize="14sp" />
+            </RelativeLayout>
+
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/username"
-                android:layout_marginTop="12dp"
-                android:text="45岁"
-                android:textColor="#737373"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/useraddr"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBaseline="@+id/userage"
-                android:layout_centerHorizontal="true"
-                android:layout_marginLeft="12dp"
-                android:layout_marginTop="12dp"
-                android:layout_toRightOf="@+id/userage"
-                android:text="北京"
-                android:textColor="#737373"
-                android:textSize="14sp" />
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingRight="23dp"
+                android:src="@mipmap/fanhui" />
         </RelativeLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
+
+        <RelativeLayout
+            android:id="@+id/layout_no_login_info"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:paddingRight="26dp"
-            android:src="@mipmap/fanhui" />
-    </RelativeLayout>
+            android:background="@color/white"
+            android:paddingBottom="21dp"
+            android:paddingTop="22dp"
+            android:visibility="gone">
 
-    <RelativeLayout
-        android:id="@+id/layout_no_login_info"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/title"
-        android:background="@color/white"
-        android:paddingBottom="21dp"
-        android:paddingTop="22dp"
-        android:visibility="gone">
+            <ImageView
+                android:id="@+id/img_no_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:src="@mipmap/me_check" />
 
-        <ImageView
-            android:id="@+id/img_no_login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:src="@mipmap/me_check" />
+            <TextView
+                android:id="@+id/txt_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/img_no_login"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="12dp"
+                android:text="您还没有登录呢~"
+                android:textColor="#959595"
+                android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/txt_content"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/img_no_login"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="12dp"
-            android:text="您还没有登录呢~"
-            android:textColor="#959595"
-            android:textSize="14sp" />
-
-        <Button
-            android:id="@+id/loginin"
-            android:layout_width="110dp"
-            android:layout_height="36dp"
-            android:layout_below="@+id/txt_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="12dp"
-            android:background="@drawable/s_round_group_red"
-            android:text="@string/login_in"
-            android:textColor="@color/white"
-            android:textSize="15sp" />
+            <Button
+                android:id="@+id/loginin"
+                android:layout_width="110dp"
+                android:layout_height="36dp"
+                android:layout_below="@+id/txt_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/s_round_group_red"
+                android:text="@string/login_in"
+                android:textColor="@color/white"
+                android:textSize="15sp" />
+        </RelativeLayout>
     </RelativeLayout>
 
     <cn.fpower.financeservice.view.widget.MeSettingView
         android:id="@+id/fragment_me_check"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_login_info"
-        android:layout_marginTop="23dp"
+        android:layout_below="@+id/layout_head"
+        android:layout_marginTop="20dp"
         app:imgRes="@mipmap/me_check"
         app:txtName="我的审核" />
 
@@ -140,5 +146,19 @@
         app:imgRes="@mipmap/me_aboutus"
         app:showLine="false"
         app:txtName="关于我们" />
+
+    <Button
+        android:id="@+id/loginout"
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_below="@+id/fragment_me_about"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="26dp"
+        android:background="@drawable/s_round_group_red"
+        android:text="退出登录"
+        android:textColor="@color/white"
+        android:textSize="17sp" />
+
 
 </RelativeLayout>

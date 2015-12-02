@@ -14,6 +14,8 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.utils.ToastUtils;
+import cn.fpower.financeservice.view.me.LoginActivity;
+import cn.fpower.financeservice.view.me.LoginCheckActivity;
 import cn.fpower.financeservice.view.me.MeStoreActivity;
 import cn.fpower.financeservice.view.widget.MeSettingView;
 
@@ -68,8 +70,8 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
         super.initData();
         //TODO
        //登陆不登陆状态
-        layout_no_login_info.setVisibility(View.GONE);
-        layout_login_info.setVisibility(View.VISIBLE);
+        layout_no_login_info.setVisibility(View.VISIBLE);
+        layout_login_info.setVisibility(View.GONE);
         checkView.setIconText(R.mipmap.me_store,"店铺管理");
     }
 
@@ -86,7 +88,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
                 ToastUtils.show(getActivity(),"fragment_me_about");
                 break;
             case R.id.loginin:
-                ToastUtils.show(getActivity(),"loginin");
+                startActivity(new Intent(getActivity(), LoginCheckActivity.class));
                 break;
         }
     }

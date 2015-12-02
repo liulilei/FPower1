@@ -2,7 +2,6 @@ package cn.fpower.financeservice.view.me;
 
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -24,7 +23,7 @@ import cn.fpower.financeservice.view.widget.ClearEditText;
 /**
  * 登陆
  */
-public class LoginActivity extends BaseActivity implements View.OnClickListener {
+public class LoginCheckActivity extends BaseActivity implements View.OnClickListener {
 
     @ViewInject(R.id.title_bar_back)
     private ImageView back;
@@ -33,13 +32,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     private TextView title;
 
     @ViewInject(R.id.view_mobile)
-    private ClearEditText view_pwd;
+    private ClearEditText view_mobile;
 
     @ViewInject(R.id.loginin)
     private Button loginin;
 
-    @ViewInject(R.id.des)
-    private TextView des;
 
     @Override
     protected int initLayout() {
@@ -49,28 +46,18 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void initView() {
         super.initView();
-        des.setVisibility(View.GONE);
         back.setVisibility(View.GONE);
         title.setText("登录");
-        view_pwd.setHint(R.string.input_pwd);
-        loginin.setText(R.string.confirm);
         loginin.setOnClickListener(this);
     }
 
-
-    @Override
-    protected void initData() {
-        super.initData();
-        Bundle b=getIntent().getExtras();
-        if(b!=null) {
-            mobile=b.getString("mobile");
-        }
-    }
 
     String mobile;
 
     private void jump(Class clz) {
         Intent intent = new Intent();
+        intent.putExtra("mobile", mobile);
+        intent.setClass(this, clz);
         startActivity(intent);
     }
 
@@ -78,25 +65,29 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.loginin:
-                String pwd = view_pwd.getText().toString();
-                if (TextUtils.isEmpty(pwd)) {
-                    ToastUtils.show(this, R.string.input_pwd);
+                //登录注册
+                // 先是填一个手机号码判断注册还是没注册
+                // 注册了的号码显示登录界面 手机号码和密码 还有忘记密码
+                // 没注册过的就显示注册界面
+                mobile = view_mobile.getText().toString();
+                if (TextUtils.isEmpty(mobile)) {
+                    ToastUtils.show(this, "请输入正确的手机号");
                     return;
                 }
                 FinanceManagerControl.getFinanceServiceManager().check_mobile_sole(this, mobile, true, String.class, new ManagerDataListener() {
                     @Override
                     public void onSuccess(Object data) {
-                        ToastUtils.show(LoginActivity.this, data.toString());
+                        jump(LoginActivity.class);
                     }
 
                     @Override
                     public void onError(String error) {
-                        if (error.contains("code")) {
+                        if (error.contains("message")) {
                             try {
                                 JSONObject jsonObject = new JSONObject(error);
-                                if (jsonObject.has("code")) {
-                                    int code = jsonObject.getInt("code");
-                                    if (code == 400) {
+                                if (jsonObject.has("message")) {
+                                    String message = jsonObject.getString("message");
+                                    if (message.contains("可以注册")) {
                                         jump(RegisterActivity.class);
                                     }
                                 }
