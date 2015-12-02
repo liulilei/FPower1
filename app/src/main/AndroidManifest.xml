@@ -53,6 +53,7 @@
         <activity android:name=".view.me.MeStoreActivity"></activity>
         <activity android:name=".view.me.LoginActivity"></activity>
         <activity android:name=".view.home.SuccessExampleActivity"></activity>
+        <activity android:name=".view.progress.ProgressDetailActivity"/>
     </application>
 
 </manifest>
