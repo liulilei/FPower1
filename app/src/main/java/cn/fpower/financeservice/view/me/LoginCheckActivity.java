@@ -16,6 +16,7 @@ import org.json.JSONObject;
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.manager.netmanager.FinanceManagerControl;
 import cn.fpower.financeservice.manager.netmanager.ManagerDataListener;
+import cn.fpower.financeservice.manager.netmanager.ManagerStringListener;
 import cn.fpower.financeservice.utils.ToastUtils;
 import cn.fpower.financeservice.view.BaseActivity;
 import cn.fpower.financeservice.view.widget.ClearEditText;
@@ -74,9 +75,9 @@ public class LoginCheckActivity extends BaseActivity implements View.OnClickList
                     ToastUtils.show(this, "请输入正确的手机号");
                     return;
                 }
-                FinanceManagerControl.getFinanceServiceManager().check_mobile_sole(this, mobile, true, String.class, new ManagerDataListener() {
+                FinanceManagerControl.getFinanceServiceManager().check_mobile_sole(this, mobile, true, new ManagerStringListener() {
                     @Override
-                    public void onSuccess(Object data) {
+                    public void onSuccess(String data) {
                         jump(LoginActivity.class);
                     }
 

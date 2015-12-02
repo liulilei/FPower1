@@ -20,17 +20,16 @@ public class FinanceServiceManager extends BaseManager {
      * @param context   上下文
      * @param mobile    手机号
      * @param hasDialog 是否需要dialog
-     * @param clazz     接受类
      * @param listener  回调监听
      */
-    public void check_mobile_sole(Context context, String mobile, boolean hasDialog, Class clazz, ManagerDataListener listener) {
+    public void check_mobile_sole(Context context, String mobile, boolean hasDialog, ManagerStringListener listener) {
         params = new RequestParams();
         params.addBodyParameter("mobile", mobile);
 
         if (hasDialog) {
-            getDataFromNetHasDialog(context, NetApi.CHECK_MOBILE_SOLE, params, clazz, listener);
+            getJsonStringFromNetHasDialog(context, NetApi.CHECK_MOBILE_SOLE, params, listener);
         } else {
-            getDataFromNetNoDialog(context, NetApi.CHECK_MOBILE_SOLE, params, clazz, listener);
+            getJsonStringFromNetHasDialog(context, NetApi.CHECK_MOBILE_SOLE, params, listener);
         }
     }
 

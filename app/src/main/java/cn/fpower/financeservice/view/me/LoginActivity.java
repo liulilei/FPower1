@@ -83,29 +83,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     ToastUtils.show(this, R.string.input_pwd);
                     return;
                 }
-                FinanceManagerControl.getFinanceServiceManager().check_mobile_sole(this, mobile, true, String.class, new ManagerDataListener() {
-                    @Override
-                    public void onSuccess(Object data) {
-                        ToastUtils.show(LoginActivity.this, data.toString());
-                    }
 
-                    @Override
-                    public void onError(String error) {
-                        if (error.contains("code")) {
-                            try {
-                                JSONObject jsonObject = new JSONObject(error);
-                                if (jsonObject.has("code")) {
-                                    int code = jsonObject.getInt("code");
-                                    if (code == 400) {
-                                        jump(RegisterActivity.class);
-                                    }
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                });
                 break;
         }
     }
