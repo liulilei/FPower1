@@ -10,12 +10,15 @@ import android.widget.RadioGroup;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 import cn.fpower.financeservice.R;
+import cn.fpower.financeservice.app.FSApplication;
 import cn.fpower.financeservice.fragment.EnteringFragment;
 import cn.fpower.financeservice.fragment.HomeFragment;
 import cn.fpower.financeservice.fragment.MeFragment;
 import cn.fpower.financeservice.fragment.ProgressFragment;
+import cn.fpower.financeservice.utils.IntentUtils;
 import cn.fpower.financeservice.utils.ToastUtils;
 import cn.fpower.financeservice.view.BaseActivity;
+import cn.fpower.financeservice.view.me.LoginActivity;
 
 /**
  * Created by ll on 2015/11/26.
@@ -27,6 +30,9 @@ public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedCh
 
     @ViewInject(R.id.activity_home_entering_rbt)
     private RadioButton enteringRbt;
+
+    @ViewInject(R.id.activity_home_home_rbt)
+    private RadioButton homeRbt;
 
     private FragmentManager fragmentManager;
 
@@ -71,12 +77,27 @@ public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 showFragment(homeFragment);
                 break;
             case R.id.activity_home_progress_rbt:
+                if (!FSApplication.getInstance().isLogin()) {
+                    IntentUtils.startActivity(this, LoginActivity.class);
+                    homeRbt.setChecked(true);
+                    return;
+                }
                 showFragment(progressFragment);
                 break;
             case R.id.activity_home_entering_rbt:
+                if (!FSApplication.getInstance().isLogin()) {
+                    IntentUtils.startActivity(this, LoginActivity.class);
+                    homeRbt.setChecked(true);
+                    return;
+                }
                 showFragment(enteringFragment);
                 break;
             case R.id.activity_home_me_rbt:
+                if (!FSApplication.getInstance().isLogin()) {
+                    IntentUtils.startActivity(this, LoginActivity.class);
+                    homeRbt.setChecked(true);
+                    return;
+                }
                 showFragment(meFragment);
                 break;
         }

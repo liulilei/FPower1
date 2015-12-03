@@ -52,6 +52,8 @@ public class FSApplication extends Application {
     //用户信息
     private UserInfo userInfo;
 
+    private boolean isLogin = false;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -157,6 +159,14 @@ public class FSApplication extends Application {
 
     public UserInfo getUserInfo() {
         return userInfo;
+    }
+
+    public boolean isLogin() {
+        return isLogin;
+    }
+
+    public void setIsLogin(boolean isLogin) {
+        this.isLogin = isLogin;
     }
 
 }

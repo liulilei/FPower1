@@ -78,24 +78,24 @@ public class FinanceServiceManager extends BaseManager {
 
     /**
      * 登录
+     *
      * @param context   上下文
      * @param mobile    手机号
      * @param passwd    密码
      * @param hasDialog 是否需要dialog
      * @param listener  回调监听
      */
-    public void login(Context context, String mobile, String passwd, boolean hasDialog, ManagerStringListener listener) {
+    public void login(Context context, String mobile, String passwd, boolean hasDialog, Class clazz,
+                      ManagerDataListener listener) {
         params = new RequestParams();
         params.addBodyParameter("mobile", mobile);
         params.addBodyParameter("passwd", passwd);
         if (hasDialog) {
-            getJsonStringFromNetHasDialog(context, NetApi.LOGIN, params, listener);
+            getDataFromNetHasDialog(context, NetApi.LOGIN, params, clazz, listener);
         } else {
-            getJsonStringFromNetHasDialog(context, NetApi.LOGIN, params, listener);
+            getDataFromNetNoDialog(context, NetApi.LOGIN, params, clazz, listener);
         }
     }
-
-
 
 
 }

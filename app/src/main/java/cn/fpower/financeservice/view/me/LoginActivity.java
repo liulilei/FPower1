@@ -9,15 +9,21 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import cn.fpower.financeservice.R;
+import cn.fpower.financeservice.app.FSApplication;
+import cn.fpower.financeservice.constants.Constants;
 import cn.fpower.financeservice.manager.netmanager.FinanceManagerControl;
 import cn.fpower.financeservice.manager.netmanager.ManagerDataListener;
 import cn.fpower.financeservice.manager.netmanager.ManagerStringListener;
+import cn.fpower.financeservice.mode.UserInfo;
+import cn.fpower.financeservice.utils.IntentUtils;
+import cn.fpower.financeservice.utils.SpUtils;
 import cn.fpower.financeservice.utils.ToastUtils;
 import cn.fpower.financeservice.view.BaseActivity;
 import cn.fpower.financeservice.view.home.HomeActivity;
@@ -42,6 +48,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @ViewInject(R.id.des)
     private TextView des;
+
+    private UserInfo userInfo;
+
+    private Gson gson;
 
     @Override
     protected int initLayout() {
@@ -80,38 +90,44 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                     ToastUtils.show(this, R.string.input_pwd);
                     return;
                 }
-                FinanceManagerControl.getFinanceServiceManager().login(this, mobile, passwd, true, new ManagerStringListener() {
+                FinanceManagerControl.getFinanceServiceManager().login(this, mobile, passwd, true,
+                        UserInfo.class, new ManagerDataListener() {
 
-                    @Override
-                    public void onSuccess(String result) {
-                        jump(HomeActivity.class);
-                        finish();
-                    }
+                            @Override
+                            public void onSuccess(Object data) {
+                                userInfo = (UserInfo) data;
+                                FSApplication.getInstance().setUserInfo(userInfo);
+                                FSApplication.getInstance().setIsLogin(true);
+                                SpUtils.putString(LoginActivity.this, Constants.MOBLEE, userInfo.getData().getMobile());
+                                SpUtils.putString(LoginActivity.this, Constants.PASSWD, view_pwd.getText().toString());
+                                IntentUtils.startActivity(LoginActivity.this, HomeActivity.class);
+                                finish();
+                            }
 
-                    @Override
-                    public void onError(String error) {
-                        if (error.contains("code")) {
-                            try {
-                                JSONObject jsonObject = new JSONObject(error);
-                                if (jsonObject.has("code")) {
-                                    int code = jsonObject.getInt("code");
-                                    if (code==201) {
-                                        jump(HomeActivity.class);
+                            @Override
+                            public void onError(String error) {
+                                if (error.contains("code")) {
+                                    try {
+                                        JSONObject jsonObject = new JSONObject(error);
+                                        if (jsonObject.has("code")) {
+                                            int code = jsonObject.getInt("code");
+                                            if (code == 201) {
+                                                gson = new Gson();
+                                                userInfo = gson.fromJson(error, UserInfo.class);
+                                                FSApplication.getInstance().setUserInfo(userInfo);
+                                                FSApplication.getInstance().setIsLogin(true);
+                                                SpUtils.putString(LoginActivity.this, Constants.MOBLEE, userInfo.getData().getMobile());
+                                                SpUtils.putString(LoginActivity.this, Constants.PASSWD, view_pwd.getText().toString());
+                                                IntentUtils.startActivity(LoginActivity.this, HomeActivity.class);
+                                            }
+                                        }
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
                                     }
                                 }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
                             }
-                        }
-                    }
-                });
+                        });
                 break;
         }
-    }
-
-    private void jump(Class clz) {
-        Intent intent = new Intent();
-        intent.setClass(this, clz);
-        startActivity(intent);
     }
 }
