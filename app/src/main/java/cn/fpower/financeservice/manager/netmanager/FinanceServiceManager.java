@@ -36,17 +36,18 @@ public class FinanceServiceManager extends BaseManager {
 
     /**
      * 获取验证码
+     *
      * @param context   上下文
      * @param mobile    手机号
      * @param hasDialog 是否需要dialog
      * @param listener  回调监听
      */
-    public void get_code(Context context, String mobile,int type,boolean hasDialog, ManagerStringListener listener) {
+    public void get_code(Context context, String mobile, int type, boolean hasDialog, ManagerStringListener listener) {
         params = new RequestParams();
         params.addBodyParameter("mobile", mobile);
-        params.addBodyParameter("type", type+"");
+        params.addBodyParameter("type", type + "");
         if (hasDialog) {
-            getJsonStringFromNetHasDialog(context, NetApi.GET_CODE, params,  listener);
+            getJsonStringFromNetHasDialog(context, NetApi.GET_CODE, params, listener);
         } else {
             getJsonStringFromNetHasDialog(context, NetApi.GET_CODE, params, listener);
         }
