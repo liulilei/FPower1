@@ -13,7 +13,11 @@ import android.widget.TextView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 import cn.fpower.financeservice.R;
+import cn.fpower.financeservice.app.FSApplication;
+import cn.fpower.financeservice.constants.Constants;
+import cn.fpower.financeservice.utils.SpUtils;
 import cn.fpower.financeservice.utils.ToastUtils;
+import cn.fpower.financeservice.view.ListActivity;
 import cn.fpower.financeservice.view.me.LoginActivity;
 import cn.fpower.financeservice.view.me.LoginCheckActivity;
 import cn.fpower.financeservice.view.me.MeStoreActivity;
@@ -36,7 +40,6 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
     @ViewInject(R.id.layout_login_info)
     private RelativeLayout layout_login_info;
 
-
     @ViewInject(R.id.fragment_me_check)
     private MeSettingView checkView;
 
@@ -48,6 +51,20 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
 
     @ViewInject(R.id.loginin)
     private Button login;
+
+    @ViewInject(R.id.loginout)
+    private Button loginout;
+
+
+    @ViewInject(R.id.username)
+    private TextView username;
+
+    @ViewInject(R.id.userage)
+    private TextView userage;
+
+    @ViewInject(R.id.useraddr)
+    private TextView useraddr;
+
 
     @Override
     protected ViewGroup onCreateView(LayoutInflater inflater, Bundle savedInstanceState) {
@@ -63,32 +80,64 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
         modView.setOnClickListener(this);
         usView.setOnClickListener(this);
         login.setOnClickListener(this);
+        loginout.setOnClickListener(this);
     }
 
     @Override
     protected void initData() {
         super.initData();
         //TODO
-       //登陆不登陆状态
-        layout_no_login_info.setVisibility(View.VISIBLE);
-        layout_login_info.setVisibility(View.GONE);
-        checkView.setIconText(R.mipmap.me_store,"店铺管理");
+        //登陆不登陆状态
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        setForUserInfo();
+    }
+
+    private int userRight = 1;
+
+    private void setForUserInfo() {
+        if (FSApplication.getInstance().isLogin()) {
+            layout_login_info.setVisibility(View.VISIBLE);
+            layout_no_login_info.setVisibility(View.GONE);
+            username.setText(FSApplication.getInstance().getUserInfo().getData().getUsername());
+            userage.setText(FSApplication.getInstance().getUserInfo().getData().getBirthday());
+            useraddr.setText(FSApplication.getInstance().getUserInfo().getData().getRegion());
+        } else {
+            layout_no_login_info.setVisibility(View.VISIBLE);
+            layout_login_info.setVisibility(View.GONE);
+        }
+        switch (userRight) {
+            case 1:
+                checkView.setIconText(R.mipmap.me_store, "我的审核");
+                break;
+        }
+    }
+
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fragment_me_check:
-               startActivity(new Intent(getActivity(),MeStoreActivity.class));
+                startActivity(new Intent(getActivity(), MeStoreActivity.class));
                 break;
             case R.id.fragment_me_up:
-                ToastUtils.show(getActivity(),"fragment_me_up");
+                startActivity(new Intent(getActivity(), ListActivity.class));
                 break;
             case R.id.fragment_me_about:
-                ToastUtils.show(getActivity(),"fragment_me_about");
+                ToastUtils.show(getActivity(), "fragment_me_about");
                 break;
             case R.id.loginin:
                 startActivity(new Intent(getActivity(), LoginCheckActivity.class));
+                break;
+            case R.id.loginout:
+                FSApplication.getInstance().setIsLogin(false);
+                SpUtils.putString(getActivity(), Constants.MOBLEE, "");
+                SpUtils.putString(getActivity(), Constants.PASSWD, "");
+                setForUserInfo();
+                ToastUtils.show(getActivity(), "退出登录成功");
                 break;
         }
     }
