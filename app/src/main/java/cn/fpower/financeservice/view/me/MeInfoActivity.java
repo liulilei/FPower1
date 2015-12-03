@@ -31,16 +31,13 @@ public class MeInfoActivity extends BaseActivity implements View.OnClickListener
     @ViewInject(R.id.title_bar_title)
     private TextView title;
 
-    @ViewInject(R.id.view_mobile)
-    private ClearEditText view_mobile;
-
-    @ViewInject(R.id.loginin)
-    private Button loginin;
+    @ViewInject(R.id.submit)
+    private Button submit;
 
 
     @Override
     protected int initLayout() {
-        return R.layout.activity_login;
+        return R.layout.activity_userinfo;
     }
 
     @Override
@@ -48,55 +45,15 @@ public class MeInfoActivity extends BaseActivity implements View.OnClickListener
         super.initView();
         back.setVisibility(View.GONE);
         title.setText("登录");
-        loginin.setOnClickListener(this);
+        submit.setOnClickListener(this);
     }
 
-
-    String mobile;
-
-    private void jump(Class clz) {
-        Intent intent = new Intent();
-        intent.putExtra("mobile", mobile);
-        intent.setClass(this, clz);
-        startActivity(intent);
-    }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.loginin:
-                //登录注册
-                // 先是填一个手机号码判断注册还是没注册
-                // 注册了的号码显示登录界面 手机号码和密码 还有忘记密码
-                // 没注册过的就显示注册界面
-                mobile = view_mobile.getText().toString();
-                if (TextUtils.isEmpty(mobile)) {
-                    ToastUtils.show(this, "请输入正确的手机号");
-                    return;
-                }
-                FinanceManagerControl.getFinanceServiceManager().check_mobile_sole(this, mobile, true, new ManagerStringListener() {
-                    @Override
-                    public void onSuccess(String data) {
-                        jump(LoginActivity.class);
-                    }
+            case R.id.submit:
 
-                    @Override
-                    public void onError(String error) {
-                        if (error.contains("message")) {  //可以注册400 手机号错误也是400
-                            try {
-                                JSONObject jsonObject = new JSONObject(error);
-                                if (jsonObject.has("message")) {
-                                    String message = jsonObject.getString("message");
-                                    if (message.contains("可以注册")) {
-                                        jump(RegisterActivity.class);
-                                    }
-                                }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }
-                });
                 break;
         }
     }

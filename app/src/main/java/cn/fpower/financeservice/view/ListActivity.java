@@ -1,8 +1,6 @@
 package cn.fpower.financeservice.view;
 
-import android.content.Intent;
-import android.os.Bundle;
-import android.os.Handler;
+
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageView;
@@ -11,8 +9,8 @@ import android.widget.TextView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 import cn.fpower.financeservice.R;
-import cn.fpower.financeservice.utils.KeyBoardUtils;
-import cn.fpower.financeservice.view.widget.ClearEditText;
+import cn.fpower.financeservice.adapter.ProgressFragmentAdapter;
+import cn.fpower.financeservice.view.widget.RefreshListView;
 
 public class ListActivity extends BaseActivity implements OnClickListener {
 
@@ -22,41 +20,19 @@ public class ListActivity extends BaseActivity implements OnClickListener {
     @ViewInject(R.id.title_bar_title)
     private TextView title;
 
-
-    @ViewInject(R.id.title_bar_save)
-    private TextView save;
-
-    @ViewInject(R.id.inputinfo)
-    private ClearEditText inputinfo;
-
-    public ListActivity() {
-    }
+    @ViewInject(R.id.fragment_progress_rlv)
+    private RefreshListView progressRlv;
 
     @Override
     protected int initLayout() {
-        return R.layout.activity_info_inpput;
+        return R.layout.activity_list;
     }
 
     @Override
     protected void initView() {
         back.setOnClickListener(this);
-        Bundle b=getIntent().getExtras();
-        if(b!=null) {
-            title.setText("输入" + b.getString("title"));
-            int type=b.getInt("inputType",0);
-            if(type!=0) {
-                inputinfo.setInputType(type);
-            }
-            inputinfo.setText(b.getString("value"));
-        }
-        save.setText("完成");
-        save.setOnClickListener(this);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                KeyBoardUtils.openKeybord(inputinfo, ListActivity.this);
-            }
-        }, 500);
+        title.setText("我的审核");
+        progressRlv.setAdapter(new ProgressFragmentAdapter(this, null));
     }
 
     @Override
@@ -65,17 +41,6 @@ public class ListActivity extends BaseActivity implements OnClickListener {
             case R.id.title_bar_back:
                 this.finish();
                 break;
-            case R.id.title_bar_save:
-                //数据是使用Intent返回
-                Intent intent = new Intent();
-                //把返回数据存入Intent
-                intent.putExtra("result", inputinfo.getText().toString());
-                //设置返回数据
-                this.setResult(0, intent);
-                //关闭Activity
-                this.finish();
-                break;
         }
     }
-
 }
