@@ -19,6 +19,7 @@ import cn.fpower.financeservice.utils.IntentUtils;
 import cn.fpower.financeservice.utils.ToastUtils;
 import cn.fpower.financeservice.view.BaseActivity;
 import cn.fpower.financeservice.view.me.LoginActivity;
+import cn.fpower.financeservice.view.me.LoginCheckActivity;
 
 /**
  * Created by ll on 2015/11/26.
@@ -78,7 +79,7 @@ public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 break;
             case R.id.activity_home_progress_rbt:
                 if (!FSApplication.getInstance().isLogin()) {
-                    IntentUtils.startActivity(this, LoginActivity.class);
+                    IntentUtils.startActivity(this, LoginCheckActivity.class);
                     homeRbt.setChecked(true);
                     return;
                 }
@@ -86,18 +87,18 @@ public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 break;
             case R.id.activity_home_entering_rbt:
                 if (!FSApplication.getInstance().isLogin()) {
-                    IntentUtils.startActivity(this, LoginActivity.class);
+                    IntentUtils.startActivity(this, LoginCheckActivity.class);
                     homeRbt.setChecked(true);
                     return;
                 }
                 showFragment(enteringFragment);
                 break;
             case R.id.activity_home_me_rbt:
-                if (!FSApplication.getInstance().isLogin()) {
-                    IntentUtils.startActivity(this, LoginActivity.class);
+                /*if (!FSApplication.getInstance().isLogin()) {
+                    IntentUtils.startActivity(this, LoginCheckActivity.class);
                     homeRbt.setChecked(true);
                     return;
-                }
+                }*/
                 showFragment(meFragment);
                 break;
         }

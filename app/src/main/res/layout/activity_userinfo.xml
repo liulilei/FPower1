@@ -9,11 +9,50 @@
         android:id="@+id/layout_head"
         layout="@layout/title_bar" />
 
+    <RelativeLayout
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/layout_head"
+        android:id="@+id/layout_login_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp">
+
+        <ImageView
+            android:id="@+id/img_login"
+            android:layout_width="62dp"
+            android:layout_height="62dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:src="@mipmap/me_check" />
+
+        <TextView
+            android:id="@+id/txt_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/img_login"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:text="设置头像"
+            android:textColor="#959595"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:paddingRight="23dp"
+            android:src="@mipmap/fanhui" />
+    </RelativeLayout>
+
     <cn.fpower.financeservice.view.widget.EnteringSettingView
+        android:layout_marginTop="20dp"
         android:id="@+id/info_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_head"
+        android:layout_below="@+id/layout_login_info"
         app:txtName="姓名" />
 
     <cn.fpower.financeservice.view.widget.EnteringSettingView
@@ -37,31 +76,11 @@
         android:layout_below="@+id/info_mobile"
         app:txtName="地址"/>
 
-    <cn.fpower.financeservice.view.widget.EnteringSettingView
-        android:id="@+id/info_fanchan"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/info_addr"
-        app:txtName="有无房产"/>
-
-    <cn.fpower.financeservice.view.widget.EnteringSettingView
-        android:id="@+id/info_pay"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/info_fanchan"
-        app:txtName="有无贷款"/>
-
-    <cn.fpower.financeservice.view.widget.EnteringSettingView
-        android:id="@+id/info_qudao"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/info_pay"
-        app:txtName="渠道"/>
-
     <Button
+        android:id="@+id/submit"
         android:layout_width="match_parent"
         android:layout_height="46dp"
-        android:layout_below="@+id/info_qudao"
+        android:layout_below="@+id/info_addr"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="30dp"
