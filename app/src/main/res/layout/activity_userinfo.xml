@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/act_bg">
+
+    <include
+        android:id="@+id/layout_head"
+        layout="@layout/title_bar" />
+
+    <cn.fpower.financeservice.view.widget.EnteringSettingView
+        android:id="@+id/info_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_head"
+        app:txtName="姓名" />
+
+    <cn.fpower.financeservice.view.widget.EnteringSettingView
+        android:id="@+id/info_money"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/info_name"
+        app:txtName="申请金额"/>
+
+    <cn.fpower.financeservice.view.widget.EnteringSettingView
+        android:id="@+id/info_mobile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/info_money"
+        app:txtName="电话"/>
+
+    <cn.fpower.financeservice.view.widget.EnteringSettingView
+        android:id="@+id/info_addr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/info_mobile"
+        app:txtName="地址"/>
+
+    <cn.fpower.financeservice.view.widget.EnteringSettingView
+        android:id="@+id/info_fanchan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/info_addr"
+        app:txtName="有无房产"/>
+
+    <cn.fpower.financeservice.view.widget.EnteringSettingView
+        android:id="@+id/info_pay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/info_fanchan"
+        app:txtName="有无贷款"/>
+
+    <cn.fpower.financeservice.view.widget.EnteringSettingView
+        android:id="@+id/info_qudao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/info_pay"
+        app:txtName="渠道"/>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="46dp"
+        android:layout_below="@+id/info_qudao"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/s_round_group_red"
+        android:text="@string/sutmit"
+        android:textColor="@color/white"
+        android:textSize="17sp" />
+</RelativeLayout>
