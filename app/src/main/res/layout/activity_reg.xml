@@ -19,6 +19,7 @@
             android:id="@+id/code"
             style="@style/edittext_linput"
             android:layout_width="0dp"
+            android:maxLength="6"
             android:layout_weight="195"
             android:hint="@string/code" />
 

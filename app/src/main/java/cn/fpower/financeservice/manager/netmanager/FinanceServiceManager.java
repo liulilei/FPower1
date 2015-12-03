@@ -52,4 +52,50 @@ public class FinanceServiceManager extends BaseManager {
             getJsonStringFromNetHasDialog(context, NetApi.GET_CODE, params, listener);
         }
     }
+
+    /**
+     * 注册帐号
+     *
+     * @param context   上下文
+     * @param mobile    手机号
+     * @param verify    验证码
+     * @param passwd    密码
+     * @param hasDialog 是否需要dialog
+     * @param listener  回调监听
+     */
+    public void register(Context context, String mobile, String verify, String passwd, boolean hasDialog, ManagerStringListener listener) {
+        params = new RequestParams();
+        params.addBodyParameter("mobile", mobile);
+        params.addBodyParameter("verify", verify);
+        params.addBodyParameter("passwd", passwd);
+        params.addBodyParameter("register_source", 2 + "");//注册来源，1ios，2安卓
+        if (hasDialog) {
+            getJsonStringFromNetHasDialog(context, NetApi.REGISTER, params, listener);
+        } else {
+            getJsonStringFromNetHasDialog(context, NetApi.REGISTER, params, listener);
+        }
+    }
+
+    /**
+     * 登录
+     * @param context   上下文
+     * @param mobile    手机号
+     * @param passwd    密码
+     * @param hasDialog 是否需要dialog
+     * @param listener  回调监听
+     */
+    public void login(Context context, String mobile, String passwd, boolean hasDialog, ManagerStringListener listener) {
+        params = new RequestParams();
+        params.addBodyParameter("mobile", mobile);
+        params.addBodyParameter("passwd", passwd);
+        if (hasDialog) {
+            getJsonStringFromNetHasDialog(context, NetApi.LOGIN, params, listener);
+        } else {
+            getJsonStringFromNetHasDialog(context, NetApi.LOGIN, params, listener);
+        }
+    }
+
+
+
+
 }

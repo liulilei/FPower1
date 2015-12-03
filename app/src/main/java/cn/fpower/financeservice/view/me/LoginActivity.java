@@ -17,8 +17,10 @@ import org.json.JSONObject;
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.manager.netmanager.FinanceManagerControl;
 import cn.fpower.financeservice.manager.netmanager.ManagerDataListener;
+import cn.fpower.financeservice.manager.netmanager.ManagerStringListener;
 import cn.fpower.financeservice.utils.ToastUtils;
 import cn.fpower.financeservice.view.BaseActivity;
+import cn.fpower.financeservice.view.home.HomeActivity;
 import cn.fpower.financeservice.view.widget.ClearEditText;
 
 /**
@@ -61,30 +63,55 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void initData() {
         super.initData();
-        Bundle b=getIntent().getExtras();
-        if(b!=null) {
-            mobile=b.getString("mobile");
+        Bundle b = getIntent().getExtras();
+        if (b != null) {
+            mobile = b.getString("mobile");
         }
     }
 
     String mobile;
 
-    private void jump(Class clz) {
-        Intent intent = new Intent();
-        startActivity(intent);
-    }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.loginin:
-                String pwd = view_pwd.getText().toString();
-                if (TextUtils.isEmpty(pwd)) {
+                String passwd = view_pwd.getText().toString();
+                if (TextUtils.isEmpty(passwd)) {
                     ToastUtils.show(this, R.string.input_pwd);
                     return;
                 }
+                FinanceManagerControl.getFinanceServiceManager().login(this, mobile, passwd, true, new ManagerStringListener() {
 
+                    @Override
+                    public void onSuccess(String result) {
+                        jump(HomeActivity.class);
+                        finish();
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        if (error.contains("code")) {
+                            try {
+                                JSONObject jsonObject = new JSONObject(error);
+                                if (jsonObject.has("code")) {
+                                    int code = jsonObject.getInt("code");
+                                    if (code==201) {
+                                        jump(HomeActivity.class);
+                                    }
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                });
                 break;
         }
+    }
+
+    private void jump(Class clz) {
+        Intent intent = new Intent();
+        intent.setClass(this, clz);
+        startActivity(intent);
     }
 }

@@ -83,7 +83,7 @@ public class LoginCheckActivity extends BaseActivity implements View.OnClickList
 
                     @Override
                     public void onError(String error) {
-                        if (error.contains("message")) {
+                        if (error.contains("message")) {  //可以注册400 手机号错误也是400
                             try {
                                 JSONObject jsonObject = new JSONObject(error);
                                 if (jsonObject.has("message")) {
