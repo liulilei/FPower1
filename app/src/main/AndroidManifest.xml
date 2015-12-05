@@ -52,6 +52,7 @@
             android:name=".view.home.HomeActivity"
             android:launchMode="singleTask"/>
         <activity android:name=".view.WebViewActivity"></activity>
+        <activity android:name=".view.ImgSelActivity"></activity>
         <activity android:name=".view.InfoInputActivity"></activity>
         <activity android:name=".view.me.MeStoreActivity"></activity>
         <activity android:name=".view.me.LoginActivity"></activity>

@@ -65,7 +65,7 @@ public class MeInfoActivity extends BaseActivity {
                 break;
             case R.id.img_right:
                 if (mDialog == null) {
-                    mDialog = createDialog("设置头像");
+                    mDialog = createDialog("选择图片");
                 }
                 mDialog.show();
                 break;
@@ -73,7 +73,6 @@ public class MeInfoActivity extends BaseActivity {
     }
 
     private Dialog mDialog;
-
 
     protected Dialog createDialog(String title) {
         return new AlertDialog.Builder(act).setCancelable(true)
