@@ -74,7 +74,7 @@ public class PromotionResultActivity extends BaseActivity {
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder holder = null;
             if (convertView == null) {
-                convertView = inflater.inflate(R.layout.item_imageview,parent, false);
+                convertView = inflater.inflate(R.layout.item_imageview, parent, false);
                 holder = new ViewHolder();
                 holder.image = (ImageView) convertView
                         .findViewById(R.id.item_grida_image);
@@ -88,7 +88,7 @@ public class PromotionResultActivity extends BaseActivity {
                     holder.image.setVisibility(View.GONE);
                 }
             } else {
-                ImageUtils.displayImageRoundImg(R.mipmap.ad1, "file://"+list.get(position), holder.image);
+                ImageUtils.displayImageRoundImg(R.mipmap.ad1, "file://" + list.get(position), holder.image);
             }
             return convertView;
         }
@@ -117,13 +117,14 @@ public class PromotionResultActivity extends BaseActivity {
                 break;
             case PickPhotoUtil.PICKPHOTO_DELETE:
                 if (resultCode == RESULT_OK) {
-                    int position=data.getExtras().getInt("position");
+                    int position = data.getExtras().getInt("position");
                     list.remove(position);
                     adapter.notifyDataSetChanged();
                 }
                 break;
         }
     }
+
     private String photo;
 
     @Override
@@ -135,7 +136,6 @@ public class PromotionResultActivity extends BaseActivity {
     protected void initView() {
         back.setVisibility(View.GONE);
         title.setText("店面信息");
-        noScrollgridview = (GridView) findViewById(R.id.noScrollgridview);
         noScrollgridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
         adapter = new GridAdapter(this);
         noScrollgridview.setAdapter(adapter);
@@ -152,7 +152,7 @@ public class PromotionResultActivity extends BaseActivity {
                     Intent intent = new Intent();
                     intent.setClass(act, ImgSelActivity.class);
                     intent.putExtra("photo", list.get(position));
-                    intent.putExtra("position",position);
+                    intent.putExtra("position", position);
                     startActivityForResult(intent, PickPhotoUtil.PICKPHOTO_DELETE);
                 }
             }
@@ -166,9 +166,9 @@ public class PromotionResultActivity extends BaseActivity {
                 .setTitle(title)
                 .setItems(R.array.select_dialog_items, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        if(which==0){
+                        if (which == 0) {
                             PickPhotoUtil.getInstance().localPhoto(act);
-                        }else{
+                        } else {
                             photo = PickPhotoUtil.getInstance().takePhoto(act);
                         }
                     }
@@ -181,6 +181,5 @@ public class PromotionResultActivity extends BaseActivity {
     public void onClick(View v) {
 
     }
-
 
 }

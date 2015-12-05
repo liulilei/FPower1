@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/act_bg">
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/act_bg">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -11,7 +11,7 @@
 
         <include
             android:id="@+id/layout_head"
-            layout="@layout/title_bar" />
+            layout="@layout/title_bar"/>
 
         <RelativeLayout
             android:id="@+id/layout_login_info"
@@ -29,19 +29,19 @@
                 android:id="@+id/des"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="店铺照片"
                 android:layout_toLeftOf="@+id/img_go"
+                android:text="店铺照片"
                 android:textColor="#272727"
-                android:textSize="14sp" />
+                android:textSize="14sp"/>
 
             <GridView
-                android:layout_marginTop="12dp"
-                android:layout_below="@+id/des"
                 android:id="@+id/noScrollgridview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_below="@+id/des"
+                android:layout_marginTop="12dp"
                 android:horizontalSpacing="12dp"
-                android:numColumns="4"
+                android:numColumns="5"
                 android:scrollbars="none"
                 android:verticalSpacing="5dp"></GridView>
 
@@ -53,49 +53,49 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/layout_login_info"
             android:layout_marginTop="20dp"
-            app:txtName="店名" />
+            app:txtName="店名"/>
 
         <cn.fpower.financeservice.view.widget.EnteringSettingView
             android:id="@+id/info_add1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/info_name"
-            app:txtName="地址" />
+            app:txtName="地址"/>
 
         <cn.fpower.financeservice.view.widget.EnteringSettingView
             android:id="@+id/info_add2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/info_add1"
-            app:txtName="详细地址" />
+            app:txtName="详细地址"/>
 
         <cn.fpower.financeservice.view.widget.EnteringSettingView
             android:id="@+id/longitude"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/info_add2"
-            app:txtName="经度" />
+            app:txtName="经度"/>
 
         <cn.fpower.financeservice.view.widget.EnteringSettingView
             android:id="@+id/latitude"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/longitude"
-            app:txtName="纬度" />
+            app:txtName="纬度"/>
 
         <cn.fpower.financeservice.view.widget.EnteringSettingView
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/latitude"
-            app:txtName="店长名字" />
+            app:txtName="店长名字"/>
 
         <cn.fpower.financeservice.view.widget.EnteringSettingView
             android:id="@+id/info_mobile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/username"
-            app:txtName="店长电话" />
+            app:txtName="店长电话"/>
 
         <Button
             android:id="@+id/submit"
@@ -108,7 +108,7 @@
             android:background="@drawable/s_round_group_red"
             android:text="@string/submit"
             android:textColor="@color/white"
-            android:textSize="17sp" />
+            android:textSize="17sp"/>
     </RelativeLayout>
 
 </ScrollView>
