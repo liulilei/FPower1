@@ -30,9 +30,11 @@ import cn.fpower.financeservice.mode.BannerInfo;
 import cn.fpower.financeservice.mode.BannerInfo.BannerList;
 import cn.fpower.financeservice.mode.SuccessExampleInfo;
 import cn.fpower.financeservice.mode.SuccessExampleInfo.SuccessExample;
+import cn.fpower.financeservice.utils.IntentUtils;
 import cn.fpower.financeservice.view.WebViewActivity;
 import cn.fpower.financeservice.view.home.HomeActivity;
 import cn.fpower.financeservice.view.home.SuccessExampleActivity;
+import cn.fpower.financeservice.view.me.LoginCheckActivity;
 import cn.fpower.financeservice.view.widget.HorizontalViewPager;
 import cn.fpower.financeservice.view.widget.OnClickInnerListView;
 
@@ -169,6 +171,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.fragment_home_add_entering_tv:
+                if (!FSApplication.getInstance().isLogin()) {
+                    IntentUtils.startActivity(getActivity(), LoginCheckActivity.class);
+                    return;
+                }
                 ((HomeActivity) getActivity()).selectEnteringFragment();
                 break;
             case R.id.fragment_home_success_more:
