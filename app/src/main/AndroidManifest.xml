@@ -30,6 +30,7 @@
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.CALL_PHONE"/>
     <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"/>
 
     <application
         android:name=".app.FSApplication"
@@ -47,7 +48,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".view.home.HomeActivity" android:launchMode="singleTask"/>
+        <activity
+            android:name=".view.home.HomeActivity"
+            android:launchMode="singleTask"/>
         <activity android:name=".view.WebViewActivity"></activity>
         <activity android:name=".view.InfoInputActivity"></activity>
         <activity android:name=".view.me.MeStoreActivity"></activity>
@@ -58,6 +61,15 @@
         <activity android:name=".view.ListActivity"></activity>
         <activity android:name=".view.home.SuccessExampleActivity"></activity>
         <activity android:name=".view.progress.ProgressDetailActivity"/>
+
+
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="1ae0b52aa704a9e6b0cf292695f8b9c5"/>
+        <!-- 定位需要的服务 -->
+        <service android:name="com.amap.api.location.APSService">
+        </service>
+
     </application>
 
 </manifest>

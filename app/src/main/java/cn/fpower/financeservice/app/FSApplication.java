@@ -3,6 +3,8 @@ package cn.fpower.financeservice.app;
 import android.app.Application;
 import android.content.Context;
 
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache;
@@ -51,6 +53,12 @@ public class FSApplication extends Application {
 
     //用户信息
     private UserInfo userInfo;
+
+    //声明AMapLocationClient类对象
+    public AMapLocationClient locationClient = null;
+
+    //声明mLocationOption对象
+    public AMapLocationClientOption locationOption = null;
 
     private boolean isLogin = false;
 
@@ -167,6 +175,32 @@ public class FSApplication extends Application {
 
     public void setIsLogin(boolean isLogin) {
         this.isLogin = isLogin;
+    }
+
+    public AMapLocationClient getAMapLocationClient() {
+        if (locationClient == null) {
+            locationClient = new AMapLocationClient(getApplicationContext());
+        }
+        locationClient.setLocationOption(getAMapLocationClientOption());
+        return locationClient;
+    }
+
+    public AMapLocationClientOption getAMapLocationClientOption() {
+        //初始化定位参数
+        locationOption = new AMapLocationClientOption();
+        //设置定位模式为高精度模式，Battery_Saving为低功耗模式，Device_Sensors是仅设备模式
+        locationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+        //设置是否返回地址信息（默认返回地址信息）
+        locationOption.setNeedAddress(true);
+        //设置是否只定位一次,默认为false
+        locationOption.setOnceLocation(true);
+        //设置是否强制刷新WIFI，默认为强制刷新
+        locationOption.setWifiActiveScan(true);
+        //设置是否允许模拟位置,默认为false，不允许模拟位置
+        locationOption.setMockEnable(false);
+        //设置定位间隔,单位毫秒,默认为2000ms
+        locationOption.setInterval(2000);
+        return locationOption;
     }
 
 }
