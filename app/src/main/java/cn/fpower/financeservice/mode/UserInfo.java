@@ -1,28 +1,5 @@
 package cn.fpower.financeservice.mode;
 
-/**
- * {
- * "data": {
- * "region": "",
- * "register_source": "2",
- * "birthday": "0000-00-00",
- * "face": "0",
- * "passwd": "OTZlNzkyMTg5NjVlYjcyYzkyYTU0OWRkNWEzMzAxMTI=",
- * "sex": "0",
- * "status": "1",
- * "reg_time": "1449074097",
- * "uptime": "1449074097",
- * "group_id": "1",
- * "id": "3",
- * "addtime": "1449074097",
- * "username": "0",
- * "rank": "0",
- * "mobile": "13516599661"
- * },
- * "message": "登录成功，完善信息",
- * "code": "201"
- * }
- */
 public class UserInfo extends BaseMode {
 
     private Data data;
