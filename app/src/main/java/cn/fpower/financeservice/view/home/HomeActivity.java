@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
+import android.view.View;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
@@ -131,5 +132,10 @@ public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedCh
             }
         }
         return true;
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

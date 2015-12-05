@@ -13,7 +13,7 @@ import com.lidroid.xutils.ViewUtils;
  * @author liulilei
  *         fragment的基类
  */
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment  implements View.OnClickListener {
 
     protected ViewGroup mRoot;
 

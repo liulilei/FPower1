@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/act_bg">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/layout_head"
+            layout="@layout/title_bar" />
+
+        <RelativeLayout
+            android:id="@+id/layout_login_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_head"
+            android:layout_marginTop="20dp"
+            android:background="@color/white"
+            android:paddingBottom="16dp"
+            android:paddingTop="16dp">
+
+            <ImageView
+                android:id="@+id/img_login"
+                android:layout_width="62dp"
+                android:layout_height="62dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:src="@mipmap/me_check" />
+
+            <TextView
+                android:id="@+id/txt_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:layout_toRightOf="@+id/img_login"
+                android:text="设置头像"
+                android:textColor="#959595"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/img_right"
+                android:paddingTop="20dp"
+                android:paddingBottom="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingRight="23dp"
+                android:src="@mipmap/fanhui" />
+        </RelativeLayout>
+
+        <cn.fpower.financeservice.view.widget.EnteringSettingView
+            android:id="@+id/info_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/layout_login_info"
+            android:layout_marginTop="20dp"
+            app:txtName="店名" />
+
+        <cn.fpower.financeservice.view.widget.EnteringSettingView
+            android:id="@+id/info_add1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/info_name"
+            app:txtName="地址" />
+
+        <cn.fpower.financeservice.view.widget.EnteringSettingView
+            android:id="@+id/info_add2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/info_add1"
+            app:txtName="详细地址" />
+
+        <cn.fpower.financeservice.view.widget.EnteringSettingView
+            android:id="@+id/longitude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/info_add2"
+            app:txtName="经度" />
+
+        <cn.fpower.financeservice.view.widget.EnteringSettingView
+            android:id="@+id/latitude"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/longitude"
+            app:txtName="纬度" />
+
+        <cn.fpower.financeservice.view.widget.EnteringSettingView
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/latitude"
+            app:txtName="店长名字" />
+
+        <cn.fpower.financeservice.view.widget.EnteringSettingView
+            android:id="@+id/info_mobile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/username"
+            app:txtName="店长电话" />
+
+        <Button
+            android:id="@+id/submit"
+            android:layout_width="match_parent"
+            android:layout_height="46dp"
+            android:layout_below="@+id/info_mobile"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/s_round_group_red"
+            android:text="@string/submit"
+            android:textColor="@color/white"
+            android:textSize="17sp" />
+    </RelativeLayout>
+
+</ScrollView>
