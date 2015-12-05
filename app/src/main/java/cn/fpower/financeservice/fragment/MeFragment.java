@@ -22,12 +22,13 @@ import cn.fpower.financeservice.view.me.LoginActivity;
 import cn.fpower.financeservice.view.me.LoginCheckActivity;
 import cn.fpower.financeservice.view.me.MeInfoActivity;
 import cn.fpower.financeservice.view.me.MeStoreActivity;
+import cn.fpower.financeservice.view.me.PromotionResultActivity;
 import cn.fpower.financeservice.view.widget.MeSettingView;
 
 /**
  * Created by ll on 2015/11/26.
  */
-public class MeFragment extends BaseFragment implements View.OnClickListener {
+public class MeFragment extends BaseFragment{
 
     @ViewInject(R.id.title_bar_back)
     private ImageView back;
@@ -110,6 +111,7 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
             layout_no_login_info.setVisibility(View.VISIBLE);
             layout_login_info.setVisibility(View.GONE);
         }
+        //店铺列表 是推广员角色登录 我的业绩点击就是店铺列表
         switch (userRight) {
             case 1:
                 checkView.setIconText(R.mipmap.me_store, "我的审核");
@@ -123,13 +125,12 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.fragment_me_check:
                 startActivity(new Intent(getActivity(), ListActivity.class));
-               // startActivity(new Intent(getActivity(), MeStoreActivity.class));
                 break;
             case R.id.fragment_me_up:
                 startActivity(new Intent(getActivity(), MeInfoActivity.class));
                 break;
             case R.id.fragment_me_about:
-                ToastUtils.show(getActivity(), "fragment_me_about");
+                 startActivity(new Intent(getActivity(), PromotionResultActivity.class));
                 break;
             case R.id.loginin:
                 startActivity(new Intent(getActivity(), LoginCheckActivity.class));

@@ -23,4 +23,9 @@
 
     <string name="me">我的</string>
     <string name="entering">信息录入</string>
+    
+    <string-array name="select_dialog_items">
+        <item>拍照上传</item>
+        <item>本地上传</item>
+    </string-array>
 </resources>

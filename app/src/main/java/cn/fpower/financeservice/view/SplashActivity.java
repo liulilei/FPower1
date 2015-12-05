@@ -3,6 +3,7 @@ package cn.fpower.financeservice.view;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
+import android.view.View;
 
 import com.google.gson.Gson;
 
@@ -98,5 +99,10 @@ public class SplashActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
         handler.removeCallbacksAndMessages(null);
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }
