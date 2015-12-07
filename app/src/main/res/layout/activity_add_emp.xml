@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/act_bg">
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/act_bg">
 
     <include
         android:id="@+id/layout_head"
-        layout="@layout/title_bar" />
+        layout="@layout/title_bar"/>
 
     <cn.fpower.financeservice.view.widget.EnteringSettingView
         android:id="@+id/info_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/layout_head"
-        app:txtName="员工姓名" />
+        app:txtName="员工姓名"/>
 
     <cn.fpower.financeservice.view.widget.EnteringSettingView
         android:id="@+id/info_mobile"
@@ -34,5 +34,5 @@
         android:background="@drawable/s_round_group_red"
         android:text="@string/confirm_add"
         android:textColor="@color/white"
-        android:textSize="17sp" />
+        android:textSize="17sp"/>
 </RelativeLayout>

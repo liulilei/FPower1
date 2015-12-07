@@ -98,6 +98,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         limitTv.setOnClickListener(this);
         enteringTv.setOnClickListener(this);
         successMoreTv.setOnClickListener(this);
+
     }
 
     @Override
