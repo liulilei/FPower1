@@ -1,5 +1,7 @@
 package cn.fpower.financeservice.mode;
 
+import java.util.List;
+
 /**
  * 审核列表
  **/
@@ -15,7 +17,20 @@ public class LoanInfo extends BaseMode {
         this.data = data;
     }
 
+
     public class Data implements BaseEntity {
+        private List<DataInfo> dataInfoList;
+
+        public List<DataInfo> getDataInfoList() {
+            return dataInfoList;
+        }
+
+        public void setDataInfoList(List<DataInfo> dataInfoList) {
+            this.dataInfoList = dataInfoList;
+        }
+    }
+
+    public class DataInfo implements BaseEntity {
 
         private int id;// "2",
         private int user_id;// "18",
