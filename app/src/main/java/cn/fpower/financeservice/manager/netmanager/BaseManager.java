@@ -92,4 +92,80 @@ public class BaseManager {
         });
     }
 
+    public void getJsonStringFromNetHasDialogGet(Context context, String netApi, final ManagerStringListener listener) {
+        NetworkService.getWithLoading(context, netApi, new IRequestListener() {
+            @Override
+            public void onSuccess(String result) {
+                if (listener != null) {
+                    listener.onSuccess(result);
+                }
+            }
+
+            @Override
+            public boolean onError(String error) {
+                if (listener != null) {
+                    listener.onError(error);
+                }
+                return false;
+            }
+        });
+    }
+
+    public void getJsonStringFromNetNoDialogGet(Context context, String netApi, final ManagerStringListener listener) {
+        NetworkService.get(context, netApi, new IRequestListener() {
+            @Override
+            public void onSuccess(String result) {
+                if (listener != null) {
+                    listener.onSuccess(result);
+                }
+            }
+
+            @Override
+            public boolean onError(String error) {
+                if (listener != null) {
+                    listener.onError(error);
+                }
+                return false;
+            }
+        });
+    }
+
+    public void getDataFromNetHasDialogGet(Context context, String netApi, final Class clazz, final ManagerDataListener listener) {
+        NetworkService.getWithLoading(context, netApi, new IRequestListener() {
+            @Override
+            public void onSuccess(String result) {
+                if (listener != null) {
+                    listener.onSuccess(gson.fromJson(result, clazz));
+                }
+            }
+
+            @Override
+            public boolean onError(String error) {
+                if (listener != null) {
+                    listener.onError(error);
+                }
+                return false;
+            }
+        });
+    }
+
+    public void getDataFromNetNoDialogGet(Context context, String netApi, final Class clazz, final ManagerDataListener listener) {
+        NetworkService.get(context, netApi, new IRequestListener() {
+            @Override
+            public void onSuccess(String result) {
+                if (listener != null) {
+                    listener.onSuccess(gson.fromJson(result, clazz));
+                }
+            }
+
+            @Override
+            public boolean onError(String error) {
+                if (listener != null) {
+                    listener.onError(error);
+                }
+                return false;
+            }
+        });
+    }
+
 }

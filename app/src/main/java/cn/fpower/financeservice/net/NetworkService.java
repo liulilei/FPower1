@@ -98,6 +98,68 @@ public class NetworkService {
                 });
     }
 
+    public static void get(final Context cont, String pUrl, final IRequestListener pListener) {
+        if (mHttpUtils == null) {
+            mHttpUtils = new HttpUtils(1000 * 10);
+        }
+
+        if (!NetUtil.isNetworkConnected(cont)) {
+            ToastUtils.show(cont, R.string.check_net);
+            if (null != pListener) {
+                pListener.onError("请检查网络");
+            }
+            return;
+        }
+        mHttpUtils.send(HttpMethod.GET, pUrl, new RequestCallBack<String>() {
+
+            @Override
+            public void onFailure(HttpException error, String msg) {
+                ToastUtils.show(cont, R.string.network_error);
+                if (null != pListener) {
+                    pListener.onError(msg);
+                }
+            }
+
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                checkResponseCode(cont, responseInfo.result, pListener);
+            }
+        });
+    }
+
+    public static void getWithLoading(final Context cont, String pUrl, final IRequestListener pListener) {
+        if (mHttpUtils == null) {
+            mHttpUtils = new HttpUtils(1000 * 10);
+        }
+
+        if (!NetUtil.isNetworkConnected(cont)) {
+            ToastUtils.show(cont, R.string.check_net);
+            if (null != pListener) {
+                pListener.onError("请检查网络");
+            }
+            return;
+        }
+        DialogUtils.showProgess(cont, R.string.loading);
+        mHttpUtils.send(HttpMethod.GET, pUrl, new RequestCallBack<String>() {
+
+            @Override
+            public void onFailure(HttpException error, String msg) {
+                LogUtils.e(TAG, "网络错误编码:" + error.getExceptionCode());
+                DialogUtils.dismissProgessDirectly();
+                ToastUtils.show(cont, R.string.network_error);
+                if (null != pListener) {
+                    pListener.onError(msg);
+                }
+            }
+
+            @Override
+            public void onSuccess(ResponseInfo<String> responseInfo) {
+                DialogUtils.dismissProgessDirectly();
+                checkResponseCode(cont, responseInfo.result, pListener);
+            }
+        });
+    }
+
 
     private static void checkResponseCode(Context cont, String result, IRequestListener pListener) {
         try {
