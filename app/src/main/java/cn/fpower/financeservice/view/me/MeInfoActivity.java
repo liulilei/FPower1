@@ -69,7 +69,7 @@ public class MeInfoActivity extends BaseActivity {
     @ViewInject(R.id.info_addr)
     private EnteringSettingView info_addr;
     private UserInfo userInfo;
-    String[] sexs={"男","女"};
+    String[] sexs = {"男", "女"};
     String sex = "1"; //默认是男
     private final int CODE_NAME = 0;
 
@@ -97,12 +97,12 @@ public class MeInfoActivity extends BaseActivity {
     protected void initData() {
         super.initData();
         //假如已经登陆
-        if(FSApplication.getInstance().isLogin()){
-            if(FSApplication.getInstance().getUserInfo().getData()!=null) {
+        if (FSApplication.getInstance().isLogin()) {
+            if (FSApplication.getInstance().getUserInfo().getData() != null) {
                 info_name.setValue(FSApplication.getInstance().getUserInfo().getData().getUsername());
                 info_birthday.setValue(FSApplication.getInstance().getUserInfo().getData().getBirthday());
-                info_sex.setValue(FSApplication.getInstance().getUserInfo().getData().getSex()==1?"男":"女");
-                info_addr.setValue(FSApplication.getInstance().getUserInfo().getData().getProvince_id()+"");
+                info_sex.setValue(FSApplication.getInstance().getUserInfo().getData().getSex() == 1 ? "男" : "女");
+                info_addr.setValue(FSApplication.getInstance().getUserInfo().getData().getProvince_id() + "");
                 ImageUtils.displayImageRoundImg(R.mipmap.ad1, NetApi.URL + FSApplication.getInstance().getUserInfo().getData().getFace(), img_login);
             }
         }
@@ -122,7 +122,7 @@ public class MeInfoActivity extends BaseActivity {
         switch (v.getId()) {
             case R.id.submit:
                 //验证，姓名，生日，城市不能为空，性别默认是男，头像默认为空，可以不传
-                String user_id = FSApplication.getInstance().getUserInfo().getData().getId()+"";
+                String user_id = FSApplication.getInstance().getUserInfo().getData().getId() + "";
                 String face = "";
                 String username = info_name.getValue();
                 if (TextUtils.isEmpty(username)) {
@@ -140,7 +140,7 @@ public class MeInfoActivity extends BaseActivity {
                 FinanceManagerControl.getFinanceServiceManager().complete_user_info(act, user_id, face,
                         username, birthday, sex, province_id,
                         city_id, district_id,
-                 true,  UserInfo.class, new ManagerDataListener(){
+                        true, UserInfo.class, new ManagerDataListener() {
 
                             @Override
                             public void onSuccess(Object data) {
@@ -148,7 +148,7 @@ public class MeInfoActivity extends BaseActivity {
                                 FSApplication.getInstance().setUserInfo(userInfo);
                                 FSApplication.getInstance().setIsLogin(true);
                                 SpUtils.putString(act, Constants.MOBLEE, userInfo.getData().getMobile());
-                              //  SpUtils.putString(act, Constants.PASSWD, view_pwd.getText().toString());
+                                //  SpUtils.putString(act, Constants.PASSWD, view_pwd.getText().toString());
                                 IntentUtils.startActivity(act, HomeActivity.class);
                                 finish();
 
@@ -179,7 +179,7 @@ public class MeInfoActivity extends BaseActivity {
                 mDialog.show();
                 break;
             case R.id.info_addr:
-               //下拉 控件
+                //下拉 控件
                 info_addr.setValue("北京市 北京市 东城区");
                 break;
         }
@@ -205,9 +205,9 @@ public class MeInfoActivity extends BaseActivity {
                 .setItems(sexs, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         if (which == 0) {
-                            sex="1";
+                            sex = "1";
                         } else {
-                            sex="2";
+                            sex = "2";
                         }
                         info_sex.setValue(sexs[which]);
                     }

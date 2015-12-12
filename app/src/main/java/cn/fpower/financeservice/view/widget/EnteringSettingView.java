@@ -13,6 +13,7 @@ public class EnteringSettingView extends RelativeLayout {
 
     private TextView titleName;
     private TextView valueName;
+    private String key;
 
     public EnteringSettingView(Context context) {
         this(context, null);
@@ -48,4 +49,19 @@ public class EnteringSettingView extends RelativeLayout {
     public void setValue(String value){
         valueName.setText(value);
     }
+
+    public void setValue(String key,String value){
+        this.key=key;
+        valueName.setText(value);
+    }
+
+    public void clear(){
+        this.key="";
+        valueName.setText("");
+    }
+
+    public String getKey(){
+        return key;
+    }
+
 }

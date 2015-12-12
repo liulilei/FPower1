@@ -5,6 +5,7 @@ import android.text.TextUtils;
 
 import com.lidroid.xutils.http.RequestParams;
 
+import cn.fpower.financeservice.mode.LoanPara;
 import cn.fpower.financeservice.net.NetApi;
 
 /**
@@ -123,9 +124,29 @@ public class FinanceServiceManager extends BaseManager {
     }
 
 
+    public void create_loan(Context context, LoanPara loanPara,
+                                   boolean hasDialog, Class clazz,
+                                   ManagerDataListener listener) {
+        params = new RequestParams();
+        params.addBodyParameter("user_id", loanPara.user_id+"");
+        params.addBodyParameter("realname", loanPara.realname);
+        params.addBodyParameter("mobile", loanPara.mobile);
+        params.addBodyParameter("money", loanPara.money+"");
+        params.addBodyParameter("province_id", loanPara.province_id);
+        params.addBodyParameter("city_id", loanPara.city_id);
+        params.addBodyParameter("district_id", loanPara.district_id);
+        params.addBodyParameter("is_housing", loanPara.is_housing);
+        params.addBodyParameter("is_loan", loanPara.is_loan);
+        params.addBodyParameter("address", loanPara.address);
 
-
-
-
+        if(!TextUtils.isEmpty(loanPara.channel)){
+            params.addBodyParameter("channel", loanPara.channel);
+        }
+        if (hasDialog) {
+            getDataFromNetHasDialog(context, NetApi.CREATE_LOAN, params, clazz, listener);
+        } else {
+            getDataFromNetNoDialog(context, NetApi.CREATE_LOAN, params, clazz, listener);
+        }
+    }
 
 }

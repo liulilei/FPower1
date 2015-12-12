@@ -15,7 +15,8 @@ public class NetApi {
     public static final String LOGIN = URL + "/login";//登陆
 
 
+    public static final String COMPLETE_USER_INFO = URL + "/complete_user_info"; //完善信息
 
-    public static final String COMPLETE_USER_INFO=  URL + "/complete_user_info";//登陆
+    public static final String CREATE_LOAN = URL + "/create_loan"; //11、录入贷款
 
 }
