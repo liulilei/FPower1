@@ -1,7 +1,6 @@
 package cn.fpower.financeservice.view;
 
 import android.content.Intent;
-import android.location.Location;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -18,7 +17,6 @@ import cn.fpower.financeservice.manager.netmanager.FinanceManagerControl;
 import cn.fpower.financeservice.manager.netmanager.ManagerDataListener;
 import cn.fpower.financeservice.mode.UserInfo;
 import cn.fpower.financeservice.utils.IntentUtils;
-import cn.fpower.financeservice.utils.LocationUtils;
 import cn.fpower.financeservice.utils.SpUtils;
 import cn.fpower.financeservice.utils.StringUtils;
 import cn.fpower.financeservice.view.home.HomeActivity;
@@ -49,7 +47,6 @@ public class SplashActivity extends BaseActivity {
     protected void initData() {
         String mobile = SpUtils.getString(this, Constants.MOBLEE, "");
         String passWd = SpUtils.getString(this, Constants.PASSWD, "");
-        LocationUtils.getCNBylocation(this);
         if (!StringUtils.isEmpty(mobile) && !StringUtils.isEmpty(passWd)) {
             FinanceManagerControl.getFinanceServiceManager().login(this, mobile, passWd, false, UserInfo.class,
                     new ManagerDataListener() {

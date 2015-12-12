@@ -144,6 +144,7 @@ public class MeFragment extends BaseFragment{
                 break;
             case R.id.loginout:
                 FSApplication.getInstance().setIsLogin(false);
+                FSApplication.getInstance().setUserInfo(null);
                 SpUtils.putString(getActivity(), Constants.MOBLEE, "");
                 SpUtils.putString(getActivity(), Constants.PASSWD, "");
                 setForUserInfo();

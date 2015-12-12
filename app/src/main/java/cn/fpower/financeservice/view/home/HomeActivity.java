@@ -73,8 +73,8 @@ public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         homeRg.setOnCheckedChangeListener(this);
 
         //201没有登陆，并且用户不为空
-        if(!FSApplication.getInstance().isLogin()){
-            if(FSApplication.getInstance().getUserInfo()!=null) {
+        if (!FSApplication.getInstance().isLogin()) {
+            if (FSApplication.getInstance().getUserInfo() != null) {
                 IntentUtils.startActivity(act, MeInfoActivity.class);
             }
         }

@@ -2,60 +2,53 @@ package cn.fpower.financeservice.mode;
 
 public class DataInfo implements BaseEntity {
 
-    private int id;// "2",
-    private int user_id;// "18",
+    private String id;// "2",
+    private String user_id;// "18",
     private String realname;// "test",
-    private int age;// "0",
+    private String age;// "0",
     private String mobile;// "13516599662",
-    private double money;// "11.11",
+    private String money;// "11.11",
     private String province_id;// "110000",
     private String city_id;// "110100",
     private String district_id;// "110101",
     private String address;// "北京市 北京市 东城区",
-    private int channel;// "0",
-    private int is_fund;// "0",
-    private int is_social_security;// "0",
-    private int is_bank_pay;// "0",
-    private double salary;// "0.00",
-    private int is_credit_card;// "0",
-    private double credit_card_quota;// "0.00",
-    private int household;// "0",
-    private int is_housing;// "1",
-    private int is_car;// "0",
-    private int is_loan;// "0",
-    private int process;// "0",
-    private int is_insurance;// "0",
-    private int identity;// "0",
+    private String channel;// "0",
+    private String is_fund;// "0",
+    private String is_social_security;// "0",
+    private String is_bank_pay;// "0",
+    private String salary;// "0.00",
+    private String is_credit_card;// "0",
+    private String credit_card_quota;// "0.00",
+    private String household;// "0",
+    private String is_housing;// "1",
+    private String is_car;// "0",
+    private String is_loan;// "0",
+    private String process;// "0",
+    private String is_insurance;// "0",
+    private String identity;// "0",
     private Long addtime;// "1449911529", 申请时间
     private Long uptime;// "1449911529",
     private Long audit_success_time;// "0",
     private Long audit_fail_time;// "0",
     private Long apply_success_time;// "0",
     private Long apply_fail_time;// "0",
-    private int status;// "1",
-    private int source;// "0"
+    private String status;// "1",
+    private String source;// "0"
 
-    public int getSource() {
-        return source;
-    }
 
-    public void setSource(int source) {
-        this.source = source;
-    }
-
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getUser_id() {
+    public String getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(int user_id) {
+    public void setUser_id(String user_id) {
         this.user_id = user_id;
     }
 
@@ -67,11 +60,11 @@ public class DataInfo implements BaseEntity {
         this.realname = realname;
     }
 
-    public int getAge() {
+    public String getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(String age) {
         this.age = age;
     }
 
@@ -83,11 +76,11 @@ public class DataInfo implements BaseEntity {
         this.mobile = mobile;
     }
 
-    public double getMoney() {
+    public String getMoney() {
         return money;
     }
 
-    public void setMoney(double money) {
+    public void setMoney(String money) {
         this.money = money;
     }
 
@@ -123,115 +116,115 @@ public class DataInfo implements BaseEntity {
         this.address = address;
     }
 
-    public int getChannel() {
+    public String getChannel() {
         return channel;
     }
 
-    public void setChannel(int channel) {
+    public void setChannel(String channel) {
         this.channel = channel;
     }
 
-    public int getIs_fund() {
+    public String getIs_fund() {
         return is_fund;
     }
 
-    public void setIs_fund(int is_fund) {
+    public void setIs_fund(String is_fund) {
         this.is_fund = is_fund;
     }
 
-    public int getIs_social_security() {
+    public String getIs_social_security() {
         return is_social_security;
     }
 
-    public void setIs_social_security(int is_social_security) {
+    public void setIs_social_security(String is_social_security) {
         this.is_social_security = is_social_security;
     }
 
-    public int getIs_bank_pay() {
+    public String getIs_bank_pay() {
         return is_bank_pay;
     }
 
-    public void setIs_bank_pay(int is_bank_pay) {
+    public void setIs_bank_pay(String is_bank_pay) {
         this.is_bank_pay = is_bank_pay;
     }
 
-    public double getSalary() {
+    public String getSalary() {
         return salary;
     }
 
-    public void setSalary(double salary) {
+    public void setSalary(String salary) {
         this.salary = salary;
     }
 
-    public int getIs_credit_card() {
+    public String getIs_credit_card() {
         return is_credit_card;
     }
 
-    public void setIs_credit_card(int is_credit_card) {
+    public void setIs_credit_card(String is_credit_card) {
         this.is_credit_card = is_credit_card;
     }
 
-    public double getCredit_card_quota() {
+    public String getCredit_card_quota() {
         return credit_card_quota;
     }
 
-    public void setCredit_card_quota(double credit_card_quota) {
+    public void setCredit_card_quota(String credit_card_quota) {
         this.credit_card_quota = credit_card_quota;
     }
 
-    public int getHousehold() {
+    public String getHousehold() {
         return household;
     }
 
-    public void setHousehold(int household) {
+    public void setHousehold(String household) {
         this.household = household;
     }
 
-    public int getIs_housing() {
+    public String getIs_housing() {
         return is_housing;
     }
 
-    public void setIs_housing(int is_housing) {
+    public void setIs_housing(String is_housing) {
         this.is_housing = is_housing;
     }
 
-    public int getIs_car() {
+    public String getIs_car() {
         return is_car;
     }
 
-    public void setIs_car(int is_car) {
+    public void setIs_car(String is_car) {
         this.is_car = is_car;
     }
 
-    public int getIs_loan() {
+    public String getIs_loan() {
         return is_loan;
     }
 
-    public void setIs_loan(int is_loan) {
+    public void setIs_loan(String is_loan) {
         this.is_loan = is_loan;
     }
 
-    public int getProcess() {
+    public String getProcess() {
         return process;
     }
 
-    public void setProcess(int process) {
+    public void setProcess(String process) {
         this.process = process;
     }
 
-    public int getIs_insurance() {
+    public String getIs_insurance() {
         return is_insurance;
     }
 
-    public void setIs_insurance(int is_insurance) {
+    public void setIs_insurance(String is_insurance) {
         this.is_insurance = is_insurance;
     }
 
-    public int getIdentity() {
+    public String getIdentity() {
         return identity;
     }
 
-    public void setIdentity(int identity) {
+    public void setIdentity(String identity) {
         this.identity = identity;
     }
 
@@ -283,11 +276,19 @@ public class DataInfo implements BaseEntity {
         this.apply_fail_time = apply_fail_time;
     }
 
-    public int getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(int status) {
+    public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
     }
 }

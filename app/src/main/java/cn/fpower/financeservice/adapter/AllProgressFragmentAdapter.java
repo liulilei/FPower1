@@ -8,13 +8,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-
 import java.util.List;
 
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.manager.MappingManager;
 import cn.fpower.financeservice.mode.DataInfo;
-import cn.fpower.financeservice.mode.LoanInfo;
 
 /**
  * Created by ll on 2015/12/2.
@@ -49,7 +47,7 @@ public class AllProgressFragmentAdapter extends AbstractAdapter<DataInfo> {
         }
         DataInfo info=mList.get(0);
         holder.progressName.setText(info.getRealname());
-        holder.progressMoney.setText(MappingManager.getProcess(info.getProcess()));
+        holder.progressMoney.setText(MappingManager.getProcess(Integer.parseInt(info.getProcess())));
         holder.progressCreateTime.setText("申请时间:" + info.getAddtime());
         // ImageUtils.displayImageRoundImg(R.mipmap.ad1, "http://stimgcn1.s-msn.com/msnportal/fashion/2012/12/24/51478f07-382d-4da9-99b5-815dd2848aa8.jpg", holder.progressAvatar);
         return convertView;
