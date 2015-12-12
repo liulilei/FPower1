@@ -149,6 +149,17 @@ public class FinanceServiceManager extends BaseManager {
         }
     }
 
-
-
+    public void loan_list(Context context, String user_id, String process, boolean hasDialog, Class clazz,
+                      ManagerDataListener listener) {
+        params = new RequestParams();
+        params.addQueryStringParameter("user_id", user_id);
+        if(!TextUtils.isEmpty(process)) {
+            params.addQueryStringParameter("process", process);
+        }
+        if (hasDialog) {
+            getDataFromNetHasDialogGet(context, NetApi.LOAN_LIST, params, clazz, listener);
+        } else {
+            getDataFromNetHasDialogGet(context, NetApi.LOAN_LIST, params, clazz, listener);
+        }
+    }
 }

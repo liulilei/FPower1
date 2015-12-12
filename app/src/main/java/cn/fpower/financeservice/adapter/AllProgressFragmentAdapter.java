@@ -18,11 +18,11 @@ import cn.fpower.financeservice.utils.ImageUtils;
 /**
  * Created by ll on 2015/12/2.
  */
-public class AllProgressFragmentAdapter extends AbstractAdapter<LoanInfo> {
+public class AllProgressFragmentAdapter extends AbstractAdapter<LoanInfo.Data> {
 
     private Intent intent;
 
-    public AllProgressFragmentAdapter(Context Context, List<LoanInfo> datas) {
+    public AllProgressFragmentAdapter(Context Context, List<LoanInfo.Data> datas) {
         super(Context, datas);
     }
 
@@ -46,10 +46,10 @@ public class AllProgressFragmentAdapter extends AbstractAdapter<LoanInfo> {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        LoanInfo info=mList.get(0);
-        holder.progressName.setText(info.getData().getRealname());
-        holder.progressMoney.setText(MappingManager.getProcess(info.getData().getProcess()));
-        holder.progressCreateTime.setText("申请时间:"+info.getData().getAddtime());
+        LoanInfo.Data info=mList.get(0);
+        holder.progressName.setText(info.getRealname());
+        holder.progressMoney.setText(MappingManager.getProcess(info.getProcess()));
+        holder.progressCreateTime.setText("申请时间:"+info.getAddtime());
         // ImageUtils.displayImageRoundImg(R.mipmap.ad1, "http://stimgcn1.s-msn.com/msnportal/fashion/2012/12/24/51478f07-382d-4da9-99b5-815dd2848aa8.jpg", holder.progressAvatar);
         return convertView;
     }

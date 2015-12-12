@@ -22,6 +22,7 @@ import cn.fpower.financeservice.utils.ToastUtils;
 import cn.fpower.financeservice.view.ListActivity;
 import cn.fpower.financeservice.view.me.LoginActivity;
 import cn.fpower.financeservice.view.me.LoginCheckActivity;
+import cn.fpower.financeservice.view.me.MeCheckListActivity;
 import cn.fpower.financeservice.view.me.MeInfoActivity;
 import cn.fpower.financeservice.view.me.MeStoreActivity;
 import cn.fpower.financeservice.view.me.PromotionResultActivity;
@@ -130,7 +131,7 @@ public class MeFragment extends BaseFragment{
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fragment_me_check:
-                startActivity(new Intent(getActivity(), ListActivity.class));
+                startActivity(new Intent(getActivity(), MeCheckListActivity.class));
                 break;
             case R.id.fragment_me_up:
                 startActivity(new Intent(getActivity(), MeInfoActivity.class));
