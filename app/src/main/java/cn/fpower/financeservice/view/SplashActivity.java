@@ -73,8 +73,8 @@ public class SplashActivity extends BaseActivity {
                                             gson = new Gson();
                                             userInfo = gson.fromJson(error, UserInfo.class);
                                             FSApplication.getInstance().setUserInfo(userInfo);
-                                            FSApplication.getInstance().setIsLogin(true);
-                                            IntentUtils.startActivity(SplashActivity.this, HomeActivity.class);
+                                           // FSApplication.getInstance().setIsLogin(true);
+                                            IntentUtils.startActivity(act, HomeActivity.class);
                                             finish();
                                         } else {
                                             IntentUtils.startActivity(SplashActivity.this, HomeActivity.class);

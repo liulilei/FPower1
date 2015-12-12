@@ -15,6 +15,8 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.app.FSApplication;
 import cn.fpower.financeservice.constants.Constants;
+import cn.fpower.financeservice.net.NetApi;
+import cn.fpower.financeservice.utils.ImageUtils;
 import cn.fpower.financeservice.utils.SpUtils;
 import cn.fpower.financeservice.utils.ToastUtils;
 import cn.fpower.financeservice.view.ListActivity;
@@ -67,6 +69,9 @@ public class MeFragment extends BaseFragment{
     @ViewInject(R.id.useraddr)
     private TextView useraddr;
 
+    @ViewInject(R.id.img_login)
+    private ImageView img_login;
+
 
     @Override
     protected ViewGroup onCreateView(LayoutInflater inflater, Bundle savedInstanceState) {
@@ -106,7 +111,8 @@ public class MeFragment extends BaseFragment{
             layout_no_login_info.setVisibility(View.GONE);
             username.setText(FSApplication.getInstance().getUserInfo().getData().getUsername());
             userage.setText(FSApplication.getInstance().getUserInfo().getData().getBirthday());
-            useraddr.setText(FSApplication.getInstance().getUserInfo().getData().getRegion());
+            useraddr.setText(FSApplication.getInstance().getUserInfo().getData().getProvince_id()+"");
+            ImageUtils.displayImageRoundImg(R.mipmap.ad1, NetApi.URL+FSApplication.getInstance().getUserInfo().getData().getFace(), img_login);
         } else {
             layout_no_login_info.setVisibility(View.VISIBLE);
             layout_login_info.setVisibility(View.GONE);

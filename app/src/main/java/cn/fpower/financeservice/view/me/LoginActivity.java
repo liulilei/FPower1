@@ -115,10 +115,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                                 gson = new Gson();
                                                 userInfo = gson.fromJson(error, UserInfo.class);
                                                 FSApplication.getInstance().setUserInfo(userInfo);
-                                                FSApplication.getInstance().setIsLogin(true);
+                                                //  //必须完善信息才算登陆
+                                                //FSApplication.getInstance().setIsLogin(true);
                                                 SpUtils.putString(LoginActivity.this, Constants.MOBLEE, userInfo.getData().getMobile());
                                                 SpUtils.putString(LoginActivity.this, Constants.PASSWD, view_pwd.getText().toString());
-                                                IntentUtils.startActivity(LoginActivity.this, HomeActivity.class);
+                                                IntentUtils.startActivity(act, HomeActivity.class);
                                             }
                                         }
                                     } catch (JSONException e) {

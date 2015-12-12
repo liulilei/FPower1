@@ -13,21 +13,106 @@ public class UserInfo extends BaseMode {
     }
 
     public class Data implements BaseEntity {
-        private Long addtime;//1449074097",
-        private String birthday;//生日
-        private String face;//头像 "0",
-        private int group_id;//"1",
-        private int id;//"3",
-        private String mobile;//手机号 13516599661"
-        private String passwd;//密码 加密
-        private int rank;//0",
-        private Long reg_time;// 1449074097",
-        private String region;
-        private int register_source;//来源 1、IOS 2、安卓
-        private int sex;//性别[0,人妖，1男，2女]
-        private int status;//"1",
-        private Long uptime;// 1449074097",
-        private String username;//用户名 "0",
+
+        /**
+         * "id": "18",
+         * "tissue_id": "0",
+         * "shop_id": "0",
+         * "entering_uid": "0",
+         * "rank": "0",
+         * "mobile": "13516599661",
+         * "username": "uhb",
+         * "passwd": "Z3p3ZWltaWFvZjYzYTVmYmViNjQyMWU1NTQ5NzBiYTA2MDk4NjAyZjA=",
+         * "face": "/uploads/avatar/default_face.png",
+         * "birthday": "1989-09-27",
+         * "sex": "1",
+         * "province_id": "110000",
+         * "city_id": "110100",
+         * "district_id": "110101",
+         * "address": "",
+         * "register_source": "2",
+         * "addtime": "1449898335",
+         * "uptime": "1449903335",
+         * "reg_time": "1449898335",
+         * "status": "1"
+         **/
+
+        private int id; //18,
+        private int tissue_id;//0
+        private int shop_id;//"0",
+        private int entering_uid;//"0",
+        private int rank;// "0",
+        private String mobile; //"13516599661",
+        private String username;//"uhb",
+        private String passwd;// "Z3p3ZWltaWFvZjYzYTVmYmViNjQyMWU1NTQ5NzBiYTA2MDk4NjAyZjA=",
+        private String face;// "/uploads/avatar/default_face.png",
+        private String birthday;// "1989-09-27",
+        private int sex;//"1",
+        private int province_id;// "110000",
+        private int city_id;//"110100",
+        private int district_id;//"110101",
+        private String address;// "",
+        private int register_source;// "2",
+        private Long addtime; //"1449898335",
+        private Long uptime;// "1449903335",
+        private Long reg_time;// "1449898335",
+        private int status;//"1"
+
+        public String getAddress() {
+            return address;
+        }
+
+        public void setAddress(String address) {
+            this.address = address;
+        }
+
+        public int getDistrict_id() {
+            return district_id;
+        }
+
+        public void setDistrict_id(int district_id) {
+            this.district_id = district_id;
+        }
+
+        public int getCity_id() {
+            return city_id;
+        }
+
+        public void setCity_id(int city_id) {
+            this.city_id = city_id;
+        }
+
+        public int getProvince_id() {
+            return province_id;
+        }
+
+        public void setProvince_id(int province_id) {
+            this.province_id = province_id;
+        }
+
+        public int getEntering_uid() {
+            return entering_uid;
+        }
+
+        public void setEntering_uid(int entering_uid) {
+            this.entering_uid = entering_uid;
+        }
+
+        public int getShop_id() {
+            return shop_id;
+        }
+
+        public void setShop_id(int shop_id) {
+            this.shop_id = shop_id;
+        }
+
+        public int getTissue_id() {
+            return tissue_id;
+        }
+
+        public void setTissue_id(int tissue_id) {
+            this.tissue_id = tissue_id;
+        }
 
         public Long getAddtime() {
             return addtime;
@@ -51,14 +136,6 @@ public class UserInfo extends BaseMode {
 
         public void setFace(String face) {
             this.face = face;
-        }
-
-        public int getGroup_id() {
-            return group_id;
-        }
-
-        public void setGroup_id(int group_id) {
-            this.group_id = group_id;
         }
 
         public int getId() {
@@ -99,14 +176,6 @@ public class UserInfo extends BaseMode {
 
         public void setReg_time(Long reg_time) {
             this.reg_time = reg_time;
-        }
-
-        public String getRegion() {
-            return region;
-        }
-
-        public void setRegion(String region) {
-            this.region = region;
         }
 
         public int getRegister_source() {

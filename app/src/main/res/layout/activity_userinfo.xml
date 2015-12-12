@@ -59,24 +59,24 @@
         app:txtName="姓名" />
 
     <cn.fpower.financeservice.view.widget.EnteringSettingView
-        android:id="@+id/info_money"
+        android:id="@+id/info_birthday"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/info_name"
-        app:txtName="申请金额"/>
+        app:txtName="生日"/>
 
     <cn.fpower.financeservice.view.widget.EnteringSettingView
-        android:id="@+id/info_mobile"
+        android:id="@+id/info_sex"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/info_money"
-        app:txtName="电话"/>
+        android:layout_below="@+id/info_birthday"
+        app:txtName="性别"/>
 
     <cn.fpower.financeservice.view.widget.EnteringSettingView
         android:id="@+id/info_addr"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/info_mobile"
+        android:layout_below="@+id/info_sex"
         app:txtName="地址"/>
 
     <Button

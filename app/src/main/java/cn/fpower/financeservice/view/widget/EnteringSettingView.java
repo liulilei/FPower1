@@ -41,7 +41,7 @@ public class EnteringSettingView extends RelativeLayout {
     }
 
     public String getValue(){
-        return valueName.getText().toString();
+        return valueName.getText().toString().trim();
     }
 
 

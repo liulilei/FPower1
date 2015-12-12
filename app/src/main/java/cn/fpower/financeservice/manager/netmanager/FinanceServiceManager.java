@@ -1,6 +1,7 @@
 package cn.fpower.financeservice.manager.netmanager;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import com.lidroid.xutils.http.RequestParams;
 
@@ -45,7 +46,7 @@ public class FinanceServiceManager extends BaseManager {
     public void get_code(Context context, String mobile, int type, boolean hasDialog, ManagerStringListener listener) {
         params = new RequestParams();
         params.addBodyParameter("mobile", mobile);
-        params.addBodyParameter("type", type + "");
+        params.addBodyParameter("code_type", type + "");
         if (hasDialog) {
             getJsonStringFromNetHasDialog(context, NetApi.GET_CODE, params, listener);
         } else {
@@ -96,6 +97,35 @@ public class FinanceServiceManager extends BaseManager {
             getDataFromNetNoDialog(context, NetApi.LOGIN, params, clazz, listener);
         }
     }
+
+
+    public void complete_user_info(Context context, String user_id, String face,
+                                   String username, String birthday, String sex, String province_id,
+                                   String city_id, String district_id,
+                                   boolean hasDialog, Class clazz,
+                                   ManagerDataListener listener) {
+        params = new RequestParams();//user_id，face, username, birthday, sex, province_id, city_id, district_id
+        params.addBodyParameter("user_id", user_id);
+        if(!TextUtils.isEmpty(face)) {
+            params.addBodyParameter("face", face);
+        }
+        params.addBodyParameter("username", username);
+        params.addBodyParameter("birthday", birthday);
+        params.addBodyParameter("sex", sex);
+        params.addBodyParameter("province_id", province_id);
+        params.addBodyParameter("city_id", city_id);
+        params.addBodyParameter("district_id", district_id);
+        if (hasDialog) {
+            getDataFromNetHasDialog(context, NetApi.COMPLETE_USER_INFO, params, clazz, listener);
+        } else {
+            getDataFromNetNoDialog(context, NetApi.COMPLETE_USER_INFO, params, clazz, listener);
+        }
+    }
+
+
+
+
+
 
 
 }

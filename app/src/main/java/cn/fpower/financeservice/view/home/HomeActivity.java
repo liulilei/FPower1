@@ -21,6 +21,7 @@ import cn.fpower.financeservice.utils.ToastUtils;
 import cn.fpower.financeservice.view.BaseActivity;
 import cn.fpower.financeservice.view.me.LoginActivity;
 import cn.fpower.financeservice.view.me.LoginCheckActivity;
+import cn.fpower.financeservice.view.me.MeInfoActivity;
 
 /**
  * Created by ll on 2015/11/26.
@@ -70,6 +71,13 @@ public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         currentFragment = homeFragment;
 
         homeRg.setOnCheckedChangeListener(this);
+
+        //201没有登陆，并且用户不为空
+        if(!FSApplication.getInstance().isLogin()){
+            if(FSApplication.getInstance().getUserInfo()!=null) {
+                IntentUtils.startActivity(act, MeInfoActivity.class);
+            }
+        }
     }
 
     @Override
