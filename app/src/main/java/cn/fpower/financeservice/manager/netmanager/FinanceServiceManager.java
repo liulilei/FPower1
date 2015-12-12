@@ -138,7 +138,7 @@ public class FinanceServiceManager extends BaseManager {
         params.addBodyParameter("is_housing", loanPara.is_housing);
         params.addBodyParameter("is_loan", loanPara.is_loan);
         params.addBodyParameter("address", loanPara.address);
-
+        params.addBodyParameter("source", "2");
         if(!TextUtils.isEmpty(loanPara.channel)){
             params.addBodyParameter("channel", loanPara.channel);
         }
@@ -148,5 +148,7 @@ public class FinanceServiceManager extends BaseManager {
             getDataFromNetNoDialog(context, NetApi.CREATE_LOAN, params, clazz, listener);
         }
     }
+
+
 
 }
