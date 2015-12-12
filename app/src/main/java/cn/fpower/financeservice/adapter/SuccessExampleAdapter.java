@@ -9,15 +9,16 @@ import android.widget.TextView;
 import java.util.List;
 
 import cn.fpower.financeservice.R;
-import cn.fpower.financeservice.mode.SuccessExampleInfo.SuccessExample;
+import cn.fpower.financeservice.mode.DataInfo;
 import cn.fpower.financeservice.utils.ImageUtils;
+import cn.fpower.financeservice.utils.TimeUtils;
 
 /**
  * Created by ll on 2015/11/30.
  */
-public class SuccessExampleAdapter extends AbstractAdapter<SuccessExample> {
+public class SuccessExampleAdapter extends AbstractAdapter<DataInfo> {
 
-    public SuccessExampleAdapter(Context Context, List<SuccessExample> datas) {
+    public SuccessExampleAdapter(Context Context, List<DataInfo> datas) {
         super(Context, datas);
     }
 
@@ -37,6 +38,9 @@ public class SuccessExampleAdapter extends AbstractAdapter<SuccessExample> {
             holder = (ViewHolder) convertView.getTag();
         }
         ImageUtils.displayImageRoundImg(R.mipmap.ad1, "http://stimgcn1.s-msn.com/msnportal/fashion/2012/12/24/51478f07-382d-4da9-99b5-815dd2848aa8.jpg", holder.exampleAvatar);
+        holder.exampleName.setText(mList.get(position).getRealname());
+        holder.exampleMoney.setText("￥" + mList.get(position).getMoney());
+        holder.exampleCreateTime.setText("申请时间:" + TimeUtils.fullTimeAndDay(mList.get(position).getApply_success_time()));
         holder.exampleRightIv.setImageResource(R.mipmap.fanhui);
         return convertView;
     }

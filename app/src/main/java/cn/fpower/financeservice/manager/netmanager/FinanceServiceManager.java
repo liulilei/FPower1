@@ -107,7 +107,7 @@ public class FinanceServiceManager extends BaseManager {
                                    ManagerDataListener listener) {
         params = new RequestParams();//user_id，face, username, birthday, sex, province_id, city_id, district_id
         params.addBodyParameter("user_id", user_id);
-        if(!TextUtils.isEmpty(face)) {
+        if (!TextUtils.isEmpty(face)) {
             params.addBodyParameter("face", face);
         }
         params.addBodyParameter("username", username);
@@ -125,13 +125,13 @@ public class FinanceServiceManager extends BaseManager {
 
 
     public void create_loan(Context context, LoanPara loanPara,
-                                   boolean hasDialog, Class clazz,
-                                   ManagerDataListener listener) {
+                            boolean hasDialog, Class clazz,
+                            ManagerDataListener listener) {
         params = new RequestParams();
-        params.addBodyParameter("user_id", loanPara.user_id+"");
+        params.addBodyParameter("user_id", loanPara.user_id + "");
         params.addBodyParameter("realname", loanPara.realname);
         params.addBodyParameter("mobile", loanPara.mobile);
-        params.addBodyParameter("money", loanPara.money+"");
+        params.addBodyParameter("money", loanPara.money + "");
         params.addBodyParameter("province_id", loanPara.province_id);
         params.addBodyParameter("city_id", loanPara.city_id);
         params.addBodyParameter("district_id", loanPara.district_id);
@@ -139,7 +139,7 @@ public class FinanceServiceManager extends BaseManager {
         params.addBodyParameter("is_loan", loanPara.is_loan);
         params.addBodyParameter("address", loanPara.address);
         params.addBodyParameter("source", "2");
-        if(!TextUtils.isEmpty(loanPara.channel)){
+        if (!TextUtils.isEmpty(loanPara.channel)) {
             params.addBodyParameter("channel", loanPara.channel);
         }
         if (hasDialog) {
@@ -150,16 +150,24 @@ public class FinanceServiceManager extends BaseManager {
     }
 
     public void loan_list(Context context, String user_id, String process, boolean hasDialog, Class clazz,
-                      ManagerDataListener listener) {
+                          ManagerDataListener listener) {
         params = new RequestParams();
         params.addQueryStringParameter("user_id", user_id);
-        if(!TextUtils.isEmpty(process)) {
+        if (!TextUtils.isEmpty(process)) {
             params.addQueryStringParameter("process", process);
         }
         if (hasDialog) {
             getDataFromNetHasDialogGet(context, NetApi.LOAN_LIST, params, clazz, listener);
         } else {
             getDataFromNetHasDialogGet(context, NetApi.LOAN_LIST, params, clazz, listener);
+        }
+    }
+
+    public void home(Context context, boolean hasDialog, Class clazz, ManagerDataListener listener) {
+        if (hasDialog) {
+            getDataFromNetHasDialogGet(context, NetApi.HOME, null, clazz, listener);
+        } else {
+            getDataFromNetHasDialogGet(context, NetApi.HOME, null, clazz, listener);
         }
     }
 }

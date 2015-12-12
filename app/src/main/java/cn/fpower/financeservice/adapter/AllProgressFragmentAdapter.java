@@ -8,21 +8,22 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
 import java.util.List;
 
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.manager.MappingManager;
+import cn.fpower.financeservice.mode.DataInfo;
 import cn.fpower.financeservice.mode.LoanInfo;
-import cn.fpower.financeservice.utils.ImageUtils;
 
 /**
  * Created by ll on 2015/12/2.
  */
-public class AllProgressFragmentAdapter extends AbstractAdapter<LoanInfo.DataInfo> {
+public class AllProgressFragmentAdapter extends AbstractAdapter<DataInfo> {
 
     private Intent intent;
 
-    public AllProgressFragmentAdapter(Context Context, List<LoanInfo.DataInfo> datas) {
+    public AllProgressFragmentAdapter(Context Context, List<DataInfo> datas) {
         super(Context, datas);
     }
 
@@ -46,7 +47,7 @@ public class AllProgressFragmentAdapter extends AbstractAdapter<LoanInfo.DataInf
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        LoanInfo.DataInfo info=mList.get(0);
+        DataInfo info=mList.get(0);
         holder.progressName.setText(info.getRealname());
         holder.progressMoney.setText(MappingManager.getProcess(info.getProcess()));
         holder.progressCreateTime.setText("申请时间:" + info.getAddtime());

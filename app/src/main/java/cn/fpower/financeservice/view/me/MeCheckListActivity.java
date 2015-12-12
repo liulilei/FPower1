@@ -10,13 +10,10 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.adapter.AllProgressFragmentAdapter;
-import cn.fpower.financeservice.adapter.ProgressFragmentAdapter;
 import cn.fpower.financeservice.app.FSApplication;
 import cn.fpower.financeservice.manager.netmanager.FinanceManagerControl;
 import cn.fpower.financeservice.manager.netmanager.ManagerDataListener;
-import cn.fpower.financeservice.manager.netmanager.ManagerStringListener;
 import cn.fpower.financeservice.mode.LoanInfo;
-import cn.fpower.financeservice.mode.UserInfo;
 import cn.fpower.financeservice.view.BaseActivity;
 import cn.fpower.financeservice.view.widget.RefreshListView;
 

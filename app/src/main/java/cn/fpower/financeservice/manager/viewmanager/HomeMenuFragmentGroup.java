@@ -17,10 +17,12 @@ import java.util.List;
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.adapter.MainAdPageradapter;
 import cn.fpower.financeservice.constants.Constants;
-import cn.fpower.financeservice.mode.BannerInfo;
+import cn.fpower.financeservice.mode.HomeInfo;
+import cn.fpower.financeservice.net.NetApi;
 import cn.fpower.financeservice.utils.ImageUtils;
 import cn.fpower.financeservice.utils.StringUtils;
 import cn.fpower.financeservice.view.WebViewActivity;
+import cn.fpower.financeservice.mode.HomeInfo.AdItem;
 
 public class HomeMenuFragmentGroup {
 
@@ -64,12 +66,12 @@ public class HomeMenuFragmentGroup {
      * @param viewPager
      * @param pointGroup
      */
-    public void initAd(final List<BannerInfo.BannerList> bannerList,
+    public void initAd(final List<AdItem> bannerList,
                        final ViewPager viewPager, final LinearLayout pointGroup) {
         this.viewPager = viewPager;
         List<View> views = new ArrayList<View>();
-        views.add(addImageView(bannerList.get(bannerList.size() - 1).getPicture(),
-                bannerList.get(bannerList.size() - 1).getUrl()));
+        views.add(addImageView(NetApi.URL_HTTP + bannerList.get(bannerList.size() - 1).getAd_img(),
+                NetApi.URL_HTTP + bannerList.get(bannerList.size() - 1).getAd_link()));
         for (int i = 0; i < bannerList.size(); i++) {
             ImageView point = new ImageView(context);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -82,10 +84,9 @@ public class HomeMenuFragmentGroup {
                 point.setEnabled(false);
             }
             pointGroup.addView(point);
-            views.add(addImageView(bannerList.get(i).getPicture(),
-                    bannerList.get(i).getUrl()));
+            views.add(addImageView(NetApi.URL_HTTP + bannerList.get(i).getAd_img(), NetApi.URL_HTTP + bannerList.get(i).getAd_link()));
         }
-        views.add(addImageView(bannerList.get(0).getPicture(), bannerList.get(0).getUrl()));
+        views.add(addImageView(NetApi.URL_HTTP + bannerList.get(0).getAd_img(), NetApi.URL_HTTP + bannerList.get(0).getAd_link()));
         viewLength = views.size();
         viewPager.setAdapter(new MainAdPageradapter(views));
         viewPager.setOnPageChangeListener(new OnPageChangeListener() {

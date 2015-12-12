@@ -2,6 +2,8 @@ package cn.fpower.financeservice.net;
 
 public class NetApi {
 
+    public static final String URL_HTTP = "http://";
+
     public static final String URL = "http://a.gzweimiao.com";//测试地址
 
 //    public static final String URL = "http://api.gzweimiao.com";//正式地址
@@ -20,6 +22,8 @@ public class NetApi {
     public static final String CREATE_LOAN = URL + "/create_loan"; //11、录入贷款
 
     public static final String LOAN_LIST = URL + "/loan_list"; //进度
+
+    public static final String HOME = URL + "/home";//首页
 
 
 }

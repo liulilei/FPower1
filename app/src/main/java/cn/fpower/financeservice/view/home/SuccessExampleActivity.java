@@ -12,8 +12,7 @@ import java.util.List;
 
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.adapter.SuccessExampleAdapter;
-import cn.fpower.financeservice.mode.SuccessExampleInfo;
-import cn.fpower.financeservice.mode.SuccessExampleInfo.SuccessExample;
+import cn.fpower.financeservice.mode.DataInfo;
 import cn.fpower.financeservice.view.BaseActivity;
 import cn.fpower.financeservice.view.widget.RefreshListView;
 
@@ -33,7 +32,7 @@ public class SuccessExampleActivity extends BaseActivity implements View.OnClick
 
     private SuccessExampleAdapter successExampleAdapter;
 
-    private List<SuccessExample> successExampleList;
+    private List<DataInfo> successExampleList;
 
     private int count = 1;
 
@@ -58,10 +57,10 @@ public class SuccessExampleActivity extends BaseActivity implements View.OnClick
         successExampleRlv.showFooterResult(true);
     }
 
-    public List<SuccessExample> addData() {
-        List<SuccessExample> data = new ArrayList<>();
+    public List<DataInfo> addData() {
+        List<DataInfo> data = new ArrayList<>();
         for (int i = 0; i < 10; i++) {
-            data.add(new SuccessExampleInfo().new SuccessExample());
+            data.add(new DataInfo());
         }
         return data;
     }
