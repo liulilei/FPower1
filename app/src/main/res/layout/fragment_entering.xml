@@ -38,10 +38,17 @@
         app:txtName="地址"/>
 
     <cn.fpower.financeservice.view.widget.EnteringSettingView
-        android:id="@+id/info_fanchan"
+        android:id="@+id/info_addrdetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/info_addr"
+        app:txtName="详细地址"/>
+
+    <cn.fpower.financeservice.view.widget.EnteringSettingView
+        android:id="@+id/info_fanchan"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/info_addrdetail"
         app:txtName="有无房产"/>
 
     <cn.fpower.financeservice.view.widget.EnteringSettingView

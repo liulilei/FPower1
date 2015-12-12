@@ -98,7 +98,7 @@ public class NetworkService {
                 });
     }
 
-    public static void get(final Context cont, String pUrl, final IRequestListener pListener) {
+    public static void get(final Context cont, String pUrl, RequestParams params,final IRequestListener pListener) {
         if (mHttpUtils == null) {
             mHttpUtils = new HttpUtils(1000 * 10);
         }
@@ -110,7 +110,7 @@ public class NetworkService {
             }
             return;
         }
-        mHttpUtils.send(HttpMethod.GET, pUrl, new RequestCallBack<String>() {
+        mHttpUtils.send(HttpMethod.GET, pUrl, params,new RequestCallBack<String>() {
 
             @Override
             public void onFailure(HttpException error, String msg) {
@@ -127,7 +127,7 @@ public class NetworkService {
         });
     }
 
-    public static void getWithLoading(final Context cont, String pUrl, final IRequestListener pListener) {
+    public static void getWithLoading(final Context cont, String pUrl,RequestParams params, final IRequestListener pListener) {
         if (mHttpUtils == null) {
             mHttpUtils = new HttpUtils(1000 * 10);
         }
@@ -140,7 +140,7 @@ public class NetworkService {
             return;
         }
         DialogUtils.showProgess(cont, R.string.loading);
-        mHttpUtils.send(HttpMethod.GET, pUrl, new RequestCallBack<String>() {
+        mHttpUtils.send(HttpMethod.GET, pUrl,params, new RequestCallBack<String>() {
 
             @Override
             public void onFailure(HttpException error, String msg) {

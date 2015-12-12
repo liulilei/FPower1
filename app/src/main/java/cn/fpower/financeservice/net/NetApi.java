@@ -19,4 +19,7 @@ public class NetApi {
 
     public static final String CREATE_LOAN = URL + "/create_loan"; //11、录入贷款
 
+    public static final String LOAN_LIST = URL + "/loan_list"; //进度
+
+
 }

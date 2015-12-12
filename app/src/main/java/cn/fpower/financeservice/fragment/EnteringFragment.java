@@ -52,6 +52,8 @@ public class EnteringFragment extends BaseFragment implements View.OnClickListen
     private EnteringSettingView info_mobile;
     @ViewInject(R.id.info_addr)
     private EnteringSettingView info_addr;
+    @ViewInject(R.id.info_addrdetail)
+    private EnteringSettingView info_addrdetail;
     @ViewInject(R.id.info_fanchan)
     private EnteringSettingView info_fanchan;
     @ViewInject(R.id.info_pay)
@@ -61,9 +63,7 @@ public class EnteringFragment extends BaseFragment implements View.OnClickListen
     private final int CODE_NAME = 0;
     private final int CODE_MONEY = 1;
     private final int CODE_MOBILE = 2;
-    private final int CODE_ADDR = 3;
-    private final int CODE_FANCHAN = 4;
-    private final int CODE_PAY = 5;
+    private final int CODE_ADDRDETAIL = 3;
     private final int CODE_QUDAO = 6;
 
 
@@ -88,6 +88,7 @@ public class EnteringFragment extends BaseFragment implements View.OnClickListen
         info_money.setOnClickListener(this);
         info_mobile.setOnClickListener(this);
         info_addr.setOnClickListener(this);
+        info_addrdetail.setOnClickListener(this);
         info_fanchan.setOnClickListener(this);
         info_pay.setOnClickListener(this);
         info_qudao.setOnClickListener(this);
@@ -120,6 +121,10 @@ public class EnteringFragment extends BaseFragment implements View.OnClickListen
                 //下拉 控件
                 info_addr.setValue("北京市 北京市 东城区");
                 break;
+            case R.id.info_addrdetail:
+                //下拉 控件
+                jump(info_addrdetail, CODE_ADDRDETAIL, 0);
+                break;
             case R.id.info_fanchan:
                 mDialog = createSexDialog("选择房产", info_fanchan);
                 mDialog.show();
@@ -140,7 +145,7 @@ public class EnteringFragment extends BaseFragment implements View.OnClickListen
                 loanPara.province_id = "110000";
                 loanPara.city_id = "110100";
                 loanPara.district_id = "110101";
-                loanPara.address=info_addr.getValue();
+                loanPara.address=info_addrdetail.getValue();
                 loanPara.is_housing = info_fanchan.getKey() + "";
                 loanPara.is_loan = info_pay.getKey() + "";
                 try {

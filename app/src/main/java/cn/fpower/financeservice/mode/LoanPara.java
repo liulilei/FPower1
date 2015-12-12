@@ -43,6 +43,9 @@ public class LoanPara {
         if (TextUtils.isEmpty(province_id)) {
             throw new Exception("请选择地址");
         }
+        if (TextUtils.isEmpty(address)) {
+            throw new Exception("请输入详细地址");
+        }
         if (TextUtils.isEmpty(is_housing)) {
             throw new Exception("请选择房产");
         }

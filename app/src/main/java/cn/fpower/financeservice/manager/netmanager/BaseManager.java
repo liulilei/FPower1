@@ -92,8 +92,8 @@ public class BaseManager {
         });
     }
 
-    public void getJsonStringFromNetHasDialogGet(Context context, String netApi, final ManagerStringListener listener) {
-        NetworkService.getWithLoading(context, netApi, new IRequestListener() {
+    public void getJsonStringFromNetHasDialogGet(Context context, String netApi, RequestParams params, final ManagerStringListener listener) {
+        NetworkService.getWithLoading(context, netApi, params, new IRequestListener() {
             @Override
             public void onSuccess(String result) {
                 if (listener != null) {
@@ -111,8 +111,8 @@ public class BaseManager {
         });
     }
 
-    public void getJsonStringFromNetNoDialogGet(Context context, String netApi, final ManagerStringListener listener) {
-        NetworkService.get(context, netApi, new IRequestListener() {
+    public void getJsonStringFromNetNoDialogGet(Context context, String netApi, RequestParams params, final ManagerStringListener listener) {
+        NetworkService.get(context, netApi, params, new IRequestListener() {
             @Override
             public void onSuccess(String result) {
                 if (listener != null) {
@@ -130,8 +130,8 @@ public class BaseManager {
         });
     }
 
-    public void getDataFromNetHasDialogGet(Context context, String netApi, final Class clazz, final ManagerDataListener listener) {
-        NetworkService.getWithLoading(context, netApi, new IRequestListener() {
+    public void getDataFromNetHasDialogGet(Context context, String netApi, RequestParams params, final Class clazz, final ManagerDataListener listener) {
+        NetworkService.getWithLoading(context, netApi, params, new IRequestListener() {
             @Override
             public void onSuccess(String result) {
                 if (listener != null) {
@@ -149,8 +149,8 @@ public class BaseManager {
         });
     }
 
-    public void getDataFromNetNoDialogGet(Context context, String netApi, final Class clazz, final ManagerDataListener listener) {
-        NetworkService.get(context, netApi, new IRequestListener() {
+    public void getDataFromNetNoDialogGet(Context context, String netApi, RequestParams params, final Class clazz, final ManagerDataListener listener) {
+        NetworkService.get(context, netApi, params, new IRequestListener() {
             @Override
             public void onSuccess(String result) {
                 if (listener != null) {
