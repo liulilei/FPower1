@@ -14,6 +14,8 @@
     <string name="login_in">登录</string>
     <string name="input_mobile">请输入注册的手机号</string>
     <string name="input_pwd">请输入密码</string>
+    <string name="input_name">请输入姓名</string>
+    <string name="input_bri">请选择生日</string>
 
     <string name="code">请输入验证码</string>
     <string name="send_code">发送验证码</string>
