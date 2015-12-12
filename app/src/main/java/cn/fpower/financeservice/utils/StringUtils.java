@@ -3,6 +3,14 @@ package cn.fpower.financeservice.utils;
 
 import android.content.Context;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringWriter;
+import java.io.Writer;
+
 public final class StringUtils {
     private static final String TAG = "StringUtils";
 
@@ -161,4 +169,27 @@ public final class StringUtils {
         }
         return pricestr;
     }
+
+    public static String getJsonFromAssets(Context context, String path) {
+
+        try {
+            Writer writer = new StringWriter();
+            InputStream is = context.getAssets().open(path);
+
+            Reader reader = new BufferedReader(new InputStreamReader(is, "utf-8"));
+            char[] buffer = new char[8 * 1024];
+            int len;
+            while ((len = reader.read(buffer)) != -1) {
+                writer.write(buffer, 0, len);
+            }
+            return writer.toString();
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+
 }

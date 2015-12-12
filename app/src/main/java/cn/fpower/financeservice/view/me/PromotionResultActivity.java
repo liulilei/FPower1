@@ -7,8 +7,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.media.Image;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,18 +16,28 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationListener;
+import com.bigkoo.pickerview.OptionsPickerView;
+import com.google.gson.Gson;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import cn.fpower.financeservice.R;
+import cn.fpower.financeservice.app.FSApplication;
+import cn.fpower.financeservice.mode.ProvinceInfo;
 import cn.fpower.financeservice.utils.ImageUtils;
-import cn.fpower.financeservice.utils.IntentUtils;
 import cn.fpower.financeservice.utils.PickPhotoUtil;
-import cn.fpower.financeservice.utils.ToastUtils;
+import cn.fpower.financeservice.utils.StringUtils;
 import cn.fpower.financeservice.view.BaseActivity;
 import cn.fpower.financeservice.view.ImgSelActivity;
+import cn.fpower.financeservice.view.widget.EnteringSettingView;
+import cn.fpower.financeservice.mode.ProvinceInfo.Province;
 
 /**
  * 推广员我的业绩
@@ -47,7 +55,30 @@ public class PromotionResultActivity extends BaseActivity {
     @ViewInject(R.id.noScrollgridview)
     private GridView noScrollgridview;
 
+    @ViewInject(R.id.info_add1)
+    private EnteringSettingView locationTv;
+
+    @ViewInject(R.id.info_add2)
+    private EnteringSettingView locationDetialTv;
+
+    @ViewInject(R.id.longitude)
+    private EnteringSettingView longitudeTv;
+
+    @ViewInject(R.id.latitude)
+    private EnteringSettingView latitudeTv;
+
+
     private GridAdapter adapter;
+
+    private AMapLocationClient aMapLocationClient;
+
+    private OptionsPickerView optionsPickerView;
+
+    private Gson gson;
+
+    private ArrayList<Province> options1Items = new ArrayList<Province>();
+    private ArrayList<ArrayList<Province>> options2Items = new ArrayList<ArrayList<Province>>();
+    private ArrayList<ArrayList<ArrayList<Province>>> options3Items = new ArrayList<ArrayList<ArrayList<Province>>>();
 
     public class GridAdapter extends BaseAdapter {
         private LayoutInflater inflater;
@@ -139,6 +170,8 @@ public class PromotionResultActivity extends BaseActivity {
         noScrollgridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
         adapter = new GridAdapter(this);
         noScrollgridview.setAdapter(adapter);
+        locationTv.setOnClickListener(this);
+        locationDetialTv.setOnClickListener(this);
         noScrollgridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -157,6 +190,23 @@ public class PromotionResultActivity extends BaseActivity {
                 }
             }
         });
+
+        aMapLocationClient = FSApplication.getInstance().getAMapLocationClient();
+        aMapLocationClient.setLocationListener(new AMapLocationListener() {
+            @Override
+            public void onLocationChanged(AMapLocation amapLocation) {
+                if (amapLocation != null) {
+                    if (amapLocation.getErrorCode() == 0) {
+                        //定位成功回调信息，设置相关消息
+                        latitudeTv.setValue(amapLocation.getLatitude() + "");//获取经度
+                        longitudeTv.setValue(amapLocation.getLongitude() + "");//获取纬度
+                    } else {
+                    }
+                }
+                aMapLocationClient.stopLocation();
+            }
+        });
+        aMapLocationClient.startLocation();
     }
 
     private Dialog mDialog;
@@ -172,14 +222,80 @@ public class PromotionResultActivity extends BaseActivity {
                             photo = PickPhotoUtil.getInstance().takePhoto(act);
                         }
                     }
-                })
-                .create();
+                }).create();
     }
 
+    @Override
+    protected void initData() {
+        gson = new Gson();
+        optionsPickerView = new OptionsPickerView(this);
+        String city = StringUtils.getJsonFromAssets(this, "city.txt");
+        String province = StringUtils.getJsonFromAssets(this, "provice.txt");
+        String distric = StringUtils.getJsonFromAssets(this, "distric.txt");
+        ProvinceInfo provinceInfo = gson.fromJson(province, ProvinceInfo.class);
+        ProvinceInfo cityInfo = gson.fromJson(city, ProvinceInfo.class);
+        ProvinceInfo districInfo = gson.fromJson(distric, ProvinceInfo.class);
+        ArrayList<Province> provinceList = provinceInfo.province;
+        TreeMap<String, ArrayList<Map<String, String>>> cityMap = cityInfo.city;
+        TreeMap<String, ArrayList<Map<String, String>>> districtMap = districInfo.district;
+        options1Items = provinceList;
+        ArrayList<Province> cityList_01;
+        ArrayList<ArrayList<Province>> districList_01;
+        ArrayList<Province> districList_02;
+        ArrayList<Map<String, String>> cityList;
+        ArrayList<Map<String, String>> districList;
+        for (Province pro : provinceList) {
+            cityList_01 = new ArrayList<Province>();
+            districList_01 = new ArrayList<ArrayList<Province>>();
+            cityList = cityMap.get(pro.code);
+            for (Map<String, String> mapCity : cityList) {
+                for (String k : mapCity.keySet()) {
+                    districList_02 = new ArrayList<Province>();
+                    cityList_01.add(new ProvinceInfo().new Province(k, mapCity.get(k)));
+                    districList = districtMap.get(k);
+                    for (Map<String, String> districMap : districList) {
+                        for (String k1 : districMap.keySet()) {
+                            districList_02.add(new ProvinceInfo().new Province(k1, districMap.get(k1)));
+                        }
+                    }
+                    districList_01.add(districList_02);
+                }
+            }
+            options3Items.add(districList_01);
+            options2Items.add(cityList_01);
+        }
+
+        //三级联动效果
+        optionsPickerView.setPicker(options1Items, options2Items, options3Items, true);
+        //设置选择的三级单位
+//        pwOptions.setLabels("省", "市", "区");
+        optionsPickerView.setCyclic(false);
+        //设置默认选中的三级项目
+        optionsPickerView.setSelectOptions(0, 0, 0);
+        //监听确定选择按钮
+        optionsPickerView.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
+
+            @Override
+            public void onOptionsSelect(int options1, int option2, int options3) {
+                //返回的分别是三个级别的选中位置
+                String tx = options1Items.get(options1).name
+                        + options2Items.get(options1).get(option2).name
+                        + options3Items.get(options1).get(option2).get(options3).name;
+                locationTv.setValue(tx);
+            }
+        });
+
+    }
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.info_add1:
+                optionsPickerView.show();
+                break;
+            case R.id.info_add2:
+                break;
+        }
     }
 
 }
