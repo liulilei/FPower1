@@ -17,16 +17,14 @@ public class LoanInfo extends BaseMode {
         this.data = data;
     }
 
-
     public class Data implements BaseEntity {
-        private List<DataInfo> dataInfoList;
+        private List<DataInfo> loan_list;
 
-        public List<DataInfo> getDataInfoList() {
-            return dataInfoList;
+        public List<DataInfo> getLoan_list() {
+            return loan_list;
         }
-
-        public void setDataInfoList(List<DataInfo> dataInfoList) {
-            this.dataInfoList = dataInfoList;
+        public void setLoan_list(List<DataInfo> loan_list) {
+            this.loan_list = loan_list;
         }
     }
 
@@ -36,7 +34,7 @@ public class LoanInfo extends BaseMode {
         private int user_id;// "18",
         private String realname;// "test",
         private int age;// "0",
-        private int mobile;// "13516599662",
+        private String mobile;// "13516599662",
         private String money;// "11.11",
         private int province_id;// "110000",
         private int city_id;// "110100",
@@ -46,9 +44,9 @@ public class LoanInfo extends BaseMode {
         private int is_fund;// "0",
         private int is_social_security;// "0",
         private int is_bank_pay;// "0",
-        private int salary;// "0.00",
+        private String salary;// "0.00",
         private int is_credit_card;// "0",
-        private int credit_card_quota;// "0.00",
+        private String credit_card_quota;// "0.00",
         private int household;// "0",
         private int is_housing;// "1",
         private int is_car;// "0",
@@ -56,12 +54,12 @@ public class LoanInfo extends BaseMode {
         private int process;// "0",
         private int is_insurance;// "0",
         private int identity;// "0",
-        private int addtime;// "1449911529", 申请时间
-        private int uptime;// "1449911529",
-        private int audit_success_time;// "0",
-        private int audit_fail_time;// "0",
-        private int apply_success_time;// "0",
-        private int apply_fail_time;// "0",
+        private Long addtime;// "1449911529", 申请时间
+        private Long uptime;// "1449911529",
+        private Long audit_success_time;// "0",
+        private Long audit_fail_time;// "0",
+        private Long apply_success_time;// "0",
+        private Long apply_fail_time;// "0",
         private int status;// "1",
         private int source;// "0"
 
@@ -105,11 +103,11 @@ public class LoanInfo extends BaseMode {
             this.age = age;
         }
 
-        public int getMobile() {
+        public String getMobile() {
             return mobile;
         }
 
-        public void setMobile(int mobile) {
+        public void setMobile(String mobile) {
             this.mobile = mobile;
         }
 
@@ -185,11 +183,11 @@ public class LoanInfo extends BaseMode {
             this.is_bank_pay = is_bank_pay;
         }
 
-        public int getSalary() {
+        public String getSalary() {
             return salary;
         }
 
-        public void setSalary(int salary) {
+        public void setSalary(String salary) {
             this.salary = salary;
         }
 
@@ -201,11 +199,11 @@ public class LoanInfo extends BaseMode {
             this.is_credit_card = is_credit_card;
         }
 
-        public int getCredit_card_quota() {
+        public String getCredit_card_quota() {
             return credit_card_quota;
         }
 
-        public void setCredit_card_quota(int credit_card_quota) {
+        public void setCredit_card_quota(String credit_card_quota) {
             this.credit_card_quota = credit_card_quota;
         }
 
@@ -265,51 +263,51 @@ public class LoanInfo extends BaseMode {
             this.identity = identity;
         }
 
-        public int getAddtime() {
+        public Long getAddtime() {
             return addtime;
         }
 
-        public void setAddtime(int addtime) {
+        public void setAddtime(Long addtime) {
             this.addtime = addtime;
         }
 
-        public int getUptime() {
+        public Long getUptime() {
             return uptime;
         }
 
-        public void setUptime(int uptime) {
+        public void setUptime(Long uptime) {
             this.uptime = uptime;
         }
 
-        public int getAudit_success_time() {
+        public Long getAudit_success_time() {
             return audit_success_time;
         }
 
-        public void setAudit_success_time(int audit_success_time) {
+        public void setAudit_success_time(Long audit_success_time) {
             this.audit_success_time = audit_success_time;
         }
 
-        public int getAudit_fail_time() {
+        public Long getAudit_fail_time() {
             return audit_fail_time;
         }
 
-        public void setAudit_fail_time(int audit_fail_time) {
+        public void setAudit_fail_time(Long audit_fail_time) {
             this.audit_fail_time = audit_fail_time;
         }
 
-        public int getApply_success_time() {
+        public Long getApply_success_time() {
             return apply_success_time;
         }
 
-        public void setApply_success_time(int apply_success_time) {
+        public void setApply_success_time(Long apply_success_time) {
             this.apply_success_time = apply_success_time;
         }
 
-        public int getApply_fail_time() {
+        public Long getApply_fail_time() {
             return apply_fail_time;
         }
 
-        public void setApply_fail_time(int apply_fail_time) {
+        public void setApply_fail_time(Long apply_fail_time) {
             this.apply_fail_time = apply_fail_time;
         }
 

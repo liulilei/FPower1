@@ -56,7 +56,7 @@ public class MeCheckListActivity extends BaseActivity implements OnClickListener
                     @Override
                     public void onSuccess(Object data) {
                         LoanInfo info = (LoanInfo) data;
-                       progressRlv.setAdapter(new AllProgressFragmentAdapter(act, info.getData().getDataInfoList()));
+                       progressRlv.setAdapter(new AllProgressFragmentAdapter(act, info.getData().getLoan_list()));
                     }
 
                     @Override
