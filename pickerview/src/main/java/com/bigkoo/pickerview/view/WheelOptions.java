@@ -11,7 +11,7 @@ import com.bigkoo.pickerview.listener.OnItemSelectedListener;
 
 public class WheelOptions<T> {
 
-    private final static int DEFAULT_TEXT_SIZE = 25;
+    private final static int DEFAULT_TEXT_SIZE = 18;
     private int textSize = DEFAULT_TEXT_SIZE;
     private View view;
     private WheelView wv_option1;
@@ -85,7 +85,9 @@ public class WheelOptions<T> {
         wv_option1.setOnScrollFinishListener(new WheelView.OnScrollFinish() {
             @Override
             public void onScrollFinished() {
-                mListener.onFinish(0,wv_option1.getCurrentItem());
+                if (mListener != null) {
+                    mListener.onFinish(0,wv_option1.getCurrentItem());
+                }
             }
         });
         // 选项2
@@ -93,7 +95,9 @@ public class WheelOptions<T> {
         wv_option2.setOnScrollFinishListener(new WheelView.OnScrollFinish() {
             @Override
             public void onScrollFinished() {
-                mListener.onFinish(1,wv_option2.getCurrentItem());
+                if (mListener != null) {
+                    mListener.onFinish(1,wv_option2.getCurrentItem());
+                }
             }
         });
         if (mOptions2Items != null)
@@ -104,7 +108,9 @@ public class WheelOptions<T> {
         wv_option3.setOnScrollFinishListener(new WheelView.OnScrollFinish() {
             @Override
             public void onScrollFinished() {
-                mListener.onFinish(2,wv_option3.getCurrentItem());
+                if (mListener != null) {
+                    mListener.onFinish(2,wv_option3.getCurrentItem());
+                }
             }
         });
         if (mOptions3Items != null)
