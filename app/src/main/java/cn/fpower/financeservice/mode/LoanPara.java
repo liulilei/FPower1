@@ -8,6 +8,10 @@ import android.text.TextUtils;
 public class LoanPara {
     public int user_id;//	 当前登录用户id	整型
     public String realname;//	真实姓名	字符串
+    public String username;//
+    public String longitude;
+    public String latitude;
+    public String name;//
     public int age;//	年龄	整型
     public String mobile;//	联系电话	长整
     public String money;//	借款金额	浮点

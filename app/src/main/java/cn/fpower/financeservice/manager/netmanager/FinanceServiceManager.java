@@ -159,7 +159,7 @@ public class FinanceServiceManager extends BaseManager {
         if (hasDialog) {
             getDataFromNetHasDialogGet(context, NetApi.LOAN_LIST, params, clazz, listener);
         } else {
-            getDataFromNetHasDialogGet(context, NetApi.LOAN_LIST, params, clazz, listener);
+            getDataFromNetNoDialogGet(context, NetApi.LOAN_LIST, params, clazz, listener);
         }
     }
 
@@ -167,7 +167,170 @@ public class FinanceServiceManager extends BaseManager {
         if (hasDialog) {
             getDataFromNetHasDialogGet(context, NetApi.HOME, null, clazz, listener);
         } else {
-            getDataFromNetHasDialogGet(context, NetApi.HOME, null, clazz, listener);
+            getDataFromNetNoDialogGet(context, NetApi.HOME, null, clazz, listener);
         }
     }
+
+    /**
+     * 案例列表
+     *
+     * @param context
+     * @param user_id   如果不传入就是所有案例，传入则为当前用户的案例
+     * @param now_page
+     * @param hasDialog
+     * @param clazz
+     * @param listener
+     */
+    public void case_list(Context context, int user_id,
+                          int now_page, boolean hasDialog, Class clazz, ManagerDataListener listener) {
+        params = new RequestParams();
+        if (user_id > 0) {
+            params.addQueryStringParameter("user_id", user_id + "");
+        }
+        if (now_page >= 1) {
+            params.addQueryStringParameter("now_page", now_page + "");//当前所在页
+            params.addQueryStringParameter("page_size", "10");//默认10条
+        }
+        if (hasDialog) {
+            getDataFromNetHasDialogGet(context, NetApi.CASE_LIST, params, clazz, listener);
+        } else {
+            getDataFromNetNoDialogGet(context, NetApi.CASE_LIST, params, clazz, listener);
+        }
+    }
+
+    /**
+     * 8、录入员工
+     *
+     * @param context
+     * @param loanPara
+     * @param hasDialog
+     * @param clazz
+     * @param listener
+     */
+    public void create_employee(Context context, LoanPara loanPara,
+                                boolean hasDialog, Class clazz,
+                                ManagerDataListener listener) {
+        params = new RequestParams();
+        params.addBodyParameter("user_id", loanPara.user_id + "");
+        params.addBodyParameter("mobile", loanPara.mobile);
+        params.addBodyParameter("username", loanPara.username);
+        params.addBodyParameter("province_id", loanPara.province_id);
+        params.addBodyParameter("city_id", loanPara.city_id);
+        params.addBodyParameter("district_id", loanPara.district_id);
+        params.addBodyParameter("address", loanPara.address);
+        params.addBodyParameter("source", "2");
+        if (hasDialog) {
+            getDataFromNetHasDialog(context, NetApi.CREATE_EMPLOYEE, params, clazz, listener);
+        } else {
+            getDataFromNetNoDialog(context, NetApi.CREATE_EMPLOYEE, params, clazz, listener);
+        }
+    }
+
+    /**
+     * 员工列表
+     * @param context
+     * @param user_id
+     * @param now_page
+     * @param hasDialog
+     * @param clazz
+     * @param listener
+     */
+    public void employee_list(Context context, int user_id,
+                              int now_page, boolean hasDialog, Class clazz, ManagerDataListener listener) {
+        params = new RequestParams();
+        params.addQueryStringParameter("user_id", user_id + "");
+        if (now_page < 1) {
+            now_page = 1;
+        }
+        params.addQueryStringParameter("now_page", now_page + "");//当前所在页
+        params.addQueryStringParameter("page_size", "10");//默认10条
+        if (hasDialog) {
+            getDataFromNetHasDialogGet(context, NetApi.EMPLOYEE_LIST, params, clazz, listener);
+        } else {
+            getDataFromNetNoDialogGet(context, NetApi.EMPLOYEE_LIST, params, clazz, listener);
+        }
+    }
+
+    /**
+     * 12、店铺列表
+     * @param context
+     * @param user_id
+     * @param now_page
+     * @param hasDialog
+     * @param clazz
+     * @param listener
+     */
+    public void shop_list(Context context, int user_id,
+                              int now_page, boolean hasDialog, Class clazz, ManagerDataListener listener) {
+        params = new RequestParams();
+        params.addQueryStringParameter("user_id", user_id + "");
+        if (now_page < 1) {
+            now_page = 1;
+        }
+        params.addQueryStringParameter("now_page", now_page + "");//当前所在页
+        params.addQueryStringParameter("page_size", "10");//默认10条
+        if (hasDialog) {
+            getDataFromNetHasDialogGet(context, NetApi.SHOP_LIST, params, clazz, listener);
+        } else {
+            getDataFromNetNoDialogGet(context, NetApi.SHOP_LIST, params, clazz, listener);
+        }
+    }
+
+    /**
+     * 删除员工
+     * @param context
+     * @param user_id
+     * @param employee_id
+     * @param hasDialog
+     * @param clazz
+     * @param listener
+     */
+    //TODO GET还是POST
+    public void delete_employee(Context context, int  user_id,int employee_id,
+                                boolean hasDialog, Class clazz,
+                                ManagerDataListener listener) {
+        params = new RequestParams();
+        params.addBodyParameter("user_id", user_id + "");
+        params.addBodyParameter("employee_id", employee_id + "");
+        if (hasDialog) {
+            getDataFromNetHasDialog(context, NetApi.DELETE_EMPLOYEE, params, clazz, listener);
+        } else {
+            getDataFromNetNoDialog(context, NetApi.DELETE_EMPLOYEE, params, clazz, listener);
+        }
+    }
+
+    /**
+     * 11、录入店铺 图片（多张用#####分隔）
+     * @param context
+     * @param loanPara
+     * @param hasDialog
+     * @param clazz
+     * @param listener
+     */
+    //TODO 图片Base64
+    public void create_shop(Context context, LoanPara loanPara,String imgs,
+                                boolean hasDialog, Class clazz,
+                                ManagerDataListener listener) {
+        params = new RequestParams();
+        params.addBodyParameter("user_id", loanPara.user_id + "");
+        params.addBodyParameter("mobile", loanPara.mobile);
+        params.addBodyParameter("username", loanPara.username);
+        params.addBodyParameter("name", loanPara.name);
+       // params.addBodyParameter("imgs", loanPara.name);
+        params.addBodyParameter("province_id", loanPara.province_id);
+        params.addBodyParameter("city_id", loanPara.city_id);
+        params.addBodyParameter("district_id", loanPara.district_id);
+        params.addBodyParameter("address", loanPara.address);
+        params.addBodyParameter("latitude", loanPara.latitude);
+        params.addBodyParameter("longitude", loanPara.longitude);
+        params.addBodyParameter("source", "2");
+        if (hasDialog) {
+            getDataFromNetHasDialog(context, NetApi.CREATE_SHOP, params, clazz, listener);
+        } else {
+            getDataFromNetNoDialog(context, NetApi.CREATE_SHOP, params, clazz, listener);
+        }
+    }
+
+
+
 }
