@@ -281,6 +281,7 @@ public class PromotionResultActivity extends BaseActivity {
                 String tx = options1Items.get(options1).name
                         + options2Items.get(options1).get(option2).name
                         + options3Items.get(options1).get(option2).get(options3).name;
+
                 locationTv.setValue(tx);
             }
         });
