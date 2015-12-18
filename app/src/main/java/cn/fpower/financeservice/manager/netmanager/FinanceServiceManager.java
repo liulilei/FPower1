@@ -124,14 +124,6 @@ public class FinanceServiceManager extends BaseManager {
     }
 
 
-    /**
-     * 14、录入贷款
-     * @param context
-     * @param loanPara
-     * @param hasDialog
-     * @param clazz
-     * @param listener
-     */
     public void create_loan(Context context, LoanPara loanPara,
                             boolean hasDialog, Class clazz,
                             ManagerDataListener listener) {
@@ -157,27 +149,13 @@ public class FinanceServiceManager extends BaseManager {
         }
     }
 
-    /**
-     * 15、贷款列表（进度）
-     * @param context
-     * @param user_id
-     * @param process
-     * @param hasDialog
-     * @param clazz
-     * @param listener
-     */
-    public void loan_list(Context context, String user_id, String process, int now_page,boolean hasDialog, Class clazz,
+    public void loan_list(Context context, String user_id, String process, boolean hasDialog, Class clazz,
                           ManagerDataListener listener) {
         params = new RequestParams();
         params.addQueryStringParameter("user_id", user_id);
         if (!TextUtils.isEmpty(process)) {
             params.addQueryStringParameter("process", process);
         }
-        if (now_page < 1) {
-            now_page = 1;
-        }
-        params.addQueryStringParameter("now_page", now_page + "");//当前所在页
-        params.addQueryStringParameter("page_size", "10");//默认10条
         if (hasDialog) {
             getDataFromNetHasDialogGet(context, NetApi.LOAN_LIST, params, clazz, listener);
         } else {
@@ -273,7 +251,30 @@ public class FinanceServiceManager extends BaseManager {
         }
     }
 
-
+    /**
+     * 12、店铺列表
+     * @param context
+     * @param user_id
+     * @param now_page
+     * @param hasDialog
+     * @param clazz
+     * @param listener
+     */
+    public void shop_list(Context context, int user_id,
+                              int now_page, boolean hasDialog, Class clazz, ManagerDataListener listener) {
+        params = new RequestParams();
+        params.addQueryStringParameter("user_id", user_id + "");
+        if (now_page < 1) {
+            now_page = 1;
+        }
+        params.addQueryStringParameter("now_page", now_page + "");//当前所在页
+        params.addQueryStringParameter("page_size", "10");//默认10条
+        if (hasDialog) {
+            getDataFromNetHasDialogGet(context, NetApi.SHOP_LIST, params, clazz, listener);
+        } else {
+            getDataFromNetNoDialogGet(context, NetApi.SHOP_LIST, params, clazz, listener);
+        }
+    }
 
     /**
      * 删除员工
@@ -329,112 +330,6 @@ public class FinanceServiceManager extends BaseManager {
             getDataFromNetNoDialog(context, NetApi.CREATE_SHOP, params, clazz, listener);
         }
     }
-
-    /**
-     * 12、店铺列表
-     * @param context
-     * @param user_id
-     * @param now_page
-     * @param hasDialog
-     * @param clazz
-     * @param listener
-     */
-    public void shop_list(Context context, int user_id,
-                          int now_page, boolean hasDialog, Class clazz, ManagerDataListener listener) {
-        params = new RequestParams();
-        params.addQueryStringParameter("user_id", user_id + "");
-        if (now_page < 1) {
-            now_page = 1;
-        }
-        params.addQueryStringParameter("now_page", now_page + "");//当前所在页
-        params.addQueryStringParameter("page_size", "10");//默认10条
-        if (hasDialog) {
-            getDataFromNetHasDialogGet(context, NetApi.SHOP_LIST, params, clazz, listener);
-        } else {
-            getDataFromNetNoDialogGet(context, NetApi.SHOP_LIST, params, clazz, listener);
-        }
-    }
-
-    /**
-     * 13、店铺详情
-     * @param context
-     * @param hasDialog
-     * @param clazz
-     * @param listener
-     */
-    public void shop_detail(Context context, int shop_id,boolean hasDialog, Class clazz, ManagerDataListener listener) {
-        params = new RequestParams();
-        params.addQueryStringParameter("shop_id", shop_id + "");
-        if (hasDialog) {
-            getDataFromNetHasDialogGet(context, NetApi.SHOP_DETAIL, params, clazz, listener);
-        } else {
-            getDataFromNetNoDialogGet(context, NetApi.SHOP_DETAIL, params, clazz, listener);
-        }
-    }
-
-    /**
-     * 16、贷款详情
-     * @param context
-     * @param loan_id
-     * @param hasDialog
-     * @param clazz
-     * @param listener
-     */
-    public void loan_detail(Context context, int loan_id,boolean hasDialog, Class clazz, ManagerDataListener listener) {
-        params = new RequestParams();
-        params.addQueryStringParameter("loan_id", loan_id + "");
-        if (hasDialog) {
-            getDataFromNetHasDialogGet(context, NetApi.LOAN_DETAIL, params, clazz, listener);
-        } else {
-            getDataFromNetNoDialogGet(context, NetApi.LOAN_DETAIL, params, clazz, listener);
-        }
-    }
-
-    /**
-     * 17、我的业绩
-     * @param context
-     * @param user_id
-     * @param achievement_size
-     * @param hasDialog
-     * @param clazz
-     * @param listener
-     */
-    public void my_achievement(Context context, int user_id,int achievement_size,boolean hasDialog, Class clazz, ManagerDataListener listener) {
-        params = new RequestParams();
-        params.addQueryStringParameter("user_id", user_id + "");
-        params.addQueryStringParameter("achievement_size", achievement_size + "");
-        if (hasDialog) {
-            getDataFromNetHasDialogGet(context, NetApi.MY_ACHIEVEMENT, params, clazz, listener);
-        } else {
-            getDataFromNetNoDialogGet(context, NetApi.MY_ACHIEVEMENT, params, clazz, listener);
-        }
-    }
-
-
-    /**
-     * 19、获得一段时间内的业绩总和
-     * @param context
-     * @param user_id
-     * @param start 开始时间
-     * @param end 结束时间
-     * @param hasDialog
-     * @param clazz
-     * @param listener
-     */
-    public void achievement_amount(Context context, int user_id,long start,long end,boolean hasDialog, Class clazz, ManagerDataListener listener) {
-        params = new RequestParams();
-        params.addQueryStringParameter("user_id", user_id + "");
-        params.addQueryStringParameter("start", start + "");
-        params.addQueryStringParameter("end", end + "");
-        if (hasDialog) {
-            getDataFromNetHasDialogGet(context, NetApi.ACHIEVEMENT_AMOUNT, params, clazz, listener);
-        } else {
-            getDataFromNetNoDialogGet(context, NetApi.ACHIEVEMENT_AMOUNT, params, clazz, listener);
-        }
-    }
-
-
-
 
 
 

@@ -1,6 +1,5 @@
 package cn.fpower.financeservice.view.home;
 
-import android.os.SystemClock;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -12,7 +11,11 @@ import java.util.List;
 
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.adapter.SuccessExampleAdapter;
+import cn.fpower.financeservice.manager.netmanager.FinanceManagerControl;
+import cn.fpower.financeservice.manager.netmanager.ManagerDataListener;
+import cn.fpower.financeservice.mode.CaseListInfo;
 import cn.fpower.financeservice.mode.DataInfo;
+import cn.fpower.financeservice.utils.ToastUtils;
 import cn.fpower.financeservice.view.BaseActivity;
 import cn.fpower.financeservice.view.widget.RefreshListView;
 
@@ -32,9 +35,13 @@ public class SuccessExampleActivity extends BaseActivity implements View.OnClick
 
     private SuccessExampleAdapter successExampleAdapter;
 
-    private List<DataInfo> successExampleList;
+    private List<DataInfo> exampleList;
 
-    private int count = 1;
+    private List<DataInfo> refreshExampleList;
+
+    private List<DataInfo> loadMoreExampleList;
+
+    private int now_page = 1;
 
     @Override
     protected int initLayout() {
@@ -51,8 +58,28 @@ public class SuccessExampleActivity extends BaseActivity implements View.OnClick
 
     @Override
     protected void initData() {
-        successExampleList = addData();
-        successExampleAdapter = new SuccessExampleAdapter(this, successExampleList);
+        FinanceManagerControl.getFinanceServiceManager().case_list(this, 0, now_page, true, CaseListInfo.class, new ManagerDataListener() {
+            @Override
+            public void onSuccess(Object data) {
+                exampleList = ((CaseListInfo) data).getData().getCase_list();
+                if (exampleList == null || exampleList.size() == 0) {
+                    ToastUtils.show(SuccessExampleActivity.this, "没有数据");
+                    successExampleRlv.showFooterResult(false);
+                    return;
+                }
+                successExampleAdapter = new SuccessExampleAdapter(SuccessExampleActivity.this, exampleList);
+                successExampleRlv.setAdapter(successExampleAdapter);
+                successExampleRlv.showFooterResult(now_page <=  (((CaseListInfo) data).getCase_total() / 10));
+            }
+
+            @Override
+            public void onError(String error) {
+                successExampleRlv.setLoadEnable(false);
+            }
+        });
+
+        exampleList = addData();
+        successExampleAdapter = new SuccessExampleAdapter(this, exampleList);
         successExampleRlv.setAdapter(successExampleAdapter);
         successExampleRlv.showFooterResult(true);
     }
@@ -76,43 +103,52 @@ public class SuccessExampleActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void OnRefresh() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                SystemClock.sleep(2000);
-                runOnUiThread(new Runnable() {
+        FinanceManagerControl.getFinanceServiceManager().case_list(this, 0, 1, false, CaseListInfo.class,
+                new ManagerDataListener() {
                     @Override
-                    public void run() {
-                        count = 1;
+                    public void onSuccess(Object data) {
+                        now_page = 1;
                         successExampleRlv.onRefreshComplete();
-                        successExampleAdapter.refresh(addData());
-                        successExampleRlv.showFooterResult(true);
+                        refreshExampleList = ((CaseListInfo) data).getData().getCase_list();
+                        if (refreshExampleList == null || refreshExampleList.size() == 0) {
+                            return;
+                        }
+                        if (successExampleAdapter == null) {
+                            successExampleAdapter = new SuccessExampleAdapter(SuccessExampleActivity.this, refreshExampleList);
+                            successExampleRlv.setAdapter(successExampleAdapter);
+                        } else {
+                            successExampleAdapter.refresh(refreshExampleList);
+                        }
+                        successExampleRlv.showFooterResult(now_page <=  (((CaseListInfo) data).getCase_total() / 10));
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        successExampleRlv.onRefreshComplete();
                     }
                 });
-            }
-        }).start();
     }
 
     @Override
     public void onLoadMore() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                SystemClock.sleep(2000);
-                runOnUiThread(new Runnable() {
+        FinanceManagerControl.getFinanceServiceManager().case_list(this, 0, ++now_page, false, CaseListInfo.class,
+                new ManagerDataListener() {
                     @Override
-                    public void run() {
-                        successExampleAdapter.addData(addData());
-                        if (count < 3) {
-                            successExampleRlv.showFooterResult(true);
-                            count++;
-                        } else {
+                    public void onSuccess(Object data) {
+                        successExampleRlv.onLoadComplete();
+                        loadMoreExampleList = ((CaseListInfo) data).getData().getCase_list();
+                        if (loadMoreExampleList == null || loadMoreExampleList.size() == 0) {
                             successExampleRlv.showFooterResult(false);
+                            return;
                         }
+                        successExampleAdapter.addData(loadMoreExampleList);
+                        successExampleRlv.showFooterResult(now_page <= (((CaseListInfo) data).getCase_total() / 10));
+                    }
+
+                    @Override
+                    public void onError(String error) {
                         successExampleRlv.onLoadComplete();
                     }
                 });
-            }
-        }).start();
     }
 }

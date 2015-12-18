@@ -34,59 +34,32 @@ public class BaseMode implements BaseEntity {
     }
 
     public class Page implements BaseEntity {
-        private int no;
-        private String orderName;
-        private int size;
-        private String isDESC;
-        private int totalRows;
-        private int totalPages;
+        private int now_page;
+        private int page_size;
+        private int case_total;
 
-        public int getNo() {
-            return no;
+        public int getNow_page() {
+            return now_page;
         }
 
-        public void setNo(int no) {
-            this.no = no;
+        public void setNow_page(int now_page) {
+            this.now_page = now_page;
         }
 
-        public String getOrderName() {
-            return orderName;
+        public int getPage_size() {
+            return page_size;
         }
 
-        public void setOrderName(String orderName) {
-            this.orderName = orderName;
+        public void setPage_size(int page_size) {
+            this.page_size = page_size;
         }
 
-        public int getSize() {
-            return size;
+        public int getCase_total() {
+            return case_total;
         }
 
-        public void setSize(int size) {
-            this.size = size;
-        }
-
-        public String getIsDESC() {
-            return isDESC;
-        }
-
-        public void setIsDESC(String isDESC) {
-            this.isDESC = isDESC;
-        }
-
-        public int getTotalRows() {
-            return totalRows;
-        }
-
-        public void setTotalRows(int totalRows) {
-            this.totalRows = totalRows;
-        }
-
-        public int getTotalPages() {
-            return totalPages;
-        }
-
-        public void setTotalPages(int totalPages) {
-            this.totalPages = totalPages;
+        public void setCase_total(int case_total) {
+            this.case_total = case_total;
         }
     }
 
