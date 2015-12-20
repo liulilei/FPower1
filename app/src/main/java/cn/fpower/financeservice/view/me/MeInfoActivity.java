@@ -12,9 +12,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.OptionsPickerView;
+import com.bigkoo.pickerview.TimePickerView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 import org.w3c.dom.Text;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.app.FSApplication;
@@ -29,6 +34,7 @@ import cn.fpower.financeservice.utils.ImageUtils;
 import cn.fpower.financeservice.utils.IntentUtils;
 import cn.fpower.financeservice.utils.PickPhotoUtil;
 import cn.fpower.financeservice.utils.SpUtils;
+import cn.fpower.financeservice.utils.TimeUtils;
 import cn.fpower.financeservice.utils.ToastUtils;
 import cn.fpower.financeservice.view.BaseActivity;
 import cn.fpower.financeservice.view.InfoInputActivity;
@@ -73,6 +79,9 @@ public class MeInfoActivity extends BaseActivity {
     private OptionsPickerView optionsPickerView;
     private ProvinceData provinceData;
 
+
+    TimePickerView pvTime;
+
     @Override
     protected int initLayout() {
         return R.layout.activity_userinfo;
@@ -97,6 +106,7 @@ public class MeInfoActivity extends BaseActivity {
     protected void initData() {
         super.initData();
         initPro();
+        initTime();
         //假如已经登陆
         if (FSApplication.getInstance().isLogin()) {
             if (FSApplication.getInstance().getUserInfo().getData() != null) {
@@ -115,6 +125,23 @@ public class MeInfoActivity extends BaseActivity {
         }
 
     }
+
+    private void initTime() {
+        pvTime = new TimePickerView(this, TimePickerView.Type.YEAR_MONTH_DAY);
+        pvTime.setRange(TimeUtils.getYear()-100,TimeUtils.getYear()-10);
+        pvTime.setTime(new Date());
+        pvTime.setCancelable(true);
+        pvTime.setCyclic(false);//不许循环
+        //时间选择后回调
+        pvTime.setOnTimeSelectListener(new TimePickerView.OnTimeSelectListener() {
+
+            @Override
+            public void onTimeSelect(Date date) {
+                info_birthday.setValue(TimeUtils.getTime(date));
+            }
+        });
+    }
+
 
     private void initPro() {
         optionsPickerView = new OptionsPickerView(this);
@@ -211,7 +238,7 @@ public class MeInfoActivity extends BaseActivity {
                 break;
             case R.id.info_birthday:
                 //下拉控件
-                info_birthday.setValue("1989-09-27");
+                pvTime.show();
                 break;
             case R.id.info_sex:
                 mDialog = createSexDialog("选择性别");

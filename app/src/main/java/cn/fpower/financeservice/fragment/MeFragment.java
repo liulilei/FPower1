@@ -103,8 +103,6 @@ public class MeFragment extends BaseFragment{
         setForUserInfo();
     }
 
-    public static int userRight = 3;
-
     private void setForUserInfo() {
         if (FSApplication.getInstance().isLogin()) {
             layout_login_info.setVisibility(View.VISIBLE);
@@ -116,21 +114,21 @@ public class MeFragment extends BaseFragment{
                     provinceData.getMap().get(FSApplication.getInstance().getUserInfo().getData().getDistrict_id() + "");
             useraddr.setText(addr);
             ImageUtils.displayImageRoundImg(R.mipmap.moren, NetApi.URL+FSApplication.getInstance().getUserInfo().getData().getFace(), img_login);
+            //店铺列表 是推广员角色登录 我的业绩点击就是店铺列表
+            switch (FSApplication.getInstance().getUserInfo().getData().getTissue_id()) {
+                case Constants.Right.NORMAL:
+                    checkView.setIconText(R.mipmap.me_store, "我的审核");
+                    break;
+                case Constants.Right.PROMOTER:
+                    checkView.setIconText(R.mipmap.me_store, "店铺列表");
+                    break;
+                case Constants.Right.SHOP:
+                    checkView.setIconText(R.mipmap.me_store, "店铺管理");
+                    break;
+            }
         } else {
             layout_no_login_info.setVisibility(View.VISIBLE);
             layout_login_info.setVisibility(View.GONE);
-        }
-        //店铺列表 是推广员角色登录 我的业绩点击就是店铺列表
-        switch (userRight) {
-            case 1:
-                checkView.setIconText(R.mipmap.me_store, "我的审核");
-                break;
-            case 2:
-                checkView.setIconText(R.mipmap.me_store, "店铺列表");
-                break;
-            case 3:
-                checkView.setIconText(R.mipmap.me_store, "店铺管理");
-                break;
         }
     }
 
@@ -139,14 +137,14 @@ public class MeFragment extends BaseFragment{
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fragment_me_check:
-                switch (userRight) {
-                    case 1:
+                switch (FSApplication.getInstance().getUserInfo().getData().getTissue_id()) {
+                    case Constants.Right.NORMAL:
                         startActivity(new Intent(getActivity(), NormalCheckListActivity.class));
                         break;
-                    case 2:
+                    case Constants.Right.PROMOTER:
                         startActivity(new Intent(getActivity(), PromoterCheckListActivity.class));
                         break;
-                    case 3:
+                    case Constants.Right.SHOP:
                         startActivity(new Intent(getActivity(), ShopActivity.class));
                         break;
                 }

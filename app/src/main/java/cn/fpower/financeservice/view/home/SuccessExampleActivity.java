@@ -77,11 +77,6 @@ public class SuccessExampleActivity extends BaseActivity implements View.OnClick
                 successExampleRlv.setLoadEnable(false);
             }
         });
-
-        exampleList = addData();
-        successExampleAdapter = new SuccessExampleAdapter(this, exampleList);
-        successExampleRlv.setAdapter(successExampleAdapter);
-        successExampleRlv.showFooterResult(true);
     }
 
     public List<DataInfo> addData() {

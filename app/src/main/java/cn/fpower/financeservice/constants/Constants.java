@@ -21,8 +21,9 @@ public class Constants {
     public static String[] isHas = {"有", "无"};
 
     public interface  Right{
-        int NORMAL=1;
-        int  PROMOTER=4;
+        int NORMAL=0;
+        int SHOP=13;
+        int EMP=14;
+        int PROMOTER=15;
     }
-
 }

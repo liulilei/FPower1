@@ -12,6 +12,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.app.FSApplication;
+import cn.fpower.financeservice.constants.Constants;
 import cn.fpower.financeservice.fragment.EnteringFragment;
 import cn.fpower.financeservice.fragment.HomeFragment;
 import cn.fpower.financeservice.fragment.MeFragment;
@@ -104,10 +105,13 @@ public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                     homeRbt.setChecked(true);
                     return;
                 }
-                if(1==2) {
-                    showFragment(enteringFragment);
-                }else{
-                    showFragment(promoterEnteringFragment);
+                switch (FSApplication.getInstance().getUserInfo().getData().getTissue_id()) {
+                    case Constants.Right.PROMOTER:
+                        showFragment(promoterEnteringFragment);
+                        break;
+                    default:
+                        showFragment(enteringFragment);
+                        break;
                 }
                 break;
             case R.id.activity_home_me_rbt:

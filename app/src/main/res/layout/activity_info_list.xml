@@ -49,8 +49,7 @@
             android:textSize="12sp"/>
     </RelativeLayout>
 
-    <cn.fpower.financeservice.view.widget.RefreshListView
-        android:layout_below="@+id/layout_title"
+    <cn.fpower.financeservice.view.widget.swipelistview.SwipeMenuListView        android:layout_below="@+id/layout_title"
         android:id="@+id/fragment_progress_rlv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
