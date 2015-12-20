@@ -4,7 +4,9 @@ package cn.fpower.financeservice.view.me;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -67,6 +69,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         view_pwd.setHint(R.string.input_pwd);
         loginin.setText(R.string.confirm);
         loginin.setOnClickListener(this);
+        view_pwd.setInputType(EditorInfo.TYPE_CLASS_TEXT | EditorInfo.TYPE_TEXT_VARIATION_PASSWORD);
     }
 
 

@@ -106,8 +106,11 @@ public class MeInfoActivity extends BaseActivity {
                 String addr= provinceData.getMap().get(FSApplication.getInstance().getUserInfo().getData().getProvince_id() + "")+
                         provinceData.getMap().get(FSApplication.getInstance().getUserInfo().getData().getCity_id() + "")+
                         provinceData.getMap().get(FSApplication.getInstance().getUserInfo().getData().getDistrict_id() + "");
-                info_addr.setValue(addr);
-                ImageUtils.displayImageRoundImg(R.mipmap.ad1, NetApi.URL + FSApplication.getInstance().getUserInfo().getData().getFace(), img_login);
+                String key=FSApplication.getInstance().getUserInfo().getData().getProvince_id()+","
+                        +FSApplication.getInstance().getUserInfo().getData().getCity_id()+","
+                        +FSApplication.getInstance().getUserInfo().getData().getDistrict_id();
+                info_addr.setValue(key,addr);
+                ImageUtils.displayImageRoundImg(R.mipmap.moren, NetApi.URL + FSApplication.getInstance().getUserInfo().getData().getFace(), img_login);
             }
         }
 
@@ -155,7 +158,7 @@ public class MeInfoActivity extends BaseActivity {
             case R.id.submit:
                 //验证，姓名，生日，城市不能为空，性别默认是男，头像默认为空，可以不传
                 String user_id = FSApplication.getInstance().getUserInfo().getData().getId() + "";
-                String face = "";
+
                 String username = info_name.getValue();
                 if (TextUtils.isEmpty(username)) {
                     ToastUtils.show(this, R.string.input_name);
@@ -166,9 +169,7 @@ public class MeInfoActivity extends BaseActivity {
                     ToastUtils.show(this, R.string.input_bri);
                     return;
                 }
-                if (!TextUtils.isEmpty(picturePath)) {
-                    face = BitmapUtils.Bitmap2StrByBase64(picturePath);
-                }
+                byte[] face = BitmapUtils.Bitmap2StrByBase64(picturePath);
                 String[] keys=info_addr.getKey().split(",");
                 if(keys==null||keys.length<3){
                     ToastUtils.show(this, R.string.input_addr);

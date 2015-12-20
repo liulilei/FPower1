@@ -11,20 +11,21 @@ import android.widget.TextView;
 import java.util.List;
 
 import cn.fpower.financeservice.R;
-import cn.fpower.financeservice.manager.MappingManager;
-import cn.fpower.financeservice.mode.DataInfo;
+import cn.fpower.financeservice.app.FSApplication;
+import cn.fpower.financeservice.mode.ProvinceData;
+import cn.fpower.financeservice.mode.ShopList;
 import cn.fpower.financeservice.utils.ImageUtils;
-import cn.fpower.financeservice.utils.TimeUtils;
 
 /**
  * Created by ll on 2015/12/2.
  */
-public class AllProgressFragmentAdapter extends AbstractAdapter<DataInfo> {
+public class ShopListFragmentAdapter extends AbstractAdapter<ShopList.Shop_list> {
 
     private Intent intent;
-
-    public AllProgressFragmentAdapter(Context Context, List<DataInfo> datas) {
+    private ProvinceData provinceData;
+    public ShopListFragmentAdapter(Context Context, List<ShopList.Shop_list> datas) {
         super(Context, datas);
+        provinceData=FSApplication.getInstance().getProvinceData();
     }
 
     @Override
@@ -41,17 +42,18 @@ public class AllProgressFragmentAdapter extends AbstractAdapter<DataInfo> {
             holder.progressAvatar = (ImageView) convertView.findViewById(R.id.item_success_example_avatar);
             holder.progressName = (TextView) convertView.findViewById(R.id.item_success_example_name);
             holder.progressMoney = (TextView) convertView.findViewById(R.id.item_success_example_money);
+            holder.progressMoney.setTextColor(mContext.getResources().getColor(R.color.black_000000));
             holder.progressCreateTime = (TextView) convertView.findViewById(R.id.item_success_example_create_time);
             holder.progressRightIv = (ImageView) convertView.findViewById(R.id.item_success_example_right_iv);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        DataInfo info=mList.get(position);
-        holder.progressName.setText(info.getRealname());
-        holder.progressMoney.setText(MappingManager.getProcess(Integer.parseInt(info.getProcess())));
-        holder.progressCreateTime.setText("申请时间:" + TimeUtils.fullTimeAndDay(info.getAddtime()));
-        ImageUtils.displayImageRoundImg(R.mipmap.moren, "", holder.progressAvatar);
+        ShopList.Shop_list info = mList.get(position);
+        holder.progressName.setText(info.username);
+        holder.progressMoney.setText(provinceData.getMap().get(info.province_id)+provinceData.getMap().get(info.city_id)+provinceData.getMap().get(info.district_id));
+        holder.progressCreateTime.setText(info.address);
+        ImageUtils.displayImageRoundImg(R.mipmap.moren, info.imgs != null && info.imgs.size() > 0 ? info.imgs.get(0) : "", holder.progressAvatar);
         return convertView;
     }
 

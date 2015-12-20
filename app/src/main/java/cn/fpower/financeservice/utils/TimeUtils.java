@@ -15,4 +15,9 @@ public class TimeUtils {
         return format.format(calendar.getTime());
     }
 
+
+    public static String getMouth() {
+        Calendar calendar = Calendar.getInstance();
+        return (calendar.get(Calendar.MONTH) + 1) + "";
+    }
 }

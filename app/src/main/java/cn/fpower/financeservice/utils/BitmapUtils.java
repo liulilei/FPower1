@@ -5,8 +5,10 @@ import android.graphics.Bitmap.Config;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
+import android.text.TextUtils;
 import android.util.Base64;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -116,26 +118,21 @@ public class BitmapUtils {
         return resizedBitmap;
     }
 
-    public static String Bitmap2StrByBase64(Bitmap bit) {
+    public static byte[] Bitmap2StrByBase64(Bitmap bit) {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         bit.compress(Bitmap.CompressFormat.JPEG, 100, bos);//参数100表示不压缩
         byte[] bytes = bos.toByteArray();
-
-      /*  try {
-            return new String(Base64.encode(bytes, 0), "utf-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-            return  "";
-        }*/
-        // return Base64.encodeToString(bytes, Base64.DEFAULT);
-        return "";
+        return bytes;//Base64.encode(bytes, Base64.DEFAULT);
     }
 
-    public static String Bitmap2StrByBase64(String srcPath) {
+    public static byte[] Bitmap2StrByBase64(String srcPath) {
+        if(TextUtils.isEmpty(srcPath)){
+            return null;
+        }
         try {
             return Bitmap2StrByBase64(compressImageFromFile(srcPath));
         } catch (Exception e) {
-            return "";
+            return null;
         }
     }
 }

@@ -16,6 +16,7 @@ import cn.fpower.financeservice.fragment.EnteringFragment;
 import cn.fpower.financeservice.fragment.HomeFragment;
 import cn.fpower.financeservice.fragment.MeFragment;
 import cn.fpower.financeservice.fragment.ProgressFragment;
+import cn.fpower.financeservice.fragment.PromoterEnteringFragment;
 import cn.fpower.financeservice.utils.IntentUtils;
 import cn.fpower.financeservice.utils.ToastUtils;
 import cn.fpower.financeservice.view.BaseActivity;
@@ -24,7 +25,7 @@ import cn.fpower.financeservice.view.me.LoginCheckActivity;
 import cn.fpower.financeservice.view.me.MeInfoActivity;
 
 /**
- * Created by ll on 2015/11/26.
+ * 18310705012 123456
  */
 public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedChangeListener {
 
@@ -44,6 +45,8 @@ public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedCh
     private ProgressFragment progressFragment;
 
     private EnteringFragment enteringFragment;
+
+    private PromoterEnteringFragment promoterEnteringFragment;
 
     private MeFragment meFragment;
 
@@ -66,6 +69,7 @@ public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         homeFragment = new HomeFragment();
         progressFragment = new ProgressFragment();
         enteringFragment = new EnteringFragment();
+        promoterEnteringFragment=new PromoterEnteringFragment();
         meFragment = new MeFragment();
         fragmentManager.beginTransaction().add(R.id.activity_home_fragment, homeFragment).commit();
         currentFragment = homeFragment;
@@ -100,7 +104,11 @@ public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                     homeRbt.setChecked(true);
                     return;
                 }
-                showFragment(enteringFragment);
+                if(1==2) {
+                    showFragment(enteringFragment);
+                }else{
+                    showFragment(promoterEnteringFragment);
+                }
                 break;
             case R.id.activity_home_me_rbt:
                 /*if (!FSApplication.getInstance().isLogin()) {

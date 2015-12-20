@@ -1,114 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/act_bg">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/act_bg">
 
-    <RelativeLayout
+    <include
+        android:id="@+id/layout_head"
+        layout="@layout/title_bar" />
+
+    <ScrollView
+        android:layout_below="@+id/layout_head"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <include
-            android:id="@+id/layout_head"
-            layout="@layout/title_bar"/>
+        android:layout_height="match_parent">
 
         <RelativeLayout
-            android:id="@+id/layout_login_info"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/layout_head"
-            android:layout_marginTop="20dp"
-            android:background="@color/white"
-            android:paddingBottom="16dp"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:paddingTop="16dp">
+            android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/des"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toLeftOf="@+id/img_go"
-                android:text="店铺照片"
-                android:textColor="#272727"
-                android:textSize="14sp"/>
-
-            <GridView
-                android:id="@+id/noScrollgridview"
+            <RelativeLayout
+                android:id="@+id/layout_login_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/des"
-                android:layout_marginTop="12dp"
-                android:horizontalSpacing="12dp"
-                android:numColumns="5"
-                android:scrollbars="none"
-                android:verticalSpacing="5dp"></GridView>
 
+                android:layout_marginTop="20dp"
+                android:background="@color/white"
+                android:paddingBottom="16dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="16dp">
+
+                <TextView
+                    android:id="@+id/des"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/img_go"
+                    android:text="店铺照片"
+                    android:textColor="#272727"
+                    android:textSize="14sp" />
+
+                <GridView
+                    android:id="@+id/noScrollgridview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/des"
+                    android:layout_marginTop="12dp"
+                    android:horizontalSpacing="12dp"
+                    android:numColumns="5"
+                    android:scrollbars="none"
+                    android:verticalSpacing="5dp"></GridView>
+
+            </RelativeLayout>
+
+            <cn.fpower.financeservice.view.widget.EnteringSettingView
+                android:id="@+id/info_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/layout_login_info"
+                android:layout_marginTop="20dp"
+                app:txtName="店名" />
+
+            <cn.fpower.financeservice.view.widget.EnteringSettingView
+                android:id="@+id/info_addr"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/info_name"
+                app:txtName="地址" />
+
+            <cn.fpower.financeservice.view.widget.EnteringSettingView
+                android:id="@+id/info_addrdetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/info_addr"
+                app:txtName="详细地址" />
+
+            <cn.fpower.financeservice.view.widget.EnteringSettingView
+                android:id="@+id/longitude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/info_addrdetail"
+                app:txtName="经度" />
+
+            <cn.fpower.financeservice.view.widget.EnteringSettingView
+                android:id="@+id/latitude"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/longitude"
+                app:txtName="纬度" />
+
+            <cn.fpower.financeservice.view.widget.EnteringSettingView
+                android:id="@+id/info_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/latitude"
+                app:txtName="店长名字" />
+
+            <cn.fpower.financeservice.view.widget.EnteringSettingView
+                android:id="@+id/info_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/info_username"
+                app:txtName="店长电话" />
+
+            <Button
+                android:id="@+id/submit"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:layout_below="@+id/info_mobile"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/s_round_group_red"
+                android:text="@string/submit"
+                android:textColor="@color/white"
+                android:textSize="17sp" />
         </RelativeLayout>
+    </ScrollView>
 
-        <cn.fpower.financeservice.view.widget.EnteringSettingView
-            android:id="@+id/info_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/layout_login_info"
-            android:layout_marginTop="20dp"
-            app:txtName="店名"/>
-
-        <cn.fpower.financeservice.view.widget.EnteringSettingView
-            android:id="@+id/info_add1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/info_name"
-            app:txtName="地址"/>
-
-        <cn.fpower.financeservice.view.widget.EnteringSettingView
-            android:id="@+id/info_add2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/info_add1"
-            app:txtName="详细地址"/>
-
-        <cn.fpower.financeservice.view.widget.EnteringSettingView
-            android:id="@+id/longitude"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/info_add2"
-            app:txtName="经度"/>
-
-        <cn.fpower.financeservice.view.widget.EnteringSettingView
-            android:id="@+id/latitude"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/longitude"
-            app:txtName="纬度"/>
-
-        <cn.fpower.financeservice.view.widget.EnteringSettingView
-            android:id="@+id/username"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/latitude"
-            app:txtName="店长名字"/>
-
-        <cn.fpower.financeservice.view.widget.EnteringSettingView
-            android:id="@+id/info_mobile"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/username"
-            app:txtName="店长电话"/>
-
-        <Button
-            android:id="@+id/submit"
-            android:layout_width="match_parent"
-            android:layout_height="46dp"
-            android:layout_below="@+id/info_mobile"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="30dp"
-            android:background="@drawable/s_round_group_red"
-            android:text="@string/submit"
-            android:textColor="@color/white"
-            android:textSize="17sp"/>
-    </RelativeLayout>
-
-</ScrollView>
+</RelativeLayout>

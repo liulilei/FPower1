@@ -38,7 +38,6 @@ public class LoginCheckActivity extends BaseActivity implements View.OnClickList
     @ViewInject(R.id.loginin)
     private Button loginin;
 
-
     @Override
     protected int initLayout() {
         return R.layout.activity_login;

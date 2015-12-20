@@ -54,13 +54,14 @@
         <activity android:name=".view.WebViewActivity"></activity>
         <activity android:name=".view.ImgSelActivity"></activity>
         <activity android:name=".view.InfoInputActivity"></activity>
-        <activity android:name=".view.me.MeStoreActivity"></activity>
+        <activity android:name=".view.me.ShopActivity"></activity>
         <activity android:name=".view.me.LoginActivity"></activity>
         <activity android:name=".view.me.LoginCheckActivity"></activity>
         <activity android:name=".view.me.RegisterActivity"></activity>
         <activity android:name=".view.me.MeInfoActivity"></activity>
-        <activity android:name=".view.me.PromotionResultActivity"></activity>
+        <activity android:name=".view.me.PromoterResultActivity"></activity>
         <activity android:name=".view.me.NormalCheckListActivity"></activity>
+        <activity android:name=".view.me.PromoterCheckListActivity"></activity>
         <activity android:name=".view.ListActivity"></activity>
 
         <activity android:name=".view.home.SuccessExampleActivity"></activity>

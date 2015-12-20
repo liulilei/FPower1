@@ -15,6 +15,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.app.FSApplication;
 import cn.fpower.financeservice.constants.Constants;
+import cn.fpower.financeservice.mode.ProvinceData;
 import cn.fpower.financeservice.net.NetApi;
 import cn.fpower.financeservice.utils.ImageUtils;
 import cn.fpower.financeservice.utils.SpUtils;
@@ -22,7 +23,9 @@ import cn.fpower.financeservice.utils.ToastUtils;
 import cn.fpower.financeservice.view.me.LoginCheckActivity;
 import cn.fpower.financeservice.view.me.NormalCheckListActivity;
 import cn.fpower.financeservice.view.me.MeInfoActivity;
-import cn.fpower.financeservice.view.me.PromotionResultActivity;
+import cn.fpower.financeservice.view.me.PromoterCheckListActivity;
+import cn.fpower.financeservice.view.me.PromoterResultActivity;
+import cn.fpower.financeservice.view.me.ShopActivity;
 import cn.fpower.financeservice.view.widget.MeSettingView;
 
 /**
@@ -70,7 +73,7 @@ public class MeFragment extends BaseFragment{
     @ViewInject(R.id.img_login)
     private ImageView img_login;
 
-
+    private ProvinceData provinceData;
     @Override
     protected ViewGroup onCreateView(LayoutInflater inflater, Bundle savedInstanceState) {
         RelativeLayout rootView = (RelativeLayout) inflater.inflate(R.layout.fragment_me, null);
@@ -91,8 +94,7 @@ public class MeFragment extends BaseFragment{
     @Override
     protected void initData() {
         super.initData();
-        //TODO
-        //登陆不登陆状态
+        provinceData = FSApplication.getInstance().getProvinceData();
     }
 
     @Override
@@ -101,7 +103,7 @@ public class MeFragment extends BaseFragment{
         setForUserInfo();
     }
 
-    private int userRight = 1;
+    public static int userRight = 3;
 
     private void setForUserInfo() {
         if (FSApplication.getInstance().isLogin()) {
@@ -109,8 +111,11 @@ public class MeFragment extends BaseFragment{
             layout_no_login_info.setVisibility(View.GONE);
             username.setText(FSApplication.getInstance().getUserInfo().getData().getUsername());
             userage.setText(FSApplication.getInstance().getUserInfo().getData().getBirthday());
-            useraddr.setText(FSApplication.getInstance().getUserInfo().getData().getProvince_id()+"");
-            ImageUtils.displayImageRoundImg(R.mipmap.ad1, NetApi.URL+FSApplication.getInstance().getUserInfo().getData().getFace(), img_login);
+            String addr= provinceData.getMap().get(FSApplication.getInstance().getUserInfo().getData().getProvince_id() + "")+
+                    provinceData.getMap().get(FSApplication.getInstance().getUserInfo().getData().getCity_id() + "")+
+                    provinceData.getMap().get(FSApplication.getInstance().getUserInfo().getData().getDistrict_id() + "");
+            useraddr.setText(addr);
+            ImageUtils.displayImageRoundImg(R.mipmap.moren, NetApi.URL+FSApplication.getInstance().getUserInfo().getData().getFace(), img_login);
         } else {
             layout_no_login_info.setVisibility(View.VISIBLE);
             layout_login_info.setVisibility(View.GONE);
@@ -120,6 +125,12 @@ public class MeFragment extends BaseFragment{
             case 1:
                 checkView.setIconText(R.mipmap.me_store, "我的审核");
                 break;
+            case 2:
+                checkView.setIconText(R.mipmap.me_store, "店铺列表");
+                break;
+            case 3:
+                checkView.setIconText(R.mipmap.me_store, "店铺管理");
+                break;
         }
     }
 
@@ -128,13 +139,24 @@ public class MeFragment extends BaseFragment{
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fragment_me_check:
-                startActivity(new Intent(getActivity(), NormalCheckListActivity.class));
+                switch (userRight) {
+                    case 1:
+                        startActivity(new Intent(getActivity(), NormalCheckListActivity.class));
+                        break;
+                    case 2:
+                        startActivity(new Intent(getActivity(), PromoterCheckListActivity.class));
+                        break;
+                    case 3:
+                        startActivity(new Intent(getActivity(), ShopActivity.class));
+                        break;
+                }
+
                 break;
             case R.id.fragment_me_up:
                 startActivity(new Intent(getActivity(), MeInfoActivity.class));
                 break;
             case R.id.fragment_me_about:
-                 startActivity(new Intent(getActivity(), PromotionResultActivity.class));
+                 startActivity(new Intent(getActivity(), PromoterResultActivity.class));
                 break;
             case R.id.loginin:
                 startActivity(new Intent(getActivity(), LoginCheckActivity.class));

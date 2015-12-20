@@ -14,4 +14,6 @@
     <drawable name="nopressed_bg">#fff</drawable>
     <color name="progress_text_normal">#555555</color>
     <color name="progress_text_select">#F20C00</color>
+
+    <color name="black_000000">#000000</color>
 </resources>

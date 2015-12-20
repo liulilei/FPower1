@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/row_selector"
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/item_success_example_avatar"
@@ -11,7 +12,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="12dp"
-        android:src="@mipmap/ad1"/>
+        android:src="@mipmap/ad1" />
 
     <TextView
         android:id="@+id/item_success_example_name"
@@ -22,7 +23,7 @@
         android:layout_toRightOf="@id/item_success_example_avatar"
         android:text="江先生"
         android:textColor="#272727"
-        android:textSize="17dp"/>
+        android:textSize="17dp" />
 
     <TextView
         android:id="@+id/item_success_example_money"
@@ -33,7 +34,7 @@
         android:layout_marginTop="1dp"
         android:text="￥50000"
         android:textColor="#e61600"
-        android:textSize="16sp"/>
+        android:textSize="16sp" />
 
     <TextView
         android:id="@+id/item_success_example_create_time"
@@ -45,7 +46,7 @@
         android:paddingBottom="12dp"
         android:text="申请时间:2015-12-1 15:30"
         android:textColor="#737373"
-        android:textSize="11sp"/>
+        android:textSize="11sp" />
 
     <ImageView
         android:id="@+id/item_success_example_right_iv"
@@ -53,6 +54,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
-        android:paddingRight="21dp"/>
+        android:paddingRight="21dp" />
 
 </RelativeLayout>

@@ -11,19 +11,21 @@ import android.widget.TextView;
 import java.util.List;
 
 import cn.fpower.financeservice.R;
-import cn.fpower.financeservice.manager.MappingManager;
-import cn.fpower.financeservice.mode.DataInfo;
+import cn.fpower.financeservice.app.FSApplication;
+import cn.fpower.financeservice.mode.Achievement;
+import cn.fpower.financeservice.mode.MyAchievement;
+import cn.fpower.financeservice.mode.ProvinceData;
+import cn.fpower.financeservice.mode.ShopList;
 import cn.fpower.financeservice.utils.ImageUtils;
 import cn.fpower.financeservice.utils.TimeUtils;
 
 /**
  * Created by ll on 2015/12/2.
  */
-public class AllProgressFragmentAdapter extends AbstractAdapter<DataInfo> {
+public class AchievementFragmentAdapter extends AbstractAdapter<Achievement> {
 
     private Intent intent;
-
-    public AllProgressFragmentAdapter(Context Context, List<DataInfo> datas) {
+    public AchievementFragmentAdapter(Context Context, List<Achievement> datas) {
         super(Context, datas);
     }
 
@@ -47,11 +49,11 @@ public class AllProgressFragmentAdapter extends AbstractAdapter<DataInfo> {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        DataInfo info=mList.get(position);
-        holder.progressName.setText(info.getRealname());
-        holder.progressMoney.setText(MappingManager.getProcess(Integer.parseInt(info.getProcess())));
-        holder.progressCreateTime.setText("申请时间:" + TimeUtils.fullTimeAndDay(info.getAddtime()));
-        ImageUtils.displayImageRoundImg(R.mipmap.moren, "", holder.progressAvatar);
+        Achievement info = mList.get(position);
+        holder.progressName.setText(info.realname);
+        holder.progressMoney.setText("￥"+info.money);
+        holder.progressCreateTime.setText("申请时间:" + TimeUtils.fullTimeAndDay(info.addtime));
+        ImageUtils.displayImageRoundImg(R.mipmap.moren,  "", holder.progressAvatar);
         return convertView;
     }
 

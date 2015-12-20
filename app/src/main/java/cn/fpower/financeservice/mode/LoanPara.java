@@ -57,4 +57,24 @@ public class LoanPara {
             throw new Exception("请选择贷款");
         }
     }
+
+    public void checShop() throws Exception {
+        if (TextUtils.isEmpty(name)) {
+            throw new Exception("请输入店名");
+        }
+        if (TextUtils.isEmpty(province_id)) {
+            throw new Exception("请选择地址");
+        }
+        if (TextUtils.isEmpty(address)) {
+            throw new Exception("请输入详细地址");
+        }
+        if (TextUtils.isEmpty(username)) {
+            throw new Exception("请输入店长名称");
+        }
+        if (TextUtils.isEmpty(mobile)) {
+            throw new Exception("请输入电话");
+        }
+    }
+
+
 }

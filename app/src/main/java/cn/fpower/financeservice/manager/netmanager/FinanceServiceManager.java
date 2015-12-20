@@ -5,8 +5,11 @@ import android.text.TextUtils;
 
 import com.lidroid.xutils.http.RequestParams;
 
+import java.io.ByteArrayInputStream;
+
 import cn.fpower.financeservice.mode.LoanPara;
 import cn.fpower.financeservice.net.NetApi;
+import cn.fpower.financeservice.utils.ToastUtils;
 
 /**
  * Created by ll on 2015/11/24.
@@ -80,6 +83,7 @@ public class FinanceServiceManager extends BaseManager {
 
     /**
      * 登录
+     * 18310705012 123456 推广员
      *
      * @param context   上下文
      * @param mobile    手机号
@@ -100,15 +104,17 @@ public class FinanceServiceManager extends BaseManager {
     }
 
 
-    public void complete_user_info(Context context, String user_id, String face,
+    public void complete_user_info(Context context, String user_id, byte[] face,
                                    String username, String birthday, String sex, String province_id,
                                    String city_id, String district_id,
                                    boolean hasDialog, Class clazz,
                                    ManagerDataListener listener) {
         params = new RequestParams();//user_id，face, username, birthday, sex, province_id, city_id, district_id
         params.addBodyParameter("user_id", user_id);
-        if (!TextUtils.isEmpty(face)) {
-            params.addBodyParameter("face", face);
+        if (face != null) {
+            ByteArrayInputStream in = new ByteArrayInputStream(face);
+            params.addBodyParameter("face", in, in.available(), "111.png");
+            // params.addBodyParameter("file"+i,"application/octet-stream");
         }
         params.addBodyParameter("username", username);
         params.addBodyParameter("birthday", birthday);
@@ -149,12 +155,26 @@ public class FinanceServiceManager extends BaseManager {
         }
     }
 
-    public void loan_list(Context context, String user_id, String process, boolean hasDialog, Class clazz,
+    /**
+     * 15、贷款列表（进度） 我的审核
+     *
+     * @param context
+     * @param user_id
+     * @param process
+     * @param hasDialog
+     * @param clazz
+     * @param listener
+     */
+    public void loan_list(Context context, String user_id, String process, int now_page, boolean hasDialog, Class clazz,
                           ManagerDataListener listener) {
         params = new RequestParams();
         params.addQueryStringParameter("user_id", user_id);
         if (!TextUtils.isEmpty(process)) {
             params.addQueryStringParameter("process", process);
+        }
+        if (now_page >= 1) {
+            params.addQueryStringParameter("now_page", now_page + "");//当前所在页
+            params.addQueryStringParameter("page_size", "10");//默认10条
         }
         if (hasDialog) {
             getDataFromNetHasDialogGet(context, NetApi.LOAN_LIST, params, clazz, listener);
@@ -228,6 +248,7 @@ public class FinanceServiceManager extends BaseManager {
 
     /**
      * 员工列表
+     *
      * @param context
      * @param user_id
      * @param now_page
@@ -239,11 +260,10 @@ public class FinanceServiceManager extends BaseManager {
                               int now_page, boolean hasDialog, Class clazz, ManagerDataListener listener) {
         params = new RequestParams();
         params.addQueryStringParameter("user_id", user_id + "");
-        if (now_page < 1) {
-            now_page = 1;
+        if (now_page >= 1) {
+            params.addQueryStringParameter("now_page", now_page + "");//当前所在页
+            params.addQueryStringParameter("page_size", "10");//默认10条
         }
-        params.addQueryStringParameter("now_page", now_page + "");//当前所在页
-        params.addQueryStringParameter("page_size", "10");//默认10条
         if (hasDialog) {
             getDataFromNetHasDialogGet(context, NetApi.EMPLOYEE_LIST, params, clazz, listener);
         } else {
@@ -253,6 +273,7 @@ public class FinanceServiceManager extends BaseManager {
 
     /**
      * 12、店铺列表
+     *
      * @param context
      * @param user_id
      * @param now_page
@@ -261,14 +282,13 @@ public class FinanceServiceManager extends BaseManager {
      * @param listener
      */
     public void shop_list(Context context, int user_id,
-                              int now_page, boolean hasDialog, Class clazz, ManagerDataListener listener) {
+                          int now_page, boolean hasDialog, Class clazz, ManagerDataListener listener) {
         params = new RequestParams();
         params.addQueryStringParameter("user_id", user_id + "");
-        if (now_page < 1) {
-            now_page = 1;
+        if (now_page >= 1) {
+            params.addQueryStringParameter("now_page", now_page + "");//当前所在页
+            params.addQueryStringParameter("page_size", "10");//默认10条
         }
-        params.addQueryStringParameter("now_page", now_page + "");//当前所在页
-        params.addQueryStringParameter("page_size", "10");//默认10条
         if (hasDialog) {
             getDataFromNetHasDialogGet(context, NetApi.SHOP_LIST, params, clazz, listener);
         } else {
@@ -278,6 +298,7 @@ public class FinanceServiceManager extends BaseManager {
 
     /**
      * 删除员工
+     *
      * @param context
      * @param user_id
      * @param employee_id
@@ -286,7 +307,7 @@ public class FinanceServiceManager extends BaseManager {
      * @param listener
      */
     //TODO GET还是POST
-    public void delete_employee(Context context, int  user_id,int employee_id,
+    public void delete_employee(Context context, int user_id, int employee_id,
                                 boolean hasDialog, Class clazz,
                                 ManagerDataListener listener) {
         params = new RequestParams();
@@ -301,6 +322,7 @@ public class FinanceServiceManager extends BaseManager {
 
     /**
      * 11、录入店铺 图片（多张用#####分隔）
+     *
      * @param context
      * @param loanPara
      * @param hasDialog
@@ -308,15 +330,15 @@ public class FinanceServiceManager extends BaseManager {
      * @param listener
      */
     //TODO 图片Base64
-    public void create_shop(Context context, LoanPara loanPara,String imgs,
-                                boolean hasDialog, Class clazz,
-                                ManagerDataListener listener) {
+    public void create_shop(Context context, LoanPara loanPara, String imgs,
+                            boolean hasDialog, Class clazz,
+                            ManagerDataListener listener) {
         params = new RequestParams();
         params.addBodyParameter("user_id", loanPara.user_id + "");
         params.addBodyParameter("mobile", loanPara.mobile);
         params.addBodyParameter("username", loanPara.username);
         params.addBodyParameter("name", loanPara.name);
-       // params.addBodyParameter("imgs", loanPara.name);
+        // params.addBodyParameter("imgs", loanPara.name);
         params.addBodyParameter("province_id", loanPara.province_id);
         params.addBodyParameter("city_id", loanPara.city_id);
         params.addBodyParameter("district_id", loanPara.district_id);
@@ -328,6 +350,42 @@ public class FinanceServiceManager extends BaseManager {
             getDataFromNetHasDialog(context, NetApi.CREATE_SHOP, params, clazz, listener);
         } else {
             getDataFromNetNoDialog(context, NetApi.CREATE_SHOP, params, clazz, listener);
+        }
+    }
+
+
+    public void my_achievement(Context context, int user_id,
+                               int achievement_size, boolean hasDialog, Class clazz, ManagerDataListener listener) {
+        params = new RequestParams();
+        params.addQueryStringParameter("user_id", user_id + "");
+        if (achievement_size >= 1) {
+            params.addQueryStringParameter("achievement_size", achievement_size + "");
+        }
+        if (hasDialog) {
+            getDataFromNetHasDialogGet(context, NetApi.MY_ACHIEVEMENT, params, clazz, listener);
+        } else {
+            getDataFromNetNoDialogGet(context, NetApi.MY_ACHIEVEMENT, params, clazz, listener);
+        }
+    }
+
+    public void my_achievement(Context context, int user_id, long start, long end,
+                               int now_page, boolean hasDialog, Class clazz, ManagerDataListener listener) {
+        params = new RequestParams();
+        params.addQueryStringParameter("user_id", user_id + "");
+        if (start > 0) {
+            params.addQueryStringParameter("start", start+"");
+        }
+        if (end > 0) {
+            params.addQueryStringParameter("end", end+"");
+        }
+        if (now_page >= 1) {
+            params.addQueryStringParameter("now_page", now_page + "");//当前所在页
+            params.addQueryStringParameter("page_size", "10");//默认10条
+        }
+        if (hasDialog) {
+            getDataFromNetHasDialogGet(context, NetApi.MY_ACHIEVEMENT, params, clazz, listener);
+        } else {
+            getDataFromNetNoDialogGet(context, NetApi.MY_ACHIEVEMENT, params, clazz, listener);
         }
     }
 }

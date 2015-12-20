@@ -42,7 +42,7 @@ import cn.fpower.financeservice.mode.ProvinceInfo.Province;
 /**
  * 推广员我的业绩
  */
-public class PromotionResultActivity extends BaseActivity {
+public class PromoterResultActivity extends BaseActivity {
 
     @ViewInject(R.id.title_bar_back)
     private ImageView back;
@@ -55,11 +55,7 @@ public class PromotionResultActivity extends BaseActivity {
     @ViewInject(R.id.noScrollgridview)
     private GridView noScrollgridview;
 
-    @ViewInject(R.id.info_add1)
-    private EnteringSettingView locationTv;
 
-    @ViewInject(R.id.info_add2)
-    private EnteringSettingView locationDetialTv;
 
     @ViewInject(R.id.longitude)
     private EnteringSettingView longitudeTv;
@@ -170,8 +166,7 @@ public class PromotionResultActivity extends BaseActivity {
         noScrollgridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
         adapter = new GridAdapter(this);
         noScrollgridview.setAdapter(adapter);
-        locationTv.setOnClickListener(this);
-        locationDetialTv.setOnClickListener(this);
+
         noScrollgridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -281,7 +276,6 @@ public class PromotionResultActivity extends BaseActivity {
                 String tx = options1Items.get(options1).name
                         + options2Items.get(options1).get(option2).name
                         + options3Items.get(options1).get(option2).get(options3).name;
-                locationTv.setValue(tx);
             }
         });
 
@@ -290,12 +284,7 @@ public class PromotionResultActivity extends BaseActivity {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.info_add1:
-                optionsPickerView.show();
-                break;
-            case R.id.info_add2:
-                break;
+
         }
     }
-
 }
