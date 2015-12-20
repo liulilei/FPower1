@@ -60,7 +60,7 @@
         <activity android:name=".view.me.RegisterActivity"></activity>
         <activity android:name=".view.me.MeInfoActivity"></activity>
         <activity android:name=".view.me.PromotionResultActivity"></activity>
-        <activity android:name=".view.me.MeCheckListActivity"></activity>
+        <activity android:name=".view.me.NormalCheckListActivity"></activity>
         <activity android:name=".view.ListActivity"></activity>
 
         <activity android:name=".view.home.SuccessExampleActivity"></activity>

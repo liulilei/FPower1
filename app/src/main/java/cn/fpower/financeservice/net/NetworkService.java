@@ -172,7 +172,6 @@ public class NetworkService {
             if (jsonObject.has("message")) {
                 msg = jsonObject.getString("message");
             }
-            ToastUtils.show(cont, msg);
             switch (code) {
                 case ResultCode.SUCCESS:
                     if (null != pListener) {
@@ -184,6 +183,7 @@ public class NetworkService {
             }
             if (code != ResultCode.SUCCESS) {
                 if (null != pListener) {
+                    ToastUtils.show(cont, msg);
                     pListener.onError(result);
                 }
             }

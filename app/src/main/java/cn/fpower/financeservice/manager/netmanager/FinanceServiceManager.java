@@ -330,7 +330,4 @@ public class FinanceServiceManager extends BaseManager {
             getDataFromNetNoDialog(context, NetApi.CREATE_SHOP, params, clazz, listener);
         }
     }
-
-
-
 }

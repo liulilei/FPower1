@@ -15,4 +15,6 @@ public class Constants {
     public static final String MOBLEE = "mobile";
 
     public static final String PASSWD = "passwd";
+
+    public static final String[] sexs = {"男", "女"};
 }

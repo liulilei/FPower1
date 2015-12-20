@@ -13,7 +13,7 @@ public class EnteringSettingView extends RelativeLayout {
 
     private TextView titleName;
     private TextView valueName;
-    private String key;
+    private String key="";
 
     public EnteringSettingView(Context context) {
         this(context, null);

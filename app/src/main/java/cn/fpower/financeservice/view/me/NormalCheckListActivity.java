@@ -20,7 +20,7 @@ import cn.fpower.financeservice.view.widget.RefreshListView;
 /**
  * 我的审核列表
  **/
-public class MeCheckListActivity extends BaseActivity implements OnClickListener {
+public class NormalCheckListActivity extends BaseActivity implements OnClickListener {
 
     @ViewInject(R.id.title_bar_back)
     private ImageView back;

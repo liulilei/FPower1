@@ -19,12 +19,9 @@ import cn.fpower.financeservice.net.NetApi;
 import cn.fpower.financeservice.utils.ImageUtils;
 import cn.fpower.financeservice.utils.SpUtils;
 import cn.fpower.financeservice.utils.ToastUtils;
-import cn.fpower.financeservice.view.ListActivity;
-import cn.fpower.financeservice.view.me.LoginActivity;
 import cn.fpower.financeservice.view.me.LoginCheckActivity;
-import cn.fpower.financeservice.view.me.MeCheckListActivity;
+import cn.fpower.financeservice.view.me.NormalCheckListActivity;
 import cn.fpower.financeservice.view.me.MeInfoActivity;
-import cn.fpower.financeservice.view.me.MeStoreActivity;
 import cn.fpower.financeservice.view.me.PromotionResultActivity;
 import cn.fpower.financeservice.view.widget.MeSettingView;
 
@@ -131,7 +128,7 @@ public class MeFragment extends BaseFragment{
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fragment_me_check:
-                startActivity(new Intent(getActivity(), MeCheckListActivity.class));
+                startActivity(new Intent(getActivity(), NormalCheckListActivity.class));
                 break;
             case R.id.fragment_me_up:
                 startActivity(new Intent(getActivity(), MeInfoActivity.class));

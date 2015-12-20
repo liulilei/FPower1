@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
+import com.google.gson.Gson;
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache;
@@ -16,11 +17,17 @@ import com.nostra13.universalimageloader.core.decode.BaseImageDecoder;
 import com.nostra13.universalimageloader.core.download.BaseImageDownloader;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 
 import cn.fpower.financeservice.constants.Constants;
+import cn.fpower.financeservice.mode.ProvinceData;
+import cn.fpower.financeservice.mode.ProvinceInfo;
 import cn.fpower.financeservice.mode.UserInfo;
 import cn.fpower.financeservice.utils.AppUtils;
 import cn.fpower.financeservice.utils.LogUtils;
+import cn.fpower.financeservice.utils.StringUtils;
 
 /*
  * application
@@ -73,6 +80,57 @@ public class FSApplication extends Application {
         }
         mContext = getApplicationContext();
         initAppParames(this);
+        initDate();
+    }
+
+
+    private static ProvinceData provinceData;
+
+    public static ProvinceData getProvinceData() {
+        return provinceData;
+    }
+
+    private void initDate() {
+        provinceData=new ProvinceData();
+        Gson gson = new Gson();
+        String city = StringUtils.getJsonFromAssets(this, "city.txt");
+        String province = StringUtils.getJsonFromAssets(this, "provice.txt");
+        String distric = StringUtils.getJsonFromAssets(this, "distric.txt");
+        ProvinceInfo provinceInfo = gson.fromJson(province, ProvinceInfo.class);
+        ProvinceInfo cityInfo = gson.fromJson(city, ProvinceInfo.class);
+        ProvinceInfo districInfo = gson.fromJson(distric, ProvinceInfo.class);
+        ArrayList<ProvinceInfo.Province> provinceList = provinceInfo.province;
+        TreeMap<String, ArrayList<Map<String, String>>> cityMap = cityInfo.city;
+        TreeMap<String, ArrayList<Map<String, String>>> districtMap = districInfo.district;
+        provinceData.setOptions1Items(provinceList);
+        ArrayList<ProvinceInfo.Province> cityList_01;
+        ArrayList<ArrayList<ProvinceInfo.Province>> districList_01;
+        ArrayList<ProvinceInfo.Province> districList_02;
+        ArrayList<Map<String, String>> cityList;
+        ArrayList<Map<String, String>> districList;
+        for (ProvinceInfo.Province pro : provinceList) {
+            cityList_01 = new ArrayList<ProvinceInfo.Province>();
+            districList_01 = new ArrayList<ArrayList<ProvinceInfo.Province>>();
+            cityList = cityMap.get(pro.code);
+            provinceData.getMap().put(pro.code,pro.name);
+            for (Map<String, String> mapCity : cityList) {
+                for (String k : mapCity.keySet()) {
+                    districList_02 = new ArrayList<ProvinceInfo.Province>();
+                    cityList_01.add(new ProvinceInfo().new Province(k, mapCity.get(k)));
+                    provinceData.getMap().put(k, mapCity.get(k));
+                    districList = districtMap.get(k);
+                    for (Map<String, String> districMap : districList) {
+                        for (String k1 : districMap.keySet()) {
+                            districList_02.add(new ProvinceInfo().new Province(k1, districMap.get(k1)));
+                            provinceData.getMap().put(k1, districMap.get(k1));
+                        }
+                    }
+                    districList_01.add(districList_02);
+                }
+            }
+            provinceData.getOptions3Items().add(districList_01);
+            provinceData.getOptions2Items().add(cityList_01);
+        }
     }
 
     private void initAppParames(Context context) {
