@@ -17,7 +17,7 @@ public class LoanInfo extends BaseMode {
         this.data = data;
     }
 
-    public class Data implements BaseEntity {
+    public class Data extends BaseEntity {
         private List<DataInfo> loan_list;
 
         public List<DataInfo> getLoan_list() {

@@ -17,7 +17,7 @@ public class MyAchievement extends BaseMode {
         this.data = data;
     }
 
-    public class Data implements BaseEntity {
+    public class Data extends BaseEntity {
         private List<Achievement> achievement_list;
         private int achievement_total;
         private String month_amount;

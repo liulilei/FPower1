@@ -6,14 +6,11 @@ import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
 import android.text.TextUtils;
-import android.util.Base64;
 
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
 public class BitmapUtils {
 
@@ -118,14 +115,16 @@ public class BitmapUtils {
         return resizedBitmap;
     }
 
-    public static byte[] Bitmap2StrByBase64(Bitmap bit) {
+    private final static String baseHead="data:image/png;base64,";
+
+    public static String Bitmap2StrByBase64(Bitmap bit) {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        bit.compress(Bitmap.CompressFormat.JPEG, 100, bos);//参数100表示不压缩
+        bit.compress(Bitmap.CompressFormat.PNG, 100, bos);//参数100表示不压缩
         byte[] bytes = bos.toByteArray();
-        return bytes;//Base64.encode(bytes, Base64.DEFAULT);
+        return baseHead+Base64.encode(bytes);
     }
 
-    public static byte[] Bitmap2StrByBase64(String srcPath) {
+    public static String Bitmap2StrByBase64(String srcPath) {
         if(TextUtils.isEmpty(srcPath)){
             return null;
         }

@@ -196,7 +196,7 @@ public class MeInfoActivity extends BaseActivity {
                     ToastUtils.show(this, R.string.input_bri);
                     return;
                 }
-                byte[] face = BitmapUtils.Bitmap2StrByBase64(picturePath);
+                String face = BitmapUtils.Bitmap2StrByBase64(picturePath);
                 String[] keys=info_addr.getKey().split(",");
                 if(keys==null||keys.length<3){
                     ToastUtils.show(this, R.string.input_addr);
