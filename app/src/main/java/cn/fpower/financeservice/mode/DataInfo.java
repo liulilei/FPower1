@@ -2,7 +2,7 @@ package cn.fpower.financeservice.mode;
 
 public class DataInfo extends BaseEntity {
 
-    private String id;// "2",
+    private int id;// "2",
     private String user_id;// "18",
     private String realname;// "test",
     private String age;// "0",
@@ -35,12 +35,11 @@ public class DataInfo extends BaseEntity {
     private String status;// "1",
     private String source;// "0"
 
-
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

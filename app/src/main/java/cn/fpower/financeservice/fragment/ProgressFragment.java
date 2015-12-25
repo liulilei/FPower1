@@ -16,18 +16,11 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import java.util.List;
 
 import cn.fpower.financeservice.R;
-import cn.fpower.financeservice.adapter.AllProgressFragmentAdapter;
 import cn.fpower.financeservice.adapter.ProgressFragmentAdapter;
 import cn.fpower.financeservice.app.FSApplication;
+import cn.fpower.financeservice.constants.Constants;
 import cn.fpower.financeservice.manager.netmanager.FinanceManagerControl;
 import cn.fpower.financeservice.manager.netmanager.ManagerDataListener;
-import cn.fpower.financeservice.mode.CaseListInfo;
-import cn.fpower.financeservice.mode.LoanInfo;
-import cn.fpower.financeservice.adapter.SuccessExampleAdapter;
-import cn.fpower.financeservice.app.FSApplication;
-import cn.fpower.financeservice.manager.netmanager.FinanceManagerControl;
-import cn.fpower.financeservice.manager.netmanager.ManagerDataListener;
-import cn.fpower.financeservice.mode.CaseListInfo;
 import cn.fpower.financeservice.mode.DataInfo;
 import cn.fpower.financeservice.mode.LoanInfo;
 import cn.fpower.financeservice.utils.ToastUtils;
@@ -37,7 +30,7 @@ import cn.fpower.financeservice.view.widget.RefreshListView;
 /**
  * Created by ll on 2015/11/26.
  */
-public class ProgressFragment extends BaseFragment implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class ProgressFragment extends BaseFragment implements View.OnClickListener, AdapterView.OnItemClickListener, RefreshListView.IOnRefreshListener, RefreshListView.IOnLoadMoreListener {
 
     @ViewInject(R.id.fragment_progress_rlv)
     private RefreshListView progressRlv;
@@ -76,17 +69,6 @@ public class ProgressFragment extends BaseFragment implements View.OnClickListen
 
     private View currentView;
 
-    private int now_page=1;
-
-    private static final int PROGRESS_ALL = 1;
-    private static final int PROGRESS_ALL = 0;
-
-    private static final int PROGRESS_CHECKING = 1;
-
-    private static final int PROGRESS_CHECKED = -1;
-
-    private static final int PROGRESS_CHECK_OK = -2;
-
     private int currentProgress = -1;
 
     private int now_page = 1;
@@ -99,6 +81,8 @@ public class ProgressFragment extends BaseFragment implements View.OnClickListen
 
     private ProgressFragmentAdapter progressFragmentAdapter;
 
+    private String userId;
+
     @Override
     protected ViewGroup onCreateView(LayoutInflater inflater, Bundle savedInstanceState) {
         LinearLayout ll = (LinearLayout) inflater.inflate(R.layout.fragment_progress, null);
@@ -107,7 +91,8 @@ public class ProgressFragment extends BaseFragment implements View.OnClickListen
 
     @Override
     protected void initView() {
-        currentProgress = PROGRESS_ALL;
+        userId = FSApplication.getInstance().getUserInfo().getData().getId() + "";
+        currentProgress = Constants.PROGRESS_ALL;
         back.setVisibility(View.GONE);
         title.setText("进度");
         progressAll.setOnClickListener(this);
@@ -115,10 +100,11 @@ public class ProgressFragment extends BaseFragment implements View.OnClickListen
         progressChecked.setOnClickListener(this);
         progressCheckOk.setOnClickListener(this);
         progressRlv.setOnItemClickListener(this);
+        progressRlv.setOnRefreshListener(this);
+        progressRlv.setOnLoadMoreListener(this);
         currentRb = progressAll;
         currentView = line1;
-        currentProgress = PROGRESS_ALL;
-        FinanceManagerControl.getFinanceServiceManager().loan_list(getActivity(), FSApplication.getInstance().getUserInfo().getData().getId() + "",
+        FinanceManagerControl.getFinanceServiceManager().loan_list(getActivity(), userId,
                 currentProgress + "", now_page, true, LoanInfo.class, new ManagerDataListener() {
                     @Override
                     public void onSuccess(Object data) {
@@ -129,17 +115,16 @@ public class ProgressFragment extends BaseFragment implements View.OnClickListen
                             progressRlv.showFooterResult(false);
                             return;
                         }
-//                        successExampleAdapter = new SuccessExampleAdapter(getActivity(), dataInfoList);
-//                        successExampleRlv.setAdapter(successExampleAdapter);
-//                        successExampleRlv.showFooterResult(now_page <=  (((CaseListInfo) data).getCase_total() / 10));
+                        progressFragmentAdapter = new ProgressFragmentAdapter(getActivity(), dataInfoList);
+                        progressRlv.setAdapter(progressFragmentAdapter);
+                        progressRlv.showFooterResult(now_page <= (((LoanInfo) data).getData().getLoan_total() / 10));
                     }
 
                     @Override
                     public void onError(String error) {
-
+                        progressRlv.setLoadEnable(false);
                     }
                 });
-        progressRlv.setAdapter(new ProgressFragmentAdapter(getActivity(), null));
     }
 
     @Override
@@ -147,22 +132,46 @@ public class ProgressFragment extends BaseFragment implements View.OnClickListen
         switch (v.getId()) {
             case R.id.fragment_progress_all:
                 showView(line1, progressAll);
-                currentProgress = PROGRESS_ALL;
+                currentProgress = Constants.PROGRESS_ALL;
                 break;
             case R.id.fragment_progress_checking:
                 showView(line2, progressChecking);
-                currentProgress = PROGRESS_CHECKING;
+                currentProgress = Constants.PROGRESS_CHECKING;
                 break;
             case R.id.fragment_progress_checked:
                 showView(line3, progressChecked);
-                currentProgress = PROGRESS_CHECKED;
+                currentProgress = Constants.PROGRESS_CHECKED;
                 break;
             case R.id.fragment_progress_check_ok:
                 showView(line4, progressCheckOk);
-                currentProgress = PROGRESS_CHECK_OK;
+                currentProgress = Constants.PROGRESS_CHECK_OK;
                 break;
         }
-        progressRlv.setAdapter(new ProgressFragmentAdapter(getActivity(), null));
+        FinanceManagerControl.getFinanceServiceManager().loan_list(getActivity(), userId,
+                currentProgress + "", 1, true, LoanInfo.class, new ManagerDataListener() {
+                    @Override
+                    public void onSuccess(Object data) {
+                        now_page = 1;
+                        dataInfoList = ((LoanInfo) data).getData().getLoan_list();
+
+                        if (dataInfoList == null || dataInfoList.size() == 0) {
+                            ToastUtils.show(getActivity(), "没有数据");
+                            progressRlv.showFooterResult(false);
+                            return;
+                        }
+                        if (progressFragmentAdapter == null) {
+                            progressFragmentAdapter = new ProgressFragmentAdapter(getActivity(), dataInfoList);
+                            progressRlv.setAdapter(progressFragmentAdapter);
+                        } else {
+                            progressFragmentAdapter.refresh(dataInfoList);
+                        }
+                        progressRlv.showFooterResult(now_page <= (((LoanInfo) data).getData().getLoan_total() / 10));
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                    }
+                });
     }
 
     private void showView(View view, RadioButton rb) {
@@ -176,23 +185,61 @@ public class ProgressFragment extends BaseFragment implements View.OnClickListen
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        startActivity(new Intent(getActivity(), ProgressDetailActivity.class));
+        Intent intent = new Intent(getActivity(), ProgressDetailActivity.class);
+        intent.putExtra("loan_id", dataInfoList.get(position).getId());
+        startActivity(intent);
     }
 
-    private void showList(){
-        FinanceManagerControl.getFinanceServiceManager().loan_list(getActivity(),
-                FSApplication.getInstance().getUserInfo().getData().getId() + "", "", now_page, true, LoanInfo.class, new ManagerDataListener() {
-
+    @Override
+    public void OnRefresh() {
+        FinanceManagerControl.getFinanceServiceManager().loan_list(getActivity(), userId, currentProgress + "",
+                1, false, LoanInfo.class, new ManagerDataListener() {
                     @Override
                     public void onSuccess(Object data) {
-                        LoanInfo info = (LoanInfo) data;
-                       // progressRlv.setAdapter(new AllProgressFragmentAdapter(getActivity(), info.getData().getLoan_list()));
+                        now_page = 1;
+                        progressRlv.onRefreshComplete();
+                        refreshDataInfoList = ((LoanInfo) data).getData().getLoan_list();
+                        if (refreshDataInfoList == null || refreshDataInfoList.size() == 0) {
+                            return;
+                        }
+                        if (progressFragmentAdapter == null) {
+                            progressFragmentAdapter = new ProgressFragmentAdapter(getActivity(), refreshDataInfoList);
+                            progressRlv.setAdapter(progressFragmentAdapter);
+                        } else {
+                            progressFragmentAdapter.refresh(refreshDataInfoList);
+                        }
+                        progressRlv.showFooterResult(now_page <= (((LoanInfo) data).getData().getLoan_total() / 10));
                     }
 
                     @Override
                     public void onError(String error) {
-
+                        progressRlv.onRefreshComplete();
                     }
                 });
+    }
+
+    @Override
+    public void onLoadMore() {
+        FinanceManagerControl.getFinanceServiceManager().loan_list(getActivity(), userId, currentProgress + "",
+                ++now_page, false, LoanInfo.class, new ManagerDataListener() {
+
+                    @Override
+                    public void onSuccess(Object data) {
+                        progressRlv.onLoadComplete();
+                        loadMoreDataInfoList = ((LoanInfo) data).getData().getLoan_list();
+                        if (loadMoreDataInfoList == null || loadMoreDataInfoList.size() == 0) {
+                            progressRlv.showFooterResult(false);
+                            return;
+                        }
+                        progressFragmentAdapter.addData(loadMoreDataInfoList);
+                        progressRlv.showFooterResult(now_page <= (((LoanInfo) data).getData().getLoan_total() / 10));
+                    }
+
+                    @Override
+                    public void onError(String error) {
+                        progressRlv.onLoadComplete();
+                    }
+                });
+
     }
 }

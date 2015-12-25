@@ -30,4 +30,12 @@ public class Constants {
         //推广员
         int PROMOTER=15;
     }
+
+    public static final int PROGRESS_ALL = 0;
+
+    public static final int PROGRESS_CHECKING = 1;
+
+    public static final int PROGRESS_CHECKED = -1;
+
+    public static final int PROGRESS_CHECK_OK = -2;
 }

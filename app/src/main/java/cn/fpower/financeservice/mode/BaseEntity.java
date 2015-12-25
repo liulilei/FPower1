@@ -14,31 +14,5 @@ import java.io.Serializable;
  * http://www.cniao5.com
  */
 public class BaseEntity implements Serializable {
-    private int now_page;
-    private int page_size;
-    private int case_total;
 
-    public int getNow_page() {
-        return now_page;
-    }
-
-    public void setNow_page(int now_page) {
-        this.now_page = now_page;
-    }
-
-    public int getPage_size() {
-        return page_size;
-    }
-
-    public void setPage_size(int page_size) {
-        this.page_size = page_size;
-    }
-
-    public int getCase_total() {
-        return case_total;
-    }
-
-    public void setCase_total(int case_total) {
-        this.case_total = case_total;
-    }
 }
