@@ -2,7 +2,6 @@ package cn.fpower.financeservice.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,13 +9,22 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.lidroid.xutils.view.annotation.ViewInject;
 
+import java.util.List;
+
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.adapter.ProgressFragmentAdapter;
+import cn.fpower.financeservice.adapter.SuccessExampleAdapter;
+import cn.fpower.financeservice.app.FSApplication;
+import cn.fpower.financeservice.manager.netmanager.FinanceManagerControl;
+import cn.fpower.financeservice.manager.netmanager.ManagerDataListener;
+import cn.fpower.financeservice.mode.CaseListInfo;
+import cn.fpower.financeservice.mode.DataInfo;
+import cn.fpower.financeservice.mode.LoanInfo;
+import cn.fpower.financeservice.utils.ToastUtils;
 import cn.fpower.financeservice.view.progress.ProgressDetailActivity;
 import cn.fpower.financeservice.view.widget.RefreshListView;
 
@@ -62,15 +70,25 @@ public class ProgressFragment extends BaseFragment implements View.OnClickListen
 
     private View currentView;
 
-    private static final int PROGRESS_ALL = 1;
+    private static final int PROGRESS_ALL = 0;
 
-    private static final int PROGRESS_CHECKING = 2;
+    private static final int PROGRESS_CHECKING = 1;
 
-    private static final int PROGRESS_CHECKED = 3;
+    private static final int PROGRESS_CHECKED = -1;
 
-    private static final int PROGRESS_CHECK_OK = 4;
+    private static final int PROGRESS_CHECK_OK = -2;
 
     private int currentProgress = -1;
+
+    private int now_page = 1;
+
+    private List<DataInfo> dataInfoList;
+
+    private List<DataInfo> refreshDataInfoList;
+
+    private List<DataInfo> loadMoreDataInfoList;
+
+    private ProgressFragmentAdapter progressFragmentAdapter;
 
     @Override
     protected ViewGroup onCreateView(LayoutInflater inflater, Bundle savedInstanceState) {
@@ -90,6 +108,28 @@ public class ProgressFragment extends BaseFragment implements View.OnClickListen
         progressRlv.setOnItemClickListener(this);
         currentRb = progressAll;
         currentView = line1;
+        currentProgress = PROGRESS_ALL;
+        FinanceManagerControl.getFinanceServiceManager().loan_list(getActivity(), FSApplication.getInstance().getUserInfo().getData().getId() + "",
+                currentProgress + "", now_page, true, LoanInfo.class, new ManagerDataListener() {
+                    @Override
+                    public void onSuccess(Object data) {
+                        dataInfoList = ((LoanInfo) data).getData().getLoan_list();
+
+                        if (dataInfoList == null || dataInfoList.size() == 0) {
+                            ToastUtils.show(getActivity(), "没有数据");
+                            progressRlv.showFooterResult(false);
+                            return;
+                        }
+//                        successExampleAdapter = new SuccessExampleAdapter(getActivity(), dataInfoList);
+//                        successExampleRlv.setAdapter(successExampleAdapter);
+//                        successExampleRlv.showFooterResult(now_page <=  (((CaseListInfo) data).getCase_total() / 10));
+                    }
+
+                    @Override
+                    public void onError(String error) {
+
+                    }
+                });
         progressRlv.setAdapter(new ProgressFragmentAdapter(getActivity(), null));
     }
 
