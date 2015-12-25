@@ -9,36 +9,6 @@ public class CaseListInfo extends BaseMode {
 
     private Data data;
 
-    private int case_total;
-
-    private int page_size;
-
-    private int now_page;
-
-    public int getCase_total() {
-        return case_total;
-    }
-
-    public void setCase_total(int case_total) {
-        this.case_total = case_total;
-    }
-
-    public int getPage_size() {
-        return page_size;
-    }
-
-    public void setPage_size(int page_size) {
-        this.page_size = page_size;
-    }
-
-    public int getNow_page() {
-        return now_page;
-    }
-
-    public void setNow_page(int now_page) {
-        this.now_page = now_page;
-    }
-
     public Data getData() {
         return data;
     }
@@ -47,7 +17,7 @@ public class CaseListInfo extends BaseMode {
         this.data = data;
     }
 
-    public class Data implements BaseEntity {
+    public class Data extends BaseEntity {
         private List<DataInfo> case_list;
 
         public List<DataInfo> getCase_list() {

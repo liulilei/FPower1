@@ -104,7 +104,7 @@ public class FinanceServiceManager extends BaseManager {
     }
 
 
-    public void complete_user_info(Context context, String user_id, byte[] face,
+    public void complete_user_info(Context context, String user_id, String face,
                                    String username, String birthday, String sex, String province_id,
                                    String city_id, String district_id,
                                    boolean hasDialog, Class clazz,
@@ -112,9 +112,7 @@ public class FinanceServiceManager extends BaseManager {
         params = new RequestParams();//user_id，face, username, birthday, sex, province_id, city_id, district_id
         params.addBodyParameter("user_id", user_id);
         if (face != null) {
-            ByteArrayInputStream in = new ByteArrayInputStream(face);
-            params.addBodyParameter("face", in, in.available(), "111.png");
-            // params.addBodyParameter("file"+i,"application/octet-stream");
+            params.addBodyParameter("face", face);
         }
         params.addBodyParameter("username", username);
         params.addBodyParameter("birthday", birthday);
@@ -386,6 +384,24 @@ public class FinanceServiceManager extends BaseManager {
             getDataFromNetHasDialogGet(context, NetApi.MY_ACHIEVEMENT, params, clazz, listener);
         } else {
             getDataFromNetNoDialogGet(context, NetApi.MY_ACHIEVEMENT, params, clazz, listener);
+        }
+    }
+
+    /**
+     * 16、贷款详情
+     * @param context
+     * @param loan_id
+     * @param hasDialog
+     * @param clazz
+     * @param listener
+     */
+    public void loan_detail(Context context , int loan_id ,boolean hasDialog, Class clazz, ManagerDataListener listener) {
+        params = new RequestParams();
+        params.addQueryStringParameter("loan_id", loan_id + "");
+        if (hasDialog) {
+            getDataFromNetHasDialogGet(context, NetApi.LOAN_DETAIL, params, clazz, listener);
+        } else {
+            getDataFromNetNoDialogGet(context, NetApi.LOAN_DETAIL, params, clazz, listener);
         }
     }
 }

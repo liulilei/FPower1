@@ -1,6 +1,6 @@
 package cn.fpower.financeservice.mode;
 
-public class DataInfo implements BaseEntity {
+public class DataInfo extends BaseEntity {
 
     private String id;// "2",
     private String user_id;// "18",

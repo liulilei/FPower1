@@ -16,7 +16,13 @@ import android.widget.TextView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 import cn.fpower.financeservice.R;
+import cn.fpower.financeservice.adapter.AllProgressFragmentAdapter;
 import cn.fpower.financeservice.adapter.ProgressFragmentAdapter;
+import cn.fpower.financeservice.app.FSApplication;
+import cn.fpower.financeservice.manager.netmanager.FinanceManagerControl;
+import cn.fpower.financeservice.manager.netmanager.ManagerDataListener;
+import cn.fpower.financeservice.mode.CaseListInfo;
+import cn.fpower.financeservice.mode.LoanInfo;
 import cn.fpower.financeservice.view.progress.ProgressDetailActivity;
 import cn.fpower.financeservice.view.widget.RefreshListView;
 
@@ -61,6 +67,8 @@ public class ProgressFragment extends BaseFragment implements View.OnClickListen
     private RadioButton currentRb;
 
     private View currentView;
+
+    private int now_page=1;
 
     private static final int PROGRESS_ALL = 1;
 
@@ -128,5 +136,22 @@ public class ProgressFragment extends BaseFragment implements View.OnClickListen
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         startActivity(new Intent(getActivity(), ProgressDetailActivity.class));
+    }
+
+    private void showList(){
+        FinanceManagerControl.getFinanceServiceManager().loan_list(getActivity(),
+                FSApplication.getInstance().getUserInfo().getData().getId() + "", "", now_page, true, LoanInfo.class, new ManagerDataListener() {
+
+                    @Override
+                    public void onSuccess(Object data) {
+                        LoanInfo info = (LoanInfo) data;
+                       // progressRlv.setAdapter(new AllProgressFragmentAdapter(getActivity(), info.getData().getLoan_list()));
+                    }
+
+                    @Override
+                    public void onError(String error) {
+
+                    }
+                });
     }
 }

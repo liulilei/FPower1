@@ -3,7 +3,7 @@ package cn.fpower.financeservice.mode;
 /**
  *  业绩
  */
-public class Achievement  implements BaseEntity {
+public class Achievement  extends BaseEntity {
     public String id;// "1",
     public String user_id;// "17",
     public String realname;// "江稳",

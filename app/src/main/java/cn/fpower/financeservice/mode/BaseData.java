@@ -7,7 +7,7 @@ public class BaseData extends BaseMode {
 
     private Data data;
 
-    public class Data implements BaseEntity {
+    public class Data extends BaseEntity {
 
     }
 }

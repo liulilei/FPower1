@@ -148,7 +148,6 @@ public class MeFragment extends BaseFragment{
                         startActivity(new Intent(getActivity(), ShopActivity.class));
                         break;
                 }
-
                 break;
             case R.id.fragment_me_up:
                 startActivity(new Intent(getActivity(), MeInfoActivity.class));

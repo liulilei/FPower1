@@ -9,7 +9,7 @@ import cn.fpower.financeservice.utils.StringUtils;
 /**
  * Created by Administrator on 2015/12/8.
  */
-public class ProvinceInfo implements BaseEntity {
+public class ProvinceInfo extends BaseEntity {
 
     public ArrayList<Province> province;
 

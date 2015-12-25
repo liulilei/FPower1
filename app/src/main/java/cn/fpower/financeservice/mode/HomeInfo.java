@@ -17,7 +17,7 @@ public class HomeInfo extends BaseMode {
         this.data = data;
     }
 
-    public class Data implements BaseEntity {
+    public class Data extends BaseEntity {
         private List<AdItem> ad_item;
         private List<String> introduce;
         private List<DataInfo> loan_list;
@@ -47,7 +47,7 @@ public class HomeInfo extends BaseMode {
         }
     }
 
-    public class AdItem implements BaseEntity {
+    public class AdItem extends BaseEntity {
         private String ad_img;
         private String ad_link;
         private String ad_title;

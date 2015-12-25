@@ -12,7 +12,7 @@ public class UserInfo extends BaseMode {
         this.data = data;
     }
 
-    public class Data implements BaseEntity {
+    public class Data extends BaseEntity {
 
         /**
          * "id": "18",

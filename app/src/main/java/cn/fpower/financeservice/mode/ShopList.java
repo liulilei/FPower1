@@ -17,7 +17,7 @@ public class ShopList extends BaseMode {
         this.data = data;
     }
 
-    public class Data implements BaseEntity {
+    public class Data extends BaseEntity {
         private List<Shop_list> shop_list;
 
         public List<Shop_list> getShop_list() {
@@ -29,7 +29,7 @@ public class ShopList extends BaseMode {
         }
     }
 
-    public class Shop_list implements BaseEntity {
+    public class Shop_list extends BaseEntity {
         public Long id;// "16",
         /*imgs; [
                 "a.gzweimiao.com/uploads/image/20151212/353876a5f62e8dcef112e17977cdc888.JPEG",
