@@ -38,4 +38,7 @@ public class Constants {
     public static final int PROGRESS_CHECKED = -1;
 
     public static final int PROGRESS_CHECK_OK = -2;
+
+    //默认页数
+    public static final int PAGE_SIZE = 1;
 }

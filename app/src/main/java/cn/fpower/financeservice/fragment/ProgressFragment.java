@@ -165,7 +165,7 @@ public class ProgressFragment extends BaseFragment implements View.OnClickListen
                         } else {
                             progressFragmentAdapter.refresh(dataInfoList);
                         }
-                        progressRlv.showFooterResult(now_page <= (((LoanInfo) data).getData().getLoan_total() / 10));
+                        progressRlv.showFooterResult(now_page <= (((LoanInfo) data).getData().getLoan_total() /  Constants.PAGE_SIZE));
                     }
 
                     @Override
@@ -211,7 +211,7 @@ public class ProgressFragment extends BaseFragment implements View.OnClickListen
                         } else {
                             progressFragmentAdapter.refresh(refreshDataInfoList);
                         }
-                        progressRlv.showFooterResult(now_page <= (((LoanInfo) data).getData().getLoan_total() / 10));
+                        progressRlv.showFooterResult(now_page <= (((LoanInfo) data).getData().getLoan_total() / Constants.PAGE_SIZE));
                     }
 
                     @Override
@@ -235,7 +235,7 @@ public class ProgressFragment extends BaseFragment implements View.OnClickListen
                             return;
                         }
                         progressFragmentAdapter.addData(loadMoreDataInfoList);
-                        progressRlv.showFooterResult(now_page <= (((LoanInfo) data).getData().getLoan_total() / 10));
+                        progressRlv.showFooterResult(now_page <= (((LoanInfo) data).getData().getLoan_total() /  Constants.PAGE_SIZE));
                     }
 
                     @Override

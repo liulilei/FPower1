@@ -7,6 +7,7 @@ import com.lidroid.xutils.http.RequestParams;
 
 import java.io.ByteArrayInputStream;
 
+import cn.fpower.financeservice.constants.Constants;
 import cn.fpower.financeservice.mode.LoanPara;
 import cn.fpower.financeservice.net.NetApi;
 import cn.fpower.financeservice.utils.ToastUtils;
@@ -172,7 +173,7 @@ public class FinanceServiceManager extends BaseManager {
         }
         if (now_page >= 1) {
             params.addQueryStringParameter("now_page", now_page + "");//当前所在页
-            params.addQueryStringParameter("page_size", "10");//默认10条
+            params.addQueryStringParameter("page_size",  Constants.PAGE_SIZE+"");//默认10条
         }
         if (hasDialog) {
             getDataFromNetHasDialogGet(context, NetApi.LOAN_LIST, params, clazz, listener);
@@ -207,7 +208,7 @@ public class FinanceServiceManager extends BaseManager {
         }
         if (now_page >= 1) {
             params.addQueryStringParameter("now_page", now_page + "");//当前所在页
-            params.addQueryStringParameter("page_size", "1");//默认10条
+            params.addQueryStringParameter("page_size",  Constants.PAGE_SIZE+"");//默认10条
         }
         if (hasDialog) {
             getDataFromNetHasDialogGet(context, NetApi.CASE_LIST, params, clazz, listener);
@@ -260,7 +261,7 @@ public class FinanceServiceManager extends BaseManager {
         params.addQueryStringParameter("user_id", user_id + "");
         if (now_page >= 1) {
             params.addQueryStringParameter("now_page", now_page + "");//当前所在页
-            params.addQueryStringParameter("page_size", "10");//默认10条
+            params.addQueryStringParameter("page_size", Constants.PAGE_SIZE+"");//默认10条
         }
         if (hasDialog) {
             getDataFromNetHasDialogGet(context, NetApi.EMPLOYEE_LIST, params, clazz, listener);
@@ -285,7 +286,7 @@ public class FinanceServiceManager extends BaseManager {
         params.addQueryStringParameter("user_id", user_id + "");
         if (now_page >= 1) {
             params.addQueryStringParameter("now_page", now_page + "");//当前所在页
-            params.addQueryStringParameter("page_size", "10");//默认10条
+            params.addQueryStringParameter("page_size", Constants.PAGE_SIZE+"");//默认10条
         }
         if (hasDialog) {
             getDataFromNetHasDialogGet(context, NetApi.SHOP_LIST, params, clazz, listener);
@@ -378,7 +379,7 @@ public class FinanceServiceManager extends BaseManager {
         }
         if (now_page >= 1) {
             params.addQueryStringParameter("now_page", now_page + "");//当前所在页
-            params.addQueryStringParameter("page_size", "10");//默认10条
+            params.addQueryStringParameter("page_size", Constants.PAGE_SIZE+"");//默认10条
         }
         if (hasDialog) {
             getDataFromNetHasDialogGet(context, NetApi.MY_ACHIEVEMENT, params, clazz, listener);
