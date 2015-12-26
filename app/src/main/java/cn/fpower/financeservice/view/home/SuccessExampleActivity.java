@@ -69,7 +69,7 @@ public class SuccessExampleActivity extends BaseActivity implements View.OnClick
                 }
                 successExampleAdapter = new SuccessExampleAdapter(SuccessExampleActivity.this, exampleList);
                 successExampleRlv.setAdapter(successExampleAdapter);
-                successExampleRlv.showFooterResult(now_page <=  (((CaseListInfo) data).getData().getCase_total() / 10));
+                successExampleRlv.showFooterResult(now_page <=  (((CaseListInfo) data).getData().getCase_total() / 1));
             }
 
             @Override
@@ -78,7 +78,6 @@ public class SuccessExampleActivity extends BaseActivity implements View.OnClick
             }
         });
     }
-
 
     @Override
     public void onClick(View v) {
@@ -107,7 +106,7 @@ public class SuccessExampleActivity extends BaseActivity implements View.OnClick
                         } else {
                             successExampleAdapter.refresh(refreshExampleList);
                         }
-                        successExampleRlv.showFooterResult(now_page <=  (((CaseListInfo) data).getData().getCase_total() / 10));
+                        successExampleRlv.showFooterResult(now_page <=  (((CaseListInfo) data).getData().getCase_total() / 1));
                     }
 
                     @Override
@@ -130,7 +129,7 @@ public class SuccessExampleActivity extends BaseActivity implements View.OnClick
                             return;
                         }
                         successExampleAdapter.addData(loadMoreExampleList);
-                       // successExampleRlv.showFooterResult(now_page <= (((CaseListInfo) data).getData().getCase_total() / 10));
+                        successExampleRlv.showFooterResult(now_page <= (((CaseListInfo) data).getData().getCase_total() / 1));
                     }
 
                     @Override

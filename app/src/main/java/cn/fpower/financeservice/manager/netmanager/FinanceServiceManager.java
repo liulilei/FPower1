@@ -172,7 +172,7 @@ public class FinanceServiceManager extends BaseManager {
         }
         if (now_page >= 1) {
             params.addQueryStringParameter("now_page", now_page + "");//当前所在页
-            params.addQueryStringParameter("page_size", "1");//默认10条
+            params.addQueryStringParameter("page_size", "10");//默认10条
         }
         if (hasDialog) {
             getDataFromNetHasDialogGet(context, NetApi.LOAN_LIST, params, clazz, listener);
@@ -207,7 +207,7 @@ public class FinanceServiceManager extends BaseManager {
         }
         if (now_page >= 1) {
             params.addQueryStringParameter("now_page", now_page + "");//当前所在页
-            params.addQueryStringParameter("page_size", "10");//默认10条
+            params.addQueryStringParameter("page_size", "1");//默认10条
         }
         if (hasDialog) {
             getDataFromNetHasDialogGet(context, NetApi.CASE_LIST, params, clazz, listener);
