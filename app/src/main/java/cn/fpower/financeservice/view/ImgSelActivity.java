@@ -44,7 +44,7 @@ public class ImgSelActivity extends BaseActivity implements OnClickListener {
         if (b != null) {
             String photo = b.getString("photo");
             position = b.getInt("position");
-            ImageUtils.displayImageRoundImg(R.mipmap.ad1, "file://" + photo, iv_selimg);
+            ImageUtils.displayImageRoundImg(R.mipmap.ad, "file://" + photo, iv_selimg);
         }
         save.setText("删除");
         save.setOnClickListener(this);

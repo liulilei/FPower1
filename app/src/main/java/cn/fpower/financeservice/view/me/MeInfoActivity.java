@@ -91,7 +91,7 @@ public class MeInfoActivity extends BaseActivity {
     @Override
     protected void initView() {
         super.initView();
-        back.setVisibility(View.GONE);
+        back.setOnClickListener(this);
         title.setText("完善信息");
         info_sex.setValue("男");
         submit.setOnClickListener(this);
@@ -113,22 +113,21 @@ public class MeInfoActivity extends BaseActivity {
                 info_name.setValue(FSApplication.getInstance().getUserInfo().getData().getUsername());
                 info_birthday.setValue(FSApplication.getInstance().getUserInfo().getData().getBirthday());
                 info_sex.setValue(FSApplication.getInstance().getUserInfo().getData().getSex() == 1 ? "男" : "女");
-                String addr= provinceData.getMap().get(FSApplication.getInstance().getUserInfo().getData().getProvince_id() + "")+
-                        provinceData.getMap().get(FSApplication.getInstance().getUserInfo().getData().getCity_id() + "")+
+                String addr = provinceData.getMap().get(FSApplication.getInstance().getUserInfo().getData().getProvince_id() + "") +
+                        provinceData.getMap().get(FSApplication.getInstance().getUserInfo().getData().getCity_id() + "") +
                         provinceData.getMap().get(FSApplication.getInstance().getUserInfo().getData().getDistrict_id() + "");
-                String key=FSApplication.getInstance().getUserInfo().getData().getProvince_id()+","
-                        +FSApplication.getInstance().getUserInfo().getData().getCity_id()+","
-                        +FSApplication.getInstance().getUserInfo().getData().getDistrict_id();
-                info_addr.setValue(key,addr);
+                String key = FSApplication.getInstance().getUserInfo().getData().getProvince_id() + ","
+                        + FSApplication.getInstance().getUserInfo().getData().getCity_id() + ","
+                        + FSApplication.getInstance().getUserInfo().getData().getDistrict_id();
+                info_addr.setValue(key, addr);
                 ImageUtils.displayImageRoundImg(R.mipmap.moren, NetApi.URL + FSApplication.getInstance().getUserInfo().getData().getFace(), img_login);
             }
         }
-
     }
 
     private void initTime() {
         pvTime = new TimePickerView(this, TimePickerView.Type.YEAR_MONTH_DAY);
-        pvTime.setRange(TimeUtils.getYear()-100,TimeUtils.getYear()-10);
+        pvTime.setRange(TimeUtils.getYear() - 100, TimeUtils.getYear() - 10);
         pvTime.setTime(new Date());
         pvTime.setCancelable(true);
         pvTime.setCyclic(false);//不许循环
@@ -162,10 +161,10 @@ public class MeInfoActivity extends BaseActivity {
                         + provinceData.getOptions2Items().get(options1).get(option2).name
                         + provinceData.getOptions3Items().get(options1).get(option2).get(options3).name;
 
-                String key = provinceData.getOptions1Items().get(options1).code+","
-                        + provinceData.getOptions2Items().get(options1).get(option2).code+","
+                String key = provinceData.getOptions1Items().get(options1).code + ","
+                        + provinceData.getOptions2Items().get(options1).get(option2).code + ","
                         + provinceData.getOptions3Items().get(options1).get(option2).get(options3).code;
-                info_addr.setValue(key,tx);
+                info_addr.setValue(key, tx);
             }
         });
     }
@@ -197,8 +196,8 @@ public class MeInfoActivity extends BaseActivity {
                     return;
                 }
                 String face = BitmapUtils.Bitmap2StrByBase64(picturePath);
-                String[] keys=info_addr.getKey().split(",");
-                if(keys==null||keys.length<3){
+                String[] keys = info_addr.getKey().split(",");
+                if (keys == null || keys.length < 3) {
                     ToastUtils.show(this, R.string.input_addr);
                     return;
                 }
@@ -246,6 +245,9 @@ public class MeInfoActivity extends BaseActivity {
                 break;
             case R.id.info_addr:
                 optionsPickerView.show();
+                break;
+            case R.id.title_bar_back:
+                this.finish();
                 break;
         }
     }
@@ -295,13 +297,13 @@ public class MeInfoActivity extends BaseActivity {
                 case PickPhotoUtil.PICKPHOTO_LOCAL:
                     if (resultCode == RESULT_OK) {
                         picturePath = PickPhotoUtil.getInstance().getPathNameFromUri(this, data.getData());
-                        ImageUtils.displayImageRoundImg(R.mipmap.ad1, "file://" + picturePath, img_login);
+                        ImageUtils.displayImageRoundImg(R.mipmap.moren, "file://" + picturePath, img_login);
                     }
                     break;
                 case PickPhotoUtil.PICKPHOTO_TAKE:
                     if (resultCode == RESULT_OK) {
                         PickPhotoUtil.galleryAddPic(this, picturePath);
-                        ImageUtils.displayImageRoundImg(R.mipmap.ad1, "file://" + picturePath, img_login);
+                        ImageUtils.displayImageRoundImg(R.mipmap.moren, "file://" + picturePath, img_login);
                     }
                     break;
             }

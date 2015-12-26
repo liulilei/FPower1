@@ -63,6 +63,8 @@
         <activity android:name=".view.me.NormalCheckListActivity"></activity>
         <activity android:name=".view.me.PromoterCheckListActivity"></activity>
         <activity android:name=".view.ListActivity"></activity>
+        <activity android:name=".view.me.ShopDetailActivity"></activity>
+
 
         <activity android:name=".view.home.SuccessExampleActivity"></activity>
         <activity android:name=".view.progress.ProgressDetailActivity"/>

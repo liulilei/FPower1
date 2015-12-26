@@ -1,8 +1,10 @@
 package cn.fpower.financeservice.view.me;
 
 
+import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +15,7 @@ import java.util.List;
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.adapter.AllProgressFragmentAdapter;
 import cn.fpower.financeservice.app.FSApplication;
+import cn.fpower.financeservice.constants.Constants;
 import cn.fpower.financeservice.manager.netmanager.FinanceManagerControl;
 import cn.fpower.financeservice.manager.netmanager.ManagerDataListener;
 import cn.fpower.financeservice.mode.CaseListInfo;
@@ -20,12 +23,13 @@ import cn.fpower.financeservice.mode.DataInfo;
 import cn.fpower.financeservice.mode.LoanInfo;
 import cn.fpower.financeservice.utils.ToastUtils;
 import cn.fpower.financeservice.view.BaseActivity;
+import cn.fpower.financeservice.view.progress.ProgressDetailActivity;
 import cn.fpower.financeservice.view.widget.RefreshListView;
 
 /**
  * 我的审核列表
  **/
-public class NormalCheckListActivity extends BaseActivity implements OnClickListener, RefreshListView.IOnRefreshListener, RefreshListView.IOnLoadMoreListener {
+public class NormalCheckListActivity extends BaseActivity implements OnClickListener, RefreshListView.IOnRefreshListener, RefreshListView.IOnLoadMoreListener, AdapterView.OnItemClickListener {
 
     @ViewInject(R.id.title_bar_back)
     private ImageView back;
@@ -54,14 +58,14 @@ public class NormalCheckListActivity extends BaseActivity implements OnClickList
         title.setText("我的审核");
         progressRlv.setOnRefreshListener(this);
         progressRlv.setOnLoadMoreListener(this);
-
+        progressRlv.setOnItemClickListener(this);
     }
 
     @Override
     protected void initData() {
         super.initData();
         FinanceManagerControl.getFinanceServiceManager().loan_list(act,
-                FSApplication.getInstance().getUserInfo().getData().getId() + "", "", 1 , true, LoanInfo.class, new ManagerDataListener() {
+                FSApplication.getInstance().getUserInfo().getData().getId() + "",  Constants.ProgressStatus.ALL.getProgress() , 1 , true, LoanInfo.class, new ManagerDataListener() {
 
                     @Override
                     public void onSuccess(Object data) {
@@ -74,7 +78,7 @@ public class NormalCheckListActivity extends BaseActivity implements OnClickList
                         }
                         adapter=new AllProgressFragmentAdapter(act, exampleList);
                         progressRlv.setAdapter(adapter);
-                        progressRlv.showFooterResult(now_page <= (info.getData().getLoan_total() / 1));
+                        progressRlv.showFooterResult(now_page <= (info.getData().getLoan_total() / Constants.PAGE_SIZE));
                     }
 
                     @Override
@@ -96,7 +100,7 @@ public class NormalCheckListActivity extends BaseActivity implements OnClickList
     @Override
     public void OnRefresh() {
         FinanceManagerControl.getFinanceServiceManager().loan_list(act,
-                FSApplication.getInstance().getUserInfo().getData().getId() + "", "", 1 , false, LoanInfo.class, new ManagerDataListener() {
+                FSApplication.getInstance().getUserInfo().getData().getId() + "", Constants.ProgressStatus.ALL.getProgress(), 1 , false, LoanInfo.class, new ManagerDataListener() {
 
                     @Override
                     public void onSuccess(Object data) {
@@ -115,7 +119,7 @@ public class NormalCheckListActivity extends BaseActivity implements OnClickList
                         } else {
                             adapter.refresh(exampleList);
                         }
-                        progressRlv.showFooterResult(now_page <= (info.getData().getLoan_total() / 1));
+                        progressRlv.showFooterResult(now_page <= (info.getData().getLoan_total() / Constants.PAGE_SIZE));
                     }
 
                     @Override
@@ -128,7 +132,7 @@ public class NormalCheckListActivity extends BaseActivity implements OnClickList
     @Override
     public void onLoadMore() {
         FinanceManagerControl.getFinanceServiceManager().loan_list(act,
-                FSApplication.getInstance().getUserInfo().getData().getId() + "", "", ++now_page, false, LoanInfo.class,
+                FSApplication.getInstance().getUserInfo().getData().getId() + "", Constants.ProgressStatus.ALL.getProgress(), ++now_page, false, LoanInfo.class,
                 new ManagerDataListener() {
                     @Override
                     public void onSuccess(Object data) {
@@ -141,7 +145,7 @@ public class NormalCheckListActivity extends BaseActivity implements OnClickList
                             return;
                         }
                         adapter.addData(loadMoreExampleList);
-                        progressRlv.showFooterResult(now_page <= (info.getData().getLoan_total() / 1));
+                        progressRlv.showFooterResult(now_page <= (info.getData().getLoan_total() / Constants.PAGE_SIZE));
                     }
 
                     @Override
@@ -149,5 +153,15 @@ public class NormalCheckListActivity extends BaseActivity implements OnClickList
                         progressRlv.onLoadComplete();
                     }
                 });
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if(position==0 || position > exampleList.size()){
+            return;
+        }
+        Intent intent = new Intent(act, ProgressDetailActivity.class);
+        intent.putExtra("loan_id", exampleList.get(position-1).getId());
+        startActivity(intent);
     }
 }

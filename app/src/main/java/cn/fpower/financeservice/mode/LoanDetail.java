@@ -37,7 +37,7 @@ public class LoanDetail extends BaseMode {
         public int is_housing;//1",
         public String is_car;//0",
         public int is_loan;//0",
-        public String process;//0",
+        public int process;//0",
         public String is_insurance;//0",
         public String identity;//0",
         public Long addtime;//1450594309",

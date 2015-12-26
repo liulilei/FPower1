@@ -164,16 +164,16 @@ public class FinanceServiceManager extends BaseManager {
      * @param clazz
      * @param listener
      */
-    public void loan_list(Context context, String user_id, String process, int now_page, boolean hasDialog, Class clazz,
+    public void loan_list(Context context, String user_id, int process, int now_page, boolean hasDialog, Class clazz,
                           ManagerDataListener listener) {
         params = new RequestParams();
         params.addQueryStringParameter("user_id", user_id);
-        if (!TextUtils.isEmpty(process)) {
-            params.addQueryStringParameter("process", process);
+        if (process!=Constants.ProgressStatus.ALL.getProgress()) {
+            params.addQueryStringParameter("process", process+"");
         }
         if (now_page >= 1) {
             params.addQueryStringParameter("now_page", now_page + "");//当前所在页
-            params.addQueryStringParameter("page_size",  Constants.PAGE_SIZE+"");//默认10条
+            params.addQueryStringParameter("page_size", Constants.PAGE_SIZE + "");//默认10条
         }
         if (hasDialog) {
             getDataFromNetHasDialogGet(context, NetApi.LOAN_LIST, params, clazz, listener);
@@ -294,6 +294,25 @@ public class FinanceServiceManager extends BaseManager {
             getDataFromNetNoDialogGet(context, NetApi.SHOP_LIST, params, clazz, listener);
         }
     }
+
+    /***
+     * 店铺详情
+     * @param context
+     * @param shop_id
+     * @param hasDialog
+     * @param clazz
+     * @param listener
+     */
+    public void shop_detail(Context context, int shop_id, boolean hasDialog, Class clazz, ManagerDataListener listener) {
+        params = new RequestParams();
+        params.addQueryStringParameter("shop_id", shop_id + "");
+        if (hasDialog) {
+            getDataFromNetHasDialogGet(context, NetApi.SHOP_DETAIL, params, clazz, listener);
+        } else {
+            getDataFromNetNoDialogGet(context, NetApi.SHOP_DETAIL, params, clazz, listener);
+        }
+    }
+
 
     /**
      * 删除员工

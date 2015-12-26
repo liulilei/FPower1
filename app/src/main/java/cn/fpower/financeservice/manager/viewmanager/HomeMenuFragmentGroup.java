@@ -133,7 +133,7 @@ public class HomeMenuFragmentGroup {
 
         ImageView imageView = new ImageView(context);
         imageView.setScaleType(ScaleType.FIT_XY);
-        ImageUtils.displayNormalImg(R.mipmap.ic_launcher, url, imageView);
+        ImageUtils.displayNormalImg(R.mipmap.ad, url, imageView);
         imageView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {

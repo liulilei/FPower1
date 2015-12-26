@@ -110,12 +110,12 @@ public class PromoterResultActivity extends BaseActivity {
                 holder = (ViewHolder) convertView.getTag();
             }
             if (position == list.size()) {
-                ImageUtils.displayImageRoundImg(R.mipmap.ad1, "drawable://" + R.mipmap.icon_addpic, holder.image);
+                ImageUtils.displayImageRoundImg(R.mipmap.ad, "drawable://" + R.mipmap.icon_addpic, holder.image);
                 if (position == 5) {
                     holder.image.setVisibility(View.GONE);
                 }
             } else {
-                ImageUtils.displayImageRoundImg(R.mipmap.ad1, "file://" + list.get(position), holder.image);
+                ImageUtils.displayImageRoundImg(R.mipmap.ad, "file://" + list.get(position), holder.image);
             }
             return convertView;
         }

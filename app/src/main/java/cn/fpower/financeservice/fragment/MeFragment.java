@@ -153,7 +153,7 @@ public class MeFragment extends BaseFragment{
                 startActivity(new Intent(getActivity(), MeInfoActivity.class));
                 break;
             case R.id.fragment_me_about:
-                 startActivity(new Intent(getActivity(), PromoterResultActivity.class));
+
                 break;
             case R.id.loginin:
                 startActivity(new Intent(getActivity(), LoginCheckActivity.class));

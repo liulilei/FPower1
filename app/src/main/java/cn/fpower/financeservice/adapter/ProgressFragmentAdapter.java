@@ -12,6 +12,7 @@ import java.util.List;
 
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.constants.Constants;
+import cn.fpower.financeservice.manager.MappingManager;
 import cn.fpower.financeservice.mode.DataInfo;
 import cn.fpower.financeservice.utils.ImageUtils;
 import cn.fpower.financeservice.utils.TimeUtils;
@@ -44,21 +45,20 @@ public class ProgressFragmentAdapter extends AbstractAdapter<DataInfo> {
         }
         holder.progressRightIv.setImageResource(R.mipmap.phone);
         holder.progressRightIv.setOnClickListener(new CallPhoneClickListener(mList.get(position).getMobile()));
-        ImageUtils.displayImageRoundImg(R.mipmap.ad1, "http://stimgcn1.s-msn.com/msnportal/fashion/2012/12/24/51478f07-382d-4da9-99b5-815dd2848aa8.jpg", holder.progressAvatar);
+        ImageUtils.displayImageRoundImg(R.mipmap.moren, "", holder.progressAvatar);
         holder.progressName.setText(mList.get(position).getRealname());
-        if (mList.get(position).getProcess().equals(Constants.PROGRESS_CHECKING)) {
-            holder.progressMoney.setText("待审核");
+        holder.progressMoney.setText(Constants.ProgressStatus.get(Integer.parseInt(mList.get(position).getProcess())).getText());
+
+        /*if (mList.get(position).getProcess()==Constants.ProgressStatus.) {
             holder.progressMoney.setTextColor(mContext.getResources().getColor(R.color.progress_checking));
         } else if (mList.get(position).getProcess().equals(Constants.PROGRESS_CHECKED)) {
-            holder.progressMoney.setText("待放款");
             holder.progressMoney.setTextColor(mContext.getResources().getColor(R.color.progress_checked));
         } else if (mList.get(position).getProcess().equals(Constants.PROGRESS_CHECK_OK)) {
-            holder.progressMoney.setText("￥" + mList.get(position).getMoney());
+           // holder.progressMoney.setText("￥" + mList.get(position).getMoney());
             holder.progressMoney.setTextColor(mContext.getResources().getColor(R.color.progress_check_ok));
         } else {
-            holder.progressMoney.setText("审核失败");
             holder.progressMoney.setTextColor(mContext.getResources().getColor(R.color.progress_check_ok));
-        }
+        }*/
         holder.progressCreateTime.setText("申请时间:" + TimeUtils.fullTimeAndDay(mList.get(position).getApply_success_time()));
         return convertView;
     }

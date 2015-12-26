@@ -66,7 +66,8 @@
             <RadioButton
                 android:id="@+id/fragment_progress_checked"
                 style="@style/fragment_progress_tab"
-                android:text="待放款"/>
+                android:text="审核成功"
+                android:checked="false" />
 
             <View
                 android:id="@+id/line3"
@@ -88,7 +89,7 @@
             <RadioButton
                 android:id="@+id/fragment_progress_check_ok"
                 style="@style/fragment_progress_tab"
-                android:text="已放款"/>
+                android:text="申请成功"/>
 
             <View
                 android:id="@+id/line4"

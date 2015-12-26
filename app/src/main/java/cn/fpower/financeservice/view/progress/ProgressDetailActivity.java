@@ -115,32 +115,33 @@ public class ProgressDetailActivity extends BaseActivity implements View.OnClick
     private void showView(LoanDetail.Data loanDetail) {
         progressTime.setText(TimeUtils.fullTimeAndDay(loanDetail.addtime));
         progressMoney.setText("￥" + loanDetail.money);
-        ImageUtils.displayImageRoundImg(R.mipmap.ad1, "http://stimgcn1.s-msn.com/msnportal/fashion/2012/12/24/51478f07-382d-4da9-99b5-815dd2848aa8.jpg", progressHeader);
+        ImageUtils.displayImageRoundImg(R.mipmap.moren, "", progressHeader);
         progressName.setText(loanDetail.realname);
-        if (loanDetail.process.equals(Constants.PROGRESS_CHECKING)) {
-            progressTime1.setText(TimeUtils.fullTimeAndDay(loanDetail.addtime));
+        progressTime1.setText(TimeUtils.fullTimeAndDay(loanDetail.addtime));// 录入成功
+        if (loanDetail.process==Constants.ProgressStatus.AUDIT.getProgress()) {
             progressTime2.setText(TimeUtils.fullTimeAndDay(System.currentTimeMillis()));
             progressStateTv.setTextColor(getResources().getColor(R.color.progress_checking_tv));
-            progressStateTv.setText("待审核");
-        } else if (loanDetail.process.equals(Constants.PROGRESS_CHECKED) || loanDetail.process.equals(Constants.PROGRESS_CHECK_OK)) {
-            progressTime1.setText(TimeUtils.fullTimeAndDay(loanDetail.addtime));
-            progressTime2.setText(TimeUtils.fullTimeAndDay(loanDetail.audit_success_time));
-            progressTime3.setText(TimeUtils.fullTimeAndDay(loanDetail.apply_success_time));
+           // progressStateTv.setText("待审核");
+        } else if (loanDetail.process==Constants.ProgressStatus.AUDIT_SUCCESS.getProgress()||
+                loanDetail.process==Constants.ProgressStatus.AUDIT_SUCCESS.getProgress()) {
+            long audit=loanDetail.audit_success_time>0?loanDetail.audit_success_time:loanDetail.audit_fail_time;
+            progressTime2.setText(TimeUtils.fullTimeAndDay(audit));
             line1.setBackgroundColor(getResources().getColor(R.color.progress_line_select));
             line2.setBackgroundColor(getResources().getColor(R.color.progress_line_select));
-            progressStateIv.setImageResource(R.mipmap.progress_success);
-            progressStateTv.setText("申请成功");
+           // progressStateIv.setImageResource(R.mipmap.progress_success);
+          //  progressStateTv.setText("申请成功");
             progressStateTv.setTextColor(getResources().getColor(R.color.progress_checked));
         } else {
-            progressTime1.setText(TimeUtils.fullTimeAndDay(loanDetail.addtime));
-            progressTime2.setText(TimeUtils.fullTimeAndDay(loanDetail.audit_fail_time));
-            progressTime3.setText(TimeUtils.fullTimeAndDay(loanDetail.apply_fail_time));
-            progressStateTv.setText("申请失败");
+            long audit=loanDetail.audit_success_time>0?loanDetail.audit_success_time:loanDetail.audit_fail_time;
+            progressTime2.setText(TimeUtils.fullTimeAndDay(audit));
+            long apply=loanDetail.apply_success_time>0?loanDetail.apply_success_time:loanDetail.apply_fail_time;
+            progressTime2.setText(TimeUtils.fullTimeAndDay(audit));
+            progressTime3.setText(TimeUtils.fullTimeAndDay(apply));
             progressStateTv.setTextColor(getResources().getColor(R.color.progress_check_ok));
         }
         progressAddress.setText(loanDetail.address);
-        progressHasHouse.setText(loanDetail.is_housing == 0 ? "没有" : "有");
-        progressHasMoney.setText(loanDetail.is_loan == 0 ? "没有" : "有");
+        progressHasHouse.setText(loanDetail.is_housing == 0 ? "无" : "有");
+        progressHasMoney.setText(loanDetail.is_loan == 0 ? "无" : "有");
         progressHasChanel.setText(loanDetail.channel);
     }
 

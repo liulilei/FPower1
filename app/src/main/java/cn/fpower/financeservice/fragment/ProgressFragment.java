@@ -69,7 +69,7 @@ public class ProgressFragment extends BaseFragment implements View.OnClickListen
 
     private View currentView;
 
-    private int currentProgress = -1;
+    private int currentProgress = -2;
 
     private int now_page = 1;
 
@@ -92,7 +92,7 @@ public class ProgressFragment extends BaseFragment implements View.OnClickListen
     @Override
     protected void initView() {
         userId = FSApplication.getInstance().getUserInfo().getData().getId() + "";
-        currentProgress = Constants.PROGRESS_ALL;
+        currentProgress = Constants.ProgressStatus.ALL.getProgress();
         back.setVisibility(View.GONE);
         title.setText("进度");
         progressAll.setOnClickListener(this);
@@ -105,7 +105,7 @@ public class ProgressFragment extends BaseFragment implements View.OnClickListen
         currentRb = progressAll;
         currentView = line1;
         FinanceManagerControl.getFinanceServiceManager().loan_list(getActivity(), userId,
-                currentProgress + "", now_page, true, LoanInfo.class, new ManagerDataListener() {
+                currentProgress, now_page, true, LoanInfo.class, new ManagerDataListener() {
                     @Override
                     public void onSuccess(Object data) {
                         dataInfoList = ((LoanInfo) data).getData().getLoan_list();
@@ -132,28 +132,27 @@ public class ProgressFragment extends BaseFragment implements View.OnClickListen
         switch (v.getId()) {
             case R.id.fragment_progress_all:
                 showView(line1, progressAll);
-                currentProgress = Constants.PROGRESS_ALL;
+                currentProgress = Constants.ProgressStatus.ALL.getProgress();
                 break;
             case R.id.fragment_progress_checking:
                 showView(line2, progressChecking);
-                currentProgress = Constants.PROGRESS_CHECKING;
+                currentProgress = Constants.ProgressStatus.AUDIT.getProgress();
                 break;
             case R.id.fragment_progress_checked:
                 showView(line3, progressChecked);
-                currentProgress = Constants.PROGRESS_CHECKED;
+                currentProgress = Constants.ProgressStatus.AUDIT_SUCCESS.getProgress();
                 break;
             case R.id.fragment_progress_check_ok:
                 showView(line4, progressCheckOk);
-                currentProgress = Constants.PROGRESS_CHECK_OK;
+                currentProgress = Constants.ProgressStatus.APPLY_SUCCESS.getProgress();
                 break;
         }
         FinanceManagerControl.getFinanceServiceManager().loan_list(getActivity(), userId,
-                currentProgress + "", 1, true, LoanInfo.class, new ManagerDataListener() {
+                currentProgress, 1, true, LoanInfo.class, new ManagerDataListener() {
                     @Override
                     public void onSuccess(Object data) {
                         now_page = 1;
                         dataInfoList = ((LoanInfo) data).getData().getLoan_list();
-
                         if (dataInfoList == null || dataInfoList.size() == 0) {
                             ToastUtils.show(getActivity(), "没有数据");
                             progressRlv.showFooterResult(false);
@@ -170,6 +169,13 @@ public class ProgressFragment extends BaseFragment implements View.OnClickListen
 
                     @Override
                     public void onError(String error) {
+                        dataInfoList.clear();
+                        if (progressFragmentAdapter == null) {
+                            progressFragmentAdapter = new ProgressFragmentAdapter(getActivity(), dataInfoList);
+                            progressRlv.setAdapter(progressFragmentAdapter);
+                        } else {
+                            progressFragmentAdapter.refresh(dataInfoList);
+                        }
                     }
                 });
     }
@@ -185,7 +191,7 @@ public class ProgressFragment extends BaseFragment implements View.OnClickListen
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if(position==0){
+        if(position==0 || position > dataInfoList.size()){
             return;
         }
         Intent intent = new Intent(getActivity(), ProgressDetailActivity.class);
@@ -195,7 +201,7 @@ public class ProgressFragment extends BaseFragment implements View.OnClickListen
 
     @Override
     public void OnRefresh() {
-        FinanceManagerControl.getFinanceServiceManager().loan_list(getActivity(), userId, currentProgress + "",
+        FinanceManagerControl.getFinanceServiceManager().loan_list(getActivity(), userId, currentProgress ,
                 1, false, LoanInfo.class, new ManagerDataListener() {
                     @Override
                     public void onSuccess(Object data) {
@@ -223,7 +229,7 @@ public class ProgressFragment extends BaseFragment implements View.OnClickListen
 
     @Override
     public void onLoadMore() {
-        FinanceManagerControl.getFinanceServiceManager().loan_list(getActivity(), userId, currentProgress + "",
+        FinanceManagerControl.getFinanceServiceManager().loan_list(getActivity(), userId, currentProgress,
                 ++now_page, false, LoanInfo.class, new ManagerDataListener() {
 
                     @Override

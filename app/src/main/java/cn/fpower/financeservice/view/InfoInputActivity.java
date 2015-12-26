@@ -2,8 +2,10 @@ package cn.fpower.financeservice.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.InputFilter;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.lidroid.xutils.view.annotation.ViewInject;
@@ -20,7 +22,6 @@ public class InfoInputActivity extends BaseActivity implements OnClickListener {
 
     @ViewInject(R.id.title_bar_title)
     private TextView title;
-
 
     @ViewInject(R.id.title_bar_save)
     private TextView save;
@@ -45,6 +46,10 @@ public class InfoInputActivity extends BaseActivity implements OnClickListener {
             int type=b.getInt("inputType",0);
             if(type!=0) {
                 inputinfo.setInputType(type);
+                if(type==EditorInfo.TYPE_CLASS_NUMBER){
+                    inputinfo.setFilters(new InputFilter[] { new InputFilter.LengthFilter(
+                            11) });
+                }
             }
             inputinfo.setText(b.getString("value"));
         }

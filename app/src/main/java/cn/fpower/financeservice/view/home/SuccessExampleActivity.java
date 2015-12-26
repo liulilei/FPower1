@@ -5,10 +5,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lidroid.xutils.view.annotation.ViewInject;
-
-import java.util.ArrayList;
 import java.util.List;
-
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.adapter.SuccessExampleAdapter;
 import cn.fpower.financeservice.manager.netmanager.FinanceManagerControl;

@@ -18,38 +18,43 @@ public class ShopList extends BaseMode {
     }
 
     public class Data extends BaseEntity {
-        private List<Shop_list> shop_list;
 
-        public List<Shop_list> getShop_list() {
+        private int shop_total;
+        private int page_size;
+        private int now_page;
+
+        public int getShop_total() {
+            return shop_total;
+        }
+
+        public void setShop_total(int shop_total) {
+            this.shop_total = shop_total;
+        }
+
+        public int getPage_size() {
+            return page_size;
+        }
+
+        public void setPage_size(int page_size) {
+            this.page_size = page_size;
+        }
+
+        public int getNow_page() {
+            return now_page;
+        }
+
+        public void setNow_page(int now_page) {
+            this.now_page = now_page;
+        }
+
+        private List<ShopInfo> shop_list;
+
+        public List<ShopInfo> getShop_list() {
             return shop_list;
         }
 
-        public void setShop_list(List<Shop_list> shop_list) {
+        public void setShop_list(List<ShopInfo> shop_list) {
             this.shop_list = shop_list;
         }
-    }
-
-    public class Shop_list extends BaseEntity {
-        public Long id;// "16",
-        /*imgs; [
-                "a.gzweimiao.com/uploads/image/20151212/353876a5f62e8dcef112e17977cdc888.JPEG",
-                "a.gzweimiao.com/uploads/image/20151212/ccb8b13ad4ee8436d6405c6c7532fb2a.JPEG"
-                ],*/
-
-        public List<String> imgs;
-        public String name;// "我爱我家（华景店）",
-        public Long user_id;// "25",
-        public String rec_user_id;// "17",
-        public String province_id;// "360000",
-        public String city_id;// "360200",
-        public String district_id;// "360202",
-        public String longitude;// "113.33",
-        public String latitude;// "23.15",
-        public String address;// "0",
-        public Long addtime;// "1449914639",
-        public Long uptime;// "1449914639",
-        public Long status;// "1",
-        public String username;// "江稳",
-        public String mobile;// "18110705012"
     }
 }

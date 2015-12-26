@@ -75,7 +75,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     private List<DataInfo> loanList;
 
-    private String no_banner_url = "drawable://" + R.mipmap.ad1;
+    private String no_banner_url = "drawable://" + R.mipmap.ad;
 
     private HomeMenuFragmentGroup homeMenuFragmentGroup;
 

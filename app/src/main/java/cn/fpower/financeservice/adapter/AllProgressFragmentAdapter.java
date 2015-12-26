@@ -48,6 +48,8 @@ public class AllProgressFragmentAdapter extends AbstractAdapter<DataInfo> {
             holder = (ViewHolder) convertView.getTag();
         }
         DataInfo info=mList.get(position);
+        holder.progressRightIv.setImageResource(R.mipmap.phone);
+        holder.progressRightIv.setOnClickListener(new CallPhoneClickListener(mList.get(position).getMobile()));
         holder.progressName.setText(info.getRealname());
         holder.progressMoney.setText(MappingManager.getProcess(Integer.parseInt(info.getProcess())));
         holder.progressCreateTime.setText("申请时间:" + TimeUtils.fullTimeAndDay(info.getAddtime()));

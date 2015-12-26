@@ -12,7 +12,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="12dp"
-        android:src="@mipmap/ad1" />
+        android:src="@mipmap/moren" />
 
     <TextView
         android:id="@+id/item_success_example_name"
