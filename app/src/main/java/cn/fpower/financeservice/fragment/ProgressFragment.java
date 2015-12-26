@@ -117,7 +117,7 @@ public class ProgressFragment extends BaseFragment implements View.OnClickListen
                         }
                         progressFragmentAdapter = new ProgressFragmentAdapter(getActivity(), dataInfoList);
                         progressRlv.setAdapter(progressFragmentAdapter);
-                        progressRlv.showFooterResult(now_page <= (((LoanInfo) data).getData().getLoan_total() / 10));
+                        progressRlv.showFooterResult(now_page <= (((LoanInfo) data).getData().getLoan_total() / Constants.PAGE_SIZE));
                     }
 
                     @Override
