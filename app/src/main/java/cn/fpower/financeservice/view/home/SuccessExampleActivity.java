@@ -79,13 +79,6 @@ public class SuccessExampleActivity extends BaseActivity implements View.OnClick
         });
     }
 
-    public List<DataInfo> addData() {
-        List<DataInfo> data = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            data.add(new DataInfo());
-        }
-        return data;
-    }
 
     @Override
     public void onClick(View v) {
@@ -137,7 +130,7 @@ public class SuccessExampleActivity extends BaseActivity implements View.OnClick
                             return;
                         }
                         successExampleAdapter.addData(loadMoreExampleList);
-                        successExampleRlv.showFooterResult(now_page <= (((CaseListInfo) data).getData().getCase_total() / 10));
+                       // successExampleRlv.showFooterResult(now_page <= (((CaseListInfo) data).getData().getCase_total() / 10));
                     }
 
                     @Override

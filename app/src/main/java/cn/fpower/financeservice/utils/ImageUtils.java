@@ -1,10 +1,13 @@
 package cn.fpower.financeservice.utils;
 
 import android.graphics.Bitmap;
+import android.view.View;
 import android.widget.ImageView;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.assist.FailReason;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import cn.fpower.financeservice.app.FSApplication;
 
@@ -23,6 +26,10 @@ public class ImageUtils {
      */
     public static void displayImageRoundImg(int rId, String url, ImageView imageView) {
         displayImage(url, imageView, getRoundImgOptions(rId));
+    }
+
+    public static void displayImageRoundImg(int rId, String url, ImageView imageView,ImageLoadingListener listrner) {
+        FSApplication.getInstance().getImgLoader().displayImage(url, imageView, getRoundImgOptions(rId), listrner);
     }
 
     /**
@@ -50,6 +57,31 @@ public class ImageUtils {
     public static void displayImage(String url, ImageView imageView, DisplayImageOptions options) {
 
         FSApplication.getInstance().getImgLoader().displayImage(url, imageView, options);
+    }
+
+    public static void displayImage1(String url, ImageView imageView, DisplayImageOptions options) {
+
+        FSApplication.getInstance().getImgLoader().displayImage(url, imageView, options, new ImageLoadingListener() {
+            @Override
+            public void onLoadingStarted(String s, View view) {
+
+            }
+
+            @Override
+            public void onLoadingFailed(String s, View view, FailReason failReason) {
+
+            }
+
+            @Override
+            public void onLoadingComplete(String s, View view, Bitmap bitmap) {
+
+            }
+
+            @Override
+            public void onLoadingCancelled(String s, View view) {
+
+            }
+        });
     }
 
     public static DisplayImageOptions getRoundImgOptions(int rId) {

@@ -185,8 +185,11 @@ public class ProgressFragment extends BaseFragment implements View.OnClickListen
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if(position==0){
+            return;
+        }
         Intent intent = new Intent(getActivity(), ProgressDetailActivity.class);
-        intent.putExtra("loan_id", dataInfoList.get(position).getId());
+        intent.putExtra("loan_id", dataInfoList.get(position-1).getId());
         startActivity(intent);
     }
 

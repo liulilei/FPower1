@@ -3,7 +3,7 @@ package cn.fpower.financeservice.mode;
 import java.util.List;
 
 /**
- * 审核列表
+ * 15、贷款列表（进度）
  **/
 public class LoanInfo extends BaseMode {
 
