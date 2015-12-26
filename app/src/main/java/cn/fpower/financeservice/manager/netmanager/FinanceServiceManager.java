@@ -321,20 +321,17 @@ public class FinanceServiceManager extends BaseManager {
      * @param user_id
      * @param employee_id
      * @param hasDialog
-     * @param clazz
      * @param listener
      */
-    //TODO GET还是POST
     public void delete_employee(Context context, int user_id, int employee_id,
-                                boolean hasDialog, Class clazz,
-                                ManagerDataListener listener) {
+                                boolean hasDialog, ManagerStringListener listener) {
         params = new RequestParams();
         params.addBodyParameter("user_id", user_id + "");
         params.addBodyParameter("employee_id", employee_id + "");
         if (hasDialog) {
-            getDataFromNetHasDialog(context, NetApi.DELETE_EMPLOYEE, params, clazz, listener);
+            getJsonStringFromNetHasDialog(context, NetApi.DELETE_EMPLOYEE, params, listener);
         } else {
-            getDataFromNetNoDialog(context, NetApi.DELETE_EMPLOYEE, params, clazz, listener);
+            getJsonStringFromNetNoDialog(context, NetApi.DELETE_EMPLOYEE, params, listener);
         }
     }
 
