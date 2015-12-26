@@ -8,6 +8,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import java.util.List;
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.adapter.SuccessExampleAdapter;
+import cn.fpower.financeservice.constants.Constants;
 import cn.fpower.financeservice.manager.netmanager.FinanceManagerControl;
 import cn.fpower.financeservice.manager.netmanager.ManagerDataListener;
 import cn.fpower.financeservice.mode.CaseListInfo;
@@ -66,7 +67,7 @@ public class SuccessExampleActivity extends BaseActivity implements View.OnClick
                 }
                 successExampleAdapter = new SuccessExampleAdapter(SuccessExampleActivity.this, exampleList);
                 successExampleRlv.setAdapter(successExampleAdapter);
-                successExampleRlv.showFooterResult(now_page <=  (((CaseListInfo) data).getData().getCase_total() / 1));
+                successExampleRlv.showFooterResult(now_page <=  (((CaseListInfo) data).getData().getCase_total() / Constants.PAGE_SIZE));
             }
 
             @Override
@@ -103,7 +104,7 @@ public class SuccessExampleActivity extends BaseActivity implements View.OnClick
                         } else {
                             successExampleAdapter.refresh(refreshExampleList);
                         }
-                        successExampleRlv.showFooterResult(now_page <=  (((CaseListInfo) data).getData().getCase_total() / 1));
+                        successExampleRlv.showFooterResult(now_page <=  (((CaseListInfo) data).getData().getCase_total() / Constants.PAGE_SIZE));
                     }
 
                     @Override
@@ -126,7 +127,7 @@ public class SuccessExampleActivity extends BaseActivity implements View.OnClick
                             return;
                         }
                         successExampleAdapter.addData(loadMoreExampleList);
-                        successExampleRlv.showFooterResult(now_page <= (((CaseListInfo) data).getData().getCase_total() / 1));
+                        successExampleRlv.showFooterResult(now_page <= (((CaseListInfo) data).getData().getCase_total() / Constants.PAGE_SIZE));
                     }
 
                     @Override

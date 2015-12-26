@@ -39,6 +39,7 @@ import cn.fpower.financeservice.mode.ProvinceData;
 import cn.fpower.financeservice.mode.ShopDetail;
 import cn.fpower.financeservice.mode.ShopInfo;
 import cn.fpower.financeservice.mode.UserInfo;
+import cn.fpower.financeservice.net.NetApi;
 import cn.fpower.financeservice.utils.ImageUtils;
 import cn.fpower.financeservice.utils.PickPhotoUtil;
 import cn.fpower.financeservice.utils.ToastUtils;
@@ -120,7 +121,7 @@ public class ShopDetailActivity extends BaseActivity {
             } else {
                 holder = (ViewHolder) convertView.getTag();
             }
-            ImageUtils.displayImageRoundImg(R.mipmap.moren,list.get(position), holder.image);
+            ImageUtils.displayImageRoundImg(R.mipmap.moren, NetApi.URL_HTTP + list.get(position), holder.image);
             return convertView;
         }
 

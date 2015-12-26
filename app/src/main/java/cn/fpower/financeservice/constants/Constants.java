@@ -35,43 +35,19 @@ public class Constants {
      * 0 待审核 1审核成功 -1审核失败 -2申请失败 2申请成功
      **/
 
-    public enum ProgressStatus {
-        ALL(-2, "全部"), AUDIT(0, "待审核"), AUDIT_SUCCESS(1, "审核成功"), AUDIT_FAIL(-1, "审核失败"), APPLY_FAIL(-2, "申请失败"), APPLY_SUCCESS(2, "申请成功");
-        private int progress;
-        private String text;
+    public interface ProgressStatus {
 
-        //构造函数初始化
-        private ProgressStatus(int progress, String text) {
-            this.progress = progress;
-            this.text = text;
-        }
+        public static final int ALL = -10;
 
-        public static ProgressStatus get(int progress){
-            switch (progress) {
-                case 0:
-                    return ProgressStatus.AUDIT;
-                case 1:
-                    return ProgressStatus.AUDIT_SUCCESS;
-                case -1:
-                    return ProgressStatus.AUDIT_FAIL;
-                case -2:
-                    return ProgressStatus.APPLY_FAIL;
-                case 2:
-                    return ProgressStatus.APPLY_SUCCESS;
-                default:
-                    return ProgressStatus.ALL;
-            }
-        }
+        public static final int AUDIT = 0;
 
-        public final int getProgress() {
-            return progress;
-        }
+        public static final int AUDIT_SUCCESS = 1;
 
-        public String getText() {
-            return text;
-        }
+        public static final int AUDIT_FAIL = -1;
 
+        public static final int APPLY_FAIL = -2;
 
+        public static final int APPLY_SUCCESS = 2;
     }
 
 

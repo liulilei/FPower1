@@ -71,7 +71,7 @@ public class HomeMenuFragmentGroup {
         this.viewPager = viewPager;
         List<View> views = new ArrayList<View>();
         views.add(addImageView(NetApi.URL_HTTP + bannerList.get(bannerList.size() - 1).getAd_img(),
-                NetApi.URL_HTTP + bannerList.get(bannerList.size() - 1).getAd_link()));
+                bannerList.get(bannerList.size() - 1).getAd_link()));
         for (int i = 0; i < bannerList.size(); i++) {
             ImageView point = new ImageView(context);
             LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -84,9 +84,9 @@ public class HomeMenuFragmentGroup {
                 point.setEnabled(false);
             }
             pointGroup.addView(point);
-            views.add(addImageView(NetApi.URL_HTTP + bannerList.get(i).getAd_img(), NetApi.URL_HTTP + bannerList.get(i).getAd_link()));
+            views.add(addImageView(NetApi.URL_HTTP + bannerList.get(i).getAd_img(), bannerList.get(i).getAd_link()));
         }
-        views.add(addImageView(NetApi.URL_HTTP + bannerList.get(0).getAd_img(), NetApi.URL_HTTP + bannerList.get(0).getAd_link()));
+        views.add(addImageView(NetApi.URL_HTTP + bannerList.get(0).getAd_img(), bannerList.get(0).getAd_link()));
         viewLength = views.size();
         viewPager.setAdapter(new MainAdPageradapter(views));
         viewPager.setOnPageChangeListener(new OnPageChangeListener() {

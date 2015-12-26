@@ -92,7 +92,7 @@ public class ProgressFragment extends BaseFragment implements View.OnClickListen
     @Override
     protected void initView() {
         userId = FSApplication.getInstance().getUserInfo().getData().getId() + "";
-        currentProgress = Constants.ProgressStatus.ALL.getProgress();
+        currentProgress = Constants.ProgressStatus.ALL;
         back.setVisibility(View.GONE);
         title.setText("进度");
         progressAll.setOnClickListener(this);
@@ -132,19 +132,19 @@ public class ProgressFragment extends BaseFragment implements View.OnClickListen
         switch (v.getId()) {
             case R.id.fragment_progress_all:
                 showView(line1, progressAll);
-                currentProgress = Constants.ProgressStatus.ALL.getProgress();
+                currentProgress = Constants.ProgressStatus.ALL;
                 break;
             case R.id.fragment_progress_checking:
                 showView(line2, progressChecking);
-                currentProgress = Constants.ProgressStatus.AUDIT.getProgress();
+                currentProgress = Constants.ProgressStatus.AUDIT;
                 break;
             case R.id.fragment_progress_checked:
                 showView(line3, progressChecked);
-                currentProgress = Constants.ProgressStatus.AUDIT_SUCCESS.getProgress();
+                currentProgress = Constants.ProgressStatus.AUDIT_SUCCESS;
                 break;
             case R.id.fragment_progress_check_ok:
                 showView(line4, progressCheckOk);
-                currentProgress = Constants.ProgressStatus.APPLY_SUCCESS.getProgress();
+                currentProgress = Constants.ProgressStatus.APPLY_SUCCESS;
                 break;
         }
         FinanceManagerControl.getFinanceServiceManager().loan_list(getActivity(), userId,

@@ -119,7 +119,13 @@ public class BitmapUtils {
 
     public static String Bitmap2StrByBase64(Bitmap bit) {
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        bit.compress(Bitmap.CompressFormat.PNG, 100, bos);//参数100表示不压缩
+        int options = 100;
+        bit.compress(Bitmap.CompressFormat.PNG, options, bos);
+        while (bos.toByteArray().length / 1024 > 300) {
+            bos.reset();
+            options -= 10;
+            bit.compress(Bitmap.CompressFormat.JPEG, options, bos);
+        }
         byte[] bytes = bos.toByteArray();
         return baseHead+Base64.encode(bytes);
     }

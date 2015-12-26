@@ -74,6 +74,7 @@ public class MeFragment extends BaseFragment{
     private ImageView img_login;
 
     private ProvinceData provinceData;
+
     @Override
     protected ViewGroup onCreateView(LayoutInflater inflater, Bundle savedInstanceState) {
         RelativeLayout rootView = (RelativeLayout) inflater.inflate(R.layout.fragment_me, null);
@@ -104,7 +105,8 @@ public class MeFragment extends BaseFragment{
     }
 
     private void setForUserInfo() {
-        if (FSApplication.getInstance().isLogin()) {
+        if (FSApplication.getInstance().getUserInfo() != null) {
+            loginout.setVisibility(View.VISIBLE);
             layout_login_info.setVisibility(View.VISIBLE);
             layout_no_login_info.setVisibility(View.GONE);
             username.setText(FSApplication.getInstance().getUserInfo().getData().getUsername());
@@ -114,7 +116,6 @@ public class MeFragment extends BaseFragment{
                     provinceData.getMap().get(FSApplication.getInstance().getUserInfo().getData().getDistrict_id() + "");
             useraddr.setText(addr);
             ImageUtils.displayImageRoundImg(R.mipmap.moren, NetApi.URL+FSApplication.getInstance().getUserInfo().getData().getFace(), img_login);
-            //店铺列表 是推广员角色登录 我的业绩点击就是店铺列表
             switch (FSApplication.getInstance().getUserInfo().getData().getTissue_id()) {
                 case Constants.Right.NORMAL:
                     checkView.setIconText(R.mipmap.me_store, "我的审核");
@@ -129,6 +130,7 @@ public class MeFragment extends BaseFragment{
         } else {
             layout_no_login_info.setVisibility(View.VISIBLE);
             layout_login_info.setVisibility(View.GONE);
+            loginout.setVisibility(View.GONE);
         }
     }
 
@@ -137,6 +139,9 @@ public class MeFragment extends BaseFragment{
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fragment_me_check:
+                if(!isLogin()){
+                    return;
+                }
                 switch (FSApplication.getInstance().getUserInfo().getData().getTissue_id()) {
                     case Constants.Right.NORMAL:
                         startActivity(new Intent(getActivity(), NormalCheckListActivity.class));
@@ -150,10 +155,12 @@ public class MeFragment extends BaseFragment{
                 }
                 break;
             case R.id.fragment_me_up:
-                startActivity(new Intent(getActivity(), MeInfoActivity.class));
+                if (FSApplication.getInstance().getUserInfo() != null) {
+                    startActivity(new Intent(getActivity(), MeInfoActivity.class));
+                }
                 break;
             case R.id.fragment_me_about:
-
+                
                 break;
             case R.id.loginin:
                 startActivity(new Intent(getActivity(), LoginCheckActivity.class));

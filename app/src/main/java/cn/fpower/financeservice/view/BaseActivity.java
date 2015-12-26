@@ -9,8 +9,12 @@ import android.view.Window;
 import com.lidroid.xutils.ViewUtils;
 
 import cn.fpower.financeservice.R;
+import cn.fpower.financeservice.app.FSApplication;
 import cn.fpower.financeservice.utils.DialogUtils;
+import cn.fpower.financeservice.utils.IntentUtils;
 import cn.fpower.financeservice.view.home.HomeActivity;
+import cn.fpower.financeservice.view.me.LoginCheckActivity;
+import cn.fpower.financeservice.view.me.MeInfoActivity;
 
 public abstract class BaseActivity extends FragmentActivity  implements View.OnClickListener{
 
@@ -61,4 +65,17 @@ public abstract class BaseActivity extends FragmentActivity  implements View.OnC
             overridePendingTransition(R.anim.in_stable, R.anim.out_push_left_to_right);
         }
     }
+
+    public boolean isLogin(){
+        if (!FSApplication.getInstance().isLogin()) {
+            if (FSApplication.getInstance().getUserInfo() != null) {
+                IntentUtils.startActivity(act, MeInfoActivity.class);
+            }else{
+                IntentUtils.startActivity(this, LoginCheckActivity.class);
+            }
+            return false;
+        }
+        return true;
+    }
+
 }

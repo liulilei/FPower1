@@ -17,7 +17,7 @@ import android.widget.Toast;
 import cn.fpower.financeservice.constants.Constants;
 
 public class PickPhotoUtil {
-	private final String FILEDIR = Constants.IMG_PATH;
+	public final static String FILEDIR = Constants.IMG_PATH;
 
 	private static PickPhotoUtil instance;
 
@@ -38,13 +38,13 @@ public class PickPhotoUtil {
 	/**
 	 * 拍照
 	 */
-	public static final int PICKPHOTO_TAKE = 201;
+	public static final int PICKPHOTO_TAKE = 2001;
 	/**
 	 * 本地相册
 	 */
-	public static final int PICKPHOTO_LOCAL = 202;
+	public static final int PICKPHOTO_LOCAL = 2002;
 
-	public static final int PICKPHOTO_DELETE = 203;
+	public static final int PICKPHOTO_DELETE = 2003;
 
 	private PickPhotoUtil() {
 		initPath();
@@ -90,8 +90,7 @@ public class PickPhotoUtil {
 			String path = System.currentTimeMillis() + ".png";
 			File imgFile = new File(FILEDIR, path);
 			if (null != imgFile) {
-				Intent mIntent = new Intent(
-						"android.media.action.IMAGE_CAPTURE");
+				Intent mIntent = new Intent("android.media.action.IMAGE_CAPTURE");
 				mIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(imgFile));
 				mActivity.startActivityForResult(mIntent, PICKPHOTO_TAKE);
 				return imgFile.getAbsolutePath();

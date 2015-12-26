@@ -7,7 +7,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +22,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
@@ -27,6 +31,7 @@ import com.bigkoo.pickerview.OptionsPickerView;
 import com.google.gson.Gson;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -41,6 +46,7 @@ import cn.fpower.financeservice.mode.LoanPara;
 import cn.fpower.financeservice.mode.ProvinceData;
 import cn.fpower.financeservice.mode.ProvinceInfo;
 import cn.fpower.financeservice.mode.UserInfo;
+import cn.fpower.financeservice.utils.BitmapUtils;
 import cn.fpower.financeservice.utils.ImageUtils;
 import cn.fpower.financeservice.utils.PickPhotoUtil;
 import cn.fpower.financeservice.utils.StringUtils;
@@ -160,43 +166,45 @@ public class PromoterEnteringFragment extends BaseFragment implements View.OnCli
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (data != null) {
-            String result = data.getExtras().getString("result");
-            switch (requestCode) {
-                case PickPhotoUtil.PICKPHOTO_LOCAL:
-                    if (resultCode == getActivity().RESULT_OK) {
-                        String picturePath = PickPhotoUtil.getInstance().getPathNameFromUri(getActivity(), data.getData());
-                        list.add(picturePath);
-                        adapter.notifyDataSetChanged();
-                    }
-                    break;
-                case PickPhotoUtil.PICKPHOTO_TAKE:
-                    if (resultCode == getActivity().RESULT_OK) {
-                        PickPhotoUtil.galleryAddPic(getActivity(), photo);
-                        list.add(photo);
-                        adapter.notifyDataSetChanged();
-                    }
-                    break;
-                case PickPhotoUtil.PICKPHOTO_DELETE:
-                    if (resultCode == getActivity().RESULT_OK) {
-                        int position = data.getExtras().getInt("position");
-                        list.remove(position);
-                        adapter.notifyDataSetChanged();
-                    }
-                    break;
-                case CODE_NAME:
-                    info_name.setValue(result);
-                    break;
-                case CODE_USERNAME:
-                    info_username.setValue(result);
-                    break;
-                case CODE_MOBILE:
-                    info_mobile.setValue(result);
-                    break;
-                case CODE_ADDRDETAIL:
-                    info_addrdetail.setValue(result);
-                    break;
-            }
+        super.onActivityResult(requestCode, resultCode, data);
+        String result = "";
+        if (data!=null){
+            result=data.getExtras().getString("result");
+        }
+        switch (requestCode) {
+            case PickPhotoUtil.PICKPHOTO_LOCAL:
+                if (resultCode == getActivity().RESULT_OK) {
+                    String picturePath = PickPhotoUtil.getInstance().getPathNameFromUri(getActivity(), data.getData());
+                    list.add(picturePath);
+                    adapter.notifyDataSetChanged();
+                }
+                break;
+            case PickPhotoUtil.PICKPHOTO_TAKE:
+                if (resultCode == getActivity().RESULT_OK) {
+                    PickPhotoUtil.galleryAddPic(getActivity(), photo);
+                    list.add(photo);
+                    adapter.notifyDataSetChanged();
+                }
+                break;
+            case PickPhotoUtil.PICKPHOTO_DELETE:
+                if (resultCode == getActivity().RESULT_OK) {
+                    int position = data.getExtras().getInt("position");
+                    list.remove(position);
+                    adapter.notifyDataSetChanged();
+                }
+                break;
+            case CODE_NAME:
+                info_name.setValue(result);
+                break;
+            case CODE_USERNAME:
+                info_username.setValue(result);
+                break;
+            case CODE_MOBILE:
+                info_mobile.setValue(result);
+                break;
+            case CODE_ADDRDETAIL:
+                info_addrdetail.setValue(result);
+                break;
         }
     }
 
@@ -246,6 +254,7 @@ public class PromoterEnteringFragment extends BaseFragment implements View.OnCli
                         info_latitude.setValue(amapLocation.getLatitude() + "");//获取经度
                         info_longitude.setValue(amapLocation.getLongitude() + "");//获取纬度
                     } else {
+
                     }
                 }
                 aMapLocationClient.stopLocation();
@@ -256,15 +265,45 @@ public class PromoterEnteringFragment extends BaseFragment implements View.OnCli
 
     private Dialog mDialog;
 
+    private boolean isStorageState() {
+        if (Environment.MEDIA_MOUNTED.equals(Environment
+                .getExternalStorageState())) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     protected Dialog createDialog(String title) {
         return new AlertDialog.Builder(getActivity()).setCancelable(true)
                 .setTitle(title)
                 .setItems(R.array.select_dialog_items, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         if (which == 0) {
-                            PickPhotoUtil.getInstance().localPhoto(getActivity());
+                            if (isStorageState()) {
+                                Intent mIntent = new Intent(Intent.ACTION_PICK);
+                                mIntent.setDataAndType(
+                                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+                                startActivityForResult(mIntent, PickPhotoUtil.PICKPHOTO_LOCAL);
+                            } else {
+                                Toast.makeText(getActivity(), "未找到SD卡", Toast.LENGTH_LONG).show();
+                            }
                         } else {
-                            photo = PickPhotoUtil.getInstance().takePhoto(getActivity());
+                            if (isStorageState()) {
+                                String path = System.currentTimeMillis() + ".png";
+                                File imgFile = new File(PickPhotoUtil.FILEDIR, path);
+                                if (null != imgFile) {
+                                    Intent mIntent = new Intent(
+                                            "android.media.action.IMAGE_CAPTURE");
+                                    mIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(imgFile));
+                                    startActivityForResult(mIntent, PickPhotoUtil.PICKPHOTO_TAKE);
+                                    photo = imgFile.getAbsolutePath();
+                                } else {
+                                    Toast.makeText(getActivity(), "创建图片对象有误", Toast.LENGTH_LONG).show();
+                                }
+                            } else {
+                                Toast.makeText(getActivity(), "未找到SD卡", Toast.LENGTH_LONG).show();
+                            }
                         }
                     }
                 }).create();
@@ -328,15 +367,23 @@ public class PromoterEnteringFragment extends BaseFragment implements View.OnCli
                     loanPara.district_id = keys[2];
                 }
                 loanPara.address = info_addrdetail.getValue();
-                loanPara.latitude = info_latitude.getValue();
-                loanPara.longitude = info_longitude.getValue();
+                loanPara.latitude = "23.15";//info_latitude.getValue();
+                loanPara.longitude = "113.33";// info_longitude.getValue();
+                String imgs = "";
+                for (int i = 0; i < list.size(); i++) {
+                    if (i == list.size() - 1) {
+                        imgs += BitmapUtils.Bitmap2StrByBase64(list.get(i));
+                    } else {
+                        imgs += BitmapUtils.Bitmap2StrByBase64(list.get(i)) + "#####";
+                    }
+                }
                 try {
-                    loanPara.checShop();
+                    loanPara.checkShop();
                 } catch (Exception e) {
                     ToastUtils.show(getActivity(), e.getMessage());
                     return;
                 }
-                FinanceManagerControl.getFinanceServiceManager().create_shop(getActivity(), loanPara, "",
+                FinanceManagerControl.getFinanceServiceManager().create_shop(getActivity(), loanPara, imgs,
                         true, UserInfo.class, new ManagerDataListener() {
 
                             @Override

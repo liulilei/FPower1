@@ -168,7 +168,7 @@ public class FinanceServiceManager extends BaseManager {
                           ManagerDataListener listener) {
         params = new RequestParams();
         params.addQueryStringParameter("user_id", user_id);
-        if (process!=Constants.ProgressStatus.ALL.getProgress()) {
+        if (process!=Constants.ProgressStatus.ALL) {
             params.addQueryStringParameter("process", process+"");
         }
         if (now_page >= 1) {
@@ -356,7 +356,9 @@ public class FinanceServiceManager extends BaseManager {
         params.addBodyParameter("mobile", loanPara.mobile);
         params.addBodyParameter("username", loanPara.username);
         params.addBodyParameter("name", loanPara.name);
-        // params.addBodyParameter("imgs", loanPara.name);
+        if(!TextUtils.isEmpty(imgs)) {
+            params.addBodyParameter("imgs", imgs);
+        }
         params.addBodyParameter("province_id", loanPara.province_id);
         params.addBodyParameter("city_id", loanPara.city_id);
         params.addBodyParameter("district_id", loanPara.district_id);

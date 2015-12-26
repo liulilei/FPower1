@@ -23,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 android:background="@color/white"
                 android:paddingBottom="16dp"
                 android:paddingLeft="20dp"
@@ -44,8 +44,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/des"
-                    android:layout_marginTop="12dp"
-                    android:horizontalSpacing="12dp"
+                    android:layout_marginTop="10dp"
+                    android:horizontalSpacing="10dp"
                     android:numColumns="5"
                     android:scrollbars="none"
                     android:verticalSpacing="5dp"></GridView>
@@ -57,7 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/layout_login_info"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="15dp"
                 app:txtName="店名" />
 
             <cn.fpower.financeservice.view.widget.EnteringSettingView

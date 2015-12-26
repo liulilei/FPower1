@@ -15,6 +15,7 @@ import cn.fpower.financeservice.app.FSApplication;
 import cn.fpower.financeservice.mode.ProvinceData;
 import cn.fpower.financeservice.mode.ShopInfo;
 import cn.fpower.financeservice.mode.ShopList;
+import cn.fpower.financeservice.net.NetApi;
 import cn.fpower.financeservice.utils.ImageUtils;
 
 /**
@@ -54,7 +55,7 @@ public class ShopListFragmentAdapter extends AbstractAdapter<ShopInfo> {
         holder.progressName.setText(info.username);
         holder.progressMoney.setText(provinceData.getMap().get(info.province_id)+provinceData.getMap().get(info.city_id)+provinceData.getMap().get(info.district_id));
         holder.progressCreateTime.setText(info.address);
-        ImageUtils.displayImageRoundImg(R.mipmap.moren, info.imgs != null && info.imgs.size() > 0 ? info.imgs.get(0) : "", holder.progressAvatar);
+        ImageUtils.displayImageRoundImg(R.mipmap.moren, info.imgs != null && info.imgs.size() > 0 ? NetApi.URL_HTTP +info.imgs.get(0) : "", holder.progressAvatar);
         return convertView;
     }
 

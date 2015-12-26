@@ -65,7 +65,7 @@ public class NormalCheckListActivity extends BaseActivity implements OnClickList
     protected void initData() {
         super.initData();
         FinanceManagerControl.getFinanceServiceManager().loan_list(act,
-                FSApplication.getInstance().getUserInfo().getData().getId() + "",  Constants.ProgressStatus.ALL.getProgress() , 1 , true, LoanInfo.class, new ManagerDataListener() {
+                FSApplication.getInstance().getUserInfo().getData().getId() + "",  Constants.ProgressStatus.ALL , 1 , true, LoanInfo.class, new ManagerDataListener() {
 
                     @Override
                     public void onSuccess(Object data) {
@@ -100,7 +100,7 @@ public class NormalCheckListActivity extends BaseActivity implements OnClickList
     @Override
     public void OnRefresh() {
         FinanceManagerControl.getFinanceServiceManager().loan_list(act,
-                FSApplication.getInstance().getUserInfo().getData().getId() + "", Constants.ProgressStatus.ALL.getProgress(), 1 , false, LoanInfo.class, new ManagerDataListener() {
+                FSApplication.getInstance().getUserInfo().getData().getId() + "", Constants.ProgressStatus.ALL, 1 , false, LoanInfo.class, new ManagerDataListener() {
 
                     @Override
                     public void onSuccess(Object data) {
@@ -132,7 +132,7 @@ public class NormalCheckListActivity extends BaseActivity implements OnClickList
     @Override
     public void onLoadMore() {
         FinanceManagerControl.getFinanceServiceManager().loan_list(act,
-                FSApplication.getInstance().getUserInfo().getData().getId() + "", Constants.ProgressStatus.ALL.getProgress(), ++now_page, false, LoanInfo.class,
+                FSApplication.getInstance().getUserInfo().getData().getId() + "", Constants.ProgressStatus.ALL, ++now_page, false, LoanInfo.class,
                 new ManagerDataListener() {
                     @Override
                     public void onSuccess(Object data) {

@@ -18,7 +18,7 @@ public class UserInfo extends BaseMode {
          * "id": "18",
          * "tissue_id": "0",  15：推广员
          * "shop_id": "0",
-         * "entering_uid": "0",
+         * "entering_uid": "0", //渠道ID
          * "rank": "0",
          * "mobile": "13516599661",
          * "username": "uhb",

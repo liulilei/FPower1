@@ -58,7 +58,7 @@ public class LoanPara {
         }
     }
 
-    public void checShop() throws Exception {
+    public void checkShop() throws Exception {
         if (TextUtils.isEmpty(name)) {
             throw new Exception("请输入店名");
         }
@@ -67,6 +67,9 @@ public class LoanPara {
         }
         if (TextUtils.isEmpty(address)) {
             throw new Exception("请输入详细地址");
+        }
+        if(TextUtils.isEmpty(longitude)){
+            throw new Exception("请刷新经纬度");
         }
         if (TextUtils.isEmpty(username)) {
             throw new Exception("请输入店长名称");

@@ -24,6 +24,7 @@ import java.util.Date;
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.app.FSApplication;
 import cn.fpower.financeservice.constants.Constants;
+import cn.fpower.financeservice.manager.MappingManager;
 import cn.fpower.financeservice.manager.netmanager.FinanceManagerControl;
 import cn.fpower.financeservice.manager.netmanager.ManagerDataListener;
 import cn.fpower.financeservice.mode.ProvinceData;
@@ -108,20 +109,20 @@ public class MeInfoActivity extends BaseActivity {
         initPro();
         initTime();
         //假如已经登陆
-        if (FSApplication.getInstance().isLogin()) {
-            if (FSApplication.getInstance().getUserInfo().getData() != null) {
-                info_name.setValue(FSApplication.getInstance().getUserInfo().getData().getUsername());
+        if (FSApplication.getInstance().getUserInfo() != null) {
+            info_name.setValue(FSApplication.getInstance().getUserInfo().getData().getUsername());
+            if(!FSApplication.getInstance().getUserInfo().getData().getBirthday().equals("0000-00-00")) {
                 info_birthday.setValue(FSApplication.getInstance().getUserInfo().getData().getBirthday());
-                info_sex.setValue(FSApplication.getInstance().getUserInfo().getData().getSex() == 1 ? "男" : "女");
-                String addr = provinceData.getMap().get(FSApplication.getInstance().getUserInfo().getData().getProvince_id() + "") +
-                        provinceData.getMap().get(FSApplication.getInstance().getUserInfo().getData().getCity_id() + "") +
-                        provinceData.getMap().get(FSApplication.getInstance().getUserInfo().getData().getDistrict_id() + "");
-                String key = FSApplication.getInstance().getUserInfo().getData().getProvince_id() + ","
-                        + FSApplication.getInstance().getUserInfo().getData().getCity_id() + ","
-                        + FSApplication.getInstance().getUserInfo().getData().getDistrict_id();
-                info_addr.setValue(key, addr);
-                ImageUtils.displayImageRoundImg(R.mipmap.moren, NetApi.URL + FSApplication.getInstance().getUserInfo().getData().getFace(), img_login);
             }
+            info_sex.setValue(MappingManager.getSex(FSApplication.getInstance().getUserInfo().getData().getSex()));
+            String addr = provinceData.getMap().get(FSApplication.getInstance().getUserInfo().getData().getProvince_id() + "") +
+                    provinceData.getMap().get(FSApplication.getInstance().getUserInfo().getData().getCity_id() + "") +
+                    provinceData.getMap().get(FSApplication.getInstance().getUserInfo().getData().getDistrict_id() + "");
+            String key = FSApplication.getInstance().getUserInfo().getData().getProvince_id() + ","
+                    + FSApplication.getInstance().getUserInfo().getData().getCity_id() + ","
+                    + FSApplication.getInstance().getUserInfo().getData().getDistrict_id();
+            info_addr.setValue(key, addr);
+            ImageUtils.displayImageRoundImg(R.mipmap.moren, NetApi.URL + FSApplication.getInstance().getUserInfo().getData().getFace(), img_login);
         }
     }
 
@@ -288,25 +289,25 @@ public class MeInfoActivity extends BaseActivity {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (data != null) {
-            switch (requestCode) {
-                case CODE_NAME:
+        switch (requestCode) {
+            case CODE_NAME:
+                if (data != null) {
                     String result = data.getExtras().getString("result");
                     info_name.setValue(result);
-                    break;
-                case PickPhotoUtil.PICKPHOTO_LOCAL:
-                    if (resultCode == RESULT_OK) {
-                        picturePath = PickPhotoUtil.getInstance().getPathNameFromUri(this, data.getData());
-                        ImageUtils.displayImageRoundImg(R.mipmap.moren, "file://" + picturePath, img_login);
-                    }
-                    break;
-                case PickPhotoUtil.PICKPHOTO_TAKE:
-                    if (resultCode == RESULT_OK) {
-                        PickPhotoUtil.galleryAddPic(this, picturePath);
-                        ImageUtils.displayImageRoundImg(R.mipmap.moren, "file://" + picturePath, img_login);
-                    }
-                    break;
-            }
+                }
+                break;
+            case PickPhotoUtil.PICKPHOTO_LOCAL:
+                if (resultCode == RESULT_OK) {
+                    picturePath = PickPhotoUtil.getInstance().getPathNameFromUri(this, data.getData());
+                    ImageUtils.displayImageRoundImg(R.mipmap.moren, "file://" + picturePath, img_login);
+                }
+                break;
+            case PickPhotoUtil.PICKPHOTO_TAKE:
+                if (resultCode == RESULT_OK) {
+                    PickPhotoUtil.galleryAddPic(this, picturePath);
+                    ImageUtils.displayImageRoundImg(R.mipmap.moren, "file://" + picturePath, img_login);
+                }
+                break;
         }
     }
 }

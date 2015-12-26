@@ -37,7 +37,7 @@ public class SuccessExampleAdapter extends AbstractAdapter<DataInfo> {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        ImageUtils.displayImageRoundImg(R.mipmap.moren, "http://stimgcn1.s-msn.com/msnportal/fashion/2012/12/24/51478f07-382d-4da9-99b5-815dd2848aa8.jpg", holder.exampleAvatar);
+        ImageUtils.displayImageRoundImg(R.mipmap.moren, "", holder.exampleAvatar);
         holder.exampleName.setText(mList.get(position).getRealname());
         holder.exampleMoney.setText("￥" + mList.get(position).getMoney());
         holder.exampleCreateTime.setText("申请时间:" + TimeUtils.fullTimeAndDay(mList.get(position).getApply_success_time()));

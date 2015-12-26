@@ -118,12 +118,12 @@ public class ProgressDetailActivity extends BaseActivity implements View.OnClick
         ImageUtils.displayImageRoundImg(R.mipmap.moren, "", progressHeader);
         progressName.setText(loanDetail.realname);
         progressTime1.setText(TimeUtils.fullTimeAndDay(loanDetail.addtime));// 录入成功
-        if (loanDetail.process==Constants.ProgressStatus.AUDIT.getProgress()) {
+        if (loanDetail.process==Constants.ProgressStatus.AUDIT) {
             progressTime2.setText(TimeUtils.fullTimeAndDay(System.currentTimeMillis()));
             progressStateTv.setTextColor(getResources().getColor(R.color.progress_checking_tv));
            // progressStateTv.setText("待审核");
-        } else if (loanDetail.process==Constants.ProgressStatus.AUDIT_SUCCESS.getProgress()||
-                loanDetail.process==Constants.ProgressStatus.AUDIT_SUCCESS.getProgress()) {
+        } else if (loanDetail.process==Constants.ProgressStatus.AUDIT_SUCCESS||
+                loanDetail.process==Constants.ProgressStatus.AUDIT_SUCCESS) {
             long audit=loanDetail.audit_success_time>0?loanDetail.audit_success_time:loanDetail.audit_fail_time;
             progressTime2.setText(TimeUtils.fullTimeAndDay(audit));
             line1.setBackgroundColor(getResources().getColor(R.color.progress_line_select));

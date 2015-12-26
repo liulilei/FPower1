@@ -92,16 +92,14 @@ public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 showFragment(homeFragment);
                 break;
             case R.id.activity_home_progress_rbt:
-                if (!FSApplication.getInstance().isLogin()) {
-                    IntentUtils.startActivity(this, LoginCheckActivity.class);
+                if(!isLogin()){
                     homeRbt.setChecked(true);
                     return;
                 }
                 showFragment(progressFragment);
                 break;
             case R.id.activity_home_entering_rbt:
-                if (!FSApplication.getInstance().isLogin()) {
-                    IntentUtils.startActivity(this, LoginCheckActivity.class);
+                if(!isLogin()){
                     homeRbt.setChecked(true);
                     return;
                 }

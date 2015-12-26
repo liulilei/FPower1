@@ -47,7 +47,7 @@ public class ProgressFragmentAdapter extends AbstractAdapter<DataInfo> {
         holder.progressRightIv.setOnClickListener(new CallPhoneClickListener(mList.get(position).getMobile()));
         ImageUtils.displayImageRoundImg(R.mipmap.moren, "", holder.progressAvatar);
         holder.progressName.setText(mList.get(position).getRealname());
-        holder.progressMoney.setText(Constants.ProgressStatus.get(Integer.parseInt(mList.get(position).getProcess())).getText());
+        holder.progressMoney.setText(MappingManager.getProcess(Integer.parseInt(mList.get(position).getProcess())));
 
         /*if (mList.get(position).getProcess()==Constants.ProgressStatus.) {
             holder.progressMoney.setTextColor(mContext.getResources().getColor(R.color.progress_checking));
