@@ -292,7 +292,7 @@ public class MeInfoActivity extends BaseActivity {
         switch (requestCode) {
             case CODE_NAME:
                 if (data != null) {
-                    String result = data.getExtras().getString("result");
+                    String result = data.getStringExtra("result");
                     info_name.setValue(result);
                 }
                 break;

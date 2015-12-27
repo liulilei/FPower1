@@ -144,7 +144,7 @@ public class PromoterResultActivity extends BaseActivity {
                 break;
             case PickPhotoUtil.PICKPHOTO_DELETE:
                 if (resultCode == RESULT_OK) {
-                    int position = data.getExtras().getInt("position");
+                    int position = data.getIntExtra("position",0);
                     list.remove(position);
                     adapter.notifyDataSetChanged();
                 }

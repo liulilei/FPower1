@@ -14,6 +14,8 @@ import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
@@ -40,17 +42,14 @@ import java.util.TreeMap;
 
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.app.FSApplication;
-import cn.fpower.financeservice.constants.Constants;
 import cn.fpower.financeservice.manager.netmanager.FinanceManagerControl;
 import cn.fpower.financeservice.manager.netmanager.ManagerDataListener;
 import cn.fpower.financeservice.mode.LoanPara;
 import cn.fpower.financeservice.mode.ProvinceData;
-import cn.fpower.financeservice.mode.ProvinceInfo;
 import cn.fpower.financeservice.mode.UserInfo;
 import cn.fpower.financeservice.utils.BitmapUtils;
 import cn.fpower.financeservice.utils.ImageUtils;
 import cn.fpower.financeservice.utils.PickPhotoUtil;
-import cn.fpower.financeservice.utils.StringUtils;
 import cn.fpower.financeservice.utils.ToastUtils;
 import cn.fpower.financeservice.view.ImgSelActivity;
 import cn.fpower.financeservice.view.InfoInputActivity;
@@ -82,17 +81,29 @@ public class PromoterEnteringFragment extends BaseFragment implements View.OnCli
     @ViewInject(R.id.info_addrdetail)
     private EnteringSettingView info_addrdetail;
 
-    @ViewInject(R.id.longitude)
+   /* @ViewInject(R.id.longitude)
     private EnteringSettingView info_longitude;
 
     @ViewInject(R.id.latitude)
-    private EnteringSettingView info_latitude;
+    private EnteringSettingView info_latitude;*/
+
+
+    @ViewInject(R.id.longitude)
+    private TextView longitude;
+
+    @ViewInject(R.id.latitude)
+    private TextView latitude;
+
 
     @ViewInject(R.id.info_username)
     private EnteringSettingView info_username;
 
     @ViewInject(R.id.info_mobile)
     private EnteringSettingView info_mobile;
+
+    @ViewInject(R.id.img_loc)
+    private ImageView img_loc;
+
 
     private final int CODE_NAME = 0;
     private final int CODE_MOBILE = 2;
@@ -113,7 +124,7 @@ public class PromoterEnteringFragment extends BaseFragment implements View.OnCli
 
     @Override
     protected ViewGroup onCreateView(LayoutInflater inflater, Bundle savedInstanceState) {
-        RelativeLayout rootView = (RelativeLayout) inflater.inflate(R.layout.activity_promotion_result, null);
+        RelativeLayout rootView = (RelativeLayout) inflater.inflate(R.layout.fragment_promoterentering, null);
         return rootView;
     }
 
@@ -171,7 +182,7 @@ public class PromoterEnteringFragment extends BaseFragment implements View.OnCli
         super.onActivityResult(requestCode, resultCode, data);
         String result = "";
         if (data!=null){
-            result=data.getExtras().getString("result");
+            result=data.getStringExtra("result");
         }
         switch (requestCode) {
             case PickPhotoUtil.PICKPHOTO_LOCAL:
@@ -211,9 +222,11 @@ public class PromoterEnteringFragment extends BaseFragment implements View.OnCli
     }
 
     private String photo;
+    private Animation animation;
 
     @Override
     protected void initView() {
+        animation = AnimationUtils.loadAnimation(getActivity(), R.anim.loading_home);
         back.setVisibility(View.GONE);
         title.setText("店面信息");
         noScrollgridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
@@ -226,7 +239,7 @@ public class PromoterEnteringFragment extends BaseFragment implements View.OnCli
         info_mobile.setOnClickListener(this);
         info_username.setOnClickListener(this);
         submit.setOnClickListener(this);
-
+        img_loc.setOnClickListener(this);
         noScrollgridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
@@ -253,8 +266,10 @@ public class PromoterEnteringFragment extends BaseFragment implements View.OnCli
                 if (amapLocation != null) {
                     if (amapLocation.getErrorCode() == 0) {
                         //定位成功回调信息，设置相关消息
-                        info_latitude.setValue(amapLocation.getLatitude() + "");//获取经度
-                        info_longitude.setValue(amapLocation.getLongitude() + "");//获取纬度
+                        latitude.setText(amapLocation.getLatitude() + "");//获取经度
+                        longitude.setText(amapLocation.getLongitude() + "");//获取纬度
+                       // img_loc.clearAnimation();
+                       // ToastUtils.show(getActivity(),"定位成功");//getActivity()为空
                     } else {
 
                     }
@@ -342,6 +357,12 @@ public class PromoterEnteringFragment extends BaseFragment implements View.OnCli
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.img_loc:
+                if(!animation.hasStarted()) {
+                    img_loc.startAnimation(animation);
+                    aMapLocationClient.startLocation();
+                }
+                break;
             case R.id.info_addr:
                 optionsPickerView.show();
                 break;
@@ -368,6 +389,8 @@ public class PromoterEnteringFragment extends BaseFragment implements View.OnCli
                     loanPara.city_id = keys[1];
                     loanPara.district_id = keys[2];
                 }
+                loanPara.longitude = longitude.getText().toString();
+                loanPara.latitude = latitude.getText().toString();
                 loanPara.address = info_addrdetail.getValue();
                 String imgs = "";
                 for (int i = 0; i < list.size(); i++) {
@@ -393,9 +416,8 @@ public class PromoterEnteringFragment extends BaseFragment implements View.OnCli
                                 info_username.clear();
                                 info_mobile.clear();
                                 info_addr.clear();
-                                info_longitude.clear();
-                                info_latitude.clear();
                                 info_addrdetail.clear();
+                                loanPara = new LoanPara();
                             }
 
                             @Override
