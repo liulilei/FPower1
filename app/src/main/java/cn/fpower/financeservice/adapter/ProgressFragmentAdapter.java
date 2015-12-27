@@ -59,7 +59,7 @@ public class ProgressFragmentAdapter extends AbstractAdapter<DataInfo> {
         } else {
             holder.progressMoney.setTextColor(mContext.getResources().getColor(R.color.progress_check_ok));
         }*/
-        holder.progressCreateTime.setText("申请时间:" + TimeUtils.fullTimeAndDay(mList.get(position).getApply_success_time()));
+        holder.progressCreateTime.setText("申请时间:" + TimeUtils.fullTimeAndDay(mList.get(position).getAddtime()));
         return convertView;
     }
 

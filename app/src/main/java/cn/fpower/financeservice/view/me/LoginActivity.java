@@ -64,7 +64,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     protected void initView() {
         super.initView();
         des.setVisibility(View.GONE);
-        back.setVisibility(View.GONE);
+        back.setOnClickListener(this);
         title.setText("登录");
         view_pwd.setHint(R.string.input_pwd);
         loginin.setText(R.string.confirm);
@@ -87,6 +87,9 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.title_bar_back:
+                finish();
+                break;
             case R.id.loginin:
                 String passwd = view_pwd.getText().toString();
                 if (TextUtils.isEmpty(passwd)) {

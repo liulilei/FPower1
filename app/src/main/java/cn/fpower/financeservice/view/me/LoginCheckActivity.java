@@ -46,7 +46,7 @@ public class LoginCheckActivity extends BaseActivity implements View.OnClickList
     @Override
     protected void initView() {
         super.initView();
-        back.setVisibility(View.GONE);
+        back.setOnClickListener(this);
         title.setText("登录");
         loginin.setOnClickListener(this);
     }
@@ -64,6 +64,9 @@ public class LoginCheckActivity extends BaseActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.title_bar_back:
+                finish();
+                break;
             case R.id.loginin:
                 //登录注册
                 // 先是填一个手机号码判断注册还是没注册

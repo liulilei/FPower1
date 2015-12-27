@@ -1,10 +1,8 @@
 package cn.fpower.financeservice.view.me;
 
-import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -14,27 +12,21 @@ import java.util.List;
 
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.adapter.AchievementFragmentAdapter;
-import cn.fpower.financeservice.adapter.EmpFragmentAdapter;
-import cn.fpower.financeservice.app.FSApplication;
+import cn.fpower.financeservice.constants.Constants;
 import cn.fpower.financeservice.manager.netmanager.FinanceManagerControl;
 import cn.fpower.financeservice.manager.netmanager.ManagerDataListener;
-import cn.fpower.financeservice.manager.netmanager.ManagerStringListener;
+import cn.fpower.financeservice.mode.AchievementAmount;
 import cn.fpower.financeservice.mode.AchievementData;
-import cn.fpower.financeservice.mode.EmployeeList;
-import cn.fpower.financeservice.mode.MyAchievement;
-import cn.fpower.financeservice.utils.StringUtils;
+import cn.fpower.financeservice.mode.AchievementList;
 import cn.fpower.financeservice.utils.TimeUtils;
+import cn.fpower.financeservice.utils.ToastUtils;
 import cn.fpower.financeservice.view.BaseActivity;
 import cn.fpower.financeservice.view.widget.RefreshListView;
-import cn.fpower.financeservice.view.widget.swipelistview.SwipeMenu;
-import cn.fpower.financeservice.view.widget.swipelistview.SwipeMenuCreator;
-import cn.fpower.financeservice.view.widget.swipelistview.SwipeMenuItem;
-import cn.fpower.financeservice.view.widget.swipelistview.SwipeMenuListView;
 
 /**
- * 我的业绩
+ * 我的业绩 员工
  */
-public class AchievementActivity extends BaseActivity {
+public class AchievementActivity extends BaseActivity implements RefreshListView.IOnRefreshListener, RefreshListView.IOnLoadMoreListener, AdapterView.OnItemClickListener {
 
     @ViewInject(R.id.title_bar_back)
     private ImageView back;
@@ -55,8 +47,10 @@ public class AchievementActivity extends BaseActivity {
     private RefreshListView progressRlv;
 
     private AchievementFragmentAdapter adapter;
+    private int now_page = 1;
+    private List<AchievementData> exampleList;
+    private List<AchievementData> loadMoreExampleList;
 
-    List<EmployeeList.EmpInfo> employee_list;
 
     @Override
     protected int initLayout() {
@@ -67,6 +61,9 @@ public class AchievementActivity extends BaseActivity {
     protected void initView() {
         back.setOnClickListener(this);
         title.setText("我的业绩");
+        progressRlv.setOnRefreshListener(this);
+        progressRlv.setOnLoadMoreListener(this);
+        progressRlv.setOnItemClickListener(this);
     }
 
     private int userId;
@@ -79,27 +76,39 @@ public class AchievementActivity extends BaseActivity {
         if(extras!=null) {
             userId = getIntent().getExtras().getInt("user_id");
         }
-        if(userId==0) {
-            userId = FSApplication.getInstance().getUserInfo().getData().getId();
-        }
+
+        FinanceManagerControl.getFinanceServiceManager().achievement_list(act, userId, 1, 0, 0, true, AchievementList.class, new ManagerDataListener() {
+
+            @Override
+            public void onSuccess(Object data) {
+                AchievementList info = (AchievementList) data;
+                exampleList = info.getData().getAchievement_list();
+                if (exampleList == null || exampleList.size() == 0) {
+                    ToastUtils.show(act, "没有数据");
+                    progressRlv.showFooterResult(false);
+                    return;
+                }
+                adapter = new AchievementFragmentAdapter(act, exampleList);
+                progressRlv.setAdapter(adapter);
+                progressRlv.showFooterResult(now_page <= (info.getData().getAchievement_total() / Constants.PAGE_SIZE));
+            }
+
+            @Override
+            public void onError(String error) {
+
+            }
+        });
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        FinanceManagerControl.getFinanceServiceManager().my_achievement(act, userId
-                , 0, true, MyAchievement.class, new ManagerDataListener() {
+        FinanceManagerControl.getFinanceServiceManager().achievement_amount(act, userId
+                , TimeUtils.getMouthStart(), TimeUtils.getMouthEnd(), true, AchievementAmount.class, new ManagerDataListener() {
             @Override
             public void onSuccess(Object data) {
-                MyAchievement m = (MyAchievement) data;
-                money.setText("￥" + m.getData().getMonth_amount());
-                List<AchievementData> achievement_list = m.getData().getAchievement_list();
-                if (adapter == null) {
-                    adapter = new AchievementFragmentAdapter(act, achievement_list);
-                    progressRlv.setAdapter(adapter);
-                } else {
-                    adapter.refresh(achievement_list);
-                }
+                AchievementAmount m = (AchievementAmount) data;
+                money.setText("￥" + m.getData().getAchievement_amount());
             }
 
             @Override
@@ -115,9 +124,72 @@ public class AchievementActivity extends BaseActivity {
             case R.id.title_bar_back:
                 this.finish();
                 break;
-            case R.id.title_bar_right_iv:
-                startActivity(new Intent(this, ShopAddEmpActivity.class));
-                break;
         }
+    }
+
+    @Override
+    public void OnRefresh() {
+        FinanceManagerControl.getFinanceServiceManager().achievement_list(act, userId, 1, 0, 0, true, AchievementList.class, new ManagerDataListener() {
+
+            @Override
+            public void onSuccess(Object data) {
+                now_page = 1;
+                progressRlv.onRefreshComplete();
+                AchievementList info = (AchievementList) data;
+                exampleList = info.getData().getAchievement_list();
+                if (exampleList == null || exampleList.size() == 0) {
+                    ToastUtils.show(act, "没有数据");
+                    progressRlv.showFooterResult(false);
+                    return;
+                }
+                if (adapter == null) {
+                    adapter = new AchievementFragmentAdapter(act, exampleList);
+                    progressRlv.setAdapter(adapter);
+                } else {
+                    adapter.refresh(exampleList);
+                }
+                progressRlv.showFooterResult(now_page <= (info.getData().getAchievement_total() / Constants.PAGE_SIZE));
+            }
+
+            @Override
+            public void onError(String error) {
+                progressRlv.onRefreshComplete();
+            }
+        });
+    }
+
+    @Override
+    public void onLoadMore() {
+        FinanceManagerControl.getFinanceServiceManager().achievement_list(act, userId, ++now_page, 0, 0, false, AchievementList.class, new ManagerDataListener() {
+
+            @Override
+            public void onSuccess(Object data) {
+                progressRlv.onRefreshComplete();
+                AchievementList info = (AchievementList) data;
+                loadMoreExampleList = info.getData().getAchievement_list();
+                if (loadMoreExampleList == null || loadMoreExampleList.size() == 0) {
+                    ToastUtils.show(act, "没有数据");
+                    progressRlv.showFooterResult(false);
+                    return;
+                }
+                adapter.addData(loadMoreExampleList);
+                progressRlv.showFooterResult(now_page <= (info.getData().getAchievement_total() / Constants.PAGE_SIZE));
+            }
+
+            @Override
+            public void onError(String error) {
+                progressRlv.onRefreshComplete();
+            }
+        });
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        if (position == 0 || position > exampleList.size()) {
+            return;
+        }
+       /* Intent intent = new Intent(act, ShopDetailActivity.class);
+        intent.putExtra("shop_id", exampleList.get(position - 1).id);
+        startActivity(intent);*/
     }
 }

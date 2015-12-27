@@ -32,6 +32,7 @@
 
     <TextView
         android:id="@+id/des"
+        android:visibility="gone"
         android:text="如需帮助，请致电010-5768421"
         android:layout_marginTop="12dp"
         android:layout_width="wrap_content"

@@ -168,8 +168,8 @@ public class FinanceServiceManager extends BaseManager {
                           ManagerDataListener listener) {
         params = new RequestParams();
         params.addQueryStringParameter("user_id", user_id);
-        if (process!=Constants.ProgressStatus.ALL) {
-            params.addQueryStringParameter("process", process+"");
+        if (process != Constants.ProgressStatus.ALL) {
+            params.addQueryStringParameter("process", process + "");
         }
         if (now_page >= 1) {
             params.addQueryStringParameter("now_page", now_page + "");//当前所在页
@@ -208,7 +208,7 @@ public class FinanceServiceManager extends BaseManager {
         }
         if (now_page >= 1) {
             params.addQueryStringParameter("now_page", now_page + "");//当前所在页
-            params.addQueryStringParameter("page_size",  Constants.PAGE_SIZE+"");//默认10条
+            params.addQueryStringParameter("page_size", Constants.PAGE_SIZE + "");//默认10条
         }
         if (hasDialog) {
             getDataFromNetHasDialogGet(context, NetApi.CASE_LIST, params, clazz, listener);
@@ -233,10 +233,10 @@ public class FinanceServiceManager extends BaseManager {
         params.addBodyParameter("user_id", loanPara.user_id + "");
         params.addBodyParameter("mobile", loanPara.mobile);
         params.addBodyParameter("username", loanPara.username);
-        params.addBodyParameter("province_id", loanPara.province_id);
+       /* params.addBodyParameter("province_id", loanPara.province_id);
         params.addBodyParameter("city_id", loanPara.city_id);
         params.addBodyParameter("district_id", loanPara.district_id);
-        params.addBodyParameter("address", loanPara.address);
+        params.addBodyParameter("address", loanPara.address);*/
         params.addBodyParameter("source", "2");
         if (hasDialog) {
             getDataFromNetHasDialog(context, NetApi.CREATE_EMPLOYEE, params, clazz, listener);
@@ -261,7 +261,7 @@ public class FinanceServiceManager extends BaseManager {
         params.addQueryStringParameter("user_id", user_id + "");
         if (now_page >= 1) {
             params.addQueryStringParameter("now_page", now_page + "");//当前所在页
-            params.addQueryStringParameter("page_size", Constants.PAGE_SIZE+"");//默认10条
+            params.addQueryStringParameter("page_size", Constants.PAGE_SIZE + "");//默认10条
         }
         if (hasDialog) {
             getDataFromNetHasDialogGet(context, NetApi.EMPLOYEE_LIST, params, clazz, listener);
@@ -286,7 +286,7 @@ public class FinanceServiceManager extends BaseManager {
         params.addQueryStringParameter("user_id", user_id + "");
         if (now_page >= 1) {
             params.addQueryStringParameter("now_page", now_page + "");//当前所在页
-            params.addQueryStringParameter("page_size", Constants.PAGE_SIZE+"");//默认10条
+            params.addQueryStringParameter("page_size", Constants.PAGE_SIZE + "");//默认10条
         }
         if (hasDialog) {
             getDataFromNetHasDialogGet(context, NetApi.SHOP_LIST, params, clazz, listener);
@@ -297,6 +297,7 @@ public class FinanceServiceManager extends BaseManager {
 
     /***
      * 店铺详情
+     *
      * @param context
      * @param shop_id
      * @param hasDialog
@@ -353,7 +354,7 @@ public class FinanceServiceManager extends BaseManager {
         params.addBodyParameter("mobile", loanPara.mobile);
         params.addBodyParameter("username", loanPara.username);
         params.addBodyParameter("name", loanPara.name);
-        if(!TextUtils.isEmpty(imgs)) {
+        if (!TextUtils.isEmpty(imgs)) {
             params.addBodyParameter("imgs", imgs);
         }
         params.addBodyParameter("province_id", loanPara.province_id);
@@ -371,7 +372,24 @@ public class FinanceServiceManager extends BaseManager {
     }
 
 
-    public void my_achievement(Context context, int user_id,
+    public void achievement_amount(Context context, int user_id,
+                                   String start, String end, boolean hasDialog, Class clazz, ManagerDataListener listener) {
+        params = new RequestParams();
+        params.addQueryStringParameter("user_id", user_id + "");
+        if (!TextUtils.isEmpty(start)) {
+            params.addQueryStringParameter("start", start );
+        }
+        if (!TextUtils.isEmpty(end)) {
+            params.addQueryStringParameter("end", end);
+        }
+        if (hasDialog) {
+            getDataFromNetHasDialogGet(context, NetApi.ACHIEVEMENT_AMOUNT, params, clazz, listener);
+        } else {
+            getDataFromNetNoDialogGet(context, NetApi.ACHIEVEMENT_AMOUNT, params, clazz, listener);
+        }
+    }
+
+    /*public void my_achievement(Context context, int user_id,
                                int achievement_size, boolean hasDialog, Class clazz, ManagerDataListener listener) {
         params = new RequestParams();
         params.addQueryStringParameter("user_id", user_id + "");
@@ -383,38 +401,39 @@ public class FinanceServiceManager extends BaseManager {
         } else {
             getDataFromNetNoDialogGet(context, NetApi.MY_ACHIEVEMENT, params, clazz, listener);
         }
-    }
+    }*/
 
-    public void my_achievement(Context context, int user_id, long start, long end,
-                               int now_page, boolean hasDialog, Class clazz, ManagerDataListener listener) {
+    public void achievement_list(Context context, int user_id, int now_page, long start, long end,
+                                 boolean hasDialog, Class clazz, ManagerDataListener listener) {
         params = new RequestParams();
         params.addQueryStringParameter("user_id", user_id + "");
         if (start > 0) {
-            params.addQueryStringParameter("start", start+"");
+            params.addQueryStringParameter("start", start + "");
         }
         if (end > 0) {
-            params.addQueryStringParameter("end", end+"");
+            params.addQueryStringParameter("end", end + "");
         }
         if (now_page >= 1) {
             params.addQueryStringParameter("now_page", now_page + "");//当前所在页
-            params.addQueryStringParameter("page_size", Constants.PAGE_SIZE+"");//默认10条
+            params.addQueryStringParameter("page_size", Constants.PAGE_SIZE + "");//默认10条
         }
         if (hasDialog) {
-            getDataFromNetHasDialogGet(context, NetApi.MY_ACHIEVEMENT, params, clazz, listener);
+            getDataFromNetHasDialogGet(context, NetApi.ACHIEVEMENT_LIST, params, clazz, listener);
         } else {
-            getDataFromNetNoDialogGet(context, NetApi.MY_ACHIEVEMENT, params, clazz, listener);
+            getDataFromNetNoDialogGet(context, NetApi.ACHIEVEMENT_LIST, params, clazz, listener);
         }
     }
 
     /**
      * 16、贷款详情
+     *
      * @param context
      * @param loan_id
      * @param hasDialog
      * @param clazz
      * @param listener
      */
-    public void loan_detail(Context context , int loan_id ,boolean hasDialog, Class clazz, ManagerDataListener listener) {
+    public void loan_detail(Context context, int loan_id, boolean hasDialog, Class clazz, ManagerDataListener listener) {
         params = new RequestParams();
         params.addQueryStringParameter("loan_id", loan_id + "");
         if (hasDialog) {

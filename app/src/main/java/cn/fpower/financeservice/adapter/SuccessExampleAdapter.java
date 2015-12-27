@@ -40,7 +40,7 @@ public class SuccessExampleAdapter extends AbstractAdapter<DataInfo> {
         ImageUtils.displayImageRoundImg(R.mipmap.moren, "", holder.exampleAvatar);
         holder.exampleName.setText(mList.get(position).getRealname());
         holder.exampleMoney.setText("￥" + mList.get(position).getMoney());
-        holder.exampleCreateTime.setText("申请时间:" + TimeUtils.fullTimeAndDay(mList.get(position).getApply_success_time()));
+        holder.exampleCreateTime.setText("申请时间:" + TimeUtils.fullTimeAndDay(mList.get(position).getAddtime()));
         holder.exampleRightIv.setImageResource(R.mipmap.fanhui);
         return convertView;
     }

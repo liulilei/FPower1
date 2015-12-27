@@ -49,7 +49,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @Override
     protected void initView() {
         super.initView();
-        back.setVisibility(View.GONE);
+        back.setOnClickListener(this);
         title.setText(getString(R.string.register));
         confirm.setOnClickListener(this);
         send.setOnClickListener(this);
@@ -67,6 +67,9 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.title_bar_back:
+                finish();
+                break;
             case R.id.confirm:
                 String verify=code.getText().toString();
                 if(TextUtils.isEmpty(verify)){

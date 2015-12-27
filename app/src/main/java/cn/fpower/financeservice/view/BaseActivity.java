@@ -1,5 +1,6 @@
 package cn.fpower.financeservice.view;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.KeyEvent;
@@ -43,6 +44,18 @@ public abstract class BaseActivity extends FragmentActivity  implements View.OnC
     }
 
     protected void initLogin() {
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        /**
+         * 设置为竖屏
+         */
+        if (getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_PORTRAIT) {
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
     }
 
     @Override

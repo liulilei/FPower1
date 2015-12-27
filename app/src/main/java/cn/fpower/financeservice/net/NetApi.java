@@ -25,6 +25,6 @@ public class NetApi {
     public static final String LOAN_LIST = URL + "loan_list"; //15、贷款列表（进度）
     public static final String LOAN_DETAIL = URL + "loan_detail";//16、贷款详情
     public static final String MY_ACHIEVEMENT = URL + "my_achievement";//17、我的业绩
-   // public static final String MY_ACHIEVEMENT = URL + "my_achievement";//18、业绩列表
+    public static final String ACHIEVEMENT_LIST = URL + "achievement_list";//18、业绩列表
     public static final String ACHIEVEMENT_AMOUNT = URL + "achievement_amount";//19、获得一段时间内的业绩总和
 }

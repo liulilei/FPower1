@@ -129,7 +129,6 @@ public class SuccessExampleActivity extends BaseActivity implements View.OnClick
                         successExampleAdapter.addData(loadMoreExampleList);
                         successExampleRlv.showFooterResult(now_page <= (((CaseListInfo) data).getData().getCase_total() / Constants.PAGE_SIZE));
                     }
-
                     @Override
                     public void onError(String error) {
                         successExampleRlv.onLoadComplete();

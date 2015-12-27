@@ -134,6 +134,7 @@
                             android:layout_weight="1"></View>
 
                         <ImageView
+                            android:id="@+id/progress_state_iv1"
                             android:layout_width="10dp"
                             android:layout_height="10dp"
                             android:layout_gravity="center"
@@ -141,15 +142,17 @@
                             android:src="@mipmap/progress_ok" />
 
                         <View
+                            android:id="@+id/line1"
                             android:layout_width="0dp"
                             android:layout_height="3dp"
                             android:layout_gravity="center"
                             android:layout_weight="1"
-                            android:background="#13d424"></View>
+                            android:background="@color/progress_line_normal"></View>
 
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/progress_state_tv1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="13dp"
@@ -182,21 +185,23 @@
                         android:layout_height="20dp">
 
                         <View
+                            android:id="@+id/line2"
                             android:layout_width="0dp"
                             android:layout_height="3dp"
                             android:layout_gravity="center"
                             android:layout_weight="1"
-                            android:background="#13d424"></View>
+                            android:background="@color/progress_line_normal"></View>
 
                         <ImageView
+                            android:id="@+id/progress_state_iv2"
                             android:layout_width="10dp"
                             android:layout_height="10dp"
                             android:layout_gravity="center"
                             android:padding="1dp"
-                            android:src="@mipmap/progress_ok" />
+                            android:src="@mipmap/progress_fail" />
 
                         <View
-                            android:id="@+id/line1"
+                            android:id="@+id/line3"
                             android:layout_width="0dp"
                             android:layout_height="3dp"
                             android:layout_gravity="center"
@@ -206,10 +211,11 @@
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/progress_state_tv2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="13dp"
-                        android:text="正在审核"
+
                         android:textColor="#b7b6b6"
                         android:textSize="14sp" />
 
@@ -236,7 +242,7 @@
                         android:layout_height="20dp">
 
                         <View
-                            android:id="@+id/line2"
+                            android:id="@+id/line4"
                             android:layout_width="0dp"
                             android:layout_height="3dp"
                             android:layout_gravity="center"
@@ -244,9 +250,9 @@
                             android:background="@color/progress_line_normal"></View>
 
                         <ImageView
-                            android:id="@+id/progress_state_iv"
-                            android:layout_width="15dp"
-                            android:layout_height="15dp"
+                            android:id="@+id/progress_state_iv3"
+                            android:layout_width="10dp"
+                            android:layout_height="10dp"
                             android:layout_gravity="center"
                             android:padding="1dp"
                             android:src="@mipmap/progress_fail" />
@@ -260,7 +266,7 @@
                     </LinearLayout>
 
                     <TextView
-                        android:id="@+id/progress_state_tv"
+                        android:id="@+id/progress_state_tv3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="13dp"

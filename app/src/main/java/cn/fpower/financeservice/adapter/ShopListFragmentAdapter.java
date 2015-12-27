@@ -51,7 +51,7 @@ public class ShopListFragmentAdapter extends AbstractAdapter<ShopData> {
             holder = (ViewHolder) convertView.getTag();
         }
         ShopData info = mList.get(position);
-        holder.progressName.setText(info.username);
+        holder.progressName.setText(info.name);
         holder.progressMoney.setText(provinceData.getMap().get(info.province_id)+provinceData.getMap().get(info.city_id)+provinceData.getMap().get(info.district_id));
         holder.progressCreateTime.setText(info.address);
         ImageUtils.displayImageRoundImg(R.mipmap.moren, info.imgs != null && info.imgs.size() > 0 ? NetApi.URL_HTTP +info.imgs.get(0) : "", holder.progressAvatar);

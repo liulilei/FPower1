@@ -33,6 +33,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -66,6 +67,7 @@ public class PromoterEnteringFragment extends BaseFragment implements View.OnCli
     @ViewInject(R.id.title_bar_title)
     private TextView title;
 
+    //private Map<String,String> mapList=new LinkedHashMap<>();
     private List<String> list = new ArrayList<String>();
 
     @ViewInject(R.id.noScrollgridview)
@@ -367,8 +369,6 @@ public class PromoterEnteringFragment extends BaseFragment implements View.OnCli
                     loanPara.district_id = keys[2];
                 }
                 loanPara.address = info_addrdetail.getValue();
-                loanPara.latitude = "23.15";//info_latitude.getValue();
-                loanPara.longitude = "113.33";// info_longitude.getValue();
                 String imgs = "";
                 for (int i = 0; i < list.size(); i++) {
                     if (i == list.size() - 1) {
