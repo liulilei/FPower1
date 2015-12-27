@@ -13,24 +13,21 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 import java.util.List;
 
 import cn.fpower.financeservice.R;
-import cn.fpower.financeservice.adapter.AllProgressFragmentAdapter;
 import cn.fpower.financeservice.adapter.ShopListFragmentAdapter;
 import cn.fpower.financeservice.app.FSApplication;
 import cn.fpower.financeservice.constants.Constants;
 import cn.fpower.financeservice.manager.netmanager.FinanceManagerControl;
 import cn.fpower.financeservice.manager.netmanager.ManagerDataListener;
-import cn.fpower.financeservice.mode.DataInfo;
-import cn.fpower.financeservice.mode.ShopInfo;
+import cn.fpower.financeservice.mode.ShopData;
 import cn.fpower.financeservice.mode.ShopList;
 import cn.fpower.financeservice.utils.ToastUtils;
 import cn.fpower.financeservice.view.BaseActivity;
-import cn.fpower.financeservice.view.progress.ProgressDetailActivity;
 import cn.fpower.financeservice.view.widget.RefreshListView;
 
 /**
  * 店铺列表
  **/
-public class PromoterCheckListActivity extends BaseActivity implements OnClickListener, RefreshListView.IOnRefreshListener, RefreshListView.IOnLoadMoreListener, AdapterView.OnItemClickListener {
+public class ShopListActivity extends BaseActivity implements OnClickListener, RefreshListView.IOnRefreshListener, RefreshListView.IOnLoadMoreListener, AdapterView.OnItemClickListener {
 
     @ViewInject(R.id.title_bar_back)
     private ImageView back;
@@ -44,8 +41,8 @@ public class PromoterCheckListActivity extends BaseActivity implements OnClickLi
     private ShopListFragmentAdapter adapter;
 
     private int now_page = 1;
-    private List<ShopInfo> exampleList;
-    private List<ShopInfo> loadMoreExampleList;
+    private List<ShopData> exampleList;
+    private List<ShopData> loadMoreExampleList;
 
     @Override
     protected int initLayout() {

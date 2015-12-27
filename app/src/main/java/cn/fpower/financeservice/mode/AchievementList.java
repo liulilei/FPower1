@@ -3,9 +3,9 @@ package cn.fpower.financeservice.mode;
 import java.util.List;
 
 /**
- * 我的业绩
+ *  业绩列表
  */
-public class MyAchievement extends BaseMode {
+public class AchievementList extends BaseMode {
 
     private Data data;
 
@@ -20,7 +20,8 @@ public class MyAchievement extends BaseMode {
     public class Data extends BaseEntity {
         private List<AchievementData> achievement_list;
         private int achievement_total;
-        private String month_amount;
+        private int page_size;
+        private int now_page;
 
         public List<AchievementData> getAchievement_list() {
             return achievement_list;
@@ -38,12 +39,20 @@ public class MyAchievement extends BaseMode {
             this.achievement_total = achievement_total;
         }
 
-        public String getMonth_amount() {
-            return month_amount;
+        public int getPage_size() {
+            return page_size;
         }
 
-        public void setMonth_amount(String month_amount) {
-            this.month_amount = month_amount;
+        public void setPage_size(int page_size) {
+            this.page_size = page_size;
+        }
+
+        public int getNow_page() {
+            return now_page;
+        }
+
+        public void setNow_page(int now_page) {
+            this.now_page = now_page;
         }
     }
 }

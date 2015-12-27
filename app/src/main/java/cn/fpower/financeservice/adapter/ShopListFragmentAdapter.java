@@ -13,19 +13,18 @@ import java.util.List;
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.app.FSApplication;
 import cn.fpower.financeservice.mode.ProvinceData;
-import cn.fpower.financeservice.mode.ShopInfo;
-import cn.fpower.financeservice.mode.ShopList;
+import cn.fpower.financeservice.mode.ShopData;
 import cn.fpower.financeservice.net.NetApi;
 import cn.fpower.financeservice.utils.ImageUtils;
 
 /**
  * Created by ll on 2015/12/2.
  */
-public class ShopListFragmentAdapter extends AbstractAdapter<ShopInfo> {
+public class ShopListFragmentAdapter extends AbstractAdapter<ShopData> {
 
     private Intent intent;
     private ProvinceData provinceData;
-    public ShopListFragmentAdapter(Context Context, List<ShopInfo> datas) {
+    public ShopListFragmentAdapter(Context Context, List<ShopData> datas) {
         super(Context, datas);
         provinceData=FSApplication.getInstance().getProvinceData();
     }
@@ -51,7 +50,7 @@ public class ShopListFragmentAdapter extends AbstractAdapter<ShopInfo> {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        ShopInfo info = mList.get(position);
+        ShopData info = mList.get(position);
         holder.progressName.setText(info.username);
         holder.progressMoney.setText(provinceData.getMap().get(info.province_id)+provinceData.getMap().get(info.city_id)+provinceData.getMap().get(info.district_id));
         holder.progressCreateTime.setText(info.address);

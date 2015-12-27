@@ -11,21 +11,17 @@ import android.widget.TextView;
 import java.util.List;
 
 import cn.fpower.financeservice.R;
-import cn.fpower.financeservice.app.FSApplication;
-import cn.fpower.financeservice.mode.Achievement;
-import cn.fpower.financeservice.mode.MyAchievement;
-import cn.fpower.financeservice.mode.ProvinceData;
-import cn.fpower.financeservice.mode.ShopList;
+import cn.fpower.financeservice.mode.AchievementData;
 import cn.fpower.financeservice.utils.ImageUtils;
 import cn.fpower.financeservice.utils.TimeUtils;
 
 /**
  * Created by ll on 2015/12/2.
  */
-public class AchievementFragmentAdapter extends AbstractAdapter<Achievement> {
+public class AchievementFragmentAdapter extends AbstractAdapter<AchievementData> {
 
     private Intent intent;
-    public AchievementFragmentAdapter(Context Context, List<Achievement> datas) {
+    public AchievementFragmentAdapter(Context Context, List<AchievementData> datas) {
         super(Context, datas);
     }
 
@@ -49,7 +45,7 @@ public class AchievementFragmentAdapter extends AbstractAdapter<Achievement> {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        Achievement info = mList.get(position);
+        AchievementData info = mList.get(position);
         holder.progressName.setText(info.realname);
         holder.progressMoney.setText("￥"+info.money);
         holder.progressCreateTime.setText("申请时间:" + TimeUtils.fullTimeAndDay(info.addtime));

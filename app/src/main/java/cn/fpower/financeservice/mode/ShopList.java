@@ -47,13 +47,13 @@ public class ShopList extends BaseMode {
             this.now_page = now_page;
         }
 
-        private List<ShopInfo> shop_list;
+        private List<ShopData> shop_list;
 
-        public List<ShopInfo> getShop_list() {
+        public List<ShopData> getShop_list() {
             return shop_list;
         }
 
-        public void setShop_list(List<ShopInfo> shop_list) {
+        public void setShop_list(List<ShopData> shop_list) {
             this.shop_list = shop_list;
         }
     }

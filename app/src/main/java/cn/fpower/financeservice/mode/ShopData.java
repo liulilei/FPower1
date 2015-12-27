@@ -5,7 +5,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2015/12/26.
  */
-public class ShopInfo extends BaseEntity {
+public class ShopData extends BaseEntity {
     public int id;// "16",
         /*imgs; [
                 "a.gzweimiao.com/uploads/image/20151212/353876a5f62e8dcef112e17977cdc888.JPEG",

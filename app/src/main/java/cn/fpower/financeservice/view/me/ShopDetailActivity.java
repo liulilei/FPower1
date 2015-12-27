@@ -1,29 +1,17 @@
 package cn.fpower.financeservice.view.me;
 
-import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.EditorInfo;
-import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.amap.api.location.AMapLocation;
-import com.amap.api.location.AMapLocationClient;
-import com.amap.api.location.AMapLocationListener;
-import com.bigkoo.pickerview.OptionsPickerView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 import java.util.ArrayList;
@@ -31,21 +19,14 @@ import java.util.List;
 
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.app.FSApplication;
-import cn.fpower.financeservice.fragment.BaseFragment;
 import cn.fpower.financeservice.manager.netmanager.FinanceManagerControl;
 import cn.fpower.financeservice.manager.netmanager.ManagerDataListener;
-import cn.fpower.financeservice.mode.LoanPara;
 import cn.fpower.financeservice.mode.ProvinceData;
+import cn.fpower.financeservice.mode.ShopData;
 import cn.fpower.financeservice.mode.ShopDetail;
-import cn.fpower.financeservice.mode.ShopInfo;
-import cn.fpower.financeservice.mode.UserInfo;
 import cn.fpower.financeservice.net.NetApi;
 import cn.fpower.financeservice.utils.ImageUtils;
-import cn.fpower.financeservice.utils.PickPhotoUtil;
-import cn.fpower.financeservice.utils.ToastUtils;
 import cn.fpower.financeservice.view.BaseActivity;
-import cn.fpower.financeservice.view.ImgSelActivity;
-import cn.fpower.financeservice.view.InfoInputActivity;
 import cn.fpower.financeservice.view.widget.EnteringSettingView;
 
 /**
@@ -156,7 +137,7 @@ public class ShopDetailActivity extends BaseActivity {
 
                 @Override
                 public void onSuccess(Object data) {
-                    ShopInfo info= ((ShopDetail) data).getData().getShop_info();
+                    ShopData info= ((ShopDetail) data).getData().getShop_info();
                     list=info.imgs;
                     if(list!=null&&list.size()>0){
                         noScrollgridview.setAdapter(adapter);
