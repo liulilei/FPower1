@@ -43,7 +43,7 @@ import cn.fpower.financeservice.view.home.HomeActivity;
 import cn.fpower.financeservice.view.widget.EnteringSettingView;
 
 /**
- * 完善信息
+ * 完善个人信息
  */
 public class MeInfoActivity extends BaseActivity {
 
@@ -93,7 +93,7 @@ public class MeInfoActivity extends BaseActivity {
     protected void initView() {
         super.initView();
         back.setOnClickListener(this);
-        title.setText("完善信息");
+        title.setText("个人信息");
         info_sex.setValue("男");
         submit.setOnClickListener(this);
         img_right.setOnClickListener(this);

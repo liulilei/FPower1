@@ -38,9 +38,13 @@ public class LoginCheckActivity extends BaseActivity implements View.OnClickList
     @ViewInject(R.id.loginin)
     private Button loginin;
 
+
+    @ViewInject(R.id.forget_password)
+    private TextView forget_password;
+
     @Override
     protected int initLayout() {
-        return R.layout.activity_login;
+        return R.layout.activity_login_check;
     }
 
     @Override
@@ -49,11 +53,10 @@ public class LoginCheckActivity extends BaseActivity implements View.OnClickList
         back.setOnClickListener(this);
         title.setText("登录");
         loginin.setOnClickListener(this);
+        forget_password.setOnClickListener(this);
     }
 
-
     String mobile;
-
     private void jump(Class clz) {
         Intent intent = new Intent();
         intent.putExtra("mobile", mobile);
@@ -66,6 +69,9 @@ public class LoginCheckActivity extends BaseActivity implements View.OnClickList
         switch (v.getId()) {
             case R.id.title_bar_back:
                 finish();
+                break;
+            case R.id.forget_password:
+                startActivity(new Intent(this, ForgetMobileActivity.class));
                 break;
             case R.id.loginin:
                 //登录注册

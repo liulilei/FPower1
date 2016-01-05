@@ -42,8 +42,10 @@ import java.util.TreeMap;
 
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.app.FSApplication;
+import cn.fpower.financeservice.constants.Constants;
 import cn.fpower.financeservice.manager.netmanager.FinanceManagerControl;
 import cn.fpower.financeservice.manager.netmanager.ManagerDataListener;
+import cn.fpower.financeservice.manager.netmanager.ManagerStringListener;
 import cn.fpower.financeservice.mode.LoanPara;
 import cn.fpower.financeservice.mode.ProvinceData;
 import cn.fpower.financeservice.mode.UserInfo;
@@ -103,12 +105,6 @@ public class PromoterEnteringFragment extends BaseFragment implements View.OnCli
 
     @ViewInject(R.id.img_loc)
     private ImageView img_loc;
-
-
-    private final int CODE_NAME = 0;
-    private final int CODE_MOBILE = 2;
-    private final int CODE_ADDRDETAIL = 3;
-    private final int CODE_USERNAME = 6;
 
     @ViewInject(R.id.submit)
     private Button submit;
@@ -181,8 +177,8 @@ public class PromoterEnteringFragment extends BaseFragment implements View.OnCli
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         String result = "";
-        if (data!=null){
-            result=data.getStringExtra("result");
+        if (data != null) {
+            result = data.getStringExtra("result");
         }
         switch (requestCode) {
             case PickPhotoUtil.PICKPHOTO_LOCAL:
@@ -206,16 +202,16 @@ public class PromoterEnteringFragment extends BaseFragment implements View.OnCli
                     adapter.notifyDataSetChanged();
                 }
                 break;
-            case CODE_NAME:
+            case Constants.CODE_NAME:
                 info_name.setValue(result);
                 break;
-            case CODE_USERNAME:
+            case Constants.CODE_USERNAME:
                 info_username.setValue(result);
                 break;
-            case CODE_MOBILE:
+            case Constants.CODE_MOBILE:
                 info_mobile.setValue(result);
                 break;
-            case CODE_ADDRDETAIL:
+            case Constants.CODE_ADDRDETAIL:
                 info_addrdetail.setValue(result);
                 break;
         }
@@ -228,7 +224,7 @@ public class PromoterEnteringFragment extends BaseFragment implements View.OnCli
     protected void initView() {
         animation = AnimationUtils.loadAnimation(getActivity(), R.anim.loading_home);
         back.setVisibility(View.GONE);
-        title.setText("店面信息");
+        title.setText(R.string.entering);
         noScrollgridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
         adapter = new GridAdapter(getActivity());
         noScrollgridview.setAdapter(adapter);
@@ -268,8 +264,8 @@ public class PromoterEnteringFragment extends BaseFragment implements View.OnCli
                         //定位成功回调信息，设置相关消息
                         latitude.setText(amapLocation.getLatitude() + "");//获取经度
                         longitude.setText(amapLocation.getLongitude() + "");//获取纬度
-                       // img_loc.clearAnimation();
-                       // ToastUtils.show(getActivity(),"定位成功");//getActivity()为空
+                        img_loc.clearAnimation();
+                        // ToastUtils.show(getActivity(),"定位成功");//getActivity()为空
                     } else {
 
                     }
@@ -358,25 +354,23 @@ public class PromoterEnteringFragment extends BaseFragment implements View.OnCli
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.img_loc:
-                if(!animation.hasStarted()) {
-                    img_loc.startAnimation(animation);
-                    aMapLocationClient.startLocation();
-                }
+                img_loc.startAnimation(animation);
+                aMapLocationClient.startLocation();
                 break;
             case R.id.info_addr:
                 optionsPickerView.show();
                 break;
             case R.id.info_name:
-                jump(info_name, CODE_NAME, 0);
+                jump(info_name, Constants.CODE_NAME, 0);
                 break;
             case R.id.info_username:
-                jump(info_username, CODE_USERNAME, 0);
+                jump(info_username, Constants.CODE_USERNAME, 0);
                 break;
             case R.id.info_mobile:
-                jump(info_mobile, CODE_MOBILE, EditorInfo.TYPE_CLASS_NUMBER);
+                jump(info_mobile, Constants.CODE_MOBILE, EditorInfo.TYPE_CLASS_NUMBER);
                 break;
             case R.id.info_addrdetail:
-                jump(info_addrdetail, CODE_ADDRDETAIL, 0);
+                jump(info_addrdetail, Constants.CODE_ADDRDETAIL, 0);
                 break;
             case R.id.submit:
                 loanPara.user_id = FSApplication.getInstance().getUserInfo().getData().getId();
@@ -407,10 +401,10 @@ public class PromoterEnteringFragment extends BaseFragment implements View.OnCli
                     return;
                 }
                 FinanceManagerControl.getFinanceServiceManager().create_shop(getActivity(), loanPara, imgs,
-                        true, UserInfo.class, new ManagerDataListener() {
+                        true,  new ManagerStringListener() {
 
                             @Override
-                            public void onSuccess(Object data) {
+                            public void onSuccess(String data) {
                                 //清空所有数据
                                 info_name.clear();
                                 info_username.clear();

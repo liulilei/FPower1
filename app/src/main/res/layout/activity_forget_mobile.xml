@@ -8,14 +8,15 @@
     <include layout="@layout/title_bar" />
 
     <cn.fpower.financeservice.view.widget.ClearEditText
-        android:id="@+id/view_pwd"
+        android:id="@+id/view_mobile"
         style="@style/edittext_linput"
-        android:inputType="textPassword"
         android:layout_width="match_parent"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginTop="22dp"
-        android:hint="@string/input_mobile" />
+        android:inputType="number"
+        android:hint="@string/input_mobile"
+        android:maxLength="11" />
 
     <Button
         android:background="@drawable/s_round_group_red"
@@ -26,7 +27,7 @@
         android:layout_marginTop="22dp"
         android:layout_width="match_parent"
         android:layout_height="46dp"
-        android:text="@string/login_in"
-        android:id="@+id/loginin" />
+        android:text="@string/next"
+        android:id="@+id/next" />
 
 </LinearLayout>

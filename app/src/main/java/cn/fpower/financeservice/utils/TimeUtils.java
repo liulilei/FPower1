@@ -10,9 +10,12 @@ import java.util.Date;
 public class TimeUtils {
 
     public static String fullTimeAndDay(long time) {
+		if(time<=0){
+			return "";
+		}
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(time*1000);
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return format.format(calendar.getTime());
     }
 

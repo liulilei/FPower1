@@ -130,8 +130,8 @@ public class FinanceServiceManager extends BaseManager {
 
 
     public void create_loan(Context context, LoanPara loanPara,
-                            boolean hasDialog, Class clazz,
-                            ManagerDataListener listener) {
+                            boolean hasDialog,
+                            ManagerStringListener listener) {
         params = new RequestParams();
         params.addBodyParameter("user_id", loanPara.user_id + "");
         params.addBodyParameter("realname", loanPara.realname);
@@ -148,9 +148,9 @@ public class FinanceServiceManager extends BaseManager {
             params.addBodyParameter("channel", loanPara.channel);
         }
         if (hasDialog) {
-            getDataFromNetHasDialog(context, NetApi.CREATE_LOAN, params, clazz, listener);
+            getJsonStringFromNetHasDialog(context, NetApi.CREATE_LOAN, params, listener);
         } else {
-            getDataFromNetNoDialog(context, NetApi.CREATE_LOAN, params, clazz, listener);
+            getJsonStringFromNetHasDialog(context, NetApi.CREATE_LOAN, params, listener);
         }
     }
 
@@ -342,13 +342,12 @@ public class FinanceServiceManager extends BaseManager {
      * @param context
      * @param loanPara
      * @param hasDialog
-     * @param clazz
      * @param listener
      */
     //TODO 图片Base64
     public void create_shop(Context context, LoanPara loanPara, String imgs,
-                            boolean hasDialog, Class clazz,
-                            ManagerDataListener listener) {
+                            boolean hasDialog,
+                            ManagerStringListener listener) {
         params = new RequestParams();
         params.addBodyParameter("user_id", loanPara.user_id + "");
         params.addBodyParameter("mobile", loanPara.mobile);
@@ -365,9 +364,9 @@ public class FinanceServiceManager extends BaseManager {
         params.addBodyParameter("longitude", loanPara.longitude);
         params.addBodyParameter("source", "2");
         if (hasDialog) {
-            getDataFromNetHasDialog(context, NetApi.CREATE_SHOP, params, clazz, listener);
+            getJsonStringFromNetHasDialog(context, NetApi.CREATE_SHOP, params, listener);
         } else {
-            getDataFromNetNoDialog(context, NetApi.CREATE_SHOP, params, clazz, listener);
+            getJsonStringFromNetHasDialog(context, NetApi.CREATE_SHOP, params, listener);
         }
     }
 
@@ -440,6 +439,52 @@ public class FinanceServiceManager extends BaseManager {
             getDataFromNetHasDialogGet(context, NetApi.LOAN_DETAIL, params, clazz, listener);
         } else {
             getDataFromNetNoDialogGet(context, NetApi.LOAN_DETAIL, params, clazz, listener);
+        }
+    }
+
+    /**
+     * 忘记密码
+     * @param context
+     * @param mobile
+     * @param passwd
+     * @param verify
+     * @param hasDialog
+     * @param listener
+     */
+    public void forget_password(Context context, String mobile,String verify,String passwd,
+                            boolean hasDialog,
+                            ManagerStringListener listener) {
+        params = new RequestParams();
+        params.addBodyParameter("mobile", mobile);
+        params.addBodyParameter("verify", verify);
+        params.addBodyParameter("passwd", passwd);
+        if (hasDialog) {
+            getJsonStringFromNetHasDialog(context, NetApi.FORGET_PASSWORD, params, listener);
+        } else {
+            getJsonStringFromNetHasDialog(context, NetApi.FORGET_PASSWORD, params, listener);
+        }
+    }
+
+    /**
+     * 修改密码
+     * @param context
+     * @param user_id
+     * @param passwd 新密码
+     * @param passwd_re 旧密码
+     * @param hasDialog
+     * @param listener
+     */
+    public void user_info_edit_passwd(Context context, String user_id,String passwd,String passwd_re,
+                                boolean hasDialog,
+                                ManagerStringListener listener) {
+        params = new RequestParams();
+        params.addBodyParameter("user_id", user_id);
+        params.addBodyParameter("passwd", passwd_re);
+        params.addBodyParameter("passwd_re", passwd);
+        if (hasDialog) {
+            getJsonStringFromNetHasDialog(context, NetApi.USER_INFO_EDIT_PASSWD, params, listener);
+        } else {
+            getJsonStringFromNetHasDialog(context, NetApi.USER_INFO_EDIT_PASSWD, params, listener);
         }
     }
 }

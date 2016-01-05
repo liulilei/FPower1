@@ -35,9 +35,6 @@ public class ProgressDetailActivity extends BaseActivity implements View.OnClick
     @ViewInject(R.id.progress_money)
     private TextView progressMoney;
 
-    @ViewInject(R.id.progress_header)
-    private ImageView progressHeader;
-
     @ViewInject(R.id.progress_name)
     private TextView progressName;
 
@@ -109,7 +106,7 @@ public class ProgressDetailActivity extends BaseActivity implements View.OnClick
     protected void initView() {
         back.setOnClickListener(this);
         progressPhone.setOnClickListener(this);
-        title.setText("进度");
+        title.setText("申请详情");
         loanId = getIntent().getIntExtra("loan_id", -1);
     }
 
@@ -135,7 +132,6 @@ public class ProgressDetailActivity extends BaseActivity implements View.OnClick
     private void showView(LoanDetail.Data loanDetail) {
         progressTime.setText(TimeUtils.fullTimeAndDay(loanDetail.addtime));
         progressMoney.setText("￥" + loanDetail.money);
-        ImageUtils.displayImageRoundImg(R.mipmap.moren, "", progressHeader);
         progressName.setText(loanDetail.realname);
         progressTime1.setText(TimeUtils.fullTimeAndDay(loanDetail.addtime));
         progressStateTv1.setText("待审核");

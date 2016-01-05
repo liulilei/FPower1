@@ -65,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/info_name"
-                app:txtName="地址" />
+                app:txtName="@string/area" />
 
             <cn.fpower.financeservice.view.widget.EnteringSettingView
                 android:id="@+id/info_addrdetail"

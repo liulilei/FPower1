@@ -72,19 +72,12 @@
                 android:paddingBottom="14dp"
                 android:paddingTop="14dp">
 
-                <ImageView
-                    android:id="@+id/progress_header"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="21dp" />
-
                 <TextView
                     android:id="@+id/progress_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:layout_marginLeft="16dp"
-                    android:layout_toRightOf="@id/progress_header"
+                    android:layout_marginLeft="20dp"
                     android:textColor="#292929"
                     android:textSize="16sp" />
 
@@ -161,11 +154,11 @@
                         android:textSize="14sp" />
 
                     <TextView
-                        android:text="2011-11-10 02:11"
                         android:id="@+id/progress_tqime1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
+                        android:text="2011-11-10 02:11"
                         android:textColor="#b7b6b6"
                         android:textSize="11sp" />
 
@@ -291,9 +284,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="22dp"
-                android:layout_marginTop="15dp">
+                android:gravity="center"
+                android:layout_height="46dp">
 
                 <TextView
                     android:id="@+id/progress_address_tv"
@@ -326,9 +318,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="22dp"
-                android:layout_marginTop="15dp">
+                android:gravity="center"
+                android:layout_height="46dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -358,9 +349,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="22dp"
-                android:layout_marginTop="15dp">
+                android:gravity="center"
+                android:layout_height="46dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -390,9 +380,8 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="22dp"
-                android:layout_marginTop="15dp">
+                android:gravity="center"
+                android:layout_height="46dp">
 
                 <TextView
                     android:layout_width="wrap_content"

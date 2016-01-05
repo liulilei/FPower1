@@ -29,7 +29,7 @@
                 android:layout_width="62dp"
                 android:layout_height="62dp"
                 android:layout_marginLeft="20dp"
-                android:src="@mipmap/me_check" />
+                android:src="@mipmap/moren" />
 
             <RelativeLayout
                 android:layout_width="wrap_content"
@@ -136,7 +136,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/fragment_me_check"
         app:imgRes="@mipmap/me_mod"
-        app:txtName="修改信息" />
+        app:txtName="修改密码" />
 
     <cn.fpower.financeservice.view.widget.MeSettingView
         android:id="@+id/fragment_me_about"

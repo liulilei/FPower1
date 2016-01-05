@@ -12,12 +12,15 @@ import java.util.List;
 
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.adapter.AchievementFragmentAdapter;
+import cn.fpower.financeservice.app.FSApplication;
 import cn.fpower.financeservice.constants.Constants;
 import cn.fpower.financeservice.manager.netmanager.FinanceManagerControl;
 import cn.fpower.financeservice.manager.netmanager.ManagerDataListener;
 import cn.fpower.financeservice.mode.AchievementAmount;
 import cn.fpower.financeservice.mode.AchievementData;
 import cn.fpower.financeservice.mode.AchievementList;
+import cn.fpower.financeservice.net.NetApi;
+import cn.fpower.financeservice.utils.ImageUtils;
 import cn.fpower.financeservice.utils.TimeUtils;
 import cn.fpower.financeservice.utils.ToastUtils;
 import cn.fpower.financeservice.view.BaseActivity;
@@ -39,6 +42,9 @@ public class AchievementActivity extends BaseActivity implements RefreshListView
 
     @ViewInject(R.id.time)
     private TextView time;
+
+    @ViewInject(R.id.img_my_head)
+    private ImageView img_my_head;
 
     @ViewInject(R.id.money)
     private TextView money;
@@ -74,9 +80,11 @@ public class AchievementActivity extends BaseActivity implements RefreshListView
         time.setText(TimeUtils.getMouth() + "月");
         Bundle extras = getIntent().getExtras();
         if(extras!=null) {
-            userId = getIntent().getExtras().getInt("user_id");
+            userId = extras.getInt("user_id");
+            ImageUtils.displayImageRoundImg(R.mipmap.moren, NetApi.URL+extras.getString("face"), img_my_head);
+        }else{
+            img_my_head.setVisibility(View.GONE);
         }
-
         FinanceManagerControl.getFinanceServiceManager().achievement_list(act, userId, 1, 0, 0, true, AchievementList.class, new ManagerDataListener() {
 
             @Override
@@ -86,7 +94,6 @@ public class AchievementActivity extends BaseActivity implements RefreshListView
                 if (exampleList == null || exampleList.size() == 0) {
                     ToastUtils.show(act, "没有数据");
                     progressRlv.showFooterResult(false);
-                    return;
                 }
                 adapter = new AchievementFragmentAdapter(act, exampleList);
                 progressRlv.setAdapter(adapter);
@@ -129,6 +136,33 @@ public class AchievementActivity extends BaseActivity implements RefreshListView
 
     @Override
     public void OnRefresh() {
+        FinanceManagerControl.getFinanceServiceManager().achievement_amount(act, userId
+                , TimeUtils.getMouthStart(), TimeUtils.getMouthEnd(), true, AchievementAmount.class, new ManagerDataListener() {
+            @Override
+            public void onSuccess(Object data) {
+                AchievementAmount m = (AchievementAmount) data;
+                money.setText("￥" + m.getData().getAchievement_amount());
+            }
+
+            @Override
+            public void onError(String error) {
+                money.setText("￥0");
+            }
+        });
+        FinanceManagerControl.getFinanceServiceManager().achievement_amount(act, userId
+                , TimeUtils.getMouthStart(), TimeUtils.getMouthEnd(), true, AchievementAmount.class, new ManagerDataListener() {
+            @Override
+            public void onSuccess(Object data) {
+                AchievementAmount m = (AchievementAmount) data;
+                money.setText("￥" + m.getData().getAchievement_amount());
+            }
+
+            @Override
+            public void onError(String error) {
+                money.setText("￥0");
+            }
+        });
+
         FinanceManagerControl.getFinanceServiceManager().achievement_list(act, userId, 1, 0, 0, true, AchievementList.class, new ManagerDataListener() {
 
             @Override
@@ -140,7 +174,6 @@ public class AchievementActivity extends BaseActivity implements RefreshListView
                 if (exampleList == null || exampleList.size() == 0) {
                     ToastUtils.show(act, "没有数据");
                     progressRlv.showFooterResult(false);
-                    return;
                 }
                 if (adapter == null) {
                     adapter = new AchievementFragmentAdapter(act, exampleList);
@@ -170,7 +203,6 @@ public class AchievementActivity extends BaseActivity implements RefreshListView
                 if (loadMoreExampleList == null || loadMoreExampleList.size() == 0) {
                     ToastUtils.show(act, "没有数据");
                     progressRlv.showFooterResult(false);
-                    return;
                 }
                 adapter.addData(loadMoreExampleList);
                 progressRlv.showFooterResult(now_page <= (info.getData().getAchievement_total() / Constants.PAGE_SIZE));

@@ -14,7 +14,6 @@ import cn.fpower.financeservice.utils.ImageUtils;
 import cn.fpower.financeservice.utils.TimeUtils;
 
 /**
- * Created by ll on 2015/11/30.
  */
 public class SuccessExampleAdapter extends AbstractAdapter<DataInfo> {
 
@@ -27,8 +26,7 @@ public class SuccessExampleAdapter extends AbstractAdapter<DataInfo> {
         ViewHolder holder;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = View.inflate(mContext, R.layout.item_success_example, null);
-            holder.exampleAvatar = (ImageView) convertView.findViewById(R.id.item_success_example_avatar);
+            convertView = View.inflate(mContext, R.layout.item_example, null);
             holder.exampleName = (TextView) convertView.findViewById(R.id.item_success_example_name);
             holder.exampleMoney = (TextView) convertView.findViewById(R.id.item_success_example_money);
             holder.exampleCreateTime = (TextView) convertView.findViewById(R.id.item_success_example_create_time);
@@ -37,16 +35,14 @@ public class SuccessExampleAdapter extends AbstractAdapter<DataInfo> {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
-        ImageUtils.displayImageRoundImg(R.mipmap.moren, "", holder.exampleAvatar);
         holder.exampleName.setText(mList.get(position).getRealname());
         holder.exampleMoney.setText("￥" + mList.get(position).getMoney());
         holder.exampleCreateTime.setText("申请时间:" + TimeUtils.fullTimeAndDay(mList.get(position).getAddtime()));
-        holder.exampleRightIv.setImageResource(R.mipmap.fanhui);
+       // holder.exampleRightIv.setImageResource(R.mipmap.fanhui);
         return convertView;
     }
 
     class ViewHolder {
-        private ImageView exampleAvatar;
         private TextView exampleName;
         private TextView exampleMoney;
         private TextView exampleCreateTime;

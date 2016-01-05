@@ -30,9 +30,12 @@ import cn.fpower.financeservice.view.BaseActivity;
 import cn.fpower.financeservice.view.widget.EnteringSettingView;
 
 /**
- * Created by ll on 2015/11/26.
+ * 店面详情
  */
 public class ShopDetailActivity extends BaseActivity {
+
+    @ViewInject(R.id.des)
+    private TextView des;
 
     @ViewInject(R.id.title_bar_back)
     private ImageView back;
@@ -119,7 +122,8 @@ public class ShopDetailActivity extends BaseActivity {
     @Override
     protected void initView() {
         back.setOnClickListener(this);
-        title.setText("店面信息");
+        title.setText("店面详情");
+        des.setText("门店照片,第一张为门店照片");
         submit.setVisibility(View.GONE);
         noScrollgridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
         adapter = new GridAdapter(this);

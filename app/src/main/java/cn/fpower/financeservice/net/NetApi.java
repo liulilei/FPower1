@@ -27,4 +27,6 @@ public class NetApi {
     public static final String MY_ACHIEVEMENT = URL + "my_achievement";//17、我的业绩
     public static final String ACHIEVEMENT_LIST = URL + "achievement_list";//18、业绩列表
     public static final String ACHIEVEMENT_AMOUNT = URL + "achievement_amount";//19、获得一段时间内的业绩总和
+    public static final String  FORGET_PASSWORD = URL + "forget_password";//20、忘记密码
+    public static final String  USER_INFO_EDIT_PASSWD = URL + "user_info_edit_passwd";//21、修改密码
 }

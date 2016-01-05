@@ -53,7 +53,7 @@ public class ShopListActivity extends BaseActivity implements OnClickListener, R
     @Override
     protected void initView() {
         back.setOnClickListener(this);
-        title.setText("店铺列表");
+        title.setText("我的业绩");
         progressRlv.setOnRefreshListener(this);
         progressRlv.setOnLoadMoreListener(this);
         progressRlv.setOnItemClickListener(this);

@@ -8,9 +8,47 @@
         layout="@layout/title_bar" />
 
     <ImageView
+        android:id="@+id/img_logo"
+        android:layout_below="@+id/layout_head"
         android:src="@mipmap/logo"
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_below="@+id/img_logo"
+        android:id="@+id/value"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:text="微妙金服v1.0"
+        android:layout_marginRight="12dp"
+        android:layout_toLeftOf="@+id/img_go"
+        android:textColor="#737373"
+        android:textSize="14sp" />
+
+    <TextView
+        android:layout_marginBottom="3dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#737373"
+        android:textSize="12sp"
+        android:layout_above="@+id/copyright"
+        android:text="广州微妙商务信息有限公司" />
+
+    <TextView
+        android:id="@+id/copyright"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="#000000"
+        android:textSize="12sp"
+        android:text="Copyright @2015-2016 All Rights Reserved" />
 
 </RelativeLayout>

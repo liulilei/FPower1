@@ -37,8 +37,8 @@ public class AllProgressFragmentAdapter extends AbstractAdapter<DataInfo> {
         ViewHolder holder;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = View.inflate(mContext, R.layout.item_success_example, null);
-            holder.progressAvatar = (ImageView) convertView.findViewById(R.id.item_success_example_avatar);
+            convertView = View.inflate(mContext, R.layout.item_example, null);
+            holder.item_qian = (ImageView) convertView.findViewById(R.id.item_qian);
             holder.progressName = (TextView) convertView.findViewById(R.id.item_success_example_name);
             holder.progressMoney = (TextView) convertView.findViewById(R.id.item_success_example_money);
             holder.progressCreateTime = (TextView) convertView.findViewById(R.id.item_success_example_create_time);
@@ -48,17 +48,17 @@ public class AllProgressFragmentAdapter extends AbstractAdapter<DataInfo> {
             holder = (ViewHolder) convertView.getTag();
         }
         DataInfo info=mList.get(position);
+        holder.item_qian.setImageResource(R.mipmap.shenhe);
         holder.progressRightIv.setImageResource(R.mipmap.phone);
         holder.progressRightIv.setOnClickListener(new CallPhoneClickListener(mList.get(position).getMobile()));
         holder.progressName.setText(info.getRealname());
         holder.progressMoney.setText(MappingManager.getProcess(Integer.parseInt(info.getProcess())));
         holder.progressCreateTime.setText("申请时间:" + TimeUtils.fullTimeAndDay(info.getAddtime()));
-        ImageUtils.displayImageRoundImg(R.mipmap.moren, "", holder.progressAvatar);
         return convertView;
     }
 
     class ViewHolder {
-        private ImageView progressAvatar;
+        private ImageView item_qian;
         private TextView progressName;
         private TextView progressMoney;
         private TextView progressCreateTime;

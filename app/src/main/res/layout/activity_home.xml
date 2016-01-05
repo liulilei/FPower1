@@ -51,7 +51,7 @@
             android:gravity="center"
             android:paddingBottom="5dp"
             android:paddingTop="7dp"
-            android:text="录入"
+            android:text="信息录入"
             android:textColor="@drawable/home_tab_text_color"
             android:textSize="11sp"/>
 

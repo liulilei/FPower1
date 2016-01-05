@@ -11,6 +11,7 @@ import com.lidroid.xutils.ViewUtils;
 
 import cn.fpower.financeservice.app.FSApplication;
 import cn.fpower.financeservice.utils.IntentUtils;
+import cn.fpower.financeservice.utils.ToastUtils;
 import cn.fpower.financeservice.view.me.LoginCheckActivity;
 import cn.fpower.financeservice.view.me.MeInfoActivity;
 
@@ -53,7 +54,6 @@ public abstract class BaseFragment extends Fragment  implements View.OnClickList
 
     protected void initData() {
     }
-
     public void onResume() {
         super.onResume();
     }

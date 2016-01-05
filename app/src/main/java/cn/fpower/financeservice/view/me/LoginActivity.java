@@ -1,12 +1,9 @@
 package cn.fpower.financeservice.view.me;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.text.method.PasswordTransformationMethod;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,7 +19,6 @@ import cn.fpower.financeservice.app.FSApplication;
 import cn.fpower.financeservice.constants.Constants;
 import cn.fpower.financeservice.manager.netmanager.FinanceManagerControl;
 import cn.fpower.financeservice.manager.netmanager.ManagerDataListener;
-import cn.fpower.financeservice.manager.netmanager.ManagerStringListener;
 import cn.fpower.financeservice.mode.UserInfo;
 import cn.fpower.financeservice.utils.IntentUtils;
 import cn.fpower.financeservice.utils.SpUtils;
@@ -42,14 +38,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @ViewInject(R.id.title_bar_title)
     private TextView title;
 
-    @ViewInject(R.id.view_mobile)
+    @ViewInject(R.id.view_pwd)
     private ClearEditText view_pwd;
 
     @ViewInject(R.id.loginin)
     private Button loginin;
-
-    @ViewInject(R.id.des)
-    private TextView des;
 
     private UserInfo userInfo;
 
@@ -63,13 +56,10 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
     @Override
     protected void initView() {
         super.initView();
-        des.setVisibility(View.GONE);
         back.setOnClickListener(this);
         title.setText("登录");
         view_pwd.setHint(R.string.input_pwd);
-        loginin.setText(R.string.confirm);
         loginin.setOnClickListener(this);
-        view_pwd.setInputType(EditorInfo.TYPE_CLASS_TEXT | EditorInfo.TYPE_TEXT_VARIATION_PASSWORD);
     }
 
 
@@ -90,6 +80,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
             case R.id.title_bar_back:
                 finish();
                 break;
+
             case R.id.loginin:
                 String passwd = view_pwd.getText().toString();
                 if (TextUtils.isEmpty(passwd)) {

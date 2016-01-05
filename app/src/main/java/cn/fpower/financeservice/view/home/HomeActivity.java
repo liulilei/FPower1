@@ -85,6 +85,9 @@ public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         }
     }
 
+    private boolean isProgressFragmentFirst=true;
+    private boolean isEnteringFragmentFirst=true;
+
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         switch (checkedId) {
@@ -95,6 +98,11 @@ public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                 if(!isLogin()){
                     homeRbt.setChecked(true);
                     return;
+                }
+                if(isProgressFragmentFirst){
+                    isProgressFragmentFirst=false;
+                }else{
+                    progressFragment.initList();
                 }
                 showFragment(progressFragment);
                 break;
@@ -108,6 +116,11 @@ public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedCh
                         showFragment(promoterEnteringFragment);
                         break;
                     default:
+                        if(isEnteringFragmentFirst){
+                            isEnteringFragmentFirst=false;
+                        }else{
+                            enteringFragment.initQudao();
+                        }
                         showFragment(enteringFragment);
                         break;
                 }

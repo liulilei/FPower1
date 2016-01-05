@@ -47,6 +47,11 @@ public abstract class BaseActivity extends FragmentActivity  implements View.OnC
     }
 
     @Override
+    protected void onSaveInstanceState(Bundle outState) {
+       // super.onSaveInstanceState(outState);
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
 

@@ -19,9 +19,9 @@ import cn.fpower.financeservice.view.BaseActivity;
 import cn.fpower.financeservice.view.widget.ClearEditText;
 
 /**
- * 登陆
+ * 忘记密码
  */
-public class RegisterActivity extends BaseActivity implements View.OnClickListener {
+public class ForgetPasswordActivity extends BaseActivity implements View.OnClickListener {
 
     String mobile;
     @ViewInject(R.id.title_bar_back)
@@ -41,6 +41,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
     @ViewInject(R.id.send)
     private Button send;
+
 
     /** 倒计时 **/
     private MyTimerUtil timer;
@@ -73,7 +74,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
     protected void initView() {
         super.initView();
         back.setOnClickListener(this);
-        title.setText(getString(R.string.register));
+        title.setText("忘记密码");
         confirm.setOnClickListener(this);
         send.setOnClickListener(this);
         timer = new MyTimerUtil(60000, 1000);
@@ -95,25 +96,24 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 finish();
                 break;
             case R.id.confirm:
-                String verify=code.getText().toString();
-                if(TextUtils.isEmpty(verify)){
-                    ToastUtils.show(this,R.string.code);
+                String verify = code.getText().toString();
+                if (TextUtils.isEmpty(verify)) {
+                    ToastUtils.show(this, R.string.code);
                     return;
                 }
-                String passwd=pass.getText().toString();
-                if(TextUtils.isEmpty(passwd)){
-                    ToastUtils.show(this,R.string.input_pwd);
+                String passwd = pass.getText().toString();
+                if (TextUtils.isEmpty(passwd)) {
+                    ToastUtils.show(this, R.string.input_pwd);
                     return;
                 }
-                FinanceManagerControl.getFinanceServiceManager().register(this, mobile,verify, passwd, true, new ManagerStringListener() {
+                FinanceManagerControl.getFinanceServiceManager().forget_password(this, mobile, verify, passwd, true, new ManagerStringListener() {
 
                     @Override
                     public void onSuccess(String result) {
                         Intent intent = new Intent();
-                        intent.putExtra("mobile", mobile);
-                        intent.setClass(RegisterActivity.this, LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.setClass(act, LoginCheckActivity.class);
                         startActivity(intent);
-                        finish();
                     }
 
                     @Override
@@ -123,7 +123,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 });
                 break;
             case R.id.send:
-                FinanceManagerControl.getFinanceServiceManager().get_code(this, mobile, 1, true, new ManagerStringListener() {
+                FinanceManagerControl.getFinanceServiceManager().get_code(this, mobile, 2, true, new ManagerStringListener() {
 
                     @Override
                     public void onSuccess(String result) {

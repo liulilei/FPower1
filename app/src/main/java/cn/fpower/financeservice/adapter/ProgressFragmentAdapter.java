@@ -33,8 +33,8 @@ public class ProgressFragmentAdapter extends AbstractAdapter<DataInfo> {
         ViewHolder holder;
         if (convertView == null) {
             holder = new ViewHolder();
-            convertView = View.inflate(mContext, R.layout.item_success_example, null);
-            holder.progressAvatar = (ImageView) convertView.findViewById(R.id.item_success_example_avatar);
+            convertView = View.inflate(mContext, R.layout.item_example, null);
+            holder.item_qian = (ImageView) convertView.findViewById(R.id.item_qian);
             holder.progressName = (TextView) convertView.findViewById(R.id.item_success_example_name);
             holder.progressMoney = (TextView) convertView.findViewById(R.id.item_success_example_money);
             holder.progressCreateTime = (TextView) convertView.findViewById(R.id.item_success_example_create_time);
@@ -43,9 +43,9 @@ public class ProgressFragmentAdapter extends AbstractAdapter<DataInfo> {
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+        holder.item_qian.setImageResource(R.mipmap.shenhe);
         holder.progressRightIv.setImageResource(R.mipmap.phone);
         holder.progressRightIv.setOnClickListener(new CallPhoneClickListener(mList.get(position).getMobile()));
-        ImageUtils.displayImageRoundImg(R.mipmap.moren, "", holder.progressAvatar);
         holder.progressName.setText(mList.get(position).getRealname());
         holder.progressMoney.setText(MappingManager.getProcess(Integer.parseInt(mList.get(position).getProcess())));
 
@@ -64,7 +64,7 @@ public class ProgressFragmentAdapter extends AbstractAdapter<DataInfo> {
     }
 
     class ViewHolder {
-        private ImageView progressAvatar;
+        private ImageView item_qian;
         private TextView progressName;
         private TextView progressMoney;
         private TextView progressCreateTime;
