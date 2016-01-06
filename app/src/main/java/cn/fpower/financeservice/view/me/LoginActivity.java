@@ -17,6 +17,7 @@ import org.json.JSONObject;
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.app.FSApplication;
 import cn.fpower.financeservice.constants.Constants;
+import cn.fpower.financeservice.constants.ResultCode;
 import cn.fpower.financeservice.manager.netmanager.FinanceManagerControl;
 import cn.fpower.financeservice.manager.netmanager.ManagerDataListener;
 import cn.fpower.financeservice.mode.UserInfo;
@@ -94,7 +95,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                             public void onSuccess(Object data) {
                                 userInfo = (UserInfo) data;
                                 FSApplication.getInstance().setUserInfo(userInfo);
-                                FSApplication.getInstance().setIsLogin(true);
+                                FSApplication.getInstance().setLogincode(ResultCode.SUCCESS);
                                 SpUtils.putString(LoginActivity.this, Constants.MOBLEE, userInfo.getData().getMobile());
                                 SpUtils.putString(LoginActivity.this, Constants.PASSWD, view_pwd.getText().toString());
                                 IntentUtils.startActivity(LoginActivity.this, HomeActivity.class);
@@ -108,12 +109,11 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                         JSONObject jsonObject = new JSONObject(error);
                                         if (jsonObject.has("code")) {
                                             int code = jsonObject.getInt("code");
-                                            if (code == 201) {
+                                            if (code == ResultCode.SUCCESS_UPDATE) {
                                                 gson = new Gson();
                                                 userInfo = gson.fromJson(error, UserInfo.class);
                                                 FSApplication.getInstance().setUserInfo(userInfo);
-                                                //  //必须完善信息才算登陆
-                                                //FSApplication.getInstance().setIsLogin(true);
+                                                FSApplication.getInstance().setLogincode(ResultCode.SUCCESS_UPDATE);
                                                 SpUtils.putString(LoginActivity.this, Constants.MOBLEE, userInfo.getData().getMobile());
                                                 SpUtils.putString(LoginActivity.this, Constants.PASSWD, view_pwd.getText().toString());
                                                 IntentUtils.startActivity(act, HomeActivity.class);

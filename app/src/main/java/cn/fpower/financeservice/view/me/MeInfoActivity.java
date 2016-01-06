@@ -24,6 +24,7 @@ import java.util.Date;
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.app.FSApplication;
 import cn.fpower.financeservice.constants.Constants;
+import cn.fpower.financeservice.constants.ResultCode;
 import cn.fpower.financeservice.manager.MappingManager;
 import cn.fpower.financeservice.manager.netmanager.FinanceManagerControl;
 import cn.fpower.financeservice.manager.netmanager.ManagerDataListener;
@@ -122,7 +123,7 @@ public class MeInfoActivity extends BaseActivity {
                     + FSApplication.getInstance().getUserInfo().getData().getCity_id() + ","
                     + FSApplication.getInstance().getUserInfo().getData().getDistrict_id();
             info_addr.setValue(key, addr);
-            ImageUtils.displayImageRoundImg(R.mipmap.moren, NetApi.URL + FSApplication.getInstance().getUserInfo().getData().getFace(), img_login);
+            ImageUtils.displayImageRoundImg(R.mipmap.moren, NetApi.URL_HTTP + FSApplication.getInstance().getUserInfo().getData().getFace(), img_login);
         }
     }
 
@@ -214,7 +215,7 @@ public class MeInfoActivity extends BaseActivity {
                             public void onSuccess(Object data) {
                                 userInfo = (UserInfo) data;
                                 FSApplication.getInstance().setUserInfo(userInfo);
-                                FSApplication.getInstance().setIsLogin(true);
+                                FSApplication.getInstance().setLogincode(ResultCode.SUCCESS);
                                 SpUtils.putString(act, Constants.MOBLEE, userInfo.getData().getMobile());
                                 //  SpUtils.putString(act, Constants.PASSWD, view_pwd.getText().toString());
                                 IntentUtils.startActivity(act, HomeActivity.class);

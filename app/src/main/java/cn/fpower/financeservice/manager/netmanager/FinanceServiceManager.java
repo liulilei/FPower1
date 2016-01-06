@@ -104,7 +104,21 @@ public class FinanceServiceManager extends BaseManager {
         }
     }
 
-
+    /**
+     * 完善信息
+     * @param context
+     * @param user_id
+     * @param face
+     * @param username
+     * @param birthday
+     * @param sex
+     * @param province_id
+     * @param city_id
+     * @param district_id
+     * @param hasDialog
+     * @param clazz
+     * @param listener
+     */
     public void complete_user_info(Context context, String user_id, String face,
                                    String username, String birthday, String sex, String province_id,
                                    String city_id, String district_id,
@@ -125,6 +139,32 @@ public class FinanceServiceManager extends BaseManager {
             getDataFromNetHasDialog(context, NetApi.COMPLETE_USER_INFO, params, clazz, listener);
         } else {
             getDataFromNetNoDialog(context, NetApi.COMPLETE_USER_INFO, params, clazz, listener);
+        }
+    }
+
+    /**
+     * 修改信息
+     * **/
+    public void user_info_edit(Context context, String user_id, String face,
+                                   String username, String birthday, String sex, String province_id,
+                                   String city_id, String district_id,
+                                   boolean hasDialog, Class clazz,
+                                   ManagerDataListener listener) {
+        params = new RequestParams();//user_id，face, username, birthday, sex, province_id, city_id, district_id
+        params.addBodyParameter("user_id", user_id);
+        if (face != null) {
+            params.addBodyParameter("face", face);
+        }
+        params.addBodyParameter("username", username);
+        params.addBodyParameter("birthday", birthday);
+        params.addBodyParameter("sex", sex);
+        params.addBodyParameter("province_id", province_id);
+        params.addBodyParameter("city_id", city_id);
+        params.addBodyParameter("district_id", district_id);
+        if (hasDialog) {
+            getDataFromNetHasDialog(context, NetApi.USER_INFO_EDIT, params, clazz, listener);
+        } else {
+            getDataFromNetNoDialog(context, NetApi.USER_INFO_EDIT, params, clazz, listener);
         }
     }
 

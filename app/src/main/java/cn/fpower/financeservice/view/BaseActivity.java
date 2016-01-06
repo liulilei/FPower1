@@ -85,15 +85,10 @@ public abstract class BaseActivity extends FragmentActivity  implements View.OnC
     }
 
     public boolean isLogin(){
-        if (!FSApplication.getInstance().isLogin()) {
-            if (FSApplication.getInstance().getUserInfo() != null) {
-                IntentUtils.startActivity(act, MeInfoActivity.class);
-            }else{
-                IntentUtils.startActivity(this, LoginCheckActivity.class);
-            }
+        if (FSApplication.getInstance().getLogincode() < 200 ) {
+            IntentUtils.startActivity(this, LoginCheckActivity.class);
             return false;
         }
         return true;
     }
-
 }

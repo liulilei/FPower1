@@ -157,7 +157,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 startActivity(intent);
                 break;
             case R.id.fragment_home_add_entering_tv:
-                if (!FSApplication.getInstance().isLogin()) {
+                if (FSApplication.getInstance().getLogincode() < 200) {
                     IntentUtils.startActivity(getActivity(), LoginCheckActivity.class);
                     return;
                 }

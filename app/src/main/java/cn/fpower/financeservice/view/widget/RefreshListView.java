@@ -99,6 +99,11 @@ public class RefreshListView extends ListView implements OnScrollListener {
         init(context);
     }
 
+    public RefreshListView(Context context, AttributeSet attrs, int defStyle) {
+        super(context, attrs,defStyle);
+        init(context);
+    }
+
     public void setOnRefreshListener(IOnRefreshListener listener) {
         mOnRefreshListener = listener;
     }

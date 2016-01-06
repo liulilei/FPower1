@@ -1,11 +1,9 @@
 package cn.fpower.financeservice.constants;
 
-
-/**
- * Created by 朱瑞亮 on 15/4/1.
- */
 public interface ResultCode {
 
     /* code */
     int SUCCESS = 200;// 成功
+
+    int SUCCESS_UPDATE = 201;//登陆成功完善信息
 }

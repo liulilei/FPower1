@@ -84,12 +84,20 @@ public class EditPassActivity extends BaseActivity implements View.OnClickListen
                     ToastUtils.show(this, R.string.input_new_pwd);
                     return;
                 }
+                if(new_pass.length() < 6){
+                    ToastUtils.show(this,R.string.verify_pass);
+                    return;
+                }
                 FinanceManagerControl.getFinanceServiceManager().user_info_edit_passwd(this, userId, new_pass, old_pass, true,
                         new ManagerStringListener() {
 
                             @Override
                             public void onSuccess(String data) {
-                                SpUtils.putString(act, Constants.PASSWD, view_new_pass.getText().toString());
+                                FSApplication.getInstance().setLogincode(0);
+                                FSApplication.getInstance().setUserInfo(null);
+                                SpUtils.putString(act, Constants.MOBLEE, "");
+                                SpUtils.putString(act, Constants.PASSWD, "");
+                                ToastUtils.show(act, "密码修改成功，请重新登陆");
                                 finish();
                             }
 

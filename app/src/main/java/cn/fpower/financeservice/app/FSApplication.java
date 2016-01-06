@@ -67,7 +67,8 @@ public class FSApplication extends Application {
     //声明mLocationOption对象
     public AMapLocationClientOption locationOption = null;
 
-    private boolean isLogin = false;
+    /** 0代表未登录 200代表登陆 201首次登陆时进入完善信息**/
+    private int logincode = 0;
 
     @Override
     public void onCreate() {
@@ -227,12 +228,12 @@ public class FSApplication extends Application {
         return userInfo;
     }
 
-    public boolean isLogin() {
-        return isLogin;
+    public int getLogincode() {
+        return logincode;
     }
 
-    public void setIsLogin(boolean isLogin) {
-        this.isLogin = isLogin;
+    public void setLogincode(int logincode) {
+        this.logincode = logincode;
     }
 
     public AMapLocationClient getAMapLocationClient() {

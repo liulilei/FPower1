@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.lidroid.xutils.ViewUtils;
 
 import cn.fpower.financeservice.app.FSApplication;
+import cn.fpower.financeservice.constants.ResultCode;
 import cn.fpower.financeservice.utils.IntentUtils;
 import cn.fpower.financeservice.utils.ToastUtils;
 import cn.fpower.financeservice.view.me.LoginCheckActivity;
@@ -63,12 +64,8 @@ public abstract class BaseFragment extends Fragment  implements View.OnClickList
     }
 
     public boolean isLogin(){
-        if (!FSApplication.getInstance().isLogin()) {
-            if (FSApplication.getInstance().getUserInfo() != null) {
-                IntentUtils.startActivity(getActivity(), MeInfoActivity.class);
-            }else{
-                IntentUtils.startActivity(getActivity(), LoginCheckActivity.class);
-            }
+        if (FSApplication.getInstance().getLogincode() < ResultCode.SUCCESS) {
+            IntentUtils.startActivity(getActivity(), LoginCheckActivity.class);
             return false;
         }
         return true;

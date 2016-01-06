@@ -50,11 +50,10 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         public MyTimerUtil(long totalTime, long downValue) {
             super(totalTime, downValue);
         }
-
         @Override
         public void onTick(long remain) {
             send.setEnabled(false);
-            send.setText( remain / 1000 + "");
+            send.setText("剩余"+ remain / 1000 + "秒");
         }
 
         @Override
@@ -95,14 +94,22 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 finish();
                 break;
             case R.id.confirm:
-                String verify=code.getText().toString();
+                String verify=code.getText().toString().trim();
                 if(TextUtils.isEmpty(verify)){
                     ToastUtils.show(this,R.string.code);
+                    return;
+                }
+                if (verify.length()<6) {
+                    ToastUtils.show(this, R.string.verify_code);
                     return;
                 }
                 String passwd=pass.getText().toString();
                 if(TextUtils.isEmpty(passwd)){
                     ToastUtils.show(this,R.string.input_pwd);
+                    return;
+                }
+                if(passwd.length() < 6){
+                    ToastUtils.show(this,R.string.verify_pass);
                     return;
                 }
                 FinanceManagerControl.getFinanceServiceManager().register(this, mobile,verify, passwd, true, new ManagerStringListener() {

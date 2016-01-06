@@ -10,13 +10,15 @@ import android.view.animation.Interpolator;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
+import cn.fpower.financeservice.view.widget.RefreshListView;
+
 /**
  * 
  * @author baoyz
  * @date 2014-8-18
  * 
  */
-public class SwipeMenuListView extends ListView {
+public class SwipeMenuListView extends RefreshListView {
 
 	private static final int TOUCH_STATE_NONE = 0;
 	private static final int TOUCH_STATE_X = 1;

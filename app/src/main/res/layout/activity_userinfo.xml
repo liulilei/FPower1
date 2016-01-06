@@ -25,7 +25,7 @@
             android:layout_height="62dp"
             android:layout_centerVertical="true"
             android:layout_marginLeft="20dp"
-            android:src="@mipmap/me_check" />
+            android:src="@mipmap/moren" />
 
         <TextView
             android:id="@+id/txt_content"

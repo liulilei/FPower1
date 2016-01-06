@@ -21,6 +21,8 @@
     <string name="input_addr">请选择地区</string>
 
     <string name="code">请输入验证码</string>
+    <string name="verify_code">请输入有效的6位验证码</string>
+    <string name="verify_pass">密码最短不能少于6位</string>
     <string name="send_code">发送验证码</string>
     <string name="submit">提交</string>
     <string name="confirm_add">确认添加</string>

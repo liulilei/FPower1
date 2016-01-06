@@ -76,12 +76,15 @@ public class HomeActivity extends BaseActivity implements RadioGroup.OnCheckedCh
         currentFragment = homeFragment;
 
         homeRg.setOnCheckedChangeListener(this);
+    }
 
-        //201没有登陆，并且用户不为空
-        if (!FSApplication.getInstance().isLogin()) {
-            if (FSApplication.getInstance().getUserInfo() != null) {
-                IntentUtils.startActivity(act, MeInfoActivity.class);
-            }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //201首次完善信息
+        if (FSApplication.getInstance().getLogincode()==201) {
+            FSApplication.getInstance().setLogincode(200);
+            IntentUtils.startActivity(act, MeInfoActivity.class);
         }
     }
 

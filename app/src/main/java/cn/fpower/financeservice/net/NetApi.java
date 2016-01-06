@@ -13,6 +13,7 @@ public class NetApi {
     public static final String GET_CODE = URL + "get_code";//3、获取验证码
     public static final String LOGIN = URL + "login";//4、会员登录
     public static final String COMPLETE_USER_INFO = URL + "complete_user_info"; //5、完善信息
+    public static final String USER_INFO_EDIT = URL + "user_info_edit"; //5、完善信息
     public static final String HOME = URL + "home";//6、首页
     public static final String CASE_LIST = URL + "case_list";//7、案例列表
     public static final String CREATE_EMPLOYEE = URL + "create_employee";//8、录入员工
