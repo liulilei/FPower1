@@ -10,9 +10,9 @@
         layout="@layout/title_bar" />
 
     <ScrollView
-        android:layout_below="@+id/layout_head"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_below="@+id/layout_head">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -35,8 +35,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toLeftOf="@+id/img_go"
-                    android:text="店铺照片"
-                    android:textColor="#272727"
+                    android:text="门店照片,第一张为门店照片"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <GridView
@@ -58,6 +58,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/layout_login_info"
                 android:layout_marginTop="15dp"
+                app:hideRight="true"
                 app:txtName="店名" />
 
             <cn.fpower.financeservice.view.widget.EnteringSettingView
@@ -65,6 +66,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/info_name"
+                app:hideRight="true"
                 app:txtName="@string/area" />
 
             <cn.fpower.financeservice.view.widget.EnteringSettingView
@@ -72,6 +74,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/info_addr"
+                app:hideRight="true"
                 app:txtName="详细地址" />
 
             <cn.fpower.financeservice.view.widget.EnteringSettingView
@@ -79,6 +82,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/info_addrdetail"
+                app:hideRight="true"
                 app:txtName="经度" />
 
             <cn.fpower.financeservice.view.widget.EnteringSettingView
@@ -86,6 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/longitude"
+                app:hideRight="true"
                 app:txtName="纬度" />
 
             <cn.fpower.financeservice.view.widget.EnteringSettingView
@@ -93,6 +98,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/latitude"
+                app:hideRight="true"
                 app:txtName="店长名字" />
 
             <cn.fpower.financeservice.view.widget.EnteringSettingView
@@ -100,6 +106,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/info_username"
+                app:hideRight="true"
                 app:txtName="店长电话" />
 
             <Button

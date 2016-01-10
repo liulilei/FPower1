@@ -37,6 +37,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/info_money"
+        app:defaultValue="请选择"
         app:txtName="@string/area"/>
 
     <cn.fpower.financeservice.view.widget.EnteringSettingView
@@ -51,6 +52,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/info_addrdetail"
+        app:defaultValue="请选择"
         app:txtName="有无房产"/>
 
     <cn.fpower.financeservice.view.widget.EnteringSettingView
@@ -58,6 +60,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/info_fanchan"
+        app:defaultValue="请选择"
         app:txtName="有无贷款"/>
 
     <cn.fpower.financeservice.view.widget.EnteringSettingView
@@ -65,6 +68,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/info_pay"
+        app:hideRight ="true"
         app:txtName="渠道"/>
 
     <Button

@@ -18,16 +18,16 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginRight="12dp"
-            android:background="#ff0000" />
+            android:src="@mipmap/moren"/>
 
         <TextView
-            android:id="@+id/name"
+            android:id="@+id/top_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/img_my_head"
             android:text="本月业绩"
-            android:textColor="#272727"
+            android:textColor="@color/black"
             android:textSize="14sp" />
 
         <TextView
@@ -35,11 +35,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="12月"
             android:textColor="#737373"
             android:textSize="14sp" />
     </RelativeLayout>
-
 
     <TextView
         android:id="@+id/money"
@@ -47,8 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/layout_head"
         android:layout_marginTop="8dp"
-        android:text="￥"
         android:textColor="#F84431"
-        android:textSize="30sp"
+        android:textSize="25sp"
         android:textStyle="bold" />
 </RelativeLayout>

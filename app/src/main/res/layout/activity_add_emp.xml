@@ -23,8 +23,23 @@
         android:layout_below="@+id/info_name"
         app:txtName="员工电话"/>
 
+   <!-- <cn.fpower.financeservice.view.widget.EnteringSettingView
+        android:id="@+id/info_addr"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/info_mobile"
+        app:txtName="地址"/>
+
+    <cn.fpower.financeservice.view.widget.EnteringSettingView
+        android:id="@+id/info_addrdetail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/info_addr"
+        app:txtName="详细地址"/>-->
+
 
     <Button
+        android:id="@+id/submit"
         android:layout_width="match_parent"
         android:layout_height="46dp"
         android:layout_below="@+id/info_mobile"

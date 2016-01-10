@@ -30,25 +30,19 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationListener;
 import com.bigkoo.pickerview.OptionsPickerView;
-import com.google.gson.Gson;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.app.FSApplication;
 import cn.fpower.financeservice.constants.Constants;
 import cn.fpower.financeservice.manager.netmanager.FinanceManagerControl;
-import cn.fpower.financeservice.manager.netmanager.ManagerDataListener;
 import cn.fpower.financeservice.manager.netmanager.ManagerStringListener;
 import cn.fpower.financeservice.mode.LoanPara;
 import cn.fpower.financeservice.mode.ProvinceData;
-import cn.fpower.financeservice.mode.UserInfo;
 import cn.fpower.financeservice.utils.BitmapUtils;
 import cn.fpower.financeservice.utils.ImageUtils;
 import cn.fpower.financeservice.utils.PickPhotoUtil;
@@ -374,9 +368,9 @@ public class PromoterEnteringFragment extends BaseFragment implements View.OnCli
                 break;
             case R.id.submit:
                 loanPara.user_id = FSApplication.getInstance().getUserInfo().getData().getId();
-                loanPara.name = info_name.getValue();
-                loanPara.username = info_username.getValue();
-                loanPara.mobile = info_mobile.getValue();
+                loanPara.name = info_name.getKey();
+                loanPara.username = info_username.getKey();
+                loanPara.mobile = info_mobile.getKey();
                 String[] keys = info_addr.getKey().split(",");
                 if (keys != null && keys.length == 3) {
                     loanPara.province_id = keys[0];
@@ -385,20 +379,24 @@ public class PromoterEnteringFragment extends BaseFragment implements View.OnCli
                 }
                 loanPara.longitude = longitude.getText().toString();
                 loanPara.latitude = latitude.getText().toString();
-                loanPara.address = info_addrdetail.getValue();
+                loanPara.address = info_addrdetail.getKey();
+                try {
+                    loanPara.checkShop();
+                } catch (Exception e) {
+                    ToastUtils.show(getActivity(), e.getMessage());
+                    return;
+                }
                 String imgs = "";
+                if(list.size()<2){
+                    ToastUtils.show(getActivity(), "至少上传两张照片");
+                    return;
+                }
                 for (int i = 0; i < list.size(); i++) {
                     if (i == list.size() - 1) {
                         imgs += BitmapUtils.Bitmap2StrByBase64(list.get(i));
                     } else {
                         imgs += BitmapUtils.Bitmap2StrByBase64(list.get(i)) + "#####";
                     }
-                }
-                try {
-                    loanPara.checkShop();
-                } catch (Exception e) {
-                    ToastUtils.show(getActivity(), e.getMessage());
-                    return;
                 }
                 FinanceManagerControl.getFinanceServiceManager().create_shop(getActivity(), loanPara, imgs,
                         true,  new ManagerStringListener() {
@@ -411,6 +409,9 @@ public class PromoterEnteringFragment extends BaseFragment implements View.OnCli
                                 info_mobile.clear();
                                 info_addr.clear();
                                 info_addrdetail.clear();
+                                //清空照片
+                                list.clear();
+                                adapter.notifyDataSetChanged();
                                 loanPara = new LoanPara();
                             }
 
@@ -427,7 +428,7 @@ public class PromoterEnteringFragment extends BaseFragment implements View.OnCli
     private void jump(EnteringSettingView esView, int code, int inputType) {
         Intent intent = new Intent();
         intent.putExtra("title", esView.getTitle());
-        intent.putExtra("value", esView.getValue());
+        intent.putExtra("value", esView.getKey());
         intent.putExtra("inputType", inputType);
         intent.setClass(getContext(), InfoInputActivity.class);
         startActivityForResult(intent, code);

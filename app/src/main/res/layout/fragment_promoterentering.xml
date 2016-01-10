@@ -35,8 +35,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_toLeftOf="@+id/img_go"
-                    android:text="店铺照片"
-                    android:textColor="#272727"
+                    android:text="门店照片,第一张为门店照片"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <GridView
@@ -64,8 +64,9 @@
                 android:id="@+id/info_addr"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:defaultValue="请选择"
                 android:layout_below="@+id/info_name"
-                app:txtName="地址" />
+                app:txtName="地区" />
 
             <cn.fpower.financeservice.view.widget.EnteringSettingView
                 android:id="@+id/info_addrdetail"
@@ -89,7 +90,7 @@
                     android:gravity="center"
                     android:paddingLeft="20dp"
                     android:text="经度"
-                    android:textColor="#272727"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
@@ -120,7 +121,7 @@
                     android:gravity="center"
                     android:paddingLeft="20dp"
                     android:text="纬度"
-                    android:textColor="#272727"
+                    android:textColor="@color/black"
                     android:textSize="14sp" />
 
                 <TextView
@@ -178,5 +179,4 @@
                 android:textSize="17sp" />
         </RelativeLayout>
     </ScrollView>
-
 </RelativeLayout>

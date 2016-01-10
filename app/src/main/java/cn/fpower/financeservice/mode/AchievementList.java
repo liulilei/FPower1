@@ -22,7 +22,13 @@ public class AchievementList extends BaseMode {
         private int achievement_total;
         private int page_size;
         private int now_page;
-
+        private UserInfo.Data user_info;
+        public UserInfo.Data getUser_info() {
+            return user_info;
+        }
+        public void setUser_info(UserInfo.Data user_info) {
+            this.user_info = user_info;
+        }
         public List<AchievementData> getAchievement_list() {
             return achievement_list;
         }

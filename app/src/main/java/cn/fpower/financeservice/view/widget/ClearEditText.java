@@ -127,6 +127,24 @@ public class ClearEditText extends EditText implements View.OnFocusChangeListene
                               int after) {
         if(hasFoucs){
             setClearIconVisible(s.length() > 0);
+            if (isXiaoshu) {
+                if (s.toString().trim().equals("999999999")) {
+                    s = "999999998";
+                    setText(s);
+                    setSelection(s.length());
+                }
+                if (s.toString().trim().length() > 9) {
+                        s = s.toString().substring(0, 9);
+                        setText(s);
+                        setSelection(s.length());
+                }
+                if (s.toString().startsWith("0")
+                        && s.toString().trim().length() == 1) {
+                    s = "1";
+                    setText(s);
+                    setSelection(s.length());
+                }
+            }
         }
     }
 
@@ -160,5 +178,11 @@ public class ClearEditText extends EditText implements View.OnFocusChangeListene
         translateAnimation.setInterpolator(new CycleInterpolator(counts));
         translateAnimation.setDuration(1000);
         return translateAnimation;
+    }
+
+    private boolean isXiaoshu = false;
+
+    public void setXiaoShu() {
+        isXiaoshu = true;
     }
 }

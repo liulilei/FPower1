@@ -8,6 +8,8 @@ public class Constants {
 
     public static final String IMG_PATH = IDONGRI_PATH + "/img";
 
+    public static final String APK_PATH = IDONGRI_PATH + "/apk/financeservice.apk";
+
     public static final String IMG_LOAD_CACHE_PATH = IMG_PATH + "/cache";
 
     public static final String ADDRESS = "address";//进入webview的地址
@@ -51,13 +53,12 @@ public class Constants {
     }
 
 
-   /* public static final int PROGRESS_ALL = 0;
-
-    public static final int PROGRESS_CHECKING = 1;
-
-    public static final int PROGRESS_CHECKED = -1;
-
-    public static final int PROGRESS_CHECK_OK = -2;*/
+    public final static int CODE_NAME = 1000;
+    public final static int CODE_MONEY = 1001;
+    public final static int CODE_MOBILE = 1002;
+    public final static int CODE_ADDRDETAIL = 1003;
+    public final static int CODE_QUDAO = 1004;
+    public final static int CODE_USERNAME = 1005;
 
     //默认条数
     public static final int PAGE_SIZE = 10;

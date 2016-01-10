@@ -1,31 +1,42 @@
 package cn.fpower.financeservice.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
+import android.content.res.Resources;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.constants.Constants;
 import cn.fpower.financeservice.manager.MappingManager;
 import cn.fpower.financeservice.mode.DataInfo;
-import cn.fpower.financeservice.utils.ImageUtils;
 import cn.fpower.financeservice.utils.TimeUtils;
+import cn.fpower.financeservice.view.widget.MyAlertDialog;
 
 /**
- * Created by ll on 2015/12/2.
+ * 进度
  */
 public class ProgressFragmentAdapter extends AbstractAdapter<DataInfo> {
 
-    private Intent intent;
+    private MyAlertDialog dialog;
+    Resources resources;
+    private Map<Integer, Integer> colors=new HashMap<Integer, Integer>();
 
-    public ProgressFragmentAdapter(Context Context, List<DataInfo> datas) {
-        super(Context, datas);
+
+    public ProgressFragmentAdapter(Context context, List<DataInfo> datas) {
+        super(context, datas);
+        dialog = new MyAlertDialog(context);
+        resources = mContext.getResources();
+        colors.put(Constants.ProgressStatus.AUDIT,R.color.progress_audit);
+        colors.put(Constants.ProgressStatus.AUDIT_FAIL,R.color.progress_audit_fail);
+        colors.put(Constants.ProgressStatus.AUDIT_SUCCESS,R.color.progress_audit_success);
+        colors.put(Constants.ProgressStatus.APPLY_FAIL,R.color.progress_apply_fail);
+        colors.put(Constants.ProgressStatus.APPLY_SUCCESS,R.color.progress_apply_success);
     }
 
     @Override
@@ -45,21 +56,11 @@ public class ProgressFragmentAdapter extends AbstractAdapter<DataInfo> {
         }
         holder.item_qian.setImageResource(R.mipmap.shenhe);
         holder.progressRightIv.setImageResource(R.mipmap.phone);
-        holder.progressRightIv.setOnClickListener(new CallPhoneClickListener(mList.get(position).getMobile()));
+        holder.progressRightIv.setOnClickListener(new CallPhoneClickListener(mList.get(position).getMobile(), dialog, mContext));
         holder.progressName.setText(mList.get(position).getRealname());
-        holder.progressMoney.setText(MappingManager.getProcess(Integer.parseInt(mList.get(position).getProcess())));
-
-        /*if (mList.get(position).getProcess()==Constants.ProgressStatus.) {
-            holder.progressMoney.setTextColor(mContext.getResources().getColor(R.color.progress_checking));
-        } else if (mList.get(position).getProcess().equals(Constants.PROGRESS_CHECKED)) {
-            holder.progressMoney.setTextColor(mContext.getResources().getColor(R.color.progress_checked));
-        } else if (mList.get(position).getProcess().equals(Constants.PROGRESS_CHECK_OK)) {
-           // holder.progressMoney.setText("￥" + mList.get(position).getMoney());
-            holder.progressMoney.setTextColor(mContext.getResources().getColor(R.color.progress_check_ok));
-        } else {
-            holder.progressMoney.setTextColor(mContext.getResources().getColor(R.color.progress_check_ok));
-        }*/
-        holder.progressCreateTime.setText("申请时间:" + TimeUtils.fullTimeAndDay(mList.get(position).getAddtime()));
+        holder.progressMoney.setText(MappingManager.getProcess(mList.get(position).getProcess()));
+        holder.progressMoney.setTextColor(resources.getColor(colors.get(mList.get(position).getProcess())));
+        holder.progressCreateTime.setText(TimeUtils.fullTimeAndDay(mList.get(position).getAddtime()));
         return convertView;
     }
 
@@ -69,21 +70,5 @@ public class ProgressFragmentAdapter extends AbstractAdapter<DataInfo> {
         private TextView progressMoney;
         private TextView progressCreateTime;
         private ImageView progressRightIv;
-    }
-
-    public class CallPhoneClickListener implements View.OnClickListener {
-
-        private String phone;
-
-        public CallPhoneClickListener(String phone) {
-            this.phone = phone;
-        }
-
-        @Override
-        public void onClick(View v) {
-            //用intent启动拨打电话
-            intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone));
-            mContext.startActivity(intent);
-        }
     }
 }

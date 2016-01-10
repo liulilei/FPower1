@@ -18,8 +18,11 @@ public abstract class AbstractAdapter<T> extends BaseAdapter {
     protected Context mContext;
     protected List<T> mList;
 
-    public AbstractAdapter(Context Context, List<T> datas) {
-        this.mContext = Context;
+    public List<T> getList(){
+        return mList;
+    }
+    public AbstractAdapter(Context context, List<T> datas) {
+        this.mContext = context;
         if (datas == null) {
             this.mList = new ArrayList<T>();
         } else {
@@ -35,8 +38,8 @@ public abstract class AbstractAdapter<T> extends BaseAdapter {
     public void addData(List<T> arrayData) {
         if (arrayData != null) {
             mList.addAll(arrayData);
+            notifyDataSetChanged();
         }
-        notifyDataSetChanged();
     }
 
     /**
@@ -71,6 +74,13 @@ public abstract class AbstractAdapter<T> extends BaseAdapter {
     public void remove(T data) {
         if (data != null) {
             mList.remove(data);
+        }
+        notifyDataSetChanged();
+    }
+
+    public void remove(int poisition) {
+        if (poisition < mList.size()) {
+            mList.remove(poisition);
         }
         notifyDataSetChanged();
     }

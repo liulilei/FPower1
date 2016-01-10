@@ -3,9 +3,6 @@ package cn.fpower.financeservice.mode;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
-
-import cn.fpower.financeservice.utils.StringUtils;
 
 /**
  * Created by Administrator on 2015/12/8.
@@ -17,11 +14,21 @@ public class ProvinceData {
         return map;
     }
 
-    /**显示中文**/
-    public String getProvinceAddress(String pid, String cid, String did) {
-        return map.get(pid) + " " +
-                map.get(cid) + " " +
-                map.get(did);
+    /**
+     * 显示中文
+     **/
+    public String getProvinceAddress(long pid, long cid, long did) {
+        String address = "";
+        if (pid > 0 && map.containsKey(pid + "")) {
+            address += map.get(pid+ "");
+        }
+        if (cid > 0 && map.containsKey(cid + "")) {
+            address = address + " " + map.get(cid+ "");
+        }
+        if (did > 0 && map.containsKey(did + "")) {
+            address = address + " " + map.get(did+ "");
+        }
+        return address;
     }
 
     private ArrayList<ProvinceInfo.Province> options1Items = new ArrayList<ProvinceInfo.Province>();

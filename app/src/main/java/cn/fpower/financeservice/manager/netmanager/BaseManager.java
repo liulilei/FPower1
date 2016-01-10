@@ -5,6 +5,9 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.lidroid.xutils.http.RequestParams;
 
+import java.io.File;
+
+import cn.fpower.financeservice.net.IDownListener;
 import cn.fpower.financeservice.net.IRequestListener;
 import cn.fpower.financeservice.net.NetworkService;
 
@@ -168,4 +171,29 @@ public class BaseManager {
         });
     }
 
+    public void downloadFile(Context context, String netApi, String target, final DownListener listener) {
+        NetworkService.downloadFile(context, netApi, target, new IDownListener() {
+            @Override
+            public void onSuccess(File result) {
+                if (listener != null) {
+                    listener.onSuccess(result);
+                }
+            }
+
+            @Override
+            public void onLoading(long total, long current, int process) {
+                if (listener != null) {
+                    listener.onLoading(total, current, process);
+                }
+            }
+
+            @Override
+            public boolean onError(String error) {
+                if (listener != null) {
+                    listener.onError(error);
+                }
+                return false;
+            }
+        });
+    }
 }

@@ -10,7 +10,6 @@ import java.util.List;
 
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.mode.DataInfo;
-import cn.fpower.financeservice.utils.ImageUtils;
 import cn.fpower.financeservice.utils.TimeUtils;
 
 /**
@@ -37,7 +36,7 @@ public class SuccessExampleAdapter extends AbstractAdapter<DataInfo> {
         }
         holder.exampleName.setText(mList.get(position).getRealname());
         holder.exampleMoney.setText("￥" + mList.get(position).getMoney());
-        holder.exampleCreateTime.setText("申请时间:" + TimeUtils.fullTimeAndDay(mList.get(position).getAddtime()));
+        holder.exampleCreateTime.setText( TimeUtils.fullTimeAndDay(mList.get(position).getAddtime()));
        // holder.exampleRightIv.setImageResource(R.mipmap.fanhui);
         return convertView;
     }

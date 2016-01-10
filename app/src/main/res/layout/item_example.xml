@@ -8,18 +8,21 @@
     android:orientation="vertical">
 
     <TextView
+        android:singleLine="true"
+        android:layout_toLeftOf="@+id/item_success_example_right_iv"
         android:id="@+id/item_success_example_name"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:text="江先生"
-        android:textColor="#272727"
+        android:textColor="@color/black"
         android:textSize="17dp" />
 
     <RelativeLayout
         android:id="@+id/layout_money"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/item_success_example_right_iv"
         android:layout_alignLeft="@id/item_success_example_name"
         android:layout_below="@id/item_success_example_name"
         android:layout_marginTop="1dp">
@@ -36,6 +39,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignTop="@id/item_qian"
+            android:singleLine="true"
+            android:textStyle="bold"
             android:layout_centerVertical="true"
             android:layout_marginLeft="3dp"
             android:layout_marginTop="1dp"
@@ -48,6 +53,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/item_success_example_right_iv"
         android:layout_alignLeft="@id/layout_money"
         android:layout_below="@id/layout_money"
         android:layout_marginTop="1dp">
@@ -63,6 +69,7 @@
             android:id="@+id/item_success_example_create_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:singleLine="true"
             android:layout_alignTop="@id/item_shijian"
             android:layout_centerVertical="true"
             android:layout_marginLeft="5dp"

@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.text.TextUtils;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -15,10 +16,6 @@ import com.bigkoo.pickerview.OptionsPickerView;
 import com.bigkoo.pickerview.TimePickerView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
-import org.w3c.dom.Text;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 import cn.fpower.financeservice.R;
@@ -60,8 +57,8 @@ public class MeInfoActivity extends BaseActivity {
     @ViewInject(R.id.submit)
     private Button submit;
 
-    @ViewInject(R.id.img_right)
-    private ImageView img_right;
+    @ViewInject(R.id.layout_face)
+    private View layout_face;
 
     @ViewInject(R.id.info_name)
     private EnteringSettingView info_name;
@@ -97,7 +94,7 @@ public class MeInfoActivity extends BaseActivity {
         title.setText("个人信息");
         info_sex.setValue("男");
         submit.setOnClickListener(this);
-        img_right.setOnClickListener(this);
+        layout_face.setOnClickListener(this);
         info_name.setOnClickListener(this);
         info_birthday.setOnClickListener(this);
         info_sex.setOnClickListener(this);
@@ -116,9 +113,10 @@ public class MeInfoActivity extends BaseActivity {
                 info_birthday.setValue(FSApplication.getInstance().getUserInfo().getData().getBirthday());
             }
             info_sex.setValue(MappingManager.getSex(FSApplication.getInstance().getUserInfo().getData().getSex()));
-            String addr = provinceData.getMap().get(FSApplication.getInstance().getUserInfo().getData().getProvince_id() + "") +
-                    provinceData.getMap().get(FSApplication.getInstance().getUserInfo().getData().getCity_id() + "") +
-                    provinceData.getMap().get(FSApplication.getInstance().getUserInfo().getData().getDistrict_id() + "");
+            String addr= provinceData.getProvinceAddress(
+                    FSApplication.getInstance().getUserInfo().getData().getProvince_id(),
+                    FSApplication.getInstance().getUserInfo().getData().getCity_id(),
+                    FSApplication.getInstance().getUserInfo().getData().getDistrict_id());
             String key = FSApplication.getInstance().getUserInfo().getData().getProvince_id() + ","
                     + FSApplication.getInstance().getUserInfo().getData().getCity_id() + ","
                     + FSApplication.getInstance().getUserInfo().getData().getDistrict_id();
@@ -129,7 +127,7 @@ public class MeInfoActivity extends BaseActivity {
 
     private void initTime() {
         pvTime = new TimePickerView(this, TimePickerView.Type.YEAR_MONTH_DAY);
-        pvTime.setRange(TimeUtils.getYear() - 100, TimeUtils.getYear() - 10);
+        pvTime.setRange(TimeUtils.getYear() - 100, TimeUtils.getYear());
         pvTime.setTime(new Date());
         pvTime.setCancelable(true);
         pvTime.setCyclic(false);//不许循环
@@ -174,7 +172,7 @@ public class MeInfoActivity extends BaseActivity {
     private void jump(EnteringSettingView esView, int code, int inputType) {
         Intent intent = new Intent();
         intent.putExtra("title", esView.getTitle());
-        intent.putExtra("value", esView.getValue());
+        intent.putExtra("value", esView.getKey());
         intent.putExtra("inputType", inputType);
         intent.setClass(act, InfoInputActivity.class);
         startActivityForResult(intent, code);
@@ -186,13 +184,13 @@ public class MeInfoActivity extends BaseActivity {
             case R.id.submit:
                 //验证，姓名，生日，城市不能为空，性别默认是男，头像默认为空，可以不传
                 String user_id = FSApplication.getInstance().getUserInfo().getData().getId() + "";
-
-                String username = info_name.getValue();
+                int code=FSApplication.getInstance().getLogincode();
+                String username = info_name.getKey();
                 if (TextUtils.isEmpty(username)) {
                     ToastUtils.show(this, R.string.input_name);
                     return;
                 }
-                String birthday = info_birthday.getValue();
+                String birthday = info_birthday.getKey();
                 if (TextUtils.isEmpty(birthday)) {
                     ToastUtils.show(this, R.string.input_bri);
                     return;
@@ -206,7 +204,7 @@ public class MeInfoActivity extends BaseActivity {
                 String province_id = keys[0];
                 String city_id = keys[1];
                 String district_id = keys[2];
-                FinanceManagerControl.getFinanceServiceManager().complete_user_info(act, user_id, face,
+                FinanceManagerControl.getFinanceServiceManager().complete_user_info(act,code,user_id, face,
                         username, birthday, sex, province_id,
                         city_id, district_id,
                         true, UserInfo.class, new ManagerDataListener() {
@@ -220,7 +218,6 @@ public class MeInfoActivity extends BaseActivity {
                                 //  SpUtils.putString(act, Constants.PASSWD, view_pwd.getText().toString());
                                 IntentUtils.startActivity(act, HomeActivity.class);
                                 finish();
-
                             }
 
                             @Override
@@ -230,7 +227,7 @@ public class MeInfoActivity extends BaseActivity {
                         });
 
                 break;
-            case R.id.img_right:
+            case R.id.layout_face:
                 mDialog = createDialog("选择图片");
                 mDialog.show();
                 break;
@@ -249,9 +246,19 @@ public class MeInfoActivity extends BaseActivity {
                 optionsPickerView.show();
                 break;
             case R.id.title_bar_back:
+                IntentUtils.startActivity(act, HomeActivity.class);
                 this.finish();
                 break;
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            IntentUtils.startActivity(act, HomeActivity.class);
+            this.finish();
+        }
+        return true;
     }
 
     private Dialog mDialog;

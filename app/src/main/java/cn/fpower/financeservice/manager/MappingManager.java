@@ -23,7 +23,7 @@ public class MappingManager {
         }
     }
 
-    public  static String getSex(int sex) {
+    public static String getSex(int sex) {
         switch (sex) {
             case 1:
                 return "男";

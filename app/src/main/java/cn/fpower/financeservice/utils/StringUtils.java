@@ -2,6 +2,11 @@ package cn.fpower.financeservice.utils;
 
 
 import android.content.Context;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.TextUtils;
+import android.text.style.CharacterStyle;
+import android.text.style.ForegroundColorSpan;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -170,6 +175,19 @@ public final class StringUtils {
         return pricestr;
     }
 
+    public static CharSequence getHighLightText(String content, int color,
+                                                int start, int end) {
+        if (TextUtils.isEmpty(content)) {
+            return "";
+        }
+        start = start >= 0 ? start : 0;
+        end = end <= content.length() ? end : content.length();
+        SpannableString spannable = new SpannableString(content);
+        CharacterStyle span = new ForegroundColorSpan(color);
+        spannable.setSpan(span, start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return spannable;
+    }
+
     public static String getJsonFromAssets(Context context, String path) {
 
         try {
@@ -190,6 +208,17 @@ public final class StringUtils {
 
         return null;
     }
+
+    public static String getPhoneFormat(String phone){
+        if (TextUtils.isEmpty(phone) ||phone.length() != 11){
+            return  phone;
+        }
+        String p1=phone.substring(0,3);
+        String p2=phone.substring(3, 7);
+        String p3=phone.substring(7, 11);
+        return p1+"-"+p2+"-"+p3;
+    }
+
 
 
 }

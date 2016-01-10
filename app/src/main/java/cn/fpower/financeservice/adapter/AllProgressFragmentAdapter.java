@@ -1,30 +1,41 @@
 package cn.fpower.financeservice.adapter;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
+import android.content.res.Resources;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import cn.fpower.financeservice.R;
+import cn.fpower.financeservice.constants.Constants;
 import cn.fpower.financeservice.manager.MappingManager;
 import cn.fpower.financeservice.mode.DataInfo;
-import cn.fpower.financeservice.utils.ImageUtils;
 import cn.fpower.financeservice.utils.TimeUtils;
+import cn.fpower.financeservice.view.widget.MyAlertDialog;
 
 /**
- * Created by ll on 2015/12/2.
+ * 我的审核全部进度
  */
 public class AllProgressFragmentAdapter extends AbstractAdapter<DataInfo> {
 
-    private Intent intent;
+    private MyAlertDialog dialog;
+    Resources resources;
+    private Map<Integer, Integer> colors=new HashMap<Integer, Integer>();
 
-    public AllProgressFragmentAdapter(Context Context, List<DataInfo> datas) {
-        super(Context, datas);
+    public AllProgressFragmentAdapter(Context context, List<DataInfo> datas) {
+        super(context, datas);
+        dialog = new MyAlertDialog(context);
+        resources = mContext.getResources();
+        colors.put(Constants.ProgressStatus.AUDIT,R.color.progress_audit);
+        colors.put(Constants.ProgressStatus.AUDIT_FAIL,R.color.progress_audit_fail);
+        colors.put(Constants.ProgressStatus.AUDIT_SUCCESS,R.color.progress_audit_success);
+        colors.put(Constants.ProgressStatus.APPLY_FAIL, R.color.progress_apply_fail);
+        colors.put(Constants.ProgressStatus.APPLY_SUCCESS,R.color.progress_apply_success);
     }
 
     @Override
@@ -50,10 +61,11 @@ public class AllProgressFragmentAdapter extends AbstractAdapter<DataInfo> {
         DataInfo info=mList.get(position);
         holder.item_qian.setImageResource(R.mipmap.shenhe);
         holder.progressRightIv.setImageResource(R.mipmap.phone);
-        holder.progressRightIv.setOnClickListener(new CallPhoneClickListener(mList.get(position).getMobile()));
+        holder.progressRightIv.setOnClickListener(new CallPhoneClickListener(info.getMobile(), dialog, mContext));
         holder.progressName.setText(info.getRealname());
-        holder.progressMoney.setText(MappingManager.getProcess(Integer.parseInt(info.getProcess())));
-        holder.progressCreateTime.setText("申请时间:" + TimeUtils.fullTimeAndDay(info.getAddtime()));
+        holder.progressMoney.setText(MappingManager.getProcess(info.getProcess()));
+        holder.progressMoney.setTextColor(resources.getColor(colors.get(info.getProcess())));
+        holder.progressCreateTime.setText(TimeUtils.fullTimeAndDay(info.getAddtime()));
         return convertView;
     }
 
@@ -63,21 +75,5 @@ public class AllProgressFragmentAdapter extends AbstractAdapter<DataInfo> {
         private TextView progressMoney;
         private TextView progressCreateTime;
         private ImageView progressRightIv;
-    }
-
-    public class CallPhoneClickListener implements View.OnClickListener {
-
-        private String phone;
-
-        public CallPhoneClickListener(String phone) {
-            this.phone = phone;
-        }
-
-        @Override
-        public void onClick(View v) {
-            //用intent启动拨打电话
-            intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone));
-            mContext.startActivity(intent);
-        }
     }
 }

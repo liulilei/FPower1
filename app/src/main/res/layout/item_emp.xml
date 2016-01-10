@@ -30,7 +30,7 @@
 
             android:layout_marginTop="3dp"
             android:text="江先生"
-            android:textColor="#272727"
+            android:textColor="@color/black"
             android:textSize="17sp" />
 
         <TextView

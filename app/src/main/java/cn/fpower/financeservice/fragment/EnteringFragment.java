@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,10 +22,9 @@ import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.app.FSApplication;
 import cn.fpower.financeservice.constants.Constants;
 import cn.fpower.financeservice.manager.netmanager.FinanceManagerControl;
-import cn.fpower.financeservice.manager.netmanager.ManagerDataListener;
+import cn.fpower.financeservice.manager.netmanager.ManagerStringListener;
 import cn.fpower.financeservice.mode.LoanPara;
 import cn.fpower.financeservice.mode.ProvinceData;
-import cn.fpower.financeservice.mode.UserInfo;
 import cn.fpower.financeservice.utils.ToastUtils;
 import cn.fpower.financeservice.view.InfoInputActivity;
 import cn.fpower.financeservice.view.widget.EnteringSettingView;
@@ -57,11 +55,6 @@ public class EnteringFragment extends BaseFragment implements View.OnClickListen
     private EnteringSettingView info_pay;
     @ViewInject(R.id.info_qudao)
     private EnteringSettingView info_qudao;
-    private final int CODE_NAME = 0;
-    private final int CODE_MONEY = 1;
-    private final int CODE_MOBILE = 2;
-    private final int CODE_ADDRDETAIL = 3;
-    private final int CODE_QUDAO = 6;
 
     LoanPara loanPara = new LoanPara();
     private Dialog mDialog;
@@ -81,7 +74,7 @@ public class EnteringFragment extends BaseFragment implements View.OnClickListen
     @Override
     protected void initView() {
         back.setVisibility(View.GONE);
-        title.setText(getString(R.string.entering));
+        title.setText(R.string.entering);
         info_name.setOnClickListener(this);
         info_money.setOnClickListener(this);
         info_mobile.setOnClickListener(this);
@@ -89,7 +82,6 @@ public class EnteringFragment extends BaseFragment implements View.OnClickListen
         info_addrdetail.setOnClickListener(this);
         info_fanchan.setOnClickListener(this);
         info_pay.setOnClickListener(this);
-        info_qudao.setOnClickListener(this);
         submit.setOnClickListener(this);
     }
 
@@ -97,6 +89,14 @@ public class EnteringFragment extends BaseFragment implements View.OnClickListen
     protected void initData() {
         super.initData();
         initPro();
+        initQudao();
+    }
+
+    public void initQudao(){
+        if (FSApplication.getInstance().getUserInfo() != null) {
+            info_qudao.setValue(FSApplication.getInstance().getUserInfo().getData().getShop_id() + "",
+                    FSApplication.getInstance().getUserInfo().getData().getShop_name() );
+        }
     }
 
     private void initPro() {
@@ -129,7 +129,7 @@ public class EnteringFragment extends BaseFragment implements View.OnClickListen
     private void jump(EnteringSettingView esView, int code, int inputType) {
         Intent intent = new Intent();
         intent.putExtra("title", esView.getTitle());
-        intent.putExtra("value", esView.getValue());
+        intent.putExtra("value", esView.getKey());
         intent.putExtra("inputType", inputType);
         intent.setClass(getContext(), InfoInputActivity.class);
         startActivityForResult(intent, code);
@@ -140,19 +140,19 @@ public class EnteringFragment extends BaseFragment implements View.OnClickListen
 
         switch (v.getId()) {
             case R.id.info_name:
-                jump(info_name, CODE_NAME, 0);
+                jump(info_name, Constants.CODE_NAME, 0);
                 break;
             case R.id.info_money:
-                jump(info_money, CODE_MONEY, EditorInfo.TYPE_CLASS_NUMBER | EditorInfo.TYPE_NUMBER_FLAG_DECIMAL);
+                jump(info_money, Constants.CODE_MONEY, EditorInfo.TYPE_CLASS_NUMBER);
                 break;
             case R.id.info_mobile:
-                jump(info_mobile, CODE_MOBILE, EditorInfo.TYPE_CLASS_NUMBER);
+                jump(info_mobile, Constants.CODE_MOBILE, EditorInfo.TYPE_CLASS_NUMBER);
                 break;
             case R.id.info_addr:
                 optionsPickerView.show();
                 break;
             case R.id.info_addrdetail:
-                jump(info_addrdetail, CODE_ADDRDETAIL, 0);
+                jump(info_addrdetail, Constants.CODE_ADDRDETAIL, 0);
                 break;
             case R.id.info_fanchan:
                 mDialog = createSexDialog("选择房产", info_fanchan);
@@ -162,24 +162,22 @@ public class EnteringFragment extends BaseFragment implements View.OnClickListen
                 mDialog = createSexDialog("选择贷款", info_pay);
                 mDialog.show();
                 break;
-            case R.id.info_qudao:
-                jump(info_qudao, CODE_QUDAO, 0);
-                break;
             case R.id.submit:
                 //渠道默认为空，可以不传
                 loanPara.user_id = FSApplication.getInstance().getUserInfo().getData().getId();
-                loanPara.realname = info_name.getValue();
-                loanPara.mobile = info_mobile.getValue();
-                loanPara.money = info_money.getValue();
+                loanPara.realname = info_name.getKey();
+                loanPara.mobile = info_mobile.getKey();
+                loanPara.money = info_money.getKey();
                 String[] keys = info_addr.getKey().split(",");
                 if (keys != null && keys.length == 3) {
                     loanPara.province_id = keys[0];
                     loanPara.city_id = keys[1];
                     loanPara.district_id = keys[2];
                 }
-                loanPara.address = info_addrdetail.getValue();
+                loanPara.address = info_addrdetail.getKey();
                 loanPara.is_housing = info_fanchan.getKey() + "";
                 loanPara.is_loan = info_pay.getKey() + "";
+                loanPara.channel = info_qudao.getKey();
                 try {
                     loanPara.checkLoan();
                 } catch (Exception e) {
@@ -187,10 +185,10 @@ public class EnteringFragment extends BaseFragment implements View.OnClickListen
                     return;
                 }
                 FinanceManagerControl.getFinanceServiceManager().create_loan(getActivity(), loanPara,
-                        true, UserInfo.class, new ManagerDataListener() {
+                        true,  new ManagerStringListener() {
 
                             @Override
-                            public void onSuccess(Object data) {
+                            public void onSuccess(String data) {
                                 //清空所有数据
                                 info_name.clear();
                                 info_money.clear();
@@ -198,8 +196,8 @@ public class EnteringFragment extends BaseFragment implements View.OnClickListen
                                 info_addr.clear();
                                 info_fanchan.clear();
                                 info_pay.clear();
-                                info_qudao.clear();
                                 info_addrdetail.clear();
+                                loanPara = new LoanPara();
                             }
 
                             @Override
@@ -227,24 +225,24 @@ public class EnteringFragment extends BaseFragment implements View.OnClickListen
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (data != null) {
-            String result = data.getExtras().getString("result");
+            String result = data.getStringExtra("result");
             switch (requestCode) {
-                case CODE_NAME:
+                case Constants.CODE_NAME:
                     info_name.setValue(result);
                     break;
-                case CODE_MONEY:
-                    info_money.setValue(result);
+                case Constants.CODE_MONEY:
+                    if(TextUtils.isEmpty(result)){
+                        info_money.setValue(result);
+                    }else {
+                        info_money.setValue(result, result + "元");
+                    }
                     break;
-                case CODE_MOBILE:
+                case Constants.CODE_MOBILE:
                     info_mobile.setValue(result);
                     break;
-                case CODE_QUDAO:
-                    info_qudao.setValue(result);
-                    break;
-                case CODE_ADDRDETAIL:
+                case Constants.CODE_ADDRDETAIL:
                     info_addrdetail.setValue(result);
                     break;
-
             }
         }
     }

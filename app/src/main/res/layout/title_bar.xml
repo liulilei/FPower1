@@ -40,6 +40,8 @@
     <ImageView
         android:id="@+id/title_bar_right_iv"
         android:layout_width="wrap_content"
+        android:src="@mipmap/add"
+        android:visibility="gone"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"

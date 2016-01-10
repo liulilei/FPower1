@@ -73,11 +73,10 @@ public class ShopListActivity extends BaseActivity implements OnClickListener, R
                         if (exampleList == null || exampleList.size() == 0) {
                             ToastUtils.show(act, "没有数据");
                             progressRlv.showFooterResult(false);
-                            return;
                         }
                         adapter=new ShopListFragmentAdapter(act, exampleList);
                         progressRlv.setAdapter(adapter);
-                        progressRlv.showFooterResult(now_page <= (info.getData().getShop_total() / Constants.PAGE_SIZE));
+                        progressRlv.showFooterResult(info.getData().getShop_total() > now_page * Constants.PAGE_SIZE);
                     }
 
                     @Override
@@ -109,10 +108,9 @@ public class ShopListActivity extends BaseActivity implements OnClickListener, R
                         if (loadMoreExampleList == null || loadMoreExampleList.size() == 0) {
                             ToastUtils.show(act, "没有数据");
                             progressRlv.showFooterResult(false);
-                            return;
                         }
                         adapter.addData(loadMoreExampleList);
-                        progressRlv.showFooterResult(now_page <= (info.getData().getShop_total() / Constants.PAGE_SIZE));
+                        progressRlv.showFooterResult(info.getData().getShop_total() > now_page * Constants.PAGE_SIZE);
                     }
 
                     @Override
@@ -125,7 +123,7 @@ public class ShopListActivity extends BaseActivity implements OnClickListener, R
     @Override
     public void OnRefresh() {
         FinanceManagerControl.getFinanceServiceManager().shop_list(act,
-                FSApplication.getInstance().getUserInfo().getData().getId(), 1, true, ShopList.class, new ManagerDataListener() {
+                FSApplication.getInstance().getUserInfo().getData().getId(), 1, false, ShopList.class, new ManagerDataListener() {
 
                     @Override
                     public void onSuccess(Object data) {
@@ -144,7 +142,7 @@ public class ShopListActivity extends BaseActivity implements OnClickListener, R
                         } else {
                             adapter.refresh(exampleList);
                         }
-                        progressRlv.showFooterResult(now_page <= (info.getData().getShop_total() / Constants.PAGE_SIZE));
+                        progressRlv.showFooterResult(info.getData().getShop_total() > now_page * Constants.PAGE_SIZE);
                     }
 
                     @Override
@@ -156,11 +154,11 @@ public class ShopListActivity extends BaseActivity implements OnClickListener, R
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if(position==0 || position > exampleList.size()){
+        if(position==0 || position > adapter.getList().size()){
             return;
         }
         Intent intent = new Intent(act, ShopDetailActivity.class);
-        intent.putExtra("shop_id", exampleList.get(position-1).id);
+        intent.putExtra("shop_id", adapter.getList().get(position-1).id);
         startActivity(intent);
     }
 }

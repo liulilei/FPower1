@@ -18,7 +18,6 @@ import cn.fpower.financeservice.app.FSApplication;
 import cn.fpower.financeservice.constants.Constants;
 import cn.fpower.financeservice.manager.netmanager.FinanceManagerControl;
 import cn.fpower.financeservice.manager.netmanager.ManagerDataListener;
-import cn.fpower.financeservice.mode.CaseListInfo;
 import cn.fpower.financeservice.mode.DataInfo;
 import cn.fpower.financeservice.mode.LoanInfo;
 import cn.fpower.financeservice.utils.ToastUtils;
@@ -78,7 +77,7 @@ public class NormalCheckListActivity extends BaseActivity implements OnClickList
                         }
                         adapter=new AllProgressFragmentAdapter(act, exampleList);
                         progressRlv.setAdapter(adapter);
-                        progressRlv.showFooterResult(now_page <= (info.getData().getLoan_total() / Constants.PAGE_SIZE));
+                        progressRlv.showFooterResult(info.getData().getLoan_total() > now_page * Constants.PAGE_SIZE);
                     }
 
                     @Override
@@ -119,7 +118,7 @@ public class NormalCheckListActivity extends BaseActivity implements OnClickList
                         } else {
                             adapter.refresh(exampleList);
                         }
-                        progressRlv.showFooterResult(now_page <= (info.getData().getLoan_total() / Constants.PAGE_SIZE));
+                        progressRlv.showFooterResult(info.getData().getLoan_total() > now_page * Constants.PAGE_SIZE);
                     }
 
                     @Override
@@ -145,7 +144,7 @@ public class NormalCheckListActivity extends BaseActivity implements OnClickList
                             return;
                         }
                         adapter.addData(loadMoreExampleList);
-                        progressRlv.showFooterResult(now_page <= (info.getData().getLoan_total() / Constants.PAGE_SIZE));
+                        progressRlv.showFooterResult(info.getData().getLoan_total() > now_page * Constants.PAGE_SIZE);
                     }
 
                     @Override
@@ -157,11 +156,11 @@ public class NormalCheckListActivity extends BaseActivity implements OnClickList
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if(position==0 || position > exampleList.size()){
+        if(position==0 || position > adapter.getList().size()){
             return;
         }
         Intent intent = new Intent(act, ProgressDetailActivity.class);
-        intent.putExtra("loan_id", exampleList.get(position-1).getId());
+        intent.putExtra("loan_id", adapter.getList().get(position-1).getId());
         startActivity(intent);
     }
 }

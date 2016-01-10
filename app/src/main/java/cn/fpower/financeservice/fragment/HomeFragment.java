@@ -146,12 +146,12 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 intent.putExtra(Constants.ADDRESS, NetApi.URL_HTTP + introduceList.get(0));
                 startActivity(intent);
                 break;
-            case R.id.fragment_home_loan_tv:
+            case R.id.fragment_home_limit_tv:
                 intent = new Intent(getActivity(), WebViewActivity.class);
                 intent.putExtra(Constants.ADDRESS, NetApi.URL_HTTP + introduceList.get(1));
                 startActivity(intent);
                 break;
-            case R.id.fragment_home_limit_tv:
+            case R.id.fragment_home_loan_tv:
                 intent = new Intent(getActivity(), WebViewActivity.class);
                 intent.putExtra(Constants.ADDRESS, NetApi.URL_HTTP + introduceList.get(2));
                 startActivity(intent);

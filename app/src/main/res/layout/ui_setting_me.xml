@@ -21,7 +21,7 @@
         android:layout_marginLeft="9dp"
         android:layout_toRightOf="@+id/img_left"
         android:text="我的审核"
-        android:textColor="#464646"
+        android:textColor="@color/black"
         android:textSize="14sp" />
 
     <ImageView

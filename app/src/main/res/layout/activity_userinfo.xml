@@ -12,7 +12,7 @@
     <RelativeLayout
         android:layout_marginTop="20dp"
         android:layout_below="@+id/layout_head"
-        android:id="@+id/layout_login_info"
+        android:id="@+id/layout_face"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -35,11 +35,10 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="16dp"
             android:text="设置头像"
-            android:textColor="#959595"
+            android:textColor="@color/black"
             android:textSize="14sp" />
 
         <ImageView
-            android:id="@+id/img_right"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
             android:layout_width="wrap_content"
@@ -55,7 +54,7 @@
         android:id="@+id/info_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/layout_login_info"
+        android:layout_below="@+id/layout_face"
         app:txtName="姓名" />
 
     <cn.fpower.financeservice.view.widget.EnteringSettingView
@@ -63,21 +62,24 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/info_name"
+        app:defaultValue="请选择"
         app:txtName="生日"/>
 
     <cn.fpower.financeservice.view.widget.EnteringSettingView
         android:id="@+id/info_sex"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        app:defaultValue="请选择"
         android:layout_below="@+id/info_birthday"
         app:txtName="性别"/>
 
     <cn.fpower.financeservice.view.widget.EnteringSettingView
         android:id="@+id/info_addr"
+        app:defaultValue="请选择"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/info_sex"
-        app:txtName="地址"/>
+        app:txtName="地区"/>
 
     <Button
         android:id="@+id/submit"

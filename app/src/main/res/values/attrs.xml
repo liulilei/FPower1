@@ -2,7 +2,9 @@
 <resources>
     <declare-styleable name="me_setting">
         <attr name="txtName" format="string" />
+        <attr name="defaultValue" format="string" />
         <attr name="imgRes" format="reference" />
         <attr name="showLine" format="boolean" />
+        <attr name="hideRight" format="boolean" />
     </declare-styleable>
 </resources>

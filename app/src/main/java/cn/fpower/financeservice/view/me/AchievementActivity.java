@@ -1,11 +1,12 @@
 package cn.fpower.financeservice.view.me;
 
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bigkoo.pickerview.OptionsPickerView;
 import com.lidroid.xutils.view.annotation.ViewInject;
 
 import java.util.List;
@@ -19,6 +20,8 @@ import cn.fpower.financeservice.manager.netmanager.ManagerDataListener;
 import cn.fpower.financeservice.mode.AchievementAmount;
 import cn.fpower.financeservice.mode.AchievementData;
 import cn.fpower.financeservice.mode.AchievementList;
+import cn.fpower.financeservice.mode.PickData;
+import cn.fpower.financeservice.mode.UserInfo;
 import cn.fpower.financeservice.net.NetApi;
 import cn.fpower.financeservice.utils.ImageUtils;
 import cn.fpower.financeservice.utils.TimeUtils;
@@ -29,7 +32,7 @@ import cn.fpower.financeservice.view.widget.RefreshListView;
 /**
  * 我的业绩 员工
  */
-public class AchievementActivity extends BaseActivity implements RefreshListView.IOnRefreshListener, RefreshListView.IOnLoadMoreListener, AdapterView.OnItemClickListener {
+public class AchievementActivity extends BaseActivity implements RefreshListView.IOnRefreshListener, RefreshListView.IOnLoadMoreListener {
 
     @ViewInject(R.id.title_bar_back)
     private ImageView back;
@@ -42,6 +45,12 @@ public class AchievementActivity extends BaseActivity implements RefreshListView
 
     @ViewInject(R.id.time)
     private TextView time;
+
+    @ViewInject(R.id.list_title)
+    private TextView list_title;
+
+    @ViewInject(R.id.top_name)
+    private TextView top_name;
 
     @ViewInject(R.id.img_my_head)
     private ImageView img_my_head;
@@ -57,6 +66,13 @@ public class AchievementActivity extends BaseActivity implements RefreshListView
     private List<AchievementData> exampleList;
     private List<AchievementData> loadMoreExampleList;
 
+    private UserInfo.Data user_info;
+
+    @ViewInject(R.id.layout_info)
+    private View layout_info;
+
+    private PickData pick;
+    OptionsPickerView optionsPickerView ;
 
     @Override
     protected int initLayout() {
@@ -66,10 +82,11 @@ public class AchievementActivity extends BaseActivity implements RefreshListView
     @Override
     protected void initView() {
         back.setOnClickListener(this);
-        title.setText("我的业绩");
+        layout_info.setOnClickListener(this);
+        title.setText("业绩详情");
         progressRlv.setOnRefreshListener(this);
         progressRlv.setOnLoadMoreListener(this);
-        progressRlv.setOnItemClickListener(this);
+        top_name.setText("");
     }
 
     private int userId;
@@ -77,15 +94,17 @@ public class AchievementActivity extends BaseActivity implements RefreshListView
     @Override
     protected void initData() {
         super.initData();
-        time.setText(TimeUtils.getMouth() + "月");
+        initPick();
         Bundle extras = getIntent().getExtras();
         if(extras!=null) {
             userId = extras.getInt("user_id");
-            ImageUtils.displayImageRoundImg(R.mipmap.moren, NetApi.URL+extras.getString("face"), img_my_head);
+            list_title.setText("他的业绩");
         }else{
-            img_my_head.setVisibility(View.GONE);
+            userId= FSApplication.getInstance().getUserInfo().getData().getId();
+            list_title.setText("我的业绩");
         }
-        FinanceManagerControl.getFinanceServiceManager().achievement_list(act, userId, 1, 0, 0, true, AchievementList.class, new ManagerDataListener() {
+        getAmount(false);
+        FinanceManagerControl.getFinanceServiceManager().achievement_list(act, userId, now_page, 0, 0, true, AchievementList.class, new ManagerDataListener() {
 
             @Override
             public void onSuccess(Object data) {
@@ -107,20 +126,21 @@ public class AchievementActivity extends BaseActivity implements RefreshListView
         });
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        FinanceManagerControl.getFinanceServiceManager().achievement_amount(act, userId
-                , TimeUtils.getMouthStart(), TimeUtils.getMouthEnd(), true, AchievementAmount.class, new ManagerDataListener() {
-            @Override
-            public void onSuccess(Object data) {
-                AchievementAmount m = (AchievementAmount) data;
-                money.setText("￥" + m.getData().getAchievement_amount());
-            }
+    private void initPick(){
+        time.setText(TimeUtils.getMonth() + "月");
+        pick=new PickData();
+        optionsPickerView = new OptionsPickerView(act);
+        optionsPickerView.setPicker(pick.getOptions1Items(), pick.getOptions2Items(), true);
+        optionsPickerView.setCyclic(false);
+        optionsPickerView.setSelectOptions(0, pick.position);
+        optionsPickerView.setOnoptionsSelectListener(new OptionsPickerView.OnOptionsSelectListener() {
 
             @Override
-            public void onError(String error) {
-                money.setText("￥0");
+            public void onOptionsSelect(int options1, int option2, int options3) {
+                pick.setStartAndEnd(pick.getOptions1Items().get(options1).getCode(),
+                        pick.getOptions2Items().get(options1).get(option2).getCode());
+                time.setText(pick.getOptions2Items().get(options1).get(option2).getName());
+                getAmount(true);
             }
         });
     }
@@ -129,40 +149,38 @@ public class AchievementActivity extends BaseActivity implements RefreshListView
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.title_bar_back:
+                setResult(RESULT_OK);
                 this.finish();
+                break;
+            case R.id.layout_info:
+                optionsPickerView.show();
                 break;
         }
     }
 
+    public void getAmount(boolean isDialog){
+        FinanceManagerControl.getFinanceServiceManager().achievement_amount(act, userId
+                , TimeUtils.getMonthStart(), TimeUtils.getMonthEnd(), isDialog, AchievementAmount.class, new ManagerDataListener() {
+            @Override
+            public void onSuccess(Object data) {
+                AchievementAmount m = (AchievementAmount) data;
+                user_info = m.getData().getUser_info();
+                ImageUtils.displayImageRoundImg(R.mipmap.moren,  NetApi.URL_HTTP + user_info.getFace(), img_my_head);
+                money.setText("￥" + m.getData().getAchievement_amount());
+                top_name.setText(user_info.getUsername());
+            }
+
+            @Override
+            public void onError(String error) {
+                money.setText("￥0");
+            }
+        });
+    }
+
+
     @Override
     public void OnRefresh() {
-        FinanceManagerControl.getFinanceServiceManager().achievement_amount(act, userId
-                , TimeUtils.getMouthStart(), TimeUtils.getMouthEnd(), true, AchievementAmount.class, new ManagerDataListener() {
-            @Override
-            public void onSuccess(Object data) {
-                AchievementAmount m = (AchievementAmount) data;
-                money.setText("￥" + m.getData().getAchievement_amount());
-            }
-
-            @Override
-            public void onError(String error) {
-                money.setText("￥0");
-            }
-        });
-        FinanceManagerControl.getFinanceServiceManager().achievement_amount(act, userId
-                , TimeUtils.getMouthStart(), TimeUtils.getMouthEnd(), true, AchievementAmount.class, new ManagerDataListener() {
-            @Override
-            public void onSuccess(Object data) {
-                AchievementAmount m = (AchievementAmount) data;
-                money.setText("￥" + m.getData().getAchievement_amount());
-            }
-
-            @Override
-            public void onError(String error) {
-                money.setText("￥0");
-            }
-        });
-
+        getAmount(false);
         FinanceManagerControl.getFinanceServiceManager().achievement_list(act, userId, 1, 0, 0, true, AchievementList.class, new ManagerDataListener() {
 
             @Override
@@ -216,12 +234,12 @@ public class AchievementActivity extends BaseActivity implements RefreshListView
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (position == 0 || position > exampleList.size()) {
-            return;
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            setResult(RESULT_OK);
+            finish();
+            return true;
         }
-       /* Intent intent = new Intent(act, ShopDetailActivity.class);
-        intent.putExtra("shop_id", exampleList.get(position - 1).id);
-        startActivity(intent);*/
+        return super.onKeyDown(keyCode, event);
     }
 }

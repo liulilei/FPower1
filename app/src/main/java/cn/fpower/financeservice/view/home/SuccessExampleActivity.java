@@ -5,7 +5,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.lidroid.xutils.view.annotation.ViewInject;
+
 import java.util.List;
+
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.adapter.SuccessExampleAdapter;
 import cn.fpower.financeservice.constants.Constants;
@@ -67,7 +69,7 @@ public class SuccessExampleActivity extends BaseActivity implements View.OnClick
                 }
                 successExampleAdapter = new SuccessExampleAdapter(SuccessExampleActivity.this, exampleList);
                 successExampleRlv.setAdapter(successExampleAdapter);
-                successExampleRlv.showFooterResult(now_page <=  (((CaseListInfo) data).getData().getCase_total() / Constants.PAGE_SIZE));
+                successExampleRlv.showFooterResult(((CaseListInfo) data).getData().getCase_total() > now_page * Constants.PAGE_SIZE);
             }
 
             @Override
@@ -104,7 +106,7 @@ public class SuccessExampleActivity extends BaseActivity implements View.OnClick
                         } else {
                             successExampleAdapter.refresh(refreshExampleList);
                         }
-                        successExampleRlv.showFooterResult(now_page <=  (((CaseListInfo) data).getData().getCase_total() / Constants.PAGE_SIZE));
+                        successExampleRlv.showFooterResult(((CaseListInfo) data).getData().getCase_total() > now_page * Constants.PAGE_SIZE);
                     }
 
                     @Override
@@ -127,7 +129,7 @@ public class SuccessExampleActivity extends BaseActivity implements View.OnClick
                             return;
                         }
                         successExampleAdapter.addData(loadMoreExampleList);
-                        successExampleRlv.showFooterResult(now_page <= (((CaseListInfo) data).getData().getCase_total() / Constants.PAGE_SIZE));
+                        successExampleRlv.showFooterResult(((CaseListInfo) data).getData().getCase_total() > now_page * Constants.PAGE_SIZE);
                     }
                     @Override
                     public void onError(String error) {

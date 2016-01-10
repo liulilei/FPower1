@@ -5,12 +5,9 @@ import android.text.TextUtils;
 
 import com.lidroid.xutils.http.RequestParams;
 
-import java.io.ByteArrayInputStream;
-
 import cn.fpower.financeservice.constants.Constants;
 import cn.fpower.financeservice.mode.LoanPara;
 import cn.fpower.financeservice.net.NetApi;
-import cn.fpower.financeservice.utils.ToastUtils;
 
 /**
  * Created by ll on 2015/11/24.
@@ -106,6 +103,7 @@ public class FinanceServiceManager extends BaseManager {
 
     /**
      * 完善信息
+     *
      * @param context
      * @param user_id
      * @param face
@@ -119,7 +117,7 @@ public class FinanceServiceManager extends BaseManager {
      * @param clazz
      * @param listener
      */
-    public void complete_user_info(Context context, String user_id, String face,
+    public void complete_user_info(Context context, int code, String user_id, String face,
                                    String username, String birthday, String sex, String province_id,
                                    String city_id, String district_id,
                                    boolean hasDialog, Class clazz,
@@ -135,39 +133,18 @@ public class FinanceServiceManager extends BaseManager {
         params.addBodyParameter("province_id", province_id);
         params.addBodyParameter("city_id", city_id);
         params.addBodyParameter("district_id", district_id);
-        if (hasDialog) {
-            getDataFromNetHasDialog(context, NetApi.COMPLETE_USER_INFO, params, clazz, listener);
+        String url;
+        if (code == 200) {//修改信息
+            url = NetApi.USER_INFO_EDIT;
         } else {
-            getDataFromNetNoDialog(context, NetApi.COMPLETE_USER_INFO, params, clazz, listener);
+            url = NetApi.COMPLETE_USER_INFO;//修改信息
+        }
+        if (hasDialog) {
+            getDataFromNetHasDialog(context, url, params, clazz, listener);
+        } else {
+            getDataFromNetNoDialog(context, url, params, clazz, listener);
         }
     }
-
-    /**
-     * 修改信息
-     * **/
-    public void user_info_edit(Context context, String user_id, String face,
-                                   String username, String birthday, String sex, String province_id,
-                                   String city_id, String district_id,
-                                   boolean hasDialog, Class clazz,
-                                   ManagerDataListener listener) {
-        params = new RequestParams();//user_id，face, username, birthday, sex, province_id, city_id, district_id
-        params.addBodyParameter("user_id", user_id);
-        if (face != null) {
-            params.addBodyParameter("face", face);
-        }
-        params.addBodyParameter("username", username);
-        params.addBodyParameter("birthday", birthday);
-        params.addBodyParameter("sex", sex);
-        params.addBodyParameter("province_id", province_id);
-        params.addBodyParameter("city_id", city_id);
-        params.addBodyParameter("district_id", district_id);
-        if (hasDialog) {
-            getDataFromNetHasDialog(context, NetApi.USER_INFO_EDIT, params, clazz, listener);
-        } else {
-            getDataFromNetNoDialog(context, NetApi.USER_INFO_EDIT, params, clazz, listener);
-        }
-    }
-
 
     public void create_loan(Context context, LoanPara loanPara,
                             boolean hasDialog,
@@ -416,7 +393,7 @@ public class FinanceServiceManager extends BaseManager {
         params = new RequestParams();
         params.addQueryStringParameter("user_id", user_id + "");
         if (!TextUtils.isEmpty(start)) {
-            params.addQueryStringParameter("start", start );
+            params.addQueryStringParameter("start", start);
         }
         if (!TextUtils.isEmpty(end)) {
             params.addQueryStringParameter("end", end);
@@ -484,6 +461,7 @@ public class FinanceServiceManager extends BaseManager {
 
     /**
      * 忘记密码
+     *
      * @param context
      * @param mobile
      * @param passwd
@@ -491,9 +469,9 @@ public class FinanceServiceManager extends BaseManager {
      * @param hasDialog
      * @param listener
      */
-    public void forget_password(Context context, String mobile,String verify,String passwd,
-                            boolean hasDialog,
-                            ManagerStringListener listener) {
+    public void forget_password(Context context, String mobile, String verify, String passwd,
+                                boolean hasDialog,
+                                ManagerStringListener listener) {
         params = new RequestParams();
         params.addBodyParameter("mobile", mobile);
         params.addBodyParameter("verify", verify);
@@ -507,16 +485,17 @@ public class FinanceServiceManager extends BaseManager {
 
     /**
      * 修改密码
+     *
      * @param context
      * @param user_id
-     * @param passwd 新密码
+     * @param passwd    新密码
      * @param passwd_re 旧密码
      * @param hasDialog
      * @param listener
      */
-    public void user_info_edit_passwd(Context context, String user_id,String passwd,String passwd_re,
-                                boolean hasDialog,
-                                ManagerStringListener listener) {
+    public void user_info_edit_passwd(Context context, String user_id, String passwd, String passwd_re,
+                                      boolean hasDialog,
+                                      ManagerStringListener listener) {
         params = new RequestParams();
         params.addBodyParameter("user_id", user_id);
         params.addBodyParameter("passwd", passwd_re);
@@ -526,5 +505,17 @@ public class FinanceServiceManager extends BaseManager {
         } else {
             getJsonStringFromNetHasDialog(context, NetApi.USER_INFO_EDIT_PASSWD, params, listener);
         }
+    }
+
+    /**检查版本**/
+    public void version(Context context, Class clazz, ManagerDataListener listener) {
+        params = new RequestParams();
+        params.addQueryStringParameter("pt", "android");
+        getDataFromNetNoDialogGet(context, NetApi.VERSION, params, clazz, listener);
+    }
+
+    /**下载**/
+    public void update(Context context,String netApi, String tag, DownListener listener) {
+        downloadFile(context, netApi, tag, listener);
     }
 }

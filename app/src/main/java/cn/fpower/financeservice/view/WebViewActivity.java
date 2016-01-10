@@ -16,6 +16,7 @@ import com.lidroid.xutils.view.annotation.ViewInject;
 
 import cn.fpower.financeservice.R;
 import cn.fpower.financeservice.constants.Constants;
+import cn.fpower.financeservice.dialog.LoadingCancelDialog;
 import cn.fpower.financeservice.utils.DialogUtils;
 
 public class WebViewActivity extends BaseActivity implements OnClickListener {
@@ -29,6 +30,8 @@ public class WebViewActivity extends BaseActivity implements OnClickListener {
     @ViewInject(R.id.root)
     LinearLayout root;
 
+
+    LoadingCancelDialog dialog;
     @Override
     protected int initLayout() {
         return R.layout.activity_webview;
@@ -38,8 +41,8 @@ public class WebViewActivity extends BaseActivity implements OnClickListener {
     @Override
     protected void initView() {
         back.setOnClickListener(this);
+        dialog=new LoadingCancelDialog(this,getString(R.string.loading));
         WebSettings settings = webView.getSettings();
-
         settings.setJavaScriptEnabled(true);
         settings.setLayoutAlgorithm(LayoutAlgorithm.NORMAL);
         settings.setLoadWithOverviewMode(true);
@@ -62,13 +65,13 @@ public class WebViewActivity extends BaseActivity implements OnClickListener {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
-                DialogUtils.showProgess(WebViewActivity.this, R.string.loading);
+                dialog.show();
             }
 
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                DialogUtils.dismissProgessDirectly();
+                dialog.dismiss();
             }
         });
 

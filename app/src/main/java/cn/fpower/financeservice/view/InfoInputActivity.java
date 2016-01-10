@@ -29,9 +29,6 @@ public class InfoInputActivity extends BaseActivity implements OnClickListener {
     @ViewInject(R.id.inputinfo)
     private ClearEditText inputinfo;
 
-    public InfoInputActivity() {
-    }
-
     @Override
     protected int initLayout() {
         return R.layout.activity_info_inpput;
@@ -42,13 +39,19 @@ public class InfoInputActivity extends BaseActivity implements OnClickListener {
         back.setOnClickListener(this);
         Bundle b=getIntent().getExtras();
         if(b!=null) {
-            title.setText("输入" + b.getString("title"));
+            String titleValue=b.getString("title");
+            title.setText("输入" + titleValue);
             int type=b.getInt("inputType",0);
             if(type!=0) {
                 inputinfo.setInputType(type);
                 if(type==EditorInfo.TYPE_CLASS_NUMBER){
-                    inputinfo.setFilters(new InputFilter[] { new InputFilter.LengthFilter(
-                            11) });
+                    if(titleValue.contains("金额")){
+                        inputinfo.setFilters(new InputFilter[]{new InputFilter.LengthFilter(9)});
+                        inputinfo.setXiaoShu();
+                    }else {
+                        inputinfo.setFilters(new InputFilter[]{new InputFilter.LengthFilter(
+                                11)});
+                    }
                 }
             }
             inputinfo.setText(b.getString("value"));
@@ -81,5 +84,4 @@ public class InfoInputActivity extends BaseActivity implements OnClickListener {
                 break;
         }
     }
-
 }

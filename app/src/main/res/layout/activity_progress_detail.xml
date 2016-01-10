@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -20,10 +21,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:paddingBottom="25dp"
+                android:paddingBottom="18dp"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:paddingTop="21dp">
+                android:paddingTop="14dp">
 
                 <RelativeLayout
                     android:id="@+id/layout_head"
@@ -37,7 +38,7 @@
                         android:layout_centerVertical="true"
                         android:layout_toRightOf="@+id/img_my_head"
                         android:text="申请金额"
-                        android:textColor="#272727"
+                        android:textColor="@color/black"
                         android:textSize="14sp" />
 
                     <TextView
@@ -55,9 +56,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/layout_head"
-                    android:layout_marginTop="21dp"
+                    android:layout_marginTop="8dp"
                     android:textColor="#F84431"
-                    android:textSize="30sp"
+                    android:textSize="25sp"
                     android:textStyle="bold" />
             </RelativeLayout>
 
@@ -74,9 +75,10 @@
 
                 <TextView
                     android:id="@+id/progress_name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/progress_phone"
                     android:layout_marginLeft="20dp"
                     android:textColor="#292929"
                     android:textSize="16sp" />
@@ -131,7 +133,6 @@
                             android:layout_width="10dp"
                             android:layout_height="10dp"
                             android:layout_gravity="center"
-                            android:padding="1dp"
                             android:src="@mipmap/progress_ok" />
 
                         <View
@@ -148,19 +149,18 @@
                         android:id="@+id/progress_state_tv1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="13dp"
-                        android:text="录入成功"
-                        android:textColor="#b7b6b6"
-                        android:textSize="14sp" />
+                        android:layout_marginTop="5dp"
+                        android:text="待审核"
+                        android:textColor="@color/progress_line_select"
+                        android:textSize="11sp" />
 
                     <TextView
-                        android:id="@+id/progress_tqime1"
+                        android:id="@+id/progress_time1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:text="2011-11-10 02:11"
-                        android:textColor="#b7b6b6"
-                        android:textSize="11sp" />
+                        android:layout_marginTop="5dp"
+                        android:textColor="#666666"
+                        android:textSize="7sp" />
 
                 </LinearLayout>
 
@@ -190,7 +190,6 @@
                             android:layout_width="10dp"
                             android:layout_height="10dp"
                             android:layout_gravity="center"
-                            android:padding="1dp"
                             android:src="@mipmap/progress_fail" />
 
                         <View
@@ -207,18 +206,17 @@
                         android:id="@+id/progress_state_tv2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="13dp"
-
-                        android:textColor="#b7b6b6"
-                        android:textSize="14sp" />
+                        android:layout_marginTop="5dp"
+                        android:textColor="#333333"
+                        android:textSize="11sp" />
 
                     <TextView
                         android:id="@+id/progress_time2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:textColor="#b7b6b6"
-                        android:textSize="11sp" />
+                        android:layout_marginTop="5dp"
+                        android:textColor="#666666"
+                        android:textSize="7sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -247,7 +245,6 @@
                             android:layout_width="10dp"
                             android:layout_height="10dp"
                             android:layout_gravity="center"
-                            android:padding="1dp"
                             android:src="@mipmap/progress_fail" />
 
                         <View
@@ -262,17 +259,17 @@
                         android:id="@+id/progress_state_tv3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="13dp"
-                        android:textColor="#13d424"
-                        android:textSize="14sp" />
+                        android:layout_marginTop="5dp"
+                        android:textColor="#333333"
+                        android:textSize="11sp" />
 
                     <TextView
                         android:id="@+id/progress_time3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:textColor="#b7b6b6"
-                        android:textSize="11sp" />
+                        android:layout_marginTop="5dp"
+                        android:textColor="#666666"
+                        android:textSize="7sp" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -282,132 +279,34 @@
                 android:layout_height="1dp"
                 android:background="#bbbbbb"></View>
 
-            <RelativeLayout
+            <cn.fpower.financeservice.view.widget.EnteringSettingView
+                android:id="@+id/info_addr"
                 android:layout_width="match_parent"
-                android:gravity="center"
-                android:layout_height="46dp">
+                android:layout_height="wrap_content"
+                app:hideRight="true"
+                app:txtName="@string/area" />
 
-                <TextView
-                    android:id="@+id/progress_address_tv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="22dp"
-                    android:text="地址"
-                    android:textColor="#717171"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/progress_address"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="21dp"
-                    android:layout_toRightOf="@id/progress_address_tv"
-                    android:gravity="right"
-                    android:singleLine="true"
-                    android:textColor="#717171"
-                    android:textSize="16sp" />
-
-            </RelativeLayout>
-
-            <View
+            <cn.fpower.financeservice.view.widget.EnteringSettingView
+                android:id="@+id/info_fanchan"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#bbbbbb"></View>
+                android:layout_height="wrap_content"
+                app:hideRight="true"
+                app:txtName="有无房产" />
 
-            <RelativeLayout
+            <cn.fpower.financeservice.view.widget.EnteringSettingView
+                android:id="@+id/info_pay"
                 android:layout_width="match_parent"
-                android:gravity="center"
-                android:layout_height="46dp">
+                android:layout_height="wrap_content"
+                app:hideRight="true"
+                app:txtName="有无贷款" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="22dp"
-                    android:text="有无房产"
-                    android:textColor="#717171"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/progress_has_house"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="21dp"
-                    android:singleLine="true"
-                    android:textColor="#717171"
-                    android:textSize="16sp" />
-
-            </RelativeLayout>
-
-            <View
+            <cn.fpower.financeservice.view.widget.EnteringSettingView
+                android:id="@+id/info_qudao"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#bbbbbb"></View>
+                android:layout_height="wrap_content"
+                app:hideRight="true"
+                app:txtName="渠道" />
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:gravity="center"
-                android:layout_height="46dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="22dp"
-                    android:text="有无贷款"
-                    android:textColor="#717171"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/progress_has_money"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="21dp"
-                    android:singleLine="true"
-                    android:textColor="#717171"
-                    android:textSize="16sp" />
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#bbbbbb"></View>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:gravity="center"
-                android:layout_height="46dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="22dp"
-                    android:text="渠道"
-                    android:textColor="#717171"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/progress_has_chanel"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginRight="21dp"
-                    android:singleLine="true"
-                    android:textColor="#717171"
-                    android:textSize="16sp" />
-
-            </RelativeLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#bbbbbb"></View>
         </LinearLayout>
     </ScrollView>
 

@@ -8,18 +8,27 @@
     <color name="text_des">#5A5A5A</color>
     <color name="button_bg">#E60012</color>
     <color name="act_bg">#F0EFF4</color>
-
     <color name="split_line">#f8f8f8</color>
     <drawable name="pressed_bg">#dedede</drawable>
     <drawable name="nopressed_bg">#fff</drawable>
     <color name="progress_text_normal">#555555</color>
     <color name="progress_text_select">#F20C00</color>
 
-    <color name="black_000000">#000000</color>
-    <color name="progress_checking">#e89201</color>
-    <color name="progress_checked">#28a901</color>
-    <color name="progress_check_ok">#e61600</color>
+    <color name="progress_audit">#9400d3</color>
+    <color name="progress_apply_success">#13d424</color>
+    <color name="progress_apply_fail">#FF0000</color>
+    <color name="progress_audit_success">#EE9A00</color>
+    <color name="progress_audit_fail">#FF0000</color>
+
+
     <color name="progress_line_select">#13d424</color>
     <color name="progress_line_normal">#dddddd</color>
     <color name="progress_checking_tv">#e39400</color>
+
+    <color name="trans">#00000000</color>
+    <color name="black">#000000</color>
+    <color name="alertdialog_line">#c6c6c6</color>
+    <color name="actionsheet_blue">#037BFF</color>
+    <color name="actionsheet_red">#FD4A2E</color>
+    <color name="actionsheet_gray">#8F8F8F</color>
 </resources>

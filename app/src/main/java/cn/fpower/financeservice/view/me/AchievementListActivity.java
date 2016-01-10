@@ -1,7 +1,6 @@
 package cn.fpower.financeservice.view.me;
 
 
-import android.content.Intent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
@@ -77,7 +76,7 @@ public class AchievementListActivity extends BaseActivity implements OnClickList
                 }
                 adapter = new AchievementFragmentAdapter(act, exampleList);
                 progressRlv.setAdapter(adapter);
-                progressRlv.showFooterResult(now_page <= (info.getData().getAchievement_total() / Constants.PAGE_SIZE));
+                progressRlv.showFooterResult(info.getData().getAchievement_total() > now_page * Constants.PAGE_SIZE);
             }
 
             @Override
@@ -111,7 +110,7 @@ public class AchievementListActivity extends BaseActivity implements OnClickList
                     return;
                 }
                 adapter.addData(loadMoreExampleList);
-                progressRlv.showFooterResult(now_page <= (info.getData().getAchievement_total() / Constants.PAGE_SIZE));
+                progressRlv.showFooterResult(info.getData().getAchievement_total() > now_page * Constants.PAGE_SIZE);
             }
 
             @Override
@@ -142,7 +141,7 @@ public class AchievementListActivity extends BaseActivity implements OnClickList
                 } else {
                     adapter.refresh(exampleList);
                 }
-                progressRlv.showFooterResult(now_page <= (info.getData().getAchievement_total() / Constants.PAGE_SIZE));
+                progressRlv.showFooterResult(info.getData().getAchievement_total() > now_page * Constants.PAGE_SIZE);
             }
 
             @Override
@@ -154,7 +153,7 @@ public class AchievementListActivity extends BaseActivity implements OnClickList
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        if (position == 0 || position > exampleList.size()) {
+        if (position == 0 || position > adapter.getList().size()) {
             return;
         }
        /* Intent intent = new Intent(act, ShopDetailActivity.class);

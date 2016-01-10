@@ -79,5 +79,18 @@ public class LoanPara {
         }
     }
 
-
+    public void checkEmp() throws Exception {
+        if (TextUtils.isEmpty(username)) {
+            throw new Exception("请输入员工姓名");
+        }
+        if (TextUtils.isEmpty(mobile)) {
+            throw new Exception("请输入电话");
+        }
+       /* if (TextUtils.isEmpty(province_id)) {
+            throw new Exception("请选择地址");
+        }
+        if (TextUtils.isEmpty(address)) {
+            throw new Exception("请输入详细地址");
+        }*/
+    }
 }

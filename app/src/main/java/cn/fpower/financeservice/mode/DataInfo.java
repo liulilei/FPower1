@@ -23,7 +23,7 @@ public class DataInfo extends BaseEntity {
     private String is_housing;// "1",
     private String is_car;// "0",
     private String is_loan;// "0",
-    private String process;// "0",
+    private int process;// "0",
     private String is_insurance;// "0",
     private String identity;// "0",
     private Long addtime;// "1449911529", 申请时间
@@ -203,11 +203,11 @@ public class DataInfo extends BaseEntity {
         this.is_loan = is_loan;
     }
 
-    public String getProcess() {
+    public int getProcess() {
         return process;
     }
 
-    public void setProcess(String process) {
+    public void setProcess(int process) {
         this.process = process;
     }
 

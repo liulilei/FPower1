@@ -123,7 +123,6 @@ public class ShopDetailActivity extends BaseActivity {
     protected void initView() {
         back.setOnClickListener(this);
         title.setText("店面详情");
-        des.setText("门店照片,第一张为门店照片");
         submit.setVisibility(View.GONE);
         noScrollgridview.setSelector(new ColorDrawable(Color.TRANSPARENT));
         adapter = new GridAdapter(this);
@@ -149,13 +148,8 @@ public class ShopDetailActivity extends BaseActivity {
                     info_name.setValue(info.name);
                     info_username.setValue(info.username);
                     info_mobile.setValue(info.mobile);
-                    String addr= provinceData.getMap().get(FSApplication.getInstance().getUserInfo().getData().getProvince_id() + "")+
-                            provinceData.getMap().get(FSApplication.getInstance().getUserInfo().getData().getCity_id() + "")+
-                            provinceData.getMap().get(FSApplication.getInstance().getUserInfo().getData().getDistrict_id() + "");
-                    String key=FSApplication.getInstance().getUserInfo().getData().getProvince_id()+","
-                            +FSApplication.getInstance().getUserInfo().getData().getCity_id()+","
-                            +FSApplication.getInstance().getUserInfo().getData().getDistrict_id();
-                    info_addr.setValue(key,addr);
+                    String addr= provinceData.getProvinceAddress(info.province_id,info.city_id,info.district_id);
+                    info_addr.setValue(addr);
                     info_longitude.setValue(info.longitude);
                     info_latitude.setValue(info.latitude);
                     info_addrdetail.setValue(info.address);

@@ -16,35 +16,42 @@
 
     <TextView
         android:id="@+id/item_success_example_name"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/item_success_example_avatar"
         android:layout_marginTop="1dp"
+        android:layout_toLeftOf="@+id/item_success_example_right_iv"
         android:layout_toRightOf="@id/item_success_example_avatar"
+        android:singleLine="true"
         android:text="江先生"
-        android:textColor="#272727"
+        android:textColor="@color/black"
         android:textSize="17dp" />
 
     <TextView
         android:id="@+id/item_success_example_money"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/item_success_example_name"
         android:layout_below="@id/item_success_example_name"
         android:layout_marginTop="1dp"
+        android:textStyle="bold"
         android:text="￥50000"
-        android:textColor="#e61600"
+        android:singleLine="true"
+        android:layout_toLeftOf="@+id/item_success_example_right_iv"
+        android:textColor="@color/title_back_bgcolor"
         android:textSize="16sp" />
 
     <TextView
         android:id="@+id/item_success_example_create_time"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@id/item_success_example_money"
         android:layout_below="@id/item_success_example_money"
         android:layout_marginTop="1dp"
+        android:singleLine="true"
+        android:layout_toLeftOf="@+id/item_success_example_right_iv"
         android:paddingBottom="12dp"
-        android:text="申请时间:2015-12-1 15:30"
+        android:text="2015-12-1 15:30"
         android:textColor="#737373"
         android:textSize="11sp" />
 
@@ -57,6 +64,7 @@
         android:paddingBottom="10dp"
         android:paddingLeft="10dp"
         android:paddingRight="21dp"
-        android:paddingTop="10dp" />
+        android:paddingTop="10dp"
+        android:src="@mipmap/fanhui" />
 
 </RelativeLayout>

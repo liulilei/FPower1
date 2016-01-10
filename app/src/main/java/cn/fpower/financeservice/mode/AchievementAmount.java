@@ -1,7 +1,5 @@
 package cn.fpower.financeservice.mode;
 
-import java.util.List;
-
 /**
  * 19、获得一段时间内的业绩总和
  */
@@ -19,6 +17,14 @@ public class AchievementAmount extends BaseMode {
 
     public class Data extends BaseEntity {
         private String achievement_amount;
+        private UserInfo.Data user_info;
+
+        public UserInfo.Data getUser_info() {
+            return user_info;
+        }
+        public void setUser_info(UserInfo.Data user_info) {
+            this.user_info = user_info;
+        }
 
         public String getAchievement_amount() {
             return achievement_amount;

@@ -1,38 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/act_bg"
-    android:orientation="vertical">
+    android:background="@color/act_bg">
 
-    <include layout="@layout/title_bar" />
-
-    <include layout="@layout/item_info_top" />
+    <include
+        android:id="@+id/layout_head"
+        layout="@layout/title_bar" />
 
     <RelativeLayout
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:background="@color/white"
-        android:layout_marginTop="12dp"
+        android:id="@+id/layout_top"
         android:layout_width="match_parent"
-        android:layout_height="36dp">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout_head">
+
+        <include
+            android:id="@+id/layout_info"
+            layout="@layout/item_info_top" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/layout_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_top"
+        android:layout_marginTop="12dp"
+        android:background="@color/white">
 
         <TextView
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
+            android:id="@+id/list_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="我的业绩"
+            android:layout_centerVertical="true"
+            android:paddingBottom="12dp"
+            android:paddingLeft="17dp"
+            android:paddingTop="12dp"
             android:textColor="#494949"
+            android:text="我的业绩"
             android:textSize="12sp" />
 
         <TextView
+            android:id="@+id/fragment_home_success_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="更多"
-            android:textColor="#B2AFAF"
+            android:paddingBottom="12dp"
+            android:paddingLeft="15dp"
+            android:paddingRight="12dp"
+            android:paddingTop="12dp"
             android:textSize="12sp" />
+
     </RelativeLayout>
-</LinearLayout>
+
+    <cn.fpower.financeservice.view.widget.RefreshListView
+        android:id="@+id/fragment_progress_rlv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="#bababa"
+        android:layout_below="@+id/layout_title"
+        android:dividerHeight="1dp"
+        android:listSelector="@android:color/transparent"
+        android:scrollbars="none"/>
+
+</RelativeLayout>

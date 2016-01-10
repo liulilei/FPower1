@@ -116,7 +116,7 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
                                                 FSApplication.getInstance().setLogincode(ResultCode.SUCCESS_UPDATE);
                                                 SpUtils.putString(LoginActivity.this, Constants.MOBLEE, userInfo.getData().getMobile());
                                                 SpUtils.putString(LoginActivity.this, Constants.PASSWD, view_pwd.getText().toString());
-                                                IntentUtils.startActivity(act, HomeActivity.class);
+                                                IntentUtils.startActivity(act, MeInfoActivity.class);
                                                 finish();
                                             }
                                         }

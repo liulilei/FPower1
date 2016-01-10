@@ -181,7 +181,7 @@ public class RefreshListView extends ListView implements OnScrollListener {
         loadFull = (TextView) footer.findViewById(R.id.loadFull);
         more = (TextView) footer.findViewById(R.id.more);
         loading = (ProgressBar) footer.findViewById(R.id.loading);
-
+        footer.findViewById(R.id.load_more_ll).setOnClickListener(null);
         addFooterView(footer);
 
     }

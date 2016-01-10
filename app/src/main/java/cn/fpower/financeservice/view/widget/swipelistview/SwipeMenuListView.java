@@ -14,9 +14,7 @@ import cn.fpower.financeservice.view.widget.RefreshListView;
 
 /**
  * 
- * @author baoyz
- * @date 2014-8-18
- * 
+ * 滑动删除
  */
 public class SwipeMenuListView extends RefreshListView {
 
